@@ -3,13 +3,745 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ETF vs. Fonds Kostenrechner</title>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+<title>Vorschau — Money with Rami</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#CDF7BE;
+  --ink:#132A20;
+  --panel:#FFFFFF;
+  --panel-2:#F4FBF0;
+  --line:#132A20;
+  --line-soft:#C9E8C0;
+  --text:#132A20;
+  --text-muted:#5B7167;
+  --green:#173C2E;
+  --green-dim:#CDEFC2;
+  --purple:#8B72E8;
+  --purple-dim:#E3DBFB;
+  --orange:#FF6A3D;
+  --orange-dim:#FFE1D0;
+  --mint:#8FE07C;
+  --radius:20px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:17.5px;}
+.wrap{max-width:1180px;margin:0 auto; padding:32px 20px 60px;}
+
+/* Volle-Breite Top-Banner (Stil: schmale, farbige Leiste ganz oben) */
+.top-banner{
+  background:var(--purple);
+  border-bottom:1.5px solid var(--line);
+}
+.top-banner-inner{
+  max-width:1180px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:13px 20px;
+  flex-wrap:wrap;
+}
+.top-banner-mid{
+  flex:1;
+}
+
+header{margin-bottom:32px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
+.header-text{flex:1; min-width:260px;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--purple);
+  font-weight:600;
+  margin-bottom:10px;
+}
+body.lang-ar .eyebrow{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:14.5px;
+  font-weight:700;
+}
+h1{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:clamp(28px,4vw,42px);
+  line-height:1.1;
+  margin:0 0 10px;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+}
+body.lang-ar h1{font-family:'IBM Plex Sans Arabic',sans-serif; letter-spacing:0;}
+header p{
+  color:var(--text-muted);
+  max-width:640px;
+  line-height:1.6;
+  margin:0;
+  font-size:16px;
+}
+body.lang-ar header p{font-size:17.5px; line-height:1.75;}
+
+.lang-switch{
+  display:flex;
+  gap:4px;
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  padding:4px;
+  flex-shrink:0;
+}
+.lang-btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  border:none;
+  background:transparent;
+  color:var(--text-muted);
+  padding:7px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+}
+.lang-btn.active{background:var(--purple); color:#FFFFFF;}
+.lang-btn[data-lang="ar"]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
+body.lang-ar .lang-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
+
+.brand-name{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  text-decoration:none;
+}
+body.lang-ar .brand-name{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:15.5px;
+  font-weight:700;
+}
+
+.tab-nav{
+  display:flex;
+  gap:8px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+.tab-btn{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:600;
+  font-size:14.5px;
+  padding:10px 20px;
+  border-radius:999px;
+  border:1.5px solid var(--line);
+  background:var(--panel);
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+  text-decoration:none;
+  display:inline-block;
+}
+.tab-btn:hover{border-color:var(--purple); color:var(--ink);}
+.tab-btn.active{background:var(--ink); border-color:var(--ink); color:#FFFFFF;}
+body.lang-ar .tab-btn{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:24px;
+  align-items:start;
+}
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr;}
+}
+
+.panel{
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+}
+.panel-input{position:sticky; top:20px;}
+
+.section-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  font-weight:600;
+  margin:0 0 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+body.lang-ar .section-title{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:16px;
+  font-weight:700;
+  color:var(--ink);
+  padding-inline-start:11px;
+  border-inline-start:3.5px solid var(--purple);
+  line-height:1.4;
+}
+.block{margin-bottom:22px;}
+.block:last-child{margin-bottom:0;}
+
+.switch-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1.5px solid var(--line-soft);
+  margin-bottom:14px;
+}
+.switch-row .label{font-weight:600; font-size:15.5px; color:var(--ink);}
+body.lang-ar .switch-row .label{font-size:17px;}
+.switch{
+  position:relative;
+  width:42px;height:24px;
+  background:#E3E9E0;
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .18s ease;
+  flex-shrink:0;
+}
+.switch.on{background:var(--purple);}
+.switch::after{
+  content:'';
+  position:absolute;
+  top:50%;left:2px;
+  width:16px;height:16px;
+  background:#FFFFFF;
+  border:1.5px solid var(--line);
+  border-radius:50%;
+  transform:translateY(-50%);
+  transition:transform .18s ease, background .18s ease, left .18s ease;
+}
+.switch.on::after{left:calc(100% - 18px);}
+body.lang-ar .switch::after{left:auto; right:2px;}
+body.lang-ar .switch.on::after{right:calc(100% - 18px); left:auto;}
+
+.fields{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .25s ease;
+}
+.fields.open{max-height:400px;}
+
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.field-label{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  font-size:14px;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+body.lang-ar .field-label{font-size:15.5px;}
+.field-label .val{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--ink);
+  font-size:14.5px;
+  font-weight:600;
+}
+body.lang-ar .field-label .val{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:15.5px;
+  font-weight:700;
+}
+input[type=range]{
+  -webkit-appearance:none;
+  width:100%;
+  height:4px;
+  background:var(--line-soft);
+  border-radius:2px;
+  outline:none;
+  margin:0;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:var(--purple);
+  cursor:pointer;
+  border:1.5px solid var(--line);
+}
+input[type=range]::-moz-range-thumb{
+  width:18px;height:18px;
+  border-radius:50%;
+  background:var(--purple);
+  cursor:pointer;
+  border:1.5px solid var(--line);
+}
+input[type=number]{
+  width:100%;
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:15px;
+  padding:9px 10px;
+  border-radius:10px;
+  outline:none;
+}
+input[type=number]:focus{border-color:var(--purple);}
+body.lang-ar input[type=number]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+
+.product-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+@media (max-width:640px){.product-cards{grid-template-columns:1fr;}}
+.product-card{
+  border-radius:16px;
+  padding:16px;
+  border:1.5px solid var(--line);
+}
+.product-card.etf{background:var(--green-dim);}
+.product-card.fonds{background:var(--purple-dim);}
+.product-card .p-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:2px;
+}
+body.lang-ar .product-card .p-title{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:19.5px;}
+.product-card.etf .p-title{color:var(--green);}
+.product-card.fonds .p-title{color:var(--purple);}
+.product-card .p-sub{font-size:13px; color:var(--text-muted); margin-bottom:14px;}
+body.lang-ar .product-card .p-sub{font-size:14.5px;}
+.product-card input[type=range]{background:rgba(19,42,32,0.15);}
+.product-card input[type=range]::-webkit-slider-thumb{background:var(--panel);}
+.product-card input[type=range]::-moz-range-thumb{background:var(--panel);}
+
+.stat-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:14px;
+  margin-bottom:20px;
+}
+@media (max-width:640px){.stat-row{grid-template-columns:1fr;}}
+.stat-card{
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px 20px;
+}
+.stat-tag{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  padding:4px 11px;
+  border-radius:999px;
+  display:inline-block;
+  margin-bottom:12px;
+  color:#FFFFFF;
+}
+body.lang-ar .stat-tag{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:13px;
+}
+.stat-tag.etf{background:var(--green);}
+.stat-tag.fonds{background:var(--purple);}
+.stat-tag.orange{background:var(--orange);}
+.stat-card .k{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  font-weight:600;
+  margin-bottom:8px;
+}
+body.lang-ar .stat-card .k{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:14.5px;
+  font-weight:700;
+}
+.stat-card .v{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:27px;
+  font-weight:700;
+  line-height:1.1;
+}
+body.lang-ar .stat-card .v{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:28px;}
+.stat-card.green{background:var(--green-dim);}
+.stat-card.green .v{color:var(--green);}
+.stat-card.purple{background:var(--purple-dim);}
+.stat-card.purple .v{color:var(--purple);}
+.stat-card.orange{background:var(--orange-dim); border-color:var(--orange);}
+.stat-card.orange .v{color:var(--orange);}
+.stat-card.orange .k{color:#B34A26;}
+.stat-card .sub{font-size:13px; color:var(--text-muted); margin-top:6px;}
+body.lang-ar .stat-card .sub{font-size:14.5px;}
+
+.chart-panel{margin-bottom:20px;}
+.chart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:6px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.chart-head h2{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:20px;
+  margin:0;
+  color:var(--ink);
+}
+body.lang-ar .chart-head h2{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:21.5px;}
+.legend{display:flex; gap:16px; font-size:13px; color:var(--text-muted); font-family:'IBM Plex Mono',monospace; flex-wrap:wrap;}
+body.lang-ar .legend{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14.5px;
+  font-weight:600;
+}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.chart-inner{direction:ltr;}
+
+.view-switch{
+  display:flex;
+  gap:4px;
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  padding:4px;
+  flex-shrink:0;
+}
+.view-btn{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  border:none;
+  background:transparent;
+  color:var(--text-muted);
+  padding:7px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+  white-space:nowrap;
+}
+.view-btn.active{background:var(--green); color:#FFFFFF;}
+body.lang-ar .view-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700; font-size:14px;}
+
+.roi-table-wrap{overflow-x:auto; border:1.5px solid var(--line); border-radius:14px;}
+table.roi-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  min-width:420px;
+}
+body.lang-ar table.roi-table{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
+table.roi-table thead th{
+  background:var(--ink);
+  color:#FFFFFF;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:12.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  text-align:start;
+  padding:12px 16px;
+  position:sticky;
+  top:0;
+}
+body.lang-ar table.roi-table thead th{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:14px;
+}
+table.roi-table tbody td{
+  padding:10px 16px;
+  border-bottom:1.5px solid var(--line-soft);
+  color:var(--ink);
+  white-space:nowrap;
+}
+table.roi-table tbody tr:last-child td{border-bottom:none; font-weight:700; background:var(--green-dim);}
+table.roi-table tbody tr:nth-child(even):not(:last-child){background:var(--panel-2);}
+table.roi-table td.col-year{color:var(--text-muted); font-weight:600;}
+table.roi-table td.col-gain{color:var(--purple); font-weight:600;}
+table.roi-table td.col-total{color:var(--green); font-weight:700;}
+
+.breakdown{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 32px;
+}
+.b-col-head{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:6px 0 10px;
+}
+body.lang-ar .b-col-head{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:15.5px;
+  font-weight:700;
+}
+.b-col-head.etf{color:var(--green);}
+.b-col-head.fonds{color:var(--purple);}
+.b-row{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1.5px solid var(--line-soft);
+  font-size:15px;
+}
+body.lang-ar .b-row{font-size:16.5px;}
+body.lang-ar .b-row .b-val{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
+.b-row .b-label{color:var(--text-muted);}
+.b-row .b-val{font-family:'IBM Plex Mono',monospace; font-weight:500;}
+.b-row.total .b-val{font-weight:600;}
+.b-row.total{border-bottom:none;}
+@media (max-width:640px){
+  .breakdown{grid-template-columns:1fr; gap:0;}
+  .b-group{
+    border-radius:16px;
+    padding:12px 16px 4px;
+    margin-bottom:16px;
+  }
+  .b-group:last-child{margin-bottom:0;}
+  .b-group.etf{background:var(--green-dim);}
+  .b-group.fonds{background:var(--purple-dim);}
+  .b-group .b-col-head{padding-top:0;}
+  .b-group .b-row{border-bottom-color:rgba(19,42,32,0.15);}
+}
+
+.broker-intro{color:var(--text-muted); font-size:14px; line-height:1.65; margin:0 0 18px;}
+body.lang-ar .broker-intro{font-size:15.5px; line-height:1.8;}
+
+select#broker-country{
+  width:100%;
+  appearance:none;
+  -webkit-appearance:none;
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15px;
+  font-weight:500;
+  padding:11px 40px 11px 14px;
+  border-radius:10px;
+  outline:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%23132A20' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+}
+select#broker-country:focus{border-color:var(--purple);}
+body.lang-ar select#broker-country{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  padding:11px 14px 11px 40px;
+  background-position:left 14px center;
+}
+
+#broker-placeholder{
+  text-align:center;
+  padding:32px 20px;
+  color:var(--text-muted);
+  font-size:14px;
+  border:1.5px dashed var(--line-soft);
+  border-radius:16px;
+  background:var(--panel-2);
+}
+body.lang-ar #broker-placeholder{font-size:15px;}
+
+.broker-country-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  margin:4px 0 14px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--line);
+  flex-wrap:wrap;
+}
+.broker-country-head h3{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:18px;
+  margin:0;
+  color:var(--ink);
+}
+body.lang-ar .broker-country-head h3{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:19.5px;}
+.broker-count{font-size:12.5px; color:var(--text-muted); font-weight:500; font-family:'IBM Plex Mono',monospace;}
+body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:14px;}
+
+.broker-card{
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transition:border-color .15s ease;
+}
+.broker-card:hover{border-color:var(--purple);}
+.broker-card-main{display:flex; align-items:center; gap:14px; min-width:0; flex:1;}
+.broker-logo{
+  flex-shrink:0;
+  width:36px;height:36px;
+  border-radius:9px;
+  object-fit:contain;
+  background:#FFFFFF;
+  border:1.5px solid var(--line);
+  padding:5px;
+}
+.broker-logo-fallback{
+  flex-shrink:0;
+  width:36px;height:36px;
+  border-radius:9px;
+  background:var(--green);
+  color:#FFFFFF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:700;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+.broker-card-text{min-width:0;}
+.broker-name{font-size:15.5px; font-weight:600; margin:0 0 4px; color:var(--ink); font-family:'IBM Plex Sans',sans-serif;}
+body.lang-ar .broker-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:17px;}
+.broker-note{font-size:13px; color:var(--text-muted); margin:0; line-height:1.45;}
+body.lang-ar .broker-note{font-size:14.5px;}
+.broker-badge{
+  display:inline-block;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  color:#FFFFFF;
+  background:var(--orange);
+  padding:2px 8px;
+  border-radius:999px;
+  margin-inline-start:8px;
+  vertical-align:middle;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+body.lang-ar .broker-badge{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; letter-spacing:0;}
+
+.broker-cta{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--purple);
+  border:1.5px solid var(--line);
+  color:#FFFFFF;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:600;
+  padding:9px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .15s ease;
+}
+.broker-cta:hover{background:#7660D1;}
+body.lang-ar .broker-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700;}
+.broker-cta.disabled{
+  background:transparent;
+  border-color:var(--line-soft);
+  color:var(--text-muted);
+  pointer-events:none;
+}
+.broker-cta-arrow{display:inline-block;}
+body.lang-ar .broker-cta-arrow{transform:scaleX(-1);}
+
+.broker-general-note{
+  margin-top:6px;
+  padding:14px 16px;
+  background:var(--orange-dim);
+  border-inline-start:3px solid var(--orange);
+  border-radius:0 12px 12px 0;
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.6;
+}
+body.lang-ar .broker-general-note{
+  border-inline-start:none;
+  border-inline-end:3px solid var(--orange);
+  border-radius:12px 0 0 12px;
+  font-size:14.5px;
+}
+
+.broker-affiliate{font-size:12px; color:var(--text-muted); margin:16px 0 0; line-height:1.6;}
+body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
+
+@media (max-width:640px){
+  .broker-card{flex-direction:column; align-items:flex-start;}
+  .broker-cta{width:100%; justify-content:center;}
+}
+
+footer{
+  margin-top:28px;
+  font-size:13px;
+  color:var(--text-muted);
+  line-height:1.65;
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+body.lang-ar footer{font-size:14.5px; line-height:1.8;}
+footer .copyright{
+  margin:12px 0 0;
+  font-size:12.5px;
+  color:var(--text-muted);
+}
+body.lang-ar footer .copyright{font-size:14px;}
+footer .copyright a{
+  color:var(--purple);
+  font-weight:600;
+  text-decoration:none;
+}
+footer .copyright a:hover{text-decoration:underline;}
+
+@media (max-width:900px){
+  .panel-input{
+    position:static !important;
+    top:auto !important;
+  }
+}
+
+</style>
 </head>
 <body class="lang-ar">
+
 
   <div class="top-banner">
     <div class="top-banner-inner">
@@ -174,8 +906,311 @@
 
 </div>
 
-<script src="/js/i18n.js"></script>
-<script src="/js/common.js"></script>
-<script src="/js/rechner.js"></script>
+<script>
+// Alle Übersetzungstexte der Seite an einem Ort.
+window.I18N = {
+  de: {
+    eyebrow: 'Kostenrechner',
+    title: 'ETF vs. Fonds — was die Kosten wirklich ausmachen',
+    intro: 'Gleiche Anlagesumme, gleiche Laufzeit, gleiche erwartete Rendite — der einzige Unterschied ist die Kostenstruktur. ETFs zahlen üblicherweise Ordergebühren und eine niedrige laufende Verwaltungsgebühr, aktive Fonds meist einen Ausgabeaufschlag und höhere Verwaltungsgebühren.',
+    sectionDuration: 'Anlagedauer & Rendite',
+    labelYears: 'Anlagedauer',
+    yearsUnit: 'Jahre',
+    labelReturn: 'Erwartete Rendite p.a. (vor Kosten)',
+    labelEinmal: 'Einmalanlage',
+    labelBetrag: 'Anlagebetrag',
+    labelSparplan: 'Sparplan',
+    labelRate: 'Monatliche Rate',
+    sectionCosts: 'Kostenstruktur je Produkt',
+    etf: 'ETF',
+    etfSub: 'börsengehandelt, meist passiv',
+    labelOrder: 'Ordergebühren',
+    labelTerEtf: 'Verwaltungsgebühren p.a. (TER)',
+    fonds: 'Fonds',
+    fondsSub: 'meist aktiv gemanagt',
+    labelAA: 'Ausgabeaufschlag',
+    labelTerFonds: 'Verwaltungsgebühren p.a.',
+    statFinalLabel: 'Endkapital',
+    statAdvantage: 'ETF-Vorteil',
+    fondsAdvantage: 'Fonds-Vorteil',
+    diffPctSuffix: '% mehr Endkapital mit ETF',
+    diffPctSuffixFonds: '% mehr Endkapital mit dem Fonds',
+    chartTitle: 'Wertentwicklung im Vergleich',
+    legendNoCost: 'ohne Kosten',
+    calloutLabel: 'ETF-Vorteil',
+    calloutLabelFonds: 'Fonds-Vorteil',
+    yearLabel: 'Jahr',
+    sectionBreakdown: 'Kostenaufschlüsselung',
+    bContributed: 'Eingezahltes Kapital',
+    bDirect: 'Direkte Kosten (Order/Ausgabeaufschlag)',
+    bTer: 'Kosten durch Verwaltungsgebühr (Zinseszins)',
+    bTotal: 'Kosten gesamt',
+    footer: 'Dieser Rechner arbeitet mit vereinfachten Annahmen...',
+    brand: 'Money with Rami',
+    tabCalculator: 'Kostenrechner',
+    tabRoi: 'Renditerechner',
+    tabBroker: 'Broker-Finder',
+    locale: 'de-DE',
+  },
+  en: {
+    eyebrow: 'Cost calculator', title: 'ETF vs. fund', intro: 'Same amount...',
+    sectionDuration: 'Time horizon & return', labelYears: 'Time horizon', yearsUnit: 'years',
+    labelReturn: 'Expected return p.a.', labelEinmal: 'Lump sum', labelBetrag: 'Investment amount',
+    labelSparplan: 'Savings plan', labelRate: 'Monthly contribution', sectionCosts: 'Cost structure',
+    etf: 'ETF', etfSub: 'exchange-traded', labelOrder: 'Order fees', labelTerEtf: 'Management fee (TER)',
+    fonds: 'Fund', fondsSub: 'actively managed', labelAA: 'Front-load fee', labelTerFonds: 'Management fee',
+    statFinalLabel: 'Final value', statAdvantage: 'ETF advantage', fondsAdvantage: 'Fund advantage',
+    diffPctSuffix: '% more with ETF', diffPctSuffixFonds: '% more with fund', chartTitle: 'Growth comparison',
+    legendNoCost: 'no costs', calloutLabel: 'ETF advantage', calloutLabelFonds: 'Fund advantage', yearLabel: 'Year',
+    sectionBreakdown: 'Cost breakdown', bContributed: 'Capital invested', bDirect: 'Direct costs',
+    bTer: 'Cost from fee', bTotal: 'Total costs', footer: 'Simplified assumptions...',
+    brand: 'Money with Rami', tabCalculator: 'Cost calculator', tabRoi: 'Return calculator', tabBroker: 'Broker finder',
+    locale: 'en-US',
+  },
+  ar: {
+    eyebrow: 'حاسبة التكاليف',
+    title: 'سلات الاسهم العادية أو صناديق الاستثمار تبع البنك',
+    intro: 'نفس مبلغ الاستثمار، نفس المدة، نفس العائد المتوقع — الفرق الوحيد هو بنية التكاليف.',
+    sectionDuration: 'مدة الاستثمار والعائد', labelYears: 'مدة الاستثمار', yearsUnit: 'سنة',
+    labelReturn: 'العائد السنوي المتوقع (قبل التكاليف)', labelEinmal: 'استثمار لمرة واحدة', labelBetrag: 'مبلغ الاستثمار',
+    labelSparplan: 'خطة ادخار شهرية', labelRate: 'القسط الشهري', sectionCosts: 'بنية التكاليف لكل منتج',
+    etf: 'سلة الأسهم (ETF)', etfSub: 'يُتداول في البورصة، غالبًا سلبي', labelOrder: 'رسوم التنفيذ',
+    labelTerEtf: 'رسوم الإدارة السنوية (TER)', fonds: 'صندوق استثماري (Fond)', fondsSub: 'غالبًا مُدار بنشاط',
+    labelAA: 'رسوم الاشتراك', labelTerFonds: 'رسوم الإدارة السنوية', statFinalLabel: 'رأس المال النهائي',
+    statAdvantage: 'ميزة الاستثمار بـ ETF', fondsAdvantage: 'ميزة الاستثمار بصندوق البنك',
+    diffPctSuffix: '% رأس مال نهائي أكبر مع ETF', diffPctSuffixFonds: '% رأس مال نهائي أكبر مع صندوق البنك',
+    chartTitle: 'مقارنة تطور القيمة', legendNoCost: 'بدون تكاليف', calloutLabel: 'ميزة الاستثمار بـ ETF',
+    calloutLabelFonds: 'ميزة الاستثمار بصندوق البنك', yearLabel: 'السنة', sectionBreakdown: 'تفصيل التكاليف',
+    bContributed: 'رأس المال المُستثمر', bDirect: 'تكاليف مباشرة (تنفيذ/اشتراك)',
+    bTer: 'تكاليف رسوم الإدارة (أثر الفائدة المركبة)', bTotal: 'إجمالي التكاليف',
+    footer: 'تعتمد هذه الحاسبة على افتراضات مبسطة...',
+    brand: 'Money with Rami', tabCalculator: 'حاسبة التكاليف', tabRoi: 'حاسبة العائد', tabBroker: 'أفضل المنصات',
+    locale: 'ar-EG-u-nu-latn',
+  },
+};
+
+</script>
+<script>
+window.Site = (function(){
+  const LANG_KEY = 'mwr_lang';
+  const state = { lang: 'ar' };
+  function t(key){ return window.I18N[state.lang][key]; }
+  function locale(){ return window.I18N[state.lang].locale; }
+  function fmtEUR(v){ return v.toLocaleString(locale(),{style:'currency',currency:'EUR',maximumFractionDigits:0}); }
+  function fmtCompact(v){ const n = new Intl.NumberFormat(locale(),{notation:'compact',maximumFractionDigits:1}).format(v); return n + ' €'; }
+  function fmtPct(v, digits){ return v.toLocaleString(locale(),{minimumFractionDigits:digits,maximumFractionDigits:digits}) + ' %'; }
+  function textWidth(text, font){
+    const canvas = textWidth._c || (textWidth._c = document.createElement('canvas'));
+    const ctx = canvas.getContext('2d'); ctx.font = font; return ctx.measureText(text).width;
+  }
+  function applyStatic(){
+    document.documentElement.lang = state.lang;
+    document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('lang-ar', state.lang === 'ar');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('.lang-btn').forEach(btn=>{ btn.classList.toggle('active', btn.getAttribute('data-lang') === state.lang); });
+  }
+  function setLanguage(lang){
+    if(!window.I18N[lang]) return;
+    state.lang = lang;
+    applyStatic();
+    document.dispatchEvent(new CustomEvent('mwr:langchange', { detail: { lang } }));
+  }
+  function init(){
+    applyStatic();
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> setLanguage(btn.getAttribute('data-lang')));
+    });
+    const yearEl = document.getElementById('copy-year');
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  return { state, t, locale, fmtEUR, fmtCompact, fmtPct, textWidth, setLanguage, applyStatic };
+})();
+
+</script>
+<script>
+// Logik NUR für index.html (Kostenrechner: ETF vs. Fonds).
+(function(){
+  const $ = id => document.getElementById(id);
+  const { t, locale, fmtEUR, fmtCompact, fmtPct, textWidth } = window.Site;
+
+  const state = {
+    years: 20, rendite: 7,
+    einmalActive: true, einmalBetrag: 10000,
+    sparplanActive: true, sparplanRate: 200,
+    etfOrder: 0.2, etfTer: 0.2,
+    fondsAA: 3, fondsTer: 1.5,
+  };
+
+  function simulate(orderFeePct, terPct){
+    const months = state.years*12;
+    const monthlyReturn = Math.pow(1+state.rendite/100, 1/12) - 1;
+    const monthlyTERFactor = Math.pow(1-terPct/100, 1/12);
+    let portfolio = 0, contributed = 0, feesPaid = 0;
+    const snapshots = [];
+
+    if(state.einmalActive){
+      let amount = state.einmalBetrag;
+      contributed += amount;
+      const fee = amount * (orderFeePct/100);
+      feesPaid += fee;
+      amount -= fee;
+      portfolio += amount;
+    }
+    snapshots.push(portfolio);
+
+    for(let m=1; m<=months; m++){
+      if(state.sparplanActive){
+        let rate = state.sparplanRate;
+        contributed += rate;
+        const fee = rate * (orderFeePct/100);
+        feesPaid += fee;
+        rate -= fee;
+        portfolio += rate;
+      }
+      portfolio *= (1+monthlyReturn) * monthlyTERFactor;
+      if(m % 12 === 0) snapshots.push(portfolio);
+    }
+    return { finalValue: portfolio, contributed, feesPaid, snapshots };
+  }
+
+  function drawChart(noCost, etf, fonds){
+    const H = 360, padL = 56, padT = 20, padB = 34;
+    const n = noCost.snapshots.length;
+    const maxV = Math.max(...noCost.snapshots) * 1.06;
+    const monoFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Mono';
+    const sansFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Sans';
+
+    const finalGap = etf.snapshots[n-1] - fonds.snapshots[n-1];
+    const etfWinsChart = finalGap >= 0;
+    const valueText = '+' + fmtCompact(Math.abs(finalGap));
+    const labelText = etfWinsChart ? t('calloutLabel') : t('calloutLabelFonds');
+    const valueW = textWidth(valueText, `700 14.5px ${sansFont}`);
+    const labelW = textWidth(labelText, `11px ${monoFont}`);
+    const calloutW = Math.max(valueW, labelW);
+    const padR = Math.max(calloutW + 8 + 10, 40);
+
+    const W = 860;
+    const innerW = W - padL - padR, innerH = H - padT - padB;
+
+    const x = i => padL + (innerW * i/(n-1));
+    const y = v => padT + innerH - (innerH * (v/maxV));
+
+    function pathFor(arr){
+      return arr.map((v,i)=> (i===0?'M':'L') + x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
+    }
+
+    const pathNoCost = pathFor(noCost.snapshots);
+    const pathETF = pathFor(etf.snapshots);
+    const pathFonds = pathFor(fonds.snapshots);
+
+    const forward = etf.snapshots.map((v,i)=> x(i).toFixed(1)+','+y(v).toFixed(1)).join(' L ');
+    const backward = fonds.snapshots.slice().reverse().map((v,i)=>{
+      const idx = n-1-i;
+      return x(idx).toFixed(1)+','+y(v).toFixed(1);
+    }).join(' L ');
+    const gapPath = 'M ' + forward + ' L ' + backward + ' Z';
+
+    let grid = '';
+    const steps = 4;
+    for(let s=0; s<=steps; s++){
+      const val = maxV * s/steps;
+      const gy = y(val);
+      grid += `<line x1="${padL}" y1="${gy.toFixed(1)}" x2="${W-padR}" y2="${gy.toFixed(1)}" stroke="#C9E8C0" stroke-width="1"/>`;
+      grid += `<text x="${padL-8}" y="${(gy+4).toFixed(1)}" text-anchor="end" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${fmtCompact(val)}</text>`;
+    }
+
+    const xLabels = [0, Math.round((n-1)/2), n-1].map(i=>{
+      return `<text x="${x(i).toFixed(1)}" y="${H-10}" text-anchor="middle" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${t('yearLabel')} ${i}</text>`;
+    }).join('');
+
+    const calloutY = y(etfWinsChart ? etf.snapshots[n-1] : fonds.snapshots[n-1]);
+    const calloutColor = etfWinsChart ? '#173C2E' : '#8B72E8';
+
+    const svg = `
+    <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; overflow:visible;">
+      ${grid}
+      <path d="${gapPath}" fill="#8FE07C" fill-opacity="0.25" stroke="none"/>
+      <path d="${pathNoCost}" fill="none" stroke="#9AAA9F" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <path d="${pathFonds}" fill="none" stroke="#8B72E8" stroke-width="2.5"/>
+      <path d="${pathETF}" fill="none" stroke="#173C2E" stroke-width="2.5"/>
+      ${xLabels}
+      <g transform="translate(${x(n-1)+8}, ${calloutY.toFixed(1)})">
+        <text x="0" y="-6" font-family="${sansFont}" font-size="14.5" font-weight="700" fill="${calloutColor}">${valueText}</text>
+        <text x="0" y="10" font-family="${monoFont}" font-size="11" fill="#5B7167">${labelText}</text>
+      </g>
+    </svg>`;
+    $('chart-svg').innerHTML = svg;
+  }
+
+  function render(){
+    const noCost = simulate(0, 0);
+    const etf = simulate(state.etfOrder, state.etfTer);
+    const fonds = simulate(state.fondsAA, state.fondsTer);
+
+    $('r-etf').textContent = fmtEUR(etf.finalValue);
+    $('r-fonds').textContent = fmtEUR(fonds.finalValue);
+    const diff = etf.finalValue - fonds.finalValue;
+    const etfWins = diff >= 0;
+    $('tag-diff').textContent = etfWins ? t('etf') : t('fonds');
+    $('k-diff').textContent = etfWins ? t('statAdvantage') : t('fondsAdvantage');
+    $('r-diff').textContent = fmtEUR(Math.abs(diff));
+    const pctBase = etfWins ? fonds.finalValue : etf.finalValue;
+    const pctSuffix = etfWins ? t('diffPctSuffix') : t('diffPctSuffixFonds');
+    $('r-diff-pct').textContent = pctBase > 0
+      ? ((Math.abs(diff)/pctBase)*100).toLocaleString(locale(),{maximumFractionDigits:1}) + ' ' + pctSuffix
+      : '';
+
+    const etfGesamt = noCost.finalValue - etf.finalValue;
+    const fondsGesamt = noCost.finalValue - fonds.finalValue;
+
+    $('b-eingezahlt-etf').textContent = fmtEUR(etf.contributed);
+    $('b-eingezahlt-fonds').textContent = fmtEUR(fonds.contributed);
+    $('b-direkt-etf').textContent = fmtEUR(etf.feesPaid);
+    $('b-direkt-fonds').textContent = fmtEUR(fonds.feesPaid);
+    $('b-ter-etf').textContent = fmtEUR(etfGesamt - etf.feesPaid);
+    $('b-ter-fonds').textContent = fmtEUR(fondsGesamt - fonds.feesPaid);
+    $('b-gesamt-etf').textContent = fmtEUR(etfGesamt);
+    $('b-gesamt-fonds').textContent = fmtEUR(fondsGesamt);
+
+    drawChart(noCost, etf, fonds);
+  }
+
+  function updateSliderLabels(){
+    $('v-years').textContent = state.years + ' ' + t('yearsUnit');
+    $('v-rendite').textContent = fmtPct(state.rendite, 1);
+    $('v-etf-order').textContent = fmtPct(state.etfOrder, 2);
+    $('v-etf-ter').textContent = fmtPct(state.etfTer, 2);
+    $('v-fonds-aa').textContent = fmtPct(state.fondsAA, 2);
+    $('v-fonds-ter').textContent = fmtPct(state.fondsTer, 2);
+  }
+
+  $('years').addEventListener('input', ()=>{ state.years = parseInt($('years').value); updateSliderLabels(); render(); });
+  $('rendite').addEventListener('input', ()=>{ state.rendite = parseFloat($('rendite').value); updateSliderLabels(); render(); });
+  $('etf-order').addEventListener('input', ()=>{ state.etfOrder = parseFloat($('etf-order').value); updateSliderLabels(); render(); });
+  $('etf-ter').addEventListener('input', ()=>{ state.etfTer = parseFloat($('etf-ter').value); updateSliderLabels(); render(); });
+  $('fonds-aa').addEventListener('input', ()=>{ state.fondsAA = parseFloat($('fonds-aa').value); updateSliderLabels(); render(); });
+  $('fonds-ter').addEventListener('input', ()=>{ state.fondsTer = parseFloat($('fonds-ter').value); updateSliderLabels(); render(); });
+  $('einmal-betrag').addEventListener('input', e=>{ state.einmalBetrag = parseFloat(e.target.value)||0; render(); });
+  $('sparplan-rate').addEventListener('input', e=>{ state.sparplanRate = parseFloat(e.target.value)||0; render(); });
+
+  function bindSwitch(swId, fieldsId, key){
+    const sw = $(swId), fields = $(fieldsId);
+    sw.addEventListener('click', ()=>{
+      state[key] = !state[key];
+      sw.classList.toggle('on', state[key]);
+      fields.classList.toggle('open', state[key]);
+      render();
+    });
+  }
+  bindSwitch('sw-einmal','fields-einmal','einmalActive');
+  bindSwitch('sw-sparplan','fields-sparplan','sparplanActive');
+
+  document.addEventListener('mwr:langchange', ()=>{ updateSliderLabels(); render(); });
+  document.addEventListener('DOMContentLoaded', ()=>{ updateSliderLabels(); render(); });
+})();
+
+</script>
 </body>
 </html>
