@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renditerechner</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lang-ar">
+<div class="wrap">
+
+  <div class="site-top">
+    <a class="brand-name" href="index.html" data-i18n="brand">Money with Rami</a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn active" data-lang="ar">عربي</button>
+    </div>
+  </div>
+
+  <nav class="tab-nav">
+    <a class="tab-btn" href="index.html" data-page="index.html" data-i18n="tabCalculator">Kostenrechner</a>
+    <a class="tab-btn" href="rendite.html" data-page="rendite.html" data-i18n="tabRoi">Renditerechner</a>
+    <a class="tab-btn" href="broker.html" data-page="broker.html" data-i18n="tabBroker">Broker-Finder</a>
+  </nav>
+
+  <header>
+    <div class="header-text">
+      <div class="eyebrow" data-i18n="roiEyebrow">حاسبة العائد</div>
+      <h1 data-i18n="roiTitle">قديش ممكن تكبر فلوسك بمرور الوقت؟</h1>
+      <p data-i18n="roiIntro">حط مبلغ البداية...</p>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <div class="panel panel-input">
+      <div class="block">
+        <div class="section-title" data-i18n="sectionDuration">Anlagedauer &amp; Rendite</div>
+        <div class="field">
+          <div class="field-label"><span data-i18n="labelYears">Anlagedauer</span><span class="val" id="v-roi-years">15</span></div>
+          <input type="range" id="roi-years" min="1" max="60" value="15" step="1">
+        </div>
+        <div class="field">
+          <div class="field-label"><span data-i18n="roiLabelReturn">Erwartete Rendite p.a.</span><span class="val" id="v-roi-rendite">7,0 %</span></div>
+          <input type="range" id="roi-rendite" min="0" max="20" value="7" step="0.1">
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="switch-row">
+          <span class="label" data-i18n="labelEinmal">Einmalanlage</span>
+          <div class="switch on" id="sw-roi-einmal"></div>
+        </div>
+        <div class="fields open" id="fields-roi-einmal">
+          <div class="field">
+            <div class="field-label"><span data-i18n="labelBetrag">Anlagebetrag</span></div>
+            <input type="number" id="roi-einmal-betrag" value="5000" step="100">
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="switch-row">
+          <span class="label" data-i18n="labelSparplan">Sparplan</span>
+          <div class="switch on" id="sw-roi-sparplan"></div>
+        </div>
+        <div class="fields open" id="fields-roi-sparplan">
+          <div class="field">
+            <div class="field-label"><span data-i18n="labelRate">Monatliche Rate</span></div>
+            <input type="number" id="roi-sparplan-rate" value="300" step="10">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results">
+
+      <div class="stat-row">
+        <div class="stat-card green">
+          <div class="stat-tag etf" data-i18n="roiTagFinal">رأس المال النهائي</div>
+          <div class="k" data-i18n="statFinalLabel">Endkapital</div>
+          <div class="v" id="roi-final">–</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-tag fonds" data-i18n="roiTagInvested">المبلغ المُستثمر</div>
+          <div class="k" data-i18n="bContributed">Eingezahltes Kapital</div>
+          <div class="v" id="roi-contributed">–</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-tag orange" data-i18n="roiTagGain">صافي الربح</div>
+          <div class="k" data-i18n="roiGainLabel">الأرباح المتراكمة</div>
+          <div class="v" id="roi-gain">–</div>
+          <div class="sub" id="roi-gain-pct"></div>
+        </div>
+      </div>
+
+      <div class="panel chart-panel">
+        <div class="chart-head">
+          <h2 data-i18n="roiChartTitle">نمو استثمارك بمرور الوقت</h2>
+          <div class="view-switch" id="roi-view-switch">
+            <button class="view-btn active" data-view="chart" data-i18n="roiViewChart">رسم بياني</button>
+            <button class="view-btn" data-view="table" data-i18n="roiViewTable">جدول</button>
+          </div>
+        </div>
+        <div class="legend" id="roi-legend">
+          <span><i class="dot" style="background:#9AAA9F"></i><span data-i18n="roiLegendInvested">المبلغ المُستثمر</span></span>
+          <span><i class="dot" style="background:var(--green)"></i><span data-i18n="roiLegendValue">القيمة الإجمالية</span></span>
+        </div>
+        <div class="chart-inner" id="roi-chart-svg"></div>
+
+        <div id="roi-table-view" style="display:none;">
+          <div class="roi-table-wrap">
+            <table class="roi-table">
+              <thead>
+                <tr>
+                  <th data-i18n="roiColYear">السنة</th>
+                  <th data-i18n="roiColPrincipal">المبلغ الأساسي</th>
+                  <th id="roi-th-return">العائد التراكمي</th>
+                  <th data-i18n="roiColTotal">رأس المال الإجمالي</th>
+                </tr>
+              </thead>
+              <tbody id="roi-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-title" data-i18n="roiSectionBreakdown">تفصيل النتيجة</div>
+        <div class="breakdown" style="grid-template-columns:1fr;">
+          <div class="b-group">
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="roi-b-contributed">–</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="roiBGain">الأرباح المتراكمة (فائدة مركبة)</span><span class="b-val" id="roi-b-gain">–</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="statFinalLabel">Endkapital</span><span class="b-val" id="roi-b-total" style="color:var(--green)">–</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p data-i18n="roiFooter">تعتمد هذه الحاسبة على افتراضات مبسطة...</p>
+    <p class="copyright">© <span id="copy-year"></span> moneywithrami — Instagram: <a href="https://www.instagram.com/moneywithrami" target="_blank" rel="noopener">@moneywithrami</a></p>
+  </footer>
+
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+<script src="js/rendite.js"></script>
+</body>
+</html>

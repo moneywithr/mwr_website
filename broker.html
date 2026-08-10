@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broker-Finder</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lang-ar">
+<div class="wrap">
+
+  <div class="site-top">
+    <a class="brand-name" href="index.html" data-i18n="brand">Money with Rami</a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn active" data-lang="ar">عربي</button>
+    </div>
+  </div>
+
+  <nav class="tab-nav">
+    <a class="tab-btn" href="index.html" data-page="index.html" data-i18n="tabCalculator">Kostenrechner</a>
+    <a class="tab-btn" href="rendite.html" data-page="rendite.html" data-i18n="tabRoi">Renditerechner</a>
+    <a class="tab-btn" href="broker.html" data-page="broker.html" data-i18n="tabBroker">Broker-Finder</a>
+  </nav>
+
+  <header>
+    <div class="header-text">
+      <div class="eyebrow" data-i18n="brokerEyebrow">أفضل المنصات حسب البلد</div>
+      <h1 data-i18n="sectionBroker">وين ممكن تستثمر؟</h1>
+      <p data-i18n="brokerIntro">إختر بلد إقامتك...</p>
+    </div>
+  </header>
+
+  <div class="panel" id="broker-panel">
+    <div class="field" style="margin-bottom:18px;">
+      <div class="field-label"><span data-i18n="brokerSelectLabel">بلدك</span></div>
+      <select id="broker-country"></select>
+    </div>
+    <div id="broker-placeholder" data-i18n="brokerPlaceholder">اختر بلدًا أعلاه لرؤية المنصات المناسبة.</div>
+    <div id="broker-results" style="display:none;">
+      <div class="broker-country-head">
+        <h3 id="broker-result-country"></h3>
+        <span class="broker-count" id="broker-result-count"></span>
+      </div>
+      <div id="broker-cards"></div>
+      <div id="broker-general-note" class="broker-general-note" style="display:none;"></div>
+    </div>
+    <p class="broker-affiliate" data-i18n="brokerAffiliate">ملاحظة للشفافية...</p>
+  </div>
+
+  <footer>
+    <p class="copyright">© <span id="copy-year"></span> moneywithrami — Instagram: <a href="https://www.instagram.com/moneywithrami" target="_blank" rel="noopener">@moneywithrami</a></p>
+  </footer>
+
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/broker-data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/broker.js"></script>
+</body>
+</html>
