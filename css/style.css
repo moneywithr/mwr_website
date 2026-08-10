@@ -26,11 +26,29 @@ body{
   font-family:'IBM Plex Sans',sans-serif;
   font-size:16px;
   -webkit-font-smoothing:antialiased;
-  padding:32px 20px 60px;
   min-height:100vh;
 }
 body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:17.5px;}
-.wrap{max-width:1180px;margin:0 auto;}
+.wrap{max-width:1180px;margin:0 auto; padding:32px 20px 60px;}
+
+/* Volle-Breite Top-Banner (Stil: schmale, farbige Leiste ganz oben) */
+.top-banner{
+  background:var(--purple);
+  border-bottom:1.5px solid var(--line);
+}
+.top-banner-inner{
+  max-width:1180px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:13px 20px;
+  flex-wrap:wrap;
+}
+.top-banner-mid{
+  flex:1;
+}
 
 header{margin-bottom:32px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
 .header-text{flex:1; min-width:260px;}
@@ -94,21 +112,13 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
 .lang-btn[data-lang="ar"]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
 body.lang-ar .lang-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
 
-.site-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  margin-bottom:22px;
-  flex-wrap:wrap;
-}
 .brand-name{
   font-family:'IBM Plex Mono',monospace;
   font-size:13px;
   font-weight:700;
   letter-spacing:0.08em;
   text-transform:uppercase;
-  color:var(--purple);
+  color:#FFFFFF;
   text-decoration:none;
 }
 body.lang-ar .brand-name{
