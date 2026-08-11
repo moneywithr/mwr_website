@@ -78,6 +78,9 @@ window.Site = (function(){
     });
     const yearEl = document.getElementById('copy-year');
     if(yearEl) yearEl.textContent = new Date().getFullYear();
+    // Seite erst jetzt anzeigen: verhindert, dass der deutsche Platzhaltertext
+    // kurz aufblitzt, bevor er durch die tatsächlich gespeicherte Sprache ersetzt wird.
+    document.documentElement.style.visibility = 'visible';
   }
 
   document.addEventListener('DOMContentLoaded', init);

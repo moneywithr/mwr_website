@@ -3,6 +3,8 @@
 ```
 project/
 ├─ index.html                             Startseite "Im Aufbau" mit Links zu den 3 Tools (/)
+├─ impressum/
+│  └─ index.html                          Impressum-Vorlage — echte Daten eintragen! (/impressum/)
 ├─ calculator/
 │  ├─ investment/
 │  │  └─ index.html                       Investitionsrechner (/calculator/investment/)
@@ -11,8 +13,9 @@ project/
 ├─ stuff_i_use/
 │  └─ brokerage_finder/
 │     └─ index.html                       Broker-Finder (/stuff_i_use/brokerage_finder/)
+├─ fonts/                                  Selbst gehostete IBM-Plex-Schriftdateien (woff2)
 ├─ css/
-│  └─ style.css                           Alle Styles, für jede Seite gleich
+│  └─ style.css                           Alle Styles + @font-face-Deklarationen
 └─ js/
    ├─ i18n.js                             Alle Übersetzungstexte (de/en/ar)
    ├─ broker-data.js                      Länder- und Broker-Liste
@@ -28,6 +31,24 @@ Die Startseite `/` ist aktuell eine "Im Aufbau"-Seite ohne eigenes JS — sie nu
 Alle URL-Pfade sind bewusst auf Englisch gehalten (`calculator`, `investment`,
 `fund_etf_fees`, `stuff_i_use`, `brokerage_finder`), unabhängig von der Sprache,
 die gerade auf der Seite ausgewählt ist.
+
+## Schriften
+Alle Schriften (IBM Plex Sans, IBM Plex Mono, IBM Plex Sans Arabic) liegen lokal
+im Ordner `fonts/` und werden über `@font-face` in `css/style.css` eingebunden —
+keine Abhängigkeit mehr von Google Fonts.
+
+## Farbkontrast
+`--purple-strong` und `--orange-strong` sind dunklere Varianten von `--purple`
+und `--orange`, die für Text und Buttons mit weißer Schrift verwendet werden,
+damit sie WCAG-AA-Kontrast (4.5:1) erreichen. Die ursprünglichen helleren
+Farben (`--purple`, `--orange`) bleiben für Hintergründe, Icons und Rahmen
+erhalten, wo Kontrastregeln nicht gelten.
+
+## Impressum
+**Wichtig:** `impressum/index.html` ist nur eine Vorlage mit Platzhaltern
+(Name, Adresse, E-Mail). Vor der Veröffentlichung unbedingt die echten Angaben
+eintragen — ein Impressum mit Platzhaltertext erfüllt die gesetzliche Pflicht
+nach § 5 TMG nicht.
 
 ## Eine neue Sektion/Seite hinzufügen
 
