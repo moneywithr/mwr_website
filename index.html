@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ETF vs. Fonds Kostenrechner</title>
+<title>Investitionsrechner — Money with Rami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
@@ -12,7 +12,7 @@
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 </head>
-<body class="lang-ar">
+<body class="lang-ar" data-i18n-title="sparPageTitle">
 
 <div class="top-banner">
   <div class="top-banner-inner">
@@ -28,16 +28,16 @@
 <div class="wrap">
 
   <nav class="tab-nav">
-    <a class="tab-btn" href="/" data-page="/" data-i18n="tabCalculator">Kostenrechner</a>
-    <a class="tab-btn" href="/rendite/" data-page="/rendite/" data-i18n="tabRoi">Renditerechner</a>
+    <a class="tab-btn" href="/" data-page="/" data-i18n="tabRoi">Rechner</a>
+    <a class="tab-btn" href="/rechner/kostenvergleich/" data-page="/rechner/kostenvergleich/" data-i18n="tabCalculator">Kostenvergleich</a>
     <a class="tab-btn" href="/broker/" data-page="/broker/" data-i18n="tabBroker">Broker-Finder</a>
   </nav>
 
   <header>
     <div class="header-text">
-      <div class="eyebrow" data-i18n="eyebrow">حاسبة التكاليف</div>
-      <h1 data-i18n="title">سلات الاسهم العادية أو صناديق الاستثمار تبع البنك</h1>
-      <p data-i18n="intro">نفس مبلغ الاستثمار، نفس المدة، نفس العائد المتوقع...</p>
+      <div class="eyebrow" data-i18n="sparEyebrow">Investitionsrechner</div>
+      <h1 data-i18n="sparTitle">Endkapital, Sparrate, Laufzeit oder Anfangskapital berechnen</h1>
+      <p data-i18n="sparIntro">Wähle aus, was du berechnen möchtest — der Rechner löst die passende Formel für dich und zeigt dir den Verlauf deines Vermögens.</p>
     </div>
   </header>
 
@@ -45,123 +45,159 @@
 
     <div class="panel panel-input">
       <div class="block">
-        <div class="section-title" data-i18n="sectionDuration">Anlagedauer &amp; Rendite</div>
+        <div class="section-title" data-i18n="sparGoalSection">Was möchtest du berechnen?</div>
         <div class="field">
-          <div class="field-label"><span data-i18n="labelYears">Anlagedauer</span><span class="val" id="v-years">20</span></div>
-          <input type="range" id="years" min="1" max="60" value="20" step="1">
+          <select id="spar-target" class="select-input">
+            <option value="rate" data-i18n="sparTargetRate">Monatlicher Investitionsbetrag</option>
+            <option value="endkapital" data-i18n="sparTargetEndkapital">Endkapital</option>
+            <option value="laufzeit" data-i18n="sparTargetLaufzeit">Laufzeit</option>
+          </select>
         </div>
+      </div>
+
+      <div class="block" id="field-endkapital">
         <div class="field">
-          <div class="field-label"><span data-i18n="labelReturn">Erwartete Rendite p.a. (vor Kosten)</span><span class="val" id="v-rendite">7,0 %</span></div>
-          <input type="range" id="rendite" min="0" max="20" value="7" step="0.1">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="sparLabelGoal">Wie hoch soll dein Endkapital sein?</span>
+              <span class="info-tip" tabindex="0" data-tip="هاد المبلغ يلي بدك توصله بنهاية مدة الاستثمار — هدفك النهائي.">؟</span>
+            </span>
+          </div>
+          <input type="number" id="spar-endkapital" value="100000" step="500">
+        </div>
+      </div>
+
+      <div class="block" id="field-laufzeit">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="labelYears">Anlagedauer</span>
+              <span class="info-tip" tabindex="0" data-tip="عدد السنين يلي بدك تستثمر خلالها لحتى توصل لهدفك.">؟</span>
+            </span>
+            <span class="inline-num-group">
+              <input type="number" id="spar-years-input" class="inline-num-input" value="15" min="1" max="60" step="1">
+              <span class="inline-num-unit" data-i18n="yearsUnit">Jahre</span>
+            </span>
+          </div>
+          <input type="range" id="spar-years" min="1" max="60" value="15" step="1">
         </div>
       </div>
 
       <div class="block">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="sparLabelReturn">Erwartete Rendite p.a.</span>
+              <span class="info-tip" tabindex="0" data-tip="متوسط العائد السنوي يلي بتتوقعه على استثمارك، مثلاً حوالي 7% لصناديق المؤشرات على المدى الطويل.">؟</span>
+            </span>
+            <span class="inline-num-group">
+              <input type="number" id="spar-rendite-input" class="inline-num-input" value="7" min="0" max="20" step="0.1">
+              <span class="inline-num-unit">%</span>
+            </span>
+          </div>
+          <input type="range" id="spar-rendite" min="0" max="20" value="7" step="0.1">
+        </div>
+      </div>
+
+      <div class="block" id="field-anfangskapital">
         <div class="switch-row">
-          <span class="label" data-i18n="labelEinmal">Einmalanlage</span>
+          <span class="label field-label-text">
+            <span data-i18n="labelEinmal">Einmalanlage</span>
+            <span class="info-tip" tabindex="0" data-tip="فعّل هاد الخيار إذا عندك مبلغ جاهز بدك تستثمره كدفعة وحدة بالبداية.">؟</span>
+          </span>
           <div class="switch on" id="sw-einmal"></div>
         </div>
         <div class="fields open" id="fields-einmal">
           <div class="field">
-            <div class="field-label"><span data-i18n="labelBetrag">Anlagebetrag</span></div>
-            <input type="number" id="einmal-betrag" value="10000" step="100">
+            <div class="field-label">
+              <span data-i18n="labelBetrag">Anlagebetrag</span>
+            </div>
+            <input type="number" id="spar-anfangskapital" value="5000" step="100">
           </div>
         </div>
       </div>
 
-      <div class="block">
-        <div class="switch-row">
-          <span class="label" data-i18n="labelSparplan">Sparplan</span>
-          <div class="switch on" id="sw-sparplan"></div>
-        </div>
-        <div class="fields open" id="fields-sparplan">
-          <div class="field">
-            <div class="field-label"><span data-i18n="labelRate">Monatliche Rate</span></div>
-            <input type="number" id="sparplan-rate" value="200" step="10">
+      <div class="block" id="field-rate">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="sparLabelRate">Monatlicher Investitionsbetrag</span>
+              <span class="info-tip" tabindex="0" data-tip="المبلغ يلي بتضيفه لاستثمارك كل شهر.">؟</span>
+            </span>
           </div>
+          <input type="number" id="spar-rate" value="300" step="10">
         </div>
+      </div>
+
+      <div class="block">
+        <div class="calc-result-box" id="result-box-top">
+          <div class="crb-label" id="result-desc">–</div>
+          <div class="crb-value" id="stat-result-top">–</div>
+          <div class="crb-explain" id="result-explain"></div>
+        </div>
+        <div class="calc-warning" id="calc-warning" data-i18n="sparInvalid">Mit diesen Werten nicht lösbar — bitte Anfangskapital, Rate oder Sparziel anpassen.</div>
       </div>
     </div>
 
     <div class="results">
 
-      <div class="panel" style="margin-bottom:20px;">
-        <div class="section-title" data-i18n="sectionCosts">Kostenstruktur je Produkt</div>
-        <div class="product-cards">
-          <div class="product-card etf">
-            <div class="p-title" data-i18n="etf">ETF</div>
-            <div class="p-sub" data-i18n="etfSub">börsengehandelt, meist passiv</div>
-            <div class="field">
-              <div class="field-label"><span data-i18n="labelOrder">Ordergebühren</span><span class="val" id="v-etf-order">0,20 %</span></div>
-              <input type="range" id="etf-order" min="0" max="2" value="0.2" step="0.01">
-            </div>
-            <div class="field">
-              <div class="field-label"><span data-i18n="labelTerEtf">Verwaltungsgebühren p.a. (TER)</span><span class="val" id="v-etf-ter">0,20 %</span></div>
-              <input type="range" id="etf-ter" min="0" max="2" value="0.2" step="0.01">
-            </div>
-          </div>
-          <div class="product-card fonds">
-            <div class="p-title" data-i18n="fonds">Fonds</div>
-            <div class="p-sub" data-i18n="fondsSub">meist aktiv gemanagt</div>
-            <div class="field">
-              <div class="field-label"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="val" id="v-fonds-aa">3,00 %</span></div>
-              <input type="range" id="fonds-aa" min="0" max="6" value="3" step="0.1">
-            </div>
-            <div class="field">
-              <div class="field-label"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="val" id="v-fonds-ter">1,50 %</span></div>
-              <input type="range" id="fonds-ter" min="0" max="3" value="1.5" step="0.05">
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="stat-row">
         <div class="stat-card green">
-          <div class="stat-tag etf" data-i18n="etf">ETF</div>
-          <div class="k" data-i18n="statFinalLabel">Endkapital</div>
-          <div class="v" id="r-etf">–</div>
+          <div class="stat-tag etf" id="tag-result" data-i18n="sparTargetEndkapital">Endkapital</div>
+          <div class="k" id="result-desc-card" data-i18n="sparWillBeCalculated">Wird berechnet</div>
+          <div class="v" id="stat-result">–</div>
         </div>
         <div class="stat-card purple">
-          <div class="stat-tag fonds" data-i18n="fonds">Fonds</div>
-          <div class="k" data-i18n="statFinalLabel">Endkapital</div>
-          <div class="v" id="r-fonds">–</div>
+          <div class="stat-tag fonds" data-i18n="sparStatContributed">Eingezahltes Kapital</div>
+          <div class="k" data-i18n="bContributed">Eingezahltes Kapital</div>
+          <div class="v" id="stat-contributed">–</div>
         </div>
         <div class="stat-card orange">
-          <div class="stat-tag orange" id="tag-diff">ETF</div>
-          <div class="k" id="k-diff">ETF-Vorteil</div>
-          <div class="v" id="r-diff">–</div>
-          <div class="sub" id="r-diff-pct"></div>
+          <div class="stat-tag orange" data-i18n="sparStatGain">Ertrag</div>
+          <div class="k" data-i18n="roiGainLabel">Erzielter Gewinn</div>
+          <div class="v" id="stat-gain">–</div>
+          <div class="sub" id="stat-gain-pct"></div>
         </div>
       </div>
 
       <div class="panel chart-panel">
         <div class="chart-head">
-          <h2 data-i18n="chartTitle">Wertentwicklung im Vergleich</h2>
-          <div class="legend">
-            <span><i class="dot" style="background:#9AAA9F"></i><span data-i18n="legendNoCost">ohne Kosten</span></span>
-            <span><i class="dot" style="background:var(--green)"></i><span data-i18n="etf">ETF</span></span>
-            <span><i class="dot" style="background:var(--purple)"></i><span data-i18n="fonds">Fonds</span></span>
+          <h2 data-i18n="roiChartTitle">Vermögensentwicklung über die Zeit</h2>
+          <div class="view-switch" id="spar-view-switch">
+            <button class="view-btn active" data-view="chart" data-i18n="roiViewChart">Diagramm</button>
+            <button class="view-btn" data-view="table" data-i18n="roiViewTable">Tabelle</button>
           </div>
         </div>
-        <div class="chart-inner" id="chart-svg"></div>
+        <div class="legend" id="spar-legend">
+          <span><i class="dot" style="background:#9AAA9F"></i><span data-i18n="roiLegendInvested">eingezahltes Kapital</span></span>
+          <span><i class="dot" style="background:var(--green)"></i><span data-i18n="roiLegendValue">Gesamtwert</span></span>
+        </div>
+        <div class="chart-inner" id="spar-chart-svg"></div>
+
+        <div id="spar-table-view" style="display:none;">
+          <div class="roi-table-wrap">
+            <table class="roi-table">
+              <thead>
+                <tr>
+                  <th data-i18n="roiColYear">Jahr</th>
+                  <th data-i18n="roiColPrincipal">Eingezahltes Kapital</th>
+                  <th id="spar-th-return">Jährliche kumulierte Rendite</th>
+                  <th data-i18n="roiColTotal">Gesamtkapital</th>
+                </tr>
+              </thead>
+              <tbody id="spar-table-body"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div class="panel">
-        <div class="section-title" data-i18n="sectionBreakdown">Kostenaufschlüsselung</div>
-        <div class="breakdown">
-          <div class="b-group etf">
-            <div class="b-col-head etf" data-i18n="etf">ETF</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-etf">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-etf">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-etf">–</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-etf" style="color:var(--green)">–</span></div>
-          </div>
-          <div class="b-group fonds">
-            <div class="b-col-head fonds" data-i18n="fonds">Fonds</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-fonds">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-fonds">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-fonds">–</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-fonds" style="color:var(--purple)">–</span></div>
+        <div class="section-title" data-i18n="roiSectionBreakdown">Ergebnis im Detail</div>
+        <div class="breakdown" style="grid-template-columns:1fr;">
+          <div class="b-group">
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="spar-b-contributed">–</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="roiBGain">Kumulierter Gewinn</span><span class="b-val" id="spar-b-gain">–</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="sparTargetEndkapital">Endkapital</span><span class="b-val" id="spar-b-total" style="color:var(--green)">–</span></div>
           </div>
         </div>
       </div>
@@ -170,14 +206,15 @@
   </div>
 
   <footer>
-    <p data-i18n="footer">Dieser Rechner arbeitet mit vereinfachten Annahmen...</p>
+    <p data-i18n="roiFooter">Dieser Rechner arbeitet mit vereinfachten Annahmen (konstante monatliche Rendite über die gesamte Laufzeit, keine Gebühren oder Steuern) und dient nur zur Veranschaulichung — keine Anlageberatung. Reale Renditen schwanken.</p>
     <p class="copyright">© <span id="copy-year"></span> moneywithrami — Instagram: <a href="https://www.instagram.com/moneywithrami" target="_blank" rel="noopener">@moneywithrami</a></p>
+    <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
   </footer>
 
 </div>
 
 <script src="/js/i18n.js"></script>
 <script src="/js/common.js"></script>
-<script src="/js/rechner.js"></script>
+<script src="/js/sparrechner.js"></script>
 </body>
 </html>

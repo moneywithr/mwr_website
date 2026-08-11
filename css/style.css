@@ -250,6 +250,10 @@ body.lang-ar .switch.on::after{right:calc(100% - 18px); left:auto;}
   margin-bottom:6px;
 }
 body.lang-ar .field-label{font-size:15.5px;}
+.field-label-text{
+  display:inline-flex;
+  align-items:center;
+}
 .field-label .val{
   font-family:'IBM Plex Mono',monospace;
   color:var(--ink);
@@ -261,6 +265,107 @@ body.lang-ar .field-label .val{
   font-size:15.5px;
   font-weight:700;
 }
+.inline-num-group{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:5px;
+  width:92px;
+  flex-shrink:0;
+}
+input[type=number].inline-num-input{
+  width:56px;
+  flex-shrink:0;
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  font-weight:600;
+  text-align:center;
+  padding:4px 2px;
+  border-radius:7px;
+  outline:none;
+}
+.inline-num-input:focus{border-color:var(--purple);}
+body.lang-ar .inline-num-input{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14.5px;
+}
+.inline-num-unit{
+  font-size:12.5px;
+  color:var(--text-muted);
+  font-weight:600;
+}
+body.lang-ar .inline-num-unit{font-size:14px;}
+
+/* Info-Icon mit Erklärungs-Tooltip beim Hover/Fokus */
+.info-tip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--purple-dim);
+  color:var(--purple);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+  cursor:help;
+  margin-inline-start:6px;
+  position:relative;
+  flex-shrink:0;
+  vertical-align:middle;
+  border:1px solid var(--purple);
+}
+body.lang-ar .info-tip{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:11.5px;}
+.info-tip::before{
+  content:attr(data-tip);
+  position:absolute;
+  bottom:calc(100% + 9px);
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#FFFFFF;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  line-height:1.5;
+  padding:9px 11px;
+  border-radius:9px;
+  width:200px;
+  text-align:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .15s ease;
+  z-index:30;
+  pointer-events:none;
+}
+body.lang-ar .info-tip::before{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:13px;
+  direction:rtl;
+}
+.info-tip::after{
+  content:'';
+  position:absolute;
+  bottom:calc(100% + 3px);
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--ink);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .15s ease;
+  z-index:30;
+}
+.info-tip:hover::before, .info-tip:hover::after,
+.info-tip:focus::before, .info-tip:focus::after{
+  opacity:1;
+  visibility:visible;
+}
+
 input[type=range]{
   -webkit-appearance:none;
   width:100%;
@@ -374,6 +479,20 @@ body.lang-ar .stat-card .k{
   letter-spacing:0;
   font-size:14.5px;
   font-weight:700;
+}
+#result-desc-card{
+  font-family:'IBM Plex Sans',sans-serif;
+  text-transform:none;
+  letter-spacing:0;
+  font-size:13px;
+  font-weight:500;
+  line-height:1.4;
+}
+body.lang-ar #result-desc-card{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14.5px;
+  font-weight:600;
+  line-height:1.5;
 }
 .stat-card .v{
   font-family:'IBM Plex Sans',sans-serif;
@@ -557,6 +676,103 @@ body.lang-ar select#broker-country{
   background-position:left 14px center;
 }
 
+/* Generischer Select-Stil (z.B. "Was möchtest du berechnen?") */
+select.select-input{
+  width:100%;
+  appearance:none;
+  -webkit-appearance:none;
+  background:var(--purple-dim);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15.5px;
+  font-weight:600;
+  padding:12px 40px 12px 14px;
+  border-radius:10px;
+  outline:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%23132A20' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+}
+select.select-input:focus{border-color:var(--purple);}
+body.lang-ar select.select-input{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  padding:12px 14px 12px 40px;
+  background-position:left 14px center;
+}
+
+/* Berechnetes Feld: auffälliges Ergebnis-Kästchen (die eigentliche Antwort) */
+.calc-result-box{
+  background:var(--green);
+  border:1.5px solid var(--line);
+  border-radius:14px;
+  padding:16px 18px;
+  box-shadow:0 4px 0 rgba(19,42,32,0.18);
+}
+.calc-result-box .crb-label{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12.5px;
+  line-height:1.4;
+  color:var(--mint);
+  font-weight:600;
+  margin-bottom:5px;
+}
+body.lang-ar .calc-result-box .crb-label{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  line-height:1.5;
+}
+.calc-result-box .crb-value{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:28px;
+  font-weight:700;
+  color:#FFFFFF;
+  line-height:1.15;
+}
+body.lang-ar .calc-result-box .crb-value{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:29px;}
+.calc-result-box .crb-explain{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12.5px;
+  line-height:1.6;
+  color:var(--green-dim);
+  font-weight:400;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.18);
+}
+body.lang-ar .calc-result-box .crb-explain{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14px;
+  line-height:1.7;
+}
+.calc-result-box .crb-explain strong{
+  font-weight:700;
+}
+
+.calc-result-box.invalid{background:var(--orange);}
+.calc-result-box.invalid .crb-label{color:var(--orange-dim);}
+
+.calc-warning{
+  margin-top:14px;
+  padding:12px 14px;
+  background:var(--orange-dim);
+  border-inline-start:3px solid var(--orange);
+  border-radius:0 10px 10px 0;
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.6;
+  display:none;
+}
+body.lang-ar .calc-warning{
+  border-inline-start:none;
+  border-inline-end:3px solid var(--orange);
+  border-radius:10px 0 0 10px;
+  font-size:14.5px;
+}
+.calc-warning.show{display:block;}
+
 #broker-placeholder{
   text-align:center;
   padding:32px 20px;
@@ -714,6 +930,7 @@ footer .copyright{
   color:var(--text-muted);
 }
 body.lang-ar footer .copyright{font-size:14px;}
+footer .copyright.rights-reserved{margin-top:4px;}
 footer .copyright a{
   color:var(--purple);
   font-weight:600;

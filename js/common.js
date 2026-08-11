@@ -38,13 +38,15 @@ window.Site = (function(){
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       el.textContent = t(el.getAttribute('data-i18n'));
     });
+    const titleKey = document.body.getAttribute('data-i18n-title');
+    if(titleKey) document.title = t(titleKey);
     document.querySelectorAll('.lang-btn').forEach(btn=>{
       btn.classList.toggle('active', btn.getAttribute('data-lang') === state.lang);
     });
   }
 
   // Setzt die aktive Klasse in der Navigation anhand des aktuellen Pfads
-  // (z.B. "/", "/rendite/", "/broker/" bei sauberen URLs ohne .html).
+  // (z.B. "/", "/rechner/kostenvergleich/", "/broker/" bei sauberen URLs ohne .html).
   function initNav(){
     let current = location.pathname;
     if(!current.endsWith('/')) current += '/';

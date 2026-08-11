@@ -2,18 +2,21 @@
 
 ```
 project/
-├─ index.html        Kostenrechner (Startseite)
-├─ rendite.html       Renditerechner
-├─ broker.html         Broker-Finder
+├─ index.html                       Sparrechner (Startseite, /)
+├─ rechner/
+│  └─ kostenvergleich/
+│     └─ index.html                 ETF vs. Fonds Kostenvergleich (/rechner/kostenvergleich/)
+├─ broker/
+│  └─ index.html                    Broker-Finder (/broker/)
 ├─ css/
-│  └─ style.css       Alle Styles, für jede Seite gleich
+│  └─ style.css                     Alle Styles, für jede Seite gleich
 └─ js/
-   ├─ i18n.js          Alle Übersetzungstexte (de/en/ar)
-   ├─ broker-data.js   Länder- und Broker-Liste
-   ├─ common.js        Sprachumschaltung, Formatierung, Navigation
-   ├─ rechner.js        Logik nur für index.html
-   ├─ rendite.js        Logik nur für rendite.html
-   └─ broker.js          Logik nur für broker.html
+   ├─ i18n.js                       Alle Übersetzungstexte (de/en/ar)
+   ├─ broker-data.js                Länder- und Broker-Liste
+   ├─ common.js                     Sprachumschaltung, Formatierung, Navigation
+   ├─ sparrechner.js                Logik nur für index.html (Sparrechner)
+   ├─ kostenvergleich.js            Logik nur für rechner/kostenvergleich/index.html
+   └─ broker.js                     Logik nur für broker/index.html
 ```
 
 ## Eine neue Sektion/Seite hinzufügen
