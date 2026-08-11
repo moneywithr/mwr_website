@@ -38,6 +38,9 @@ window.Site = (function(){
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       el.textContent = t(el.getAttribute('data-i18n'));
     });
+    document.querySelectorAll('[data-i18n-tip]').forEach(el=>{
+      el.setAttribute('data-tip', t(el.getAttribute('data-i18n-tip')));
+    });
     const titleKey = document.body.getAttribute('data-i18n-title');
     if(titleKey) document.title = t(titleKey);
     document.querySelectorAll('.lang-btn').forEach(btn=>{
