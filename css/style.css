@@ -946,3 +946,261 @@ footer .copyright a:hover{text-decoration:underline;}
     top:auto !important;
   }
 }
+
+/* Startseite: "Im Aufbau" */
+.landing-wrap{
+  max-width:760px;
+  padding-top:64px;
+  padding-bottom:64px;
+  text-align:center;
+}
+.landing-hero{
+  margin-bottom:52px;
+  animation:landingFadeIn .6s ease both;
+}
+.landing-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--purple-dim);
+  border:1.5px solid var(--purple);
+  color:var(--purple);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:7px 16px;
+  border-radius:999px;
+  margin-bottom:22px;
+  animation:landingPulse 2.4s ease-in-out infinite;
+}
+body.lang-ar .landing-badge{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:14.5px;
+}
+.landing-badge .dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--purple);
+  animation:landingBlink 1.4s ease-in-out infinite;
+}
+.landing-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:clamp(30px,5vw,46px);
+  line-height:1.2;
+  color:var(--ink);
+  margin:0 0 16px;
+  letter-spacing:-0.01em;
+}
+body.lang-ar .landing-title{font-family:'IBM Plex Sans Arabic',sans-serif; letter-spacing:0;}
+.landing-sub{
+  color:var(--text-muted);
+  font-size:17px;
+  line-height:1.7;
+  max-width:520px;
+  margin:0 auto;
+}
+body.lang-ar .landing-sub{font-size:18px;}
+
+.landing-services{
+  text-align:start;
+  animation:landingFadeIn .7s ease .1s both;
+}
+.landing-services .section-title{justify-content:center;}
+body.lang-ar .landing-services .section-title{
+  justify-content:flex-start;
+  padding-inline-start:11px;
+  border-inline-start:3.5px solid var(--purple);
+}
+
+.service-cards{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin-top:18px;
+}
+
+/* Featured Karte: Investitionsrechner, oben und größer */
+.service-card.service-card-featured{
+  display:block;
+  position:relative;
+  overflow:hidden;
+  background:var(--green);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px 20px;
+  text-decoration:none;
+  color:#FFFFFF;
+  box-shadow:0 5px 0 rgba(19,42,32,0.18);
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+  opacity:0;
+  animation:landingCardPop .6s cubic-bezier(.34,1.56,.64,1) .12s forwards;
+}
+.service-card.service-card-featured::after{
+  content:'';
+  position:absolute;
+  top:-40px; inset-inline-end:-40px;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(143,224,124,0.25) 0%, transparent 70%);
+  pointer-events:none;
+}
+.service-card.service-card-featured:hover{
+  transform:translateY(-4px) scale(1.005);
+  box-shadow:0 8px 0 rgba(19,42,32,0.2);
+}
+.service-card.service-card-featured .service-featured-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(255,255,255,0.14);
+  color:var(--mint);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:5px 12px;
+  border-radius:999px;
+  margin-bottom:10px;
+  animation:landingPulse 2s ease-in-out infinite;
+}
+body.lang-ar .service-card.service-card-featured .service-featured-badge{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:12.5px;
+}
+.service-card.service-card-featured .service-icon{
+  width:42px;height:42px;
+  border-radius:12px;
+  background:var(--mint);
+  color:var(--green);
+  font-size:20px;
+  margin-bottom:10px;
+}
+.service-card.service-card-featured .service-name{color:#FFFFFF; font-size:18px; margin-bottom:5px;}
+body.lang-ar .service-card.service-card-featured .service-name{font-size:19px;}
+.service-card.service-card-featured .service-desc{color:var(--green-dim); font-size:13.5px; max-width:460px; margin-bottom:10px;}
+body.lang-ar .service-card.service-card-featured .service-desc{font-size:15px;}
+.service-card.service-card-featured .service-cta{color:var(--mint);}
+
+.service-cards-secondary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media (max-width:640px){
+  .service-cards-secondary{grid-template-columns:1fr;}
+}
+
+.service-card{
+  display:block;
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 20px;
+  text-decoration:none;
+  color:inherit;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease, border-color .18s ease;
+  opacity:0;
+  animation:landingCardPop .55s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.service-cards-secondary .service-card:nth-child(1){animation-delay:.28s;}
+.service-cards-secondary .service-card:nth-child(2){animation-delay:.4s;}
+
+.service-card.card-purple:hover{border-color:var(--purple); box-shadow:0 8px 0 rgba(139,114,232,0.22);}
+.service-card.card-orange:hover{border-color:var(--orange); box-shadow:0 8px 0 rgba(255,106,61,0.22);}
+.service-card:not(.service-card.service-card-featured):hover{transform:translateY(-5px);}
+
+.service-card .service-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  background:var(--green-dim);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  margin-bottom:14px;
+  animation:iconFloat 2.6s ease-in-out infinite;
+}
+.service-card.card-purple .service-icon{background:var(--purple-dim); animation-delay:.3s;}
+.service-card.card-orange .service-icon{background:var(--orange-dim); animation-delay:.6s;}
+.service-card.service-card-featured .service-icon{animation:iconFloat 2.6s ease-in-out infinite;}
+.service-card:hover .service-icon{animation:iconWiggle .5s ease;}
+
+.service-card .service-name{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:16.5px;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:17.5px;}
+.service-card .service-desc{
+  font-size:13.5px;
+  color:var(--text-muted);
+  line-height:1.6;
+  margin-bottom:14px;
+}
+body.lang-ar .service-card .service-desc{font-size:15px;}
+.service-card .service-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--purple);
+  letter-spacing:0.04em;
+}
+.service-card.card-purple .service-cta{color:var(--purple);}
+.service-card.card-orange .service-cta{color:var(--orange);}
+body.lang-ar .service-card .service-cta{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  letter-spacing:0;
+  font-size:14px;
+}
+.service-card .service-cta-arrow{display:inline-block; transition:transform .18s ease;}
+.service-card:hover .service-cta-arrow{transform:translateX(3px);}
+body.lang-ar .service-card .service-cta-arrow{transform:scaleX(-1);}
+body.lang-ar .service-card:hover .service-cta-arrow{transform:scaleX(-1) translateX(3px);}
+
+.landing-wrap footer{text-align:center;}
+
+@keyframes landingFadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes landingCardPop{
+  0%{opacity:0; transform:translateY(22px) scale(.94);}
+  65%{opacity:1; transform:translateY(-3px) scale(1.015);}
+  100%{opacity:1; transform:translateY(0) scale(1);}
+}
+@keyframes landingPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+}
+@keyframes landingBlink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.25;}
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-5px) rotate(-2deg);}
+}
+@keyframes iconWiggle{
+  0%{transform:rotate(0deg) scale(1);}
+  25%{transform:rotate(-12deg) scale(1.15);}
+  50%{transform:rotate(10deg) scale(1.15);}
+  75%{transform:rotate(-6deg) scale(1.1);}
+  100%{transform:rotate(0deg) scale(1.08);}
+}
+@media (prefers-reduced-motion:reduce){
+  .landing-hero,.landing-services,.service-card,.service-card.service-card-featured,.landing-badge,.landing-badge .dot,.service-icon,.service-featured-badge{
+    animation:none !important;
+    opacity:1 !important;
+  }
+}

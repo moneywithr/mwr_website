@@ -49,7 +49,7 @@ window.Site = (function(){
   }
 
   // Setzt die aktive Klasse in der Navigation anhand des aktuellen Pfads
-  // (z.B. "/", "/rechner/kostenvergleich/", "/broker/" bei sauberen URLs ohne .html).
+  // (z.B. "/", "/calculator/investment/", "/stuff_i_use/brokerage_finder/" bei sauberen URLs ohne .html).
   function initNav(){
     let current = location.pathname;
     if(!current.endsWith('/')) current += '/';

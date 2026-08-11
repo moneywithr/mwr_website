@@ -2,22 +2,32 @@
 
 ```
 project/
-├─ index.html                       Sparrechner (Startseite, /)
-├─ rechner/
-│  └─ kostenvergleich/
-│     └─ index.html                 ETF vs. Fonds Kostenvergleich (/rechner/kostenvergleich/)
-├─ broker/
-│  └─ index.html                    Broker-Finder (/broker/)
+├─ index.html                             Startseite "Im Aufbau" mit Links zu den 3 Tools (/)
+├─ calculator/
+│  ├─ investment/
+│  │  └─ index.html                       Investitionsrechner (/calculator/investment/)
+│  └─ fund_etf_fees/
+│     └─ index.html                       ETF vs. Fonds Kostenvergleich (/calculator/fund_etf_fees/)
+├─ stuff_i_use/
+│  └─ brokerage_finder/
+│     └─ index.html                       Broker-Finder (/stuff_i_use/brokerage_finder/)
 ├─ css/
-│  └─ style.css                     Alle Styles, für jede Seite gleich
+│  └─ style.css                           Alle Styles, für jede Seite gleich
 └─ js/
-   ├─ i18n.js                       Alle Übersetzungstexte (de/en/ar)
-   ├─ broker-data.js                Länder- und Broker-Liste
-   ├─ common.js                     Sprachumschaltung, Formatierung, Navigation
-   ├─ sparrechner.js                Logik nur für index.html (Sparrechner)
-   ├─ kostenvergleich.js            Logik nur für rechner/kostenvergleich/index.html
-   └─ broker.js                     Logik nur für broker/index.html
+   ├─ i18n.js                             Alle Übersetzungstexte (de/en/ar)
+   ├─ broker-data.js                      Länder- und Broker-Liste
+   ├─ common.js                           Sprachumschaltung, Formatierung, Navigation
+   ├─ sparrechner.js                      Logik nur für calculator/investment/index.html
+   ├─ kostenvergleich.js                  Logik nur für calculator/fund_etf_fees/index.html
+   └─ broker.js                           Logik nur für stuff_i_use/brokerage_finder/index.html
 ```
+
+Die Startseite `/` ist aktuell eine "Im Aufbau"-Seite ohne eigenes JS — sie nutzt nur
+`i18n.js` und `common.js` für Sprachumschaltung und verlinkt auf die drei aktiven Tools.
+
+Alle URL-Pfade sind bewusst auf Englisch gehalten (`calculator`, `investment`,
+`fund_etf_fees`, `stuff_i_use`, `brokerage_finder`), unabhängig von der Sprache,
+die gerade auf der Seite ausgewählt ist.
 
 ## Eine neue Sektion/Seite hinzufügen
 
