@@ -1026,6 +1026,48 @@ footer .copyright a{
 }
 footer .copyright a:hover{text-decoration:underline;}
 
+/* Social-Banner im Footer ("Hier findest du mich") */
+.footer-social-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  background:var(--purple-dim);
+  border:1.5px solid var(--purple-strong);
+  border-radius:14px;
+  padding:12px 22px;
+  margin:20px 0 8px;
+  flex-wrap:wrap;
+}
+.footer-social-title{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  color:var(--purple-strong);
+}
+body.lang-ar .footer-social-title{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:16.5px;
+}
+.footer-social-icons{
+  display:flex;
+  gap:16px;
+  flex-shrink:0;
+  align-items:center;
+}
+.footer-social-icons a{
+  color:var(--purple-strong);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .15s ease, opacity .15s ease;
+}
+.footer-social-icons a:hover{
+  opacity:0.7;
+  transform:translateY(-2px);
+}
+.footer-social-icons svg{width:20px; height:20px; fill:currentColor;}
+
 @media (max-width:900px){
   .panel-input{
     position:static !important;
@@ -1254,6 +1296,35 @@ body.lang-ar .service-card .service-cta{
 .service-card:hover .service-cta-arrow{transform:translateX(3px);}
 body.lang-ar .service-card .service-cta-arrow{transform:scaleX(-1);}
 body.lang-ar .service-card:hover .service-cta-arrow{transform:scaleX(-1) translateX(3px);}
+
+.landing-footnote{
+  margin:44px auto 0;
+  max-width:540px;
+  background:var(--panel);
+  border:1.5px solid var(--line-soft);
+  border-radius:16px;
+  padding:16px 22px;
+  font-size:14px;
+  color:var(--text-muted);
+  line-height:1.7;
+  text-align:center;
+  animation:landingFadeIn .7s ease .3s both;
+}
+body.lang-ar .landing-footnote{font-size:15.5px;}
+
+.service-tagline{
+  font-size:13px;
+  font-style:italic;
+  color:var(--mint);
+  margin:-3px 0 8px;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+body.lang-ar .service-tagline{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:14.5px;
+  font-style:normal;
+  font-weight:500;
+}
 
 .landing-wrap footer{text-align:center;}
 
