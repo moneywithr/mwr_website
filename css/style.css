@@ -906,12 +906,15 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
 .broker-card-main{display:flex; align-items:center; gap:14px; min-width:0; flex:1;}
 .broker-logo{
   flex-shrink:0;
-  width:92px;height:46px;
+  height:46px;
+  width:auto;
+  max-width:150px;
+  min-width:46px;
   border-radius:10px;
   object-fit:contain;
   background:#FFFFFF;
   border:1.5px solid var(--line);
-  padding:6px 9px;
+  padding:6px 10px;
 }
 .broker-logo-fallback{
   flex-shrink:0;
