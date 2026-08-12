@@ -246,7 +246,6 @@
     $('field-rate').style.display = state.target === 'rate' ? 'none' : '';
 
     $('result-desc').textContent = t(resultDescKey(state.target));
-    $('result-desc-card').textContent = t(resultDescKey(state.target));
   }
 
   function render(){
@@ -261,11 +260,8 @@
       $('stat-result').textContent = '–';
       $('stat-contributed').textContent = '–';
       $('stat-gain').textContent = '–';
-      $('stat-gain-pct').textContent = '';
-      $('spar-b-contributed').textContent = '–';
-      $('spar-b-gain').textContent = '–';
-      $('spar-b-total').textContent = '–';
       $('result-explain').textContent = '';
+      $('result-summary-explain').textContent = '';
       return;
     }
     warningEl.classList.remove('show');
@@ -285,14 +281,8 @@
     const gain = res.FV - contributed;
     $('stat-contributed').textContent = fmtEUR(contributed);
     $('stat-gain').textContent = fmtEUR(gain);
-    $('stat-gain-pct').textContent = contributed > 0
-      ? (gain/contributed*100).toLocaleString(locale(),{maximumFractionDigits:1}) + ' ' + t('diffPctSuffixRoi')
-      : '';
-
-    $('spar-b-contributed').textContent = fmtEUR(contributed);
-    $('spar-b-gain').textContent = fmtEUR(gain);
-    $('spar-b-total').textContent = fmtEUR(res.FV);
     $('result-explain').innerHTML = buildExplanation(res, contributed, gain);
+    $('result-summary-explain').innerHTML = buildExplanation(res, contributed, gain);
 
     const series = simulateSeries(res.P0, res.C, res.N, res.i);
     series.totalMonths = res.N;

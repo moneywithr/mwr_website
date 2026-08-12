@@ -141,23 +141,25 @@
 
     <div class="results">
 
-      <div class="stat-row">
-        <div class="stat-card green">
-          <div class="stat-tag etf" id="tag-result" data-i18n="sparTargetEndkapital">Endkapital</div>
-          <div class="k" id="result-desc-card" data-i18n="sparWillBeCalculated">Wird berechnet</div>
-          <div class="v" id="stat-result">–</div>
+      <div class="panel result-summary">
+        <div class="result-summary-top">
+          <div class="result-summary-stats">
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="sparStatContributed">Eingezahltes Kapital</span>
+              <span class="rs-value" id="stat-contributed">–</span>
+            </div>
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="sparStatGain">Ertrag</span>
+              <span class="rs-value" id="stat-gain">–</span>
+            </div>
+          </div>
+          <div class="result-summary-divider"></div>
+          <div class="result-summary-final">
+            <span class="rs-label" id="tag-result" data-i18n="sparTargetEndkapital">Endkapital</span>
+            <span class="rs-value-big" id="stat-result">–</span>
+          </div>
         </div>
-        <div class="stat-card purple">
-          <div class="stat-tag fonds" data-i18n="sparStatContributed">Eingezahltes Kapital</div>
-          <div class="k" data-i18n="bContributed">Eingezahltes Kapital</div>
-          <div class="v" id="stat-contributed">–</div>
-        </div>
-        <div class="stat-card orange">
-          <div class="stat-tag orange" data-i18n="sparStatGain">Ertrag</div>
-          <div class="k" data-i18n="roiGainLabel">Erzielter Gewinn</div>
-          <div class="v" id="stat-gain">–</div>
-          <div class="sub" id="stat-gain-pct"></div>
-        </div>
+        <div class="result-summary-explain" id="result-summary-explain"></div>
       </div>
 
       <div class="panel chart-panel">
@@ -187,17 +189,6 @@
               </thead>
               <tbody id="spar-table-body"></tbody>
             </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="section-title" data-i18n="roiSectionBreakdown">Ergebnis im Detail</div>
-        <div class="breakdown" style="grid-template-columns:1fr;">
-          <div class="b-group">
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="spar-b-contributed">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="roiBGain">Kumulierter Gewinn</span><span class="b-val" id="spar-b-gain">–</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="sparTargetEndkapital">Endkapital</span><span class="b-val" id="spar-b-total" style="color:var(--green)">–</span></div>
           </div>
         </div>
       </div>
