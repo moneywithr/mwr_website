@@ -42,32 +42,35 @@
   src:url('/fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
 }
 @font-face{
-  font-family:'IBM Plex Sans Arabic';
+  font-family:'Tajawal';
   font-style:normal;
   font-weight:400;
   font-display:swap;
-  src:url('/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2') format('woff2');
+  src:url('/fonts/tajawal-arabic-400-normal.woff2') format('woff2');
 }
 @font-face{
-  font-family:'IBM Plex Sans Arabic';
+  font-family:'Tajawal';
   font-style:normal;
   font-weight:500;
   font-display:swap;
-  src:url('/fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2') format('woff2');
+  src:url('/fonts/tajawal-arabic-500-normal.woff2') format('woff2');
 }
 @font-face{
-  font-family:'IBM Plex Sans Arabic';
+  /* Tajawal hat kein 600-Schnitt — der 500er-Schnitt wird hier als "600"
+     registriert, damit alle bestehenden font-weight:600-Stellen im CSS
+     ohne Änderungen weiterhin die richtige (etwas hellere) Optik bekommen. */
+  font-family:'Tajawal';
   font-style:normal;
   font-weight:600;
   font-display:swap;
-  src:url('/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2') format('woff2');
+  src:url('/fonts/tajawal-arabic-500-normal.woff2') format('woff2');
 }
 @font-face{
-  font-family:'IBM Plex Sans Arabic';
+  font-family:'Tajawal';
   font-style:normal;
   font-weight:700;
   font-display:swap;
-  src:url('/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2') format('woff2');
+  src:url('/fonts/tajawal-arabic-700-normal.woff2') format('woff2');
 }
 @font-face{
   font-family:'Unbounded';
@@ -107,7 +110,7 @@ body{
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
 }
-body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:17.5px;}
+body.lang-ar{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:17.5px;}
 .wrap{max-width:1180px;margin:0 auto; padding:32px 20px 60px;}
 
 /* Volle-Breite Top-Banner in Lila */
@@ -124,6 +127,11 @@ body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font
   gap:16px;
   padding:13px 20px;
   flex-wrap:wrap;
+  /* Bewusst IMMER ltr: Markenname bleibt links, Sprachumschalter bleibt
+     rechts — unabhängig von der gewählten Sprache/Textrichtung. Sonst
+     tauschen beide beim Sprachwechsel (ar=rtl vs. de/en=ltr) die Seiten,
+     was verwirrend ist. */
+  direction:ltr;
 }
 
 header{margin-bottom:32px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
@@ -138,7 +146,7 @@ header{margin-bottom:32px; display:flex; justify-content:space-between; align-it
   margin-bottom:10px;
 }
 body.lang-ar .eyebrow{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:14.5px;
   font-weight:700;
@@ -152,7 +160,7 @@ h1{
   letter-spacing:-0.01em;
   color:var(--ink);
 }
-body.lang-ar h1{font-family:'IBM Plex Sans Arabic',sans-serif; letter-spacing:0;}
+body.lang-ar h1{font-family:'Tajawal',sans-serif; letter-spacing:0;}
 header p{
   color:var(--text-muted);
   max-width:640px;
@@ -185,8 +193,8 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   transition:background .15s ease, color .15s ease;
 }
 .lang-btn.active{background:var(--purple-strong); color:#FFFFFF;}
-.lang-btn[data-lang="ar"]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
-body.lang-ar .lang-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
+.lang-btn[data-lang="ar"]{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:600;}
+body.lang-ar .lang-btn{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:600;}
 @media (max-width:480px){
   .lang-btn{padding:6px 10px; font-size:12px;}
 }
@@ -234,7 +242,7 @@ body.lang-ar .brand-name{
 .tab-btn:hover{border-color:var(--purple); color:var(--ink);}
 .tab-btn.active{background:var(--ink); border-color:var(--ink); color:#FFFFFF;}
 body.lang-ar .tab-btn{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-weight:700;
   font-size:16px;
 }
@@ -270,7 +278,7 @@ body.lang-ar .tab-btn{
   justify-content:space-between;
 }
 body.lang-ar .section-title{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:16px;
   font-weight:700;
@@ -347,7 +355,7 @@ body.lang-ar .field-label{font-size:15.5px;}
   font-weight:600;
 }
 body.lang-ar .field-label .val{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:15.5px;
   font-weight:700;
 }
@@ -375,7 +383,7 @@ input[type=number].inline-num-input{
 }
 .inline-num-input:focus{border-color:var(--purple);}
 body.lang-ar .inline-num-input{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14.5px;
 }
 .inline-num-unit{
@@ -405,9 +413,12 @@ body.lang-ar .inline-num-unit{font-size:14px;}
   vertical-align:middle;
   border:1px solid var(--purple);
 }
-body.lang-ar .info-tip{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:11.5px;}
+body.lang-ar .info-tip{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:11.5px;}
 .info-tip-glyph::before{content:"?";}
-body.lang-ar .info-tip-glyph::before{content:"؟";}
+/* Das arabische "؟" sitzt in der Tajawal-Schrift laut Font-Metriken spürbar
+   höher in der Zeile als das lateinische "?" in IBM Plex Sans — kleine
+   Korrektur nach unten, damit es wirklich mittig im Kreis sitzt. */
+body.lang-ar .info-tip-glyph::before{content:"؟"; position:relative; top:0.18em;}
 .info-tip::before{
   content:attr(data-tip);
   position:absolute;
@@ -431,7 +442,7 @@ body.lang-ar .info-tip-glyph::before{content:"؟";}
   pointer-events:none;
 }
 body.lang-ar .info-tip::before{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:13px;
   direction:rtl;
 }
@@ -490,7 +501,7 @@ input[type=number]{
   outline:none;
 }
 input[type=number]:focus{border-color:var(--purple);}
-body.lang-ar input[type=number]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+body.lang-ar input[type=number]{font-family:'Tajawal','IBM Plex Sans',sans-serif;}
 
 .product-cards{
   display:grid;
@@ -511,7 +522,7 @@ body.lang-ar input[type=number]{font-family:'IBM Plex Sans Arabic','IBM Plex San
   font-weight:700;
   margin-bottom:2px;
 }
-body.lang-ar .product-card .p-title{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:19.5px;}
+body.lang-ar .product-card .p-title{font-family:'Tajawal',sans-serif; font-size:19.5px;}
 .product-card.etf .p-title{color:var(--green);}
 .product-card.fonds .p-title{color:var(--purple-strong);}
 .product-card .p-sub{font-size:13px; color:var(--text-muted); margin-bottom:14px;}
@@ -567,7 +578,7 @@ body.lang-ar .rs-stat .rs-label{font-size:15px;}
   justify-self:end;
 }
 body.lang-ar .rs-stat .rs-value{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:17px;
 }
 .result-summary-divider{
@@ -591,7 +602,7 @@ body.lang-ar .rs-stat .rs-value{
   font-weight:600;
 }
 body.lang-ar .result-summary-final .rs-label{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:15px;
   font-weight:700;
@@ -603,7 +614,7 @@ body.lang-ar .result-summary-final .rs-label{
   color:#FFFFFF;
   line-height:1.15;
 }
-body.lang-ar .result-summary-final .rs-value-big{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:33px;}
+body.lang-ar .result-summary-final .rs-value-big{font-family:'Tajawal',sans-serif; font-size:33px;}
 .result-summary-explain{
   font-family:'IBM Plex Sans',sans-serif;
   font-size:12.5px;
@@ -615,7 +626,7 @@ body.lang-ar .result-summary-final .rs-value-big{font-family:'IBM Plex Sans Arab
   border-top:1px solid rgba(255,255,255,0.18);
 }
 body.lang-ar .result-summary-explain{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14px;
   line-height:1.7;
 }
@@ -645,7 +656,7 @@ body.lang-ar .result-summary-explain{
   color:#FFFFFF;
 }
 body.lang-ar .stat-tag{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:13px;
 }
@@ -662,7 +673,7 @@ body.lang-ar .stat-tag{
   margin-bottom:8px;
 }
 body.lang-ar .stat-card .k{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:14.5px;
   font-weight:700;
@@ -676,7 +687,7 @@ body.lang-ar .stat-card .k{
   line-height:1.4;
 }
 body.lang-ar #result-desc-card{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14.5px;
   font-weight:600;
   line-height:1.5;
@@ -687,7 +698,7 @@ body.lang-ar #result-desc-card{
   font-weight:700;
   line-height:1.1;
 }
-body.lang-ar .stat-card .v{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:28px;}
+body.lang-ar .stat-card .v{font-family:'Tajawal',sans-serif; font-size:28px;}
 .stat-card.green{background:var(--green-dim);}
 .stat-card.green .v{color:var(--green);}
 .stat-card.purple{background:var(--purple-dim);}
@@ -714,10 +725,10 @@ body.lang-ar .stat-card .sub{font-size:14.5px;}
   margin:0;
   color:var(--ink);
 }
-body.lang-ar .chart-head h2{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:21.5px;}
+body.lang-ar .chart-head h2{font-family:'Tajawal',sans-serif; font-size:21.5px;}
 .legend{display:flex; gap:16px; font-size:13px; color:var(--text-muted); font-family:'IBM Plex Mono',monospace; flex-wrap:wrap;}
 body.lang-ar .legend{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14.5px;
   font-weight:600;
 }
@@ -748,7 +759,93 @@ body.lang-ar .legend{
   white-space:nowrap;
 }
 .view-btn.active{background:var(--green); color:#FFFFFF;}
-body.lang-ar .view-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700; font-size:14px;}
+body.lang-ar .view-btn{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:700; font-size:14px;}
+
+/* Currency-Switch: eigener Dropdown (kein natives <select>, damit wir eine
+   runde Flagge im Button/Menü zeigen können). Zwei Instanzen pro Seite
+   (Desktop/Mobil) bleiben über common.js synchron; welche sichtbar ist,
+   entscheidet allein die Media Query weiter unten. */
+.currency-switch-row{
+  display:flex;
+  justify-content:flex-end; /* "flex-end" = im RTL-Layout automatisch ganz links */
+  margin-bottom:14px;
+}
+.currency-switch{
+  position:relative;
+  display:inline-block;
+}
+.currency-switch-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  padding:7px 12px;
+  cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.03em;
+  color:var(--ink);
+  transition:border-color .15s ease;
+}
+body.lang-ar .currency-switch-btn{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:14.5px; letter-spacing:0;}
+.currency-switch-btn:hover{border-color:var(--purple);}
+.currency-switch.open .currency-switch-btn{border-color:var(--purple);}
+.currency-flag-icon{width:20px; height:20px; border-radius:50%; flex-shrink:0; display:block; border:1px solid rgba(19,42,32,0.15);}
+.currency-switch-chevron{width:9px; height:9px; flex-shrink:0; opacity:.55; transition:transform .15s ease;}
+.currency-switch.open .currency-switch-chevron{transform:rotate(180deg);}
+
+.currency-switch-menu{
+  position:absolute;
+  top:calc(100% + 8px);
+  inset-inline-end:0;
+  min-width:190px;
+  background:var(--panel);
+  border:1.5px solid var(--line);
+  border-radius:16px;
+  padding:6px;
+  box-shadow:0 4px 0 rgba(19,42,32,0.18);
+  list-style:none;
+  margin:0;
+  z-index:30;
+  display:none;
+}
+.currency-switch.open .currency-switch-menu{display:block;}
+.currency-switch-menu li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 10px;
+  border-radius:11px;
+  cursor:pointer;
+}
+.currency-switch-menu li:hover{background:var(--panel-2);}
+.currency-switch-menu li.active{background:var(--green-dim);}
+.currency-switch-menu .cs-code{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.03em;
+  color:var(--ink);
+}
+body.lang-ar .currency-switch-menu .cs-code{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:14.5px; letter-spacing:0;}
+.currency-switch-menu .cs-name{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px;
+  color:var(--text-muted);
+  margin-inline-start:auto;
+}
+body.lang-ar .currency-switch-menu .cs-name{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:13.5px;}
+
+@media (max-width:900px){
+  .currency-switch-desktop{display:none;}
+}
+@media (min-width:901px){
+  .currency-switch-mobile{display:none;}
+}
+.currency-switch-mobile-row{margin-bottom:16px;}
 
 .roi-table-wrap{overflow-x:auto; border:1.5px solid var(--line); border-radius:14px;}
 table.roi-table{
@@ -758,7 +855,7 @@ table.roi-table{
   font-size:14px;
   min-width:420px;
 }
-body.lang-ar table.roi-table{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
+body.lang-ar table.roi-table{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:15.5px;}
 table.roi-table thead th{
   background:var(--ink);
   color:#FFFFFF;
@@ -773,7 +870,7 @@ table.roi-table thead th{
   top:0;
 }
 body.lang-ar table.roi-table thead th{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:14px;
 }
@@ -802,7 +899,7 @@ table.roi-table td.col-total{color:var(--green); font-weight:700;}
   padding:6px 0 10px;
 }
 body.lang-ar .b-col-head{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:15.5px;
   font-weight:700;
 }
@@ -816,7 +913,7 @@ body.lang-ar .b-col-head{
   font-size:15px;
 }
 body.lang-ar .b-row{font-size:16.5px;}
-body.lang-ar .b-row .b-val{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:600;}
+body.lang-ar .b-row .b-val{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:600;}
 .b-row .b-label{color:var(--text-muted);}
 .b-row .b-val{font-family:'IBM Plex Mono',monospace; font-weight:500;}
 .b-row.total .b-val{font-weight:600;}
@@ -855,7 +952,7 @@ select#broker-country{
 }
 select#broker-country:focus{border-color:var(--purple);}
 body.lang-ar select#broker-country{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   padding:11px 14px 11px 40px;
   background-position:left 14px center;
 }
@@ -881,7 +978,7 @@ select.select-input{
 }
 select.select-input:focus{border-color:var(--purple);}
 body.lang-ar select.select-input{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   padding:12px 14px 12px 40px;
   background-position:left 14px center;
 }
@@ -903,7 +1000,7 @@ body.lang-ar select.select-input{
   margin-bottom:5px;
 }
 body.lang-ar .calc-result-box .crb-label{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14px;
   font-weight:600;
   line-height:1.5;
@@ -915,7 +1012,7 @@ body.lang-ar .calc-result-box .crb-label{
   color:#FFFFFF;
   line-height:1.15;
 }
-body.lang-ar .calc-result-box .crb-value{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:29px;}
+body.lang-ar .calc-result-box .crb-value{font-family:'Tajawal',sans-serif; font-size:29px;}
 .calc-result-box .crb-explain{
   font-family:'IBM Plex Sans',sans-serif;
   font-size:12.5px;
@@ -927,7 +1024,7 @@ body.lang-ar .calc-result-box .crb-value{font-family:'IBM Plex Sans Arabic',sans
   border-top:1px solid rgba(255,255,255,0.18);
 }
 body.lang-ar .calc-result-box .crb-explain{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:14px;
   line-height:1.7;
 }
@@ -985,9 +1082,9 @@ body.lang-ar #broker-placeholder{font-size:15px;}
   margin:0;
   color:var(--ink);
 }
-body.lang-ar .broker-country-head h3{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:19.5px;}
+body.lang-ar .broker-country-head h3{font-family:'Tajawal',sans-serif; font-size:19.5px;}
 .broker-count{font-size:12.5px; color:var(--text-muted); font-weight:500; font-family:'IBM Plex Mono',monospace;}
-body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:14px;}
+body.lang-ar .broker-count{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:14px;}
 
 .broker-card{
   background:var(--panel-2);
@@ -1027,7 +1124,7 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
 }
 .broker-card-text{min-width:0;}
 .broker-name{font-size:15.5px; font-weight:600; margin:0 0 4px; color:var(--ink); font-family:'IBM Plex Sans',sans-serif;}
-body.lang-ar .broker-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:17px;}
+body.lang-ar .broker-name{font-family:'Tajawal',sans-serif; font-size:17px;}
 .broker-note{font-size:13px; color:var(--text-muted); margin:0; line-height:1.45;}
 body.lang-ar .broker-note{font-size:14.5px;}
 .broker-badge{
@@ -1044,7 +1141,7 @@ body.lang-ar .broker-note{font-size:14.5px;}
   vertical-align:middle;
   font-family:'IBM Plex Sans',sans-serif;
 }
-body.lang-ar .broker-badge{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; letter-spacing:0;}
+body.lang-ar .broker-badge{font-family:'Tajawal','IBM Plex Sans',sans-serif; letter-spacing:0;}
 
 .broker-cta{
   flex-shrink:0;
@@ -1064,7 +1161,7 @@ body.lang-ar .broker-badge{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
   transition:background .15s ease;
 }
 .broker-cta:hover{background:#7660D1;}
-body.lang-ar .broker-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700;}
+body.lang-ar .broker-cta{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:700;}
 .broker-cta.disabled{
   background:transparent;
   border-color:var(--line-soft);
@@ -1142,7 +1239,7 @@ footer .copyright a:hover{text-decoration:underline;}
   color:var(--purple-strong);
 }
 body.lang-ar .footer-social-title{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   font-size:16.5px;
 }
 .footer-social-icons{
@@ -1191,7 +1288,7 @@ body.lang-ar .footer-social-title{
   margin:0 0 20px;
   letter-spacing:-0.01em;
 }
-body.lang-ar .landing-title{font-family:'IBM Plex Sans Arabic',sans-serif; letter-spacing:0;}
+body.lang-ar .landing-title{font-family:'Tajawal',sans-serif; letter-spacing:0;}
 .landing-sub{
   color:var(--text-muted);
   font-size:19.5px;
@@ -1266,7 +1363,7 @@ body.lang-ar .landing-services .section-title{
   animation:landingPulse 2s ease-in-out infinite;
 }
 body.lang-ar .service-card.service-card-featured .service-featured-badge{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:14.5px;
 }
@@ -1335,7 +1432,7 @@ body.lang-ar .service-card.service-card-featured .service-desc{font-size:16.5px;
   color:var(--ink);
   margin-bottom:8px;
 }
-body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:20.5px;}
+body.lang-ar .service-card .service-name{font-family:'Tajawal',sans-serif; font-size:20.5px;}
 .service-card .service-desc{
   font-size:15.5px;
   color:var(--text-muted);
@@ -1356,7 +1453,7 @@ body.lang-ar .service-card .service-desc{font-size:17px;}
 .service-card.card-purple .service-cta{color:var(--purple-strong);}
 .service-card.card-orange .service-cta{color:var(--orange-strong);}
 body.lang-ar .service-card .service-cta{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-family:'Tajawal','IBM Plex Sans',sans-serif;
   letter-spacing:0;
   font-size:15.5px;
 }

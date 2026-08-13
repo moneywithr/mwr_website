@@ -46,9 +46,9 @@
   function drawChart(noCost, etf, fonds){
     const H = 360, padL = 56, padT = 20, padB = 34;
     const n = noCost.snapshots.length;
-    const maxV = Math.max(...noCost.snapshots) * 1.06;
-    const monoFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Mono';
-    const sansFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Sans';
+    const maxV = Math.max(...noCost.snapshots) * 1.06 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
+    const monoFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Mono';
+    const sansFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Sans';
 
     const finalGap = etf.snapshots[n-1] - fonds.snapshots[n-1];
     const etfWinsChart = finalGap >= 0;
@@ -176,5 +176,6 @@
   bindSwitch('sw-sparplan','fields-sparplan','sparplanActive');
 
   document.addEventListener('mwr:langchange', ()=>{ updateSliderLabels(); render(); });
+  document.addEventListener('mwr:currencychange', render);
   document.addEventListener('DOMContentLoaded', ()=>{ updateSliderLabels(); render(); });
 })();

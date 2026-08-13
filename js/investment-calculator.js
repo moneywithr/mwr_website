@@ -6,7 +6,7 @@
   const { t, locale, fmtEUR, fmtCompact, fmtPct, textWidth } = window.Site;
 
   const state = {
-    target: 'rate', // 'endkapital' | 'anfangskapital' | 'rate' | 'laufzeit'
+    target: 'endkapital', // 'endkapital' | 'anfangskapital' | 'rate' | 'laufzeit'
     years: 15,
     rendite: 7,
     einmalActive: true,
@@ -105,9 +105,9 @@
   function drawChart(res){
     const H = 360, padL = 56, padT = 20, padB = 34;
     const n = res.snapshots.length;
-    const maxV = Math.max(...res.snapshots) * 1.06;
-    const monoFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Mono';
-    const sansFont = window.Site.state.lang === 'ar' ? 'IBM Plex Sans Arabic' : 'IBM Plex Sans';
+    const maxV = Math.max(...res.snapshots) * 1.06 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
+    const monoFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Mono';
+    const sansFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Sans';
 
     const finalGain = res.snapshots[n-1] - res.contribSnapshots[n-1];
     const valueText = '+' + fmtCompact(Math.max(finalGain,0));
@@ -208,7 +208,20 @@
     return v.toLocaleString(locale(),{maximumFractionDigits:1});
   }
   function buildExplanation(res, contributed, gain){
-    const template = state.einmalActive && res.P0 > 0 ? t('sparExplainLump') : t('sparExplainNoLump');
+    const lump = state.einmalActive && res.P0 > 0;
+    let templateKey;
+    if(state.target === 'anfangskapital'){
+      // Hier ist P0 selbst die gesuchte Antwort — eine "mit/ohne Einmalanlage"-
+      // Unterscheidung ergibt keinen Sinn, es gibt nur eine Fassung.
+      templateKey = 'sparExplainAnfangskapital';
+    } else if(state.target === 'rate'){
+      templateKey = lump ? 'sparExplainRateLump' : 'sparExplainRateNoLump';
+    } else if(state.target === 'laufzeit'){
+      templateKey = lump ? 'sparExplainLaufzeitLump' : 'sparExplainLaufzeitNoLump';
+    } else {
+      templateKey = lump ? 'sparExplainEndkapitalLump' : 'sparExplainEndkapitalNoLump';
+    }
+    const template = t(templateKey);
     const b = txt => '<strong>' + txt + '</strong>';
     return template
       .replace('{p0}', b(fmtEUR(res.P0)))
@@ -244,28 +257,21 @@
     $('field-laufzeit').style.display = state.target === 'laufzeit' ? 'none' : '';
     $('field-anfangskapital').style.display = state.target === 'anfangskapital' ? 'none' : '';
     $('field-rate').style.display = state.target === 'rate' ? 'none' : '';
-
-    $('result-desc').textContent = t(resultDescKey(state.target));
   }
 
   function render(){
     const res = solve();
     const warningEl = $('calc-warning');
-    const resultBox = $('result-box-top');
 
     if(res.invalid){
       warningEl.classList.add('show');
-      resultBox.classList.add('invalid');
-      $('stat-result-top').textContent = '–';
       $('stat-result').textContent = '–';
       $('stat-contributed').textContent = '–';
       $('stat-gain').textContent = '–';
-      $('result-explain').textContent = '';
       $('result-summary-explain').textContent = '';
       return;
     }
     warningEl.classList.remove('show');
-    resultBox.classList.remove('invalid');
 
     let resultText;
     if(state.target === 'laufzeit') resultText = formatYears(res.N);
@@ -273,7 +279,6 @@
     else if(state.target === 'anfangskapital') resultText = fmtEUR(res.P0);
     else resultText = fmtEUR(res.C);
 
-    $('stat-result-top').textContent = resultText;
     $('stat-result').textContent = resultText;
     $('tag-result').textContent = t(targetLabelKey(state.target));
 
@@ -281,7 +286,6 @@
     const gain = res.FV - contributed;
     $('stat-contributed').textContent = fmtEUR(contributed);
     $('stat-gain').textContent = fmtEUR(gain);
-    $('result-explain').innerHTML = buildExplanation(res, contributed, gain);
     $('result-summary-explain').innerHTML = buildExplanation(res, contributed, gain);
 
     const series = simulateSeries(res.P0, res.C, res.N, res.i);
@@ -354,6 +358,7 @@
   });
 
   document.addEventListener('mwr:langchange', ()=>{ updateFieldVisibility(); updateSliderLabels(); render(); });
+  document.addEventListener('mwr:currencychange', render);
   document.addEventListener('DOMContentLoaded', ()=>{
     $('spar-target').value = state.target;
     updateFieldVisibility();

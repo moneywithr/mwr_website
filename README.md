@@ -20,8 +20,8 @@ project/
    ├─ i18n.js                             Alle Übersetzungstexte (de/en/ar)
    ├─ broker-data.js                      Länder- und Broker-Liste
    ├─ common.js                           Sprachumschaltung, Formatierung, Navigation
-   ├─ sparrechner.js                      Logik nur für calculator/investment/index.html
-   ├─ kostenvergleich.js                  Logik nur für calculator/fund_etf_fees/index.html
+   ├─ investment-calculator.js            Logik nur für calculator/investment/index.html
+   ├─ fund-comparison-calculator.js       Logik nur für calculator/fund_etf_fees/index.html
    └─ broker.js                           Logik nur für stuff_i_use/brokerage_finder/index.html
 ```
 
@@ -33,9 +33,19 @@ Alle URL-Pfade sind bewusst auf Englisch gehalten (`calculator`, `investment`,
 die gerade auf der Seite ausgewählt ist.
 
 ## Schriften
-Alle Schriften (IBM Plex Sans, IBM Plex Mono, IBM Plex Sans Arabic) liegen lokal
-im Ordner `fonts/` und werden über `@font-face` in `css/style.css` eingebunden —
-keine Abhängigkeit mehr von Google Fonts.
+Alle Schriften liegen lokal im Ordner `fonts/` und werden über `@font-face` in
+`css/style.css` eingebunden — keine Abhängigkeit von Google Fonts.
+- **Latein/Zahlen:** IBM Plex Sans, IBM Plex Mono
+- **Arabisch:** Tajawal (ersetzt seit August 2026 IBM Plex Sans Arabic)
+- **Markenname:** Unbounded
+
+Tajawal gibt es nur in den Schnitten 400/500/700 (kein 600) — der 500er-Schnitt
+ist in `css/style.css` zusätzlich als `font-weight:600` registriert, damit
+bestehende `font-weight:600`-Stellen im CSS ohne weitere Änderungen funktionieren.
+
+Alle Schriftdateien sind mit `pyftsubset` auf die tatsächlich im Projekt
+verwendeten Zeichen zugeschnitten (siehe frühere Learnings: immer alle
+HTML- und JS-Dateien inkl. `broker-data.js` scannen, nicht nur `i18n.js`).
 
 ## Farbkontrast
 `--purple-strong` und `--orange-strong` sind dunklere Varianten von `--purple`
