@@ -71,23 +71,13 @@
 
 <div class="wrap">
 
-  <nav class="tab-nav">
-    <a class="tab-btn" href="/calculator/investment/" data-page="/calculator/investment/" data-i18n="tabRoi">Rechner</a>
-    <a class="tab-btn" href="/calculator/fund_etf_fees/" data-page="/calculator/fund_etf_fees/" data-i18n="tabCalculator">Kostenvergleich</a>
-    <a class="tab-btn" href="/stuff_i_use/brokerage_finder/" data-page="/stuff_i_use/brokerage_finder/" data-i18n="tabBroker">Broker-Finder</a>
-  </nav>
-
-  <header>
-    <div class="header-text">
-      <div class="eyebrow" data-i18n="sparEyebrow">Investitionsrechner</div>
-      <h1 data-i18n="sparTitle">Endkapital, Sparrate, Laufzeit oder Anfangskapital berechnen</h1>
-      <p data-i18n="sparIntro">Wähle aus, was du berechnen möchtest — der Rechner löst die passende Formel für dich und zeigt dir den Verlauf deines Vermögens.</p>
-    </div>
-  </header>
-
-  <div class="grid">
-
-    <div class="currency-switch-row currency-switch-mobile currency-switch-mobile-row">
+  <div class="nav-row">
+    <nav class="tab-nav">
+      <a class="tab-btn" href="/calculator/investment/" data-page="/calculator/investment/" data-i18n="tabRoi">Rechner</a>
+      <a class="tab-btn" href="/calculator/fund_etf_fees/" data-page="/calculator/fund_etf_fees/" data-i18n="tabCalculator">Kostenvergleich</a>
+      <a class="tab-btn" href="/stuff_i_use/brokerage_finder/" data-page="/stuff_i_use/brokerage_finder/" data-i18n="tabBroker">Broker-Finder</a>
+    </nav>
+    <div class="currency-switch-row currency-switch-nav">
       <div class="currency-switch">
         <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
           <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
@@ -113,6 +103,17 @@
         </ul>
       </div>
     </div>
+  </div>
+
+  <header>
+    <div class="header-text">
+      <div class="eyebrow" data-i18n="sparEyebrow">Investitionsrechner</div>
+      <h1 data-i18n="sparTitle">Endkapital, Sparrate, Laufzeit oder Anfangskapital berechnen</h1>
+      <p data-i18n="sparIntro">Wähle aus, was du berechnen möchtest — der Rechner löst die passende Formel für dich und zeigt dir den Verlauf deines Vermögens.</p>
+    </div>
+  </header>
+
+  <div class="grid">
 
     <div class="panel panel-input">
       <div class="block">
@@ -206,33 +207,6 @@
     </div>
 
     <div class="results">
-
-      <div class="currency-switch-row currency-switch-desktop">
-        <div class="currency-switch">
-          <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
-            <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
-            <span class="cs-code">EUR</span>
-            <svg class="currency-switch-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <ul class="currency-switch-menu" role="listbox">
-            <li role="option" data-currency="EUR" class="active" aria-selected="true">
-              <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
-              <span class="cs-code">EUR</span>
-              <span class="cs-name">Euro</span>
-            </li>
-            <li role="option" data-currency="USD" aria-selected="false">
-              <svg class="currency-flag-icon"><use href="#flag-usd"></use></svg>
-              <span class="cs-code">USD</span>
-              <span class="cs-name">US Dollar</span>
-            </li>
-            <li role="option" data-currency="AED" aria-selected="false">
-              <svg class="currency-flag-icon"><use href="#flag-aed"></use></svg>
-              <span class="cs-code">AED</span>
-              <span class="cs-name">UAE Dirham</span>
-            </li>
-          </ul>
-        </div>
-      </div>
 
       <div class="panel result-summary">
         <div class="result-summary-top">

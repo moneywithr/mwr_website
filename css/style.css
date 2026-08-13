@@ -762,13 +762,20 @@ body.lang-ar .legend{
 body.lang-ar .view-btn{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-weight:700; font-size:14px;}
 
 /* Currency-Switch: eigener Dropdown (kein natives <select>, damit wir eine
-   runde Flagge im Button/Menü zeigen können). Zwei Instanzen pro Seite
-   (Desktop/Mobil) bleiben über common.js synchron; welche sichtbar ist,
-   entscheidet allein die Media Query weiter unten. */
+   runde Flagge im Button/Menü zeigen können). Sitzt direkt neben der
+   Tab-Nav, nicht mehr getrennt für Desktop/Mobil. */
+.nav-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px 16px;
+  margin-bottom:28px;
+}
+.nav-row .tab-nav{margin-bottom:0;}
 .currency-switch-row{
   display:flex;
-  justify-content:flex-end; /* "flex-end" = im RTL-Layout automatisch ganz links */
-  margin-bottom:14px;
+  margin:0;
 }
 .currency-switch{
   position:relative;
@@ -838,14 +845,6 @@ body.lang-ar .currency-switch-menu .cs-code{font-family:'Tajawal','IBM Plex Sans
   margin-inline-start:auto;
 }
 body.lang-ar .currency-switch-menu .cs-name{font-family:'Tajawal','IBM Plex Sans',sans-serif; font-size:13.5px;}
-
-@media (max-width:900px){
-  .currency-switch-desktop{display:none;}
-}
-@media (min-width:901px){
-  .currency-switch-mobile{display:none;}
-}
-.currency-switch-mobile-row{margin-bottom:16px;}
 
 .roi-table-wrap{overflow-x:auto; border:1.5px solid var(--line); border-radius:14px;}
 table.roi-table{
