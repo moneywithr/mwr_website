@@ -242,11 +242,21 @@
             <div class="field">
               <div class="field-label">
                 <span class="field-label-text">
-                  <span data-i18n="labelTfq">نسبة الإعفاء الجزئي</span>
-                  <span class="info-tip" tabindex="0" data-i18n-tip="sparTipTfq" data-tip="النسبة الثابتة يلي بتنحسب معفاة من الضريبة على صناديق الأسهم."><span class="info-tip-glyph"></span></span>
+                  <span data-i18n="labelAnlageart">نوع الاستثمار</span>
+                  <span class="info-tip" tabindex="0" data-i18n-tip="sparTipAnlageart" data-tip="اختار هون نوع الصندوق يلي عم تستثمر فيه. حسب نسبة الأسهم يلي فيه، بضل جزء من الربح معفى من الضريبة: سلات الأسهم (نسبة أسهم أكتر من 50%)، متل صناديق MSCI World أو FTSE All-World: إعفاء 30%؛ الصناديق المختلطة (نسبة أسهم بين 25% و50%): إعفاء 15%؛ باقي الصناديق (أقل من 25% أسهم)، متل صناديق سوق النقد: بدون إعفاء."><span class="info-tip-glyph"></span></span>
                 </span>
               </div>
-              <div class="tfq-static">30%</div>
+              <div class="custom-select" id="spar-anlageart-select">
+                <button type="button" class="custom-select-btn" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="custom-select-value" id="spar-anlageart-value">سلة أسهم - ETF (إعفاء 30%)</span>
+                  <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="custom-select-menu" role="listbox">
+                  <li role="option" data-value="aktien" class="active" aria-selected="true" data-i18n="optAnlageartAktien">سلة أسهم - ETF (إعفاء 30%)</li>
+                  <li role="option" data-value="misch" aria-selected="false" data-i18n="optAnlageartMisch">صناديق مختلطة (إعفاء 15%)</li>
+                  <li role="option" data-value="renten" aria-selected="false" data-i18n="optAnlageartRenten">صناديق سندات (إعفاء 0%)</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

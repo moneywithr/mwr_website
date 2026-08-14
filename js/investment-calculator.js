@@ -16,11 +16,12 @@
     taxActive: false,
     kapst: 26.375,
     teilfreistellungActive: true,
+    anlageart: 'aktien', // 'aktien' | 'misch' | 'renten'
   };
-  // Feste Teilfreistellungsquote für Aktienfonds (Aktienquote ≥ 51%) — die
-  // Auswahl der Fondsart wird bewusst nicht abgefragt, deshalb hier als
-  // Konstante statt als Eingabefeld.
-  const TEILFREISTELLUNGSQUOTE = 30;
+  // Teilfreistellungsquote nach Fondsart (§20 InvStG): Aktienfonds ab 51%
+  // Aktienquote 30%, Mischfonds (25–50%) 15%, alle anderen (u.a. Rentenfonds)
+  // 0%.
+  const TEILFREISTELLUNGSQUOTE_BY_ANLAGEART = { aktien: 30, misch: 15, renten: 0 };
 
   // Balken-Diagramm: welches Jahr aktuell angeklickt/hervorgehoben ist. null =
   // "noch nichts angeklickt", zeigt dann standardmäßig das letzte Jahr. Bleibt
@@ -108,23 +109,44 @@
   // Steuerberechnung ausgeschaltet ist.
   function effectiveTaxRate(){
     if(!state.taxActive) return 0;
-    const taxableFraction = state.teilfreistellungActive ? (1 - TEILFREISTELLUNGSQUOTE/100) : 1;
+    const quote = TEILFREISTELLUNGSQUOTE_BY_ANLAGEART[state.anlageart] || 0;
+    const taxableFraction = state.teilfreistellungActive ? (1 - quote/100) : 1;
     return (state.kapst/100) * taxableFraction;
   }
 
-  function simulateSeries(P0, C, totalMonths, i){
+  // Steuer wird jährlich auf den seit dem letzten Steuertermin neu entstandenen
+  // Gewinn fällig (wie bei einem thesaurierenden Fonds mit jährlicher
+  // Vorabpauschale) und direkt aus dem Portfolio entnommen — dadurch steht das
+  // versteuerte Geld in den Folgejahren nicht mehr für den Zinseszins zur
+  // Verfügung. Das ist der entscheidende Unterschied zu einer einmaligen
+  // Steuer erst am Laufzeitende: Wird nur einmal am Ende versteuert, wächst
+  // der eigentlich schon fällige Steueranteil die ganze Laufzeit über mit,
+  // was die tatsächliche Steuerlast unterschätzt (Abweichung ggü. externen
+  // Rechnern wie finanzfluss.de).
+  function simulateSeries(P0, C, totalMonths, i, taxRate){
+    taxRate = taxRate || 0;
     let portfolio = P0, contributed = P0;
     const snapshots = [portfolio], contribSnapshots = [contributed];
+    let taxedGain = 0;
+    function applyTax(){
+      if(taxRate <= 0) return;
+      const gain = portfolio - contributed;
+      const delta = gain - taxedGain;
+      if(delta > 0) portfolio -= delta * taxRate;
+      taxedGain = portfolio - contributed;
+    }
     for(let m=1; m<=totalMonths; m++){
       portfolio += C;
       contributed += C;
       portfolio *= (1+i);
       if(m % 12 === 0){
+        applyTax();
         snapshots.push(portfolio);
         contribSnapshots.push(contributed);
       }
     }
     if(totalMonths % 12 !== 0){
+      applyTax();
       snapshots.push(portfolio);
       contribSnapshots.push(contributed);
     }
@@ -202,10 +224,14 @@
     }
     const axisCaption = `<text x="${padL}" y="${H+10}" text-anchor="start" font-family="${monoFont}" font-size="11.5" fill="#7C7876">${t('yearLabel')}</text>`;
 
-    // Callout oben rechts im Diagramm: Jahr + Gesamtwert, dann die zwei
-    // Bestandteile mit passenden Punkt-Farben — folgt dem gehoverten/angeklickten
-    // Balken. Wird nur gebaut, wenn gerade ein Balken aktiv ist (Desktop: Hover,
-    // Touch: Tap) — sonst bleibt das Diagramm ohne Callout.
+    // Callout: Jahr + Gesamtwert, dann die zwei Bestandteile mit passenden
+    // Punkt-Farben — folgt horizontal dem gehoverten/angeklickten Balken
+    // (statt an einer festen Stelle zu kleben), damit man Balken und Zahlen
+    // nicht mehr quer über das ganze Diagramm hin- und herlesen muss. Bleibt
+    // dabei per Clamping innerhalb der Zeichenfläche, damit die Karte am
+    // linken/rechten Rand nicht abgeschnitten wird. Wird nur gebaut, wenn
+    // gerade ein Balken aktiv ist (Desktop: Hover, Touch: Tap) — sonst bleibt
+    // das Diagramm ohne Callout.
     let callout = '';
     if(activeIdx !== null){
       const activeTotal = res.snapshots[activeIdx];
@@ -216,16 +242,21 @@
         ? totalYears.toLocaleString(locale(), {maximumFractionDigits:1})
         : activeIdx);
 
-      const boxRight = W - padR;
-      const boxLeft = boxRight - 220;
+      const contentW = 220, boxPad = 14;
+      const boxW = contentW + boxPad * 2;
+      const activeCx = xCenter(activeIdx);
+      // Karte mittig über dem aktiven Balken, an den Zeichenflächenrändern gekappt.
+      const boxX = Math.min(Math.max(activeCx - boxW / 2, padL), W - padR - boxW);
+      const boxLeft = boxX + boxPad, boxRight = boxX + boxW - boxPad;
       const rowY = [padT + 8, padT + 30, padT + 50];
-      // Weiße Karte hinter dem Callout, sonst verschwimmt der Text mit den
-      // Gitterlinien/Balken dahinter, wenn man mitten im Diagramm hovert.
-      const boxPad = 14;
-      const boxX = boxLeft - boxPad, boxY = rowY[0] - 22;
-      const boxW = (boxRight + boxPad) - boxX, boxH = (rowY[2] + 12) - boxY;
+      const boxY = rowY[0] - 22;
+      const boxH = (rowY[2] + 12) - boxY;
+      // Kleiner Zeiger von der Karte zum Balken, damit die Zuordnung auch bei
+      // vielen Balken eindeutig bleibt.
+      const pointerX = Math.min(Math.max(activeCx, boxX + 14), boxX + boxW - 14);
       callout = `
         <g font-family="${sansFont}">
+          <path d="M${(pointerX - 6).toFixed(1)},${(boxY + boxH).toFixed(1)} L${pointerX.toFixed(1)},${(boxY + boxH + 7).toFixed(1)} L${(pointerX + 6).toFixed(1)},${(boxY + boxH).toFixed(1)} Z" fill="#FFFFFF" stroke="#E7E3DE"/>
           <rect x="${boxX}" y="${boxY}" width="${boxW}" height="${boxH}" rx="12" fill="#FFFFFF" stroke="#E7E3DE"/>
           <text x="${boxLeft}" y="${rowY[0]}" text-anchor="start" font-size="14.5" font-weight="700" fill="#201E1F">${activeYearLabel}</text>
           <text x="${boxRight}" y="${rowY[0]}" text-anchor="end" font-size="14.5" font-weight="700" fill="#201E1F">${fmtEUR(activeTotal)}</text>
@@ -367,6 +398,18 @@
     });
   }
 
+  const ANLAGEART_LABEL_KEY = { aktien: 'optAnlageartAktien', misch: 'optAnlageartMisch', renten: 'optAnlageartRenten' };
+  // Gleiches Prinzip wie syncTargetSelectUI: Button-Text hat kein data-i18n,
+  // muss also nach Auswahl UND nach Sprachwechsel neu gesetzt werden.
+  function syncAnlageartSelectUI(){
+    $('spar-anlageart-value').textContent = t(ANLAGEART_LABEL_KEY[state.anlageart]);
+    $('spar-anlageart-select').querySelectorAll('[data-value]').forEach(li=>{
+      const isActive = li.getAttribute('data-value') === state.anlageart;
+      li.classList.toggle('active', isActive);
+      li.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
   function updateFieldVisibility(){
     // Jedes Feld wird versteckt, wenn es gerade das Rechenziel ist (dafür erscheint
     // das Ergebnis-Kästchen oben direkt unter der Auswahl).
@@ -402,17 +445,15 @@
     warningEl.classList.remove('show');
 
     const contributed = res.P0 + res.C * res.N;
-    const pretaxGain = res.FV - contributed;
     const taxRate = effectiveTaxRate();
 
-    // Steuer fällt einmalig auf den Gesamtgewinn an (vereinfachte Annahme —
-    // ignoriert Zeitpunkt und Häufigkeit realer Steuerzahlungen).
-    let displayFV = res.FV, displayGain = pretaxGain;
-    if(taxRate > 0){
-      const taxAmount = Math.max(pretaxGain, 0) * taxRate;
-      displayFV = res.FV - taxAmount;
-      displayGain = pretaxGain - taxAmount;
-    }
+    // Dieselbe Serie treibt sowohl die Kopfzahlen als auch Diagramm/Tabelle,
+    // damit die jährlich abgezogene Steuer überall konsistent ist.
+    const series = simulateSeries(res.P0, res.C, res.N, res.i, taxRate);
+    series.totalMonths = res.N;
+    const lastIdx = series.snapshots.length - 1;
+    const displayFV = series.snapshots[lastIdx];
+    const displayGain = displayFV - series.contribSnapshots[lastIdx];
 
     let resultText;
     if(state.target === 'laufzeit') resultText = formatYears(res.N);
@@ -427,16 +468,6 @@
     $('stat-gain').textContent = fmtBig(displayGain);
     $('result-summary-explain').innerHTML = buildExplanation(res, contributed, displayGain, displayFV);
 
-    const series = simulateSeries(res.P0, res.C, res.N, res.i);
-    // Die Kurve wächst brutto weiter, nur der letzte Balken (Ende der
-    // Laufzeit) bekommt die einmalige Steuer auf den Gesamtgewinn
-    // abgezogen — die Zwischenjahre bleiben unversteuert dargestellt.
-    if(taxRate > 0){
-      const lastIdx = series.snapshots.length - 1;
-      const finalGain = series.snapshots[lastIdx] - series.contribSnapshots[lastIdx];
-      if(finalGain > 0) series.snapshots[lastIdx] -= finalGain * taxRate;
-    }
-    series.totalMonths = res.N;
     drawChart(series);
     renderTable(series);
   }
@@ -517,6 +548,12 @@
     render();
   });
 
+  $('spar-anlageart-select').addEventListener('customselect:change', e=>{
+    state.anlageart = e.detail.value;
+    syncAnlageartSelectUI();
+    render();
+  });
+
   $('spar-view-switch').querySelectorAll('.view-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const view = btn.getAttribute('data-view');
@@ -527,10 +564,11 @@
     });
   });
 
-  document.addEventListener('mwr:langchange', ()=>{ syncTargetSelectUI(); updateFieldVisibility(); updateSliderLabels(); render(); });
+  document.addEventListener('mwr:langchange', ()=>{ syncTargetSelectUI(); syncAnlageartSelectUI(); updateFieldVisibility(); updateSliderLabels(); render(); });
   document.addEventListener('mwr:currencychange', render);
   document.addEventListener('DOMContentLoaded', ()=>{
     syncTargetSelectUI();
+    syncAnlageartSelectUI();
     updateFieldVisibility();
     updateSliderLabels();
     render();

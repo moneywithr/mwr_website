@@ -465,7 +465,12 @@ body.lang-ar .switch.on::after{left:3px;}
   overflow:hidden;
   transition:max-height .25s ease;
 }
-.fields.open{max-height:400px;}
+/* overflow bleibt beim Öffnen bis zum Ende der Höhen-Animation verborgen
+   (schönes Aufklappen), wird danach aber sichtbar — sonst würde das
+   Dropdown-Menü eines custom-select hier drin (z.B. "Anlageart") vom
+   overflow:hidden des Akkordeons abgeschnitten und wäre unsichtbar. Beim
+   Schließen greift kein delay, overflow wird sofort wieder hidden. */
+.fields.open{max-height:400px; overflow:visible; transition:max-height .25s ease, overflow 0s linear .25s;}
 
 .field{margin-bottom:14px;}
 .field:last-child{margin-bottom:0;}
@@ -527,15 +532,6 @@ body.lang-ar .inline-num-input{
    (Jahre, Rendite) und wurde im festen 56px-Feld abgeschnitten. */
 .inline-num-group.wide{width:118px;}
 input[type=number].inline-num-input.wide{width:82px;}
-/* Ziffern bleiben absichtlich in der Mono-Schrift, egal in welcher Sprache
-   (wie überall sonst auf der Seite, z.B. .rs-value) — sonst sehen dieselben
-   Ziffern im Arabischen anders aus als daneben im Zahlenfeld. */
-.tfq-static{
-  font-family:'IBM Plex Mono',monospace;
-  font-weight:700;
-  font-size:15px;
-  color:var(--ink);
-}
 .inline-num-unit{
   font-size:12.5px;
   color:var(--text-muted);
@@ -551,7 +547,7 @@ body.lang-ar .inline-num-unit{font-size:14px;}
   width:16px;height:16px;
   border-radius:50%;
   background:var(--purple-dim);
-  color:var(--purple-strong);
+  color:var(--purple);
   font-family:'IBM Plex Sans',sans-serif;
   font-size:11px;
   font-weight:700;
@@ -561,7 +557,7 @@ body.lang-ar .inline-num-unit{font-size:14px;}
   position:relative;
   flex-shrink:0;
   vertical-align:middle;
-  border:1px solid var(--purple);
+  border:1px solid #9C93D6;
 }
 body.lang-ar .info-tip{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:11.5px;}
 .info-tip-glyph::before{content:"?";}
@@ -1145,6 +1141,7 @@ body.lang-ar .b-row .b-val{font-weight:600;}
   transition:border-color .15s ease;
 }
 .custom-select-btn:hover, .custom-select.open .custom-select-btn{border-color:var(--purple);}
+#spar-anlageart-select .custom-select-btn{background:#FFFFFF;}
 body.lang-ar .custom-select-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:16.5px;}
 .custom-select-btn.variant-panel{background:var(--panel-2); font-weight:500; font-size:15px;}
 body.lang-ar .custom-select-btn.variant-panel{font-size:16px;}
