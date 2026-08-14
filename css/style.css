@@ -354,12 +354,18 @@ body.lang-ar .tab-btn{
 
 .grid{
   display:grid;
-  grid-template-columns:360px 1fr;
+  /* minmax(0,1fr) statt nur 1fr: eine reine 1fr-Spur behält implizit eine
+     "auto"-Mindestbreite, die sich am breitesten Kindinhalt orientiert (hier
+     die ROI-Tabelle mit min-width:420px) — die Spur wächst dann über die
+     Grid-Breite hinaus und reißt die ganze Seite nach rechts auf ("grid
+     blowout"). minmax(0,…) kappt die Mindestbreite der Spur auf 0, sodass
+     .roi-table-wrap wie vorgesehen selbst scrollt (overflow-x:auto). */
+  grid-template-columns:360px minmax(0,1fr);
   gap:24px;
   align-items:start;
 }
 @media (max-width:900px){
-  .grid{grid-template-columns:1fr;}
+  .grid{grid-template-columns:minmax(0,1fr);}
 }
 
 .panel{
@@ -368,6 +374,12 @@ body.lang-ar .tab-btn{
   border-radius:var(--radius);
   padding:24px;
   box-shadow:var(--shadow-sm);
+  /* Grid-Items sind standardmäßig min-width:auto, schrumpfen also nicht
+     unter die Inhaltsbreite ihrer Kinder (z.B. die breite ROI-Tabelle mit
+     white-space:nowrap-Zellen). Ohne das hier sprengt die Tabelle auf dem
+     Handy die ganze .grid-Spalte samt Seite, statt selbst per
+     overflow-x:auto zu scrollen (.roi-table-wrap). */
+  min-width:0;
 }
 .panel-input{position:sticky; top:20px;}
 
@@ -1028,33 +1040,33 @@ table.roi-table{
   width:100%;
   border-collapse:collapse;
   font-family:'IBM Plex Mono',monospace;
-  font-size:14px;
+  font-size:13px;
   min-width:420px;
 }
-body.lang-ar table.roi-table{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
+body.lang-ar table.roi-table{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:14px;}
 table.roi-table thead th{
   background:var(--ink);
   color:#FFFFFF;
   font-family:'IBM Plex Sans',sans-serif;
   font-weight:700;
-  font-size:12.5px;
+  font-size:11px;
   letter-spacing:0.06em;
   text-transform:uppercase;
   text-align:start;
-  padding:12px 16px;
+  padding:10px 12px;
   position:sticky;
   top:0;
 }
 body.lang-ar table.roi-table thead th{
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   letter-spacing:0;
-  font-size:14px;
+  font-size:12px;
 }
 body.lang-ar table.roi-table tbody td{
   /* Tabellenzellen sind reine Zahlen — Mono-Ziffern wie bei DE/EN statt
      der arabischen Schrift, die vom Tabellen-Level geerbt würde. */
   font-family:'IBM Plex Mono',monospace;
-  font-size:14px;
+  font-size:13px;
 }
 table.roi-table tbody td{
   padding:10px 16px;

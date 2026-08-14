@@ -175,8 +175,19 @@
   $('etf-ter').addEventListener('input', ()=>{ state.etfTer = parseFloat($('etf-ter').value); updateSliderLabels(); render(); });
   $('fonds-aa').addEventListener('input', ()=>{ state.fondsAA = parseFloat($('fonds-aa').value); updateSliderLabels(); render(); });
   $('fonds-ter').addEventListener('input', ()=>{ state.fondsTer = parseFloat($('fonds-ter').value); updateSliderLabels(); render(); });
-  $('einmal-betrag').addEventListener('input', e=>{ state.einmalBetrag = parseFloat(e.target.value)||0; render(); });
-  $('sparplan-rate').addEventListener('input', e=>{ state.sparplanRate = parseFloat(e.target.value)||0; render(); });
+  // Negative Beträge ergeben hier keinen Sinn, siehe investment-calculator.js.
+  $('einmal-betrag').addEventListener('input', e=>{
+    const v = Math.max(0, parseFloat(e.target.value)||0);
+    state.einmalBetrag = v;
+    if(parseFloat(e.target.value) < 0) e.target.value = v;
+    render();
+  });
+  $('sparplan-rate').addEventListener('input', e=>{
+    const v = Math.max(0, parseFloat(e.target.value)||0);
+    state.sparplanRate = v;
+    if(parseFloat(e.target.value) < 0) e.target.value = v;
+    render();
+  });
 
   function bindSwitch(swId, fieldsId, key){
     const sw = $(swId), fields = $(fieldsId);

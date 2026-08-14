@@ -242,7 +242,7 @@
         ? totalYears.toLocaleString(locale(), {maximumFractionDigits:1})
         : activeIdx);
 
-      const contentW = 220, boxPad = 14;
+      const contentW = 230, boxPad = 14;
       const boxW = contentW + boxPad * 2;
       const activeCx = xCenter(activeIdx);
       // Karte mittig über dem aktiven Balken, an den Zeichenflächenrändern gekappt.
@@ -258,8 +258,8 @@
         <g font-family="${sansFont}">
           <path d="M${(pointerX - 6).toFixed(1)},${(boxY + boxH).toFixed(1)} L${pointerX.toFixed(1)},${(boxY + boxH + 7).toFixed(1)} L${(pointerX + 6).toFixed(1)},${(boxY + boxH).toFixed(1)} Z" fill="#FFFFFF" stroke="#E7E3DE"/>
           <rect x="${boxX}" y="${boxY}" width="${boxW}" height="${boxH}" rx="12" fill="#FFFFFF" stroke="#E7E3DE"/>
-          <text x="${boxLeft}" y="${rowY[0]}" text-anchor="start" font-size="14.5" font-weight="700" fill="#201E1F">${activeYearLabel}</text>
-          <text x="${boxRight}" y="${rowY[0]}" text-anchor="end" font-size="14.5" font-weight="700" fill="#201E1F">${fmtEUR(activeTotal)}</text>
+          <text id="callout-year" x="${boxLeft}" y="${rowY[0]}" text-anchor="start" font-size="13" font-weight="700" fill="#201E1F">${activeYearLabel}</text>
+          <text id="callout-total" x="${boxLeft}" y="${rowY[0]}" text-anchor="start" font-size="14.5" font-weight="700" fill="#201E1F">${fmtEUR(activeTotal)}</text>
 
           <circle cx="${boxLeft + 4}" cy="${rowY[1]-4}" r="4" fill="${RETURN_COLOR}"/>
           <text x="${boxLeft + 14}" y="${rowY[1]}" text-anchor="start" font-family="${monoFont}" font-size="12" fill="#7C7876">${t('roiLegendReturn')}</text>
@@ -280,6 +280,21 @@
       ${callout}
     </svg>`;
     $('spar-chart-svg').innerHTML = svg;
+
+    // Der Gesamtbetrag steht direkt neben dem Jahres-Label statt am rechten
+    // Kartenrand (wie "Jahr 5  12.345 €"). Da die gerenderte Breite von
+    // "Jahr 5" je nach Sprache/Ziffern/Font variiert, wird sie erst nach dem
+    // Einfügen ins DOM gemessen (getComputedTextLength) und der Betrag dann
+    // exakt danach positioniert — ein fester x-Versatz würde bei anderer
+    // Textlänge daneben liegen.
+    if(activeIdx !== null){
+      const yearEl = $('callout-year'), totalEl = $('callout-total');
+      if(yearEl && totalEl){
+        const yearX = parseFloat(yearEl.getAttribute('x'));
+        const gap = 10;
+        totalEl.setAttribute('x', yearX + yearEl.getComputedTextLength() + gap);
+      }
+    }
   }
 
   // Desktop (Maus vorhanden): Callout erscheint beim Hovern über einen Balken
@@ -314,7 +329,7 @@
   }
 
   function renderTable(res){
-    $('spar-th-return').textContent = t('roiColReturn') + ' (' + fmtPct(state.rendite,1) + ')';
+    $('spar-th-return').textContent = t('roiColReturn').replace('{rate}', fmtPct(state.rendite,1));
     const body = $('spar-table-body');
     body.innerHTML = '';
     const totalYears = res.totalMonths/12;
@@ -514,9 +529,29 @@
     render();
   });
 
-  $('spar-anfangskapital').addEventListener('input', e=>{ state.anfangskapital = parseFloat(e.target.value)||0; render(); });
-  $('spar-rate').addEventListener('input', e=>{ state.rate = parseFloat(e.target.value)||0; render(); });
-  $('spar-endkapital').addEventListener('input', e=>{ state.endkapital = parseFloat(e.target.value)||0; render(); });
+  // Negative Beträge ergeben hier keinen Sinn (Startkapital, Monatsrate,
+  // Sparziel) und würden nur zu irreführenden negativen Ergebnissen führen —
+  // deshalb bei 0 gekappt statt roh übernommen. Das HTML-min-Attribut allein
+  // reicht nicht: Zahlenfelder lassen sich per Tastatur trotzdem auf Werte
+  // außerhalb von min/max setzen.
+  $('spar-anfangskapital').addEventListener('input', e=>{
+    const v = Math.max(0, parseFloat(e.target.value)||0);
+    state.anfangskapital = v;
+    if(parseFloat(e.target.value) < 0) e.target.value = v;
+    render();
+  });
+  $('spar-rate').addEventListener('input', e=>{
+    const v = Math.max(0, parseFloat(e.target.value)||0);
+    state.rate = v;
+    if(parseFloat(e.target.value) < 0) e.target.value = v;
+    render();
+  });
+  $('spar-endkapital').addEventListener('input', e=>{
+    const v = Math.max(0, parseFloat(e.target.value)||0);
+    state.endkapital = v;
+    if(parseFloat(e.target.value) < 0) e.target.value = v;
+    render();
+  });
 
   const swEinmal = $('sw-einmal'), fieldsEinmal = $('fields-einmal');
   swEinmal.addEventListener('click', ()=>{
@@ -535,8 +570,10 @@
   });
 
   $('spar-kapst').addEventListener('input', e=>{
-    const v = parseFloat(e.target.value);
-    state.kapst = isNaN(v) ? 0 : v;
+    const raw = parseFloat(e.target.value);
+    const v = isNaN(raw) ? 0 : Math.max(0, Math.min(100, raw));
+    state.kapst = v;
+    if(raw < 0 || raw > 100) e.target.value = v;
     render();
   });
 
