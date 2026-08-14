@@ -360,6 +360,17 @@
     $('field-rate').style.display = state.target === 'rate' ? 'none' : '';
   }
 
+  // Bei hoch angesetzter Rendite (>20%) über viele Jahre wächst der Endbetrag
+  // exponentiell — als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
+  // so lang, dass sie in der Ergebnis-Box umbricht und die Box beim Ziehen des
+  // Sliders sichtbar mitwächst. Ab einer gewissen Länge deshalb kompakt
+  // formatieren (z.B. "12,3 Mio. €"), damit die Box stabil bleibt.
+  function fmtBig(v){
+    const full = fmtEUR(v);
+    const digits = full.replace(/[^0-9]/g, '').length;
+    return digits > 9 ? fmtCompact(v) : full;
+  }
+
   function render(){
     const res = solve();
     const warningEl = $('calc-warning');
@@ -376,17 +387,17 @@
 
     let resultText;
     if(state.target === 'laufzeit') resultText = formatYears(res.N);
-    else if(state.target === 'endkapital') resultText = fmtEUR(res.FV);
-    else if(state.target === 'anfangskapital') resultText = fmtEUR(res.P0);
-    else resultText = fmtEUR(res.C);
+    else if(state.target === 'endkapital') resultText = fmtBig(res.FV);
+    else if(state.target === 'anfangskapital') resultText = fmtBig(res.P0);
+    else resultText = fmtBig(res.C);
 
     $('stat-result').textContent = resultText;
     $('tag-result').textContent = t(targetLabelKey(state.target));
 
     const contributed = res.P0 + res.C * res.N;
     const gain = res.FV - contributed;
-    $('stat-contributed').textContent = fmtEUR(contributed);
-    $('stat-gain').textContent = fmtEUR(gain);
+    $('stat-contributed').textContent = fmtBig(contributed);
+    $('stat-gain').textContent = fmtBig(gain);
     $('result-summary-explain').innerHTML = buildExplanation(res, contributed, gain);
 
     const series = simulateSeries(res.P0, res.C, res.N, res.i);

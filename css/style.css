@@ -1548,24 +1548,27 @@ body.lang-ar .landing-services .section-title{
   font-weight:800;
 }
 
-/* Volle-Breite bunte Banner-Reihen statt der alten 3er-Grid-Karten — Mix
-   aus dem Pill/Akkordeon-Look (abgerundete durchgehende Balken, Icon-Kreis
-   am Rand) und dem Karten-Inhalt (Titel + Beschreibung) der Referenz. */
+/* Karten-Grid: Icon oben, Titel + Beschreibung, runder Pfeil-Button unten —
+   angelehnt an das Referenz-Design (Icon-Kachel + Titel + Learn-more-Pill),
+   hier ohne Text im Button, nur Pfeil. */
 .service-cards{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:18px;
   margin-top:28px;
+}
+@media (max-width:860px){
+  .service-cards{grid-template-columns:1fr;}
 }
 
 .service-card{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:18px;
   background:var(--panel-2);
   border-radius:24px;
-  padding:22px 26px;
+  padding:26px;
   text-decoration:none;
   color:inherit;
   transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
@@ -1582,7 +1585,7 @@ body.lang-ar .landing-services .section-title{
 .service-card.card-ink{background:var(--ink); color:#FFFFFF;}
 .service-card.card-silver{background:#D9D9D6; color:var(--ink);}
 
-.service-card-text{flex:1; min-width:0;}
+.service-card-text{width:100%;}
 
 .service-card .service-name{
   font-family:'Manrope',sans-serif;
@@ -1599,32 +1602,46 @@ body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans
 }
 body.lang-ar .service-card .service-desc{font-size:16px;}
 
-/* Runder Icon-Button am Rand — direkt aus dem Referenz-Akkordeon
-   übernommen, hier immer als Pfeil (keine Plus/Minus-Zustände, da die
-   Karten nicht auf-/zuklappen sondern direkt verlinken). */
+/* Icon-Kachel oben in der Karte — etwas größer als das UI-Standardmaß,
+   damit das Logo/Icon der Kategorie gut lesbar ist. */
 .service-card-icon{
   flex-shrink:0;
-  width:40px;height:40px;
-  border-radius:999px;
+  width:56px;height:56px;
+  border-radius:16px;
   background:rgba(255,255,255,.55);
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;
   transition:transform .18s ease, background .18s ease;
 }
+.service-card-icon svg{width:28px;height:28px;}
 .service-card.card-ink .service-card-icon{background:rgba(255,255,255,.14);}
 .service-card:hover .service-card-icon{background:#FFFFFF;}
-.service-card .service-cta-arrow{display:inline-block; transition:transform .18s ease;}
+
+/* Runder Pfeil-Button unten — nur Icon, kein Text: schwarzer Kreis,
+   weißer Pfeil, dreht sich in RTL. */
+.service-card .service-cta-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;height:40px;
+  border-radius:999px;
+  background:var(--ink);
+  color:#FFFFFF;
+  transition:transform .18s ease;
+}
+.service-card .service-cta-arrow svg{width:16px;height:16px;}
+.service-card.card-ink .service-cta-arrow{background:#FFFFFF; color:var(--ink);}
 .service-card:hover .service-cta-arrow{transform:translateX(3px);}
-body.lang-ar .service-card .service-cta-arrow{transform:scaleX(-1);}
-body.lang-ar .service-card:hover .service-cta-arrow{transform:scaleX(-1) translateX(3px);}
+body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
+body.lang-ar .service-card:hover .service-cta-arrow{transform:translateX(-3px);}
 
 @media (max-width:640px){
-  .service-card{padding:16px 18px; border-radius:20px; gap:12px;}
+  .service-card{padding:20px; border-radius:20px; gap:14px;}
   .service-card .service-name{font-size:16px;}
   body.lang-ar .service-card .service-name{font-size:17px;}
   .service-card .service-desc{font-size:13px;}
   body.lang-ar .service-card .service-desc{font-size:14px;}
-  .service-card-icon{width:34px;height:34px;font-size:14px;}
+  .service-card-icon{width:48px;height:48px;border-radius:14px;}
+  .service-card-icon svg{width:24px;height:24px;}
 }
 
 /* Reiner Fließtext statt Farbfläche — kein Card-Look mehr, nur der Satz
