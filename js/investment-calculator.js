@@ -3,7 +3,7 @@
 // Rate eingezahlt und dann das gesamte Kapital mit der monatlichen Rendite verzinst.
 (function(){
   const $ = id => document.getElementById(id);
-  const { t, locale, fmtEUR, fmtCompact, fmtPct, textWidth } = window.Site;
+  const { t, locale, fmtEUR, fmtCompact, fmtPct } = window.Site;
 
   const state = {
     target: 'endkapital', // 'endkapital' | 'anfangskapital' | 'rate' | 'laufzeit'
@@ -14,6 +14,14 @@
     rate: 300,
     endkapital: 100000,
   };
+
+  // Balken-Diagramm: welches Jahr aktuell angeklickt/hervorgehoben ist. null =
+  // "noch nichts angeklickt", zeigt dann standardmäßig das letzte Jahr. Bleibt
+  // über Neuberechnungen (Slider etc.) hinweg erhalten, damit man z.B. Jahr 10
+  // angeklickt lässt und dabei die Rendite verstellt, um live zu sehen, wie
+  // sich der Wert für genau dieses Jahr ändert.
+  let chartActiveIdx = null;
+  let lastSeries = null;
 
   function monthlyRateFromAnnual(annualPct){
     return Math.pow(1 + annualPct/100, 1/12) - 1;
@@ -76,7 +84,12 @@
       else N = Math.max(1, Math.round(r));
     }
 
-    if(!invalid && state.target !== 'endkapital'){
+    // Für "laufzeit" ist N auf ganze Monate gerundet (Math.round oben) — würde
+    // man FV daraus neu berechnen, würde die Zielsumme leicht vom eingegebenen
+    // Zielwert abweichen (z.B. 99.688 € statt der eingegebenen 100.000 €), obwohl
+    // der Nutzer genau diesen Betrag als festes Ziel vorgegeben hat. FV bleibt
+    // daher für "laufzeit" unverändert der ursprüngliche Zielwert.
+    if(!invalid && state.target !== 'endkapital' && state.target !== 'laufzeit'){
       FV = computeFV(P0, C, N, i);
     }
 
@@ -102,74 +115,155 @@
     return { snapshots, contribSnapshots };
   }
 
-  function drawChart(res){
-    const H = 360, padL = 56, padT = 20, padB = 34;
-    const n = res.snapshots.length;
-    const maxV = Math.max(...res.snapshots) * 1.06 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
-    const monoFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Mono';
-    const sansFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Sans';
+  // Bewusst dieselben Farben wie im Rest der Seite (kein neuer Akzentton nur
+  // fürs Diagramm): var(--green) ist die überall genutzte Marken-"Lila"-Farbe
+  // (Buttons, Ergebnis-Panel), var(--mint) das etablierte Gelb/Lime-Highlight
+  // (Währungsauswahl, aktive Sprache, Switches). Die "aktiv"-Varianten sind
+  // dieselben helleren Töne, die anderswo als Pendant zu green/mint stehen
+  // (--green-dim bzw. die helle Chartreuse-Fläche von .stat-card.orange).
+  const INVESTED_COLOR = '#685CC8', INVESTED_ACTIVE_COLOR = '#F0EEFA'; // var(--green) / var(--green-dim)
+  const RETURN_COLOR = '#DAFF00', RETURN_ACTIVE_COLOR = '#F2FFB8';     // var(--mint) / helle Mint-Fläche
 
-    const finalGain = res.snapshots[n-1] - res.contribSnapshots[n-1];
-    const valueText = '+' + fmtCompact(Math.max(finalGain,0));
-    const labelText = t('roiCalloutLabel');
-    const valueW = textWidth(valueText, `700 14.5px ${sansFont}`);
-    const labelW = textWidth(labelText, `11px ${monoFont}`);
-    const calloutW = Math.max(valueW, labelW);
-    const padR = Math.max(calloutW + 8 + 10, 40);
+  function drawChart(res){
+    lastSeries = res;
+    const H = 360, padL = 56, padT = 20, padR = 20, padB = 34;
+    const n = res.snapshots.length; // enthält auch Jahr 0 (Startpunkt)
+    const m = n - 1; // Anzahl gezeichneter Balken (Jahr 1..n-1, Jahr 0 wird nicht als eigener Balken gezeigt)
+    const maxV = Math.max(...res.snapshots) * 1.08 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
+    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic) —
+    // die Arabic-Schrift greift nur als Fallback für tatsächliche arabische
+    // Buchstaben, die in denselben <text>-Elementen vorkommen (z.B. "سنة 5").
+    const monoFont = window.Site.state.lang === 'ar' ? "'IBM Plex Mono','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Mono',monospace";
+    const sansFont = window.Site.state.lang === 'ar' ? "'IBM Plex Sans','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Sans',sans-serif";
 
     const W = 860;
-    const innerW = W - padL - padR, innerH = H - padT - padB;
-
-    const x = idx => padL + (innerW * idx/(n-1));
-    const y = v => padT + innerH - (innerH * (v/maxV));
-
-    function pathFor(arr){
-      return arr.map((v,idx)=> (idx===0?'M':'L') + x(idx).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
-    }
-
-    const pathValue = pathFor(res.snapshots);
-    const pathContrib = pathFor(res.contribSnapshots);
-
-    const forward = res.snapshots.map((v,idx)=> x(idx).toFixed(1)+','+y(v).toFixed(1)).join(' L ');
-    const backward = res.contribSnapshots.slice().reverse().map((v,idx)=>{
-      const i2 = n-1-idx;
-      return x(i2).toFixed(1)+','+y(v).toFixed(1);
-    }).join(' L ');
-    const gapPath = 'M ' + forward + ' L ' + backward + ' Z';
-
-    let grid = '';
+    const { y, innerW, innerH } = window.ChartHelpers.scales({ padL, padT, padR, padB, W, H, n, maxV });
     const steps = 4;
-    for(let s=0; s<=steps; s++){
-      const val = maxV * s/steps;
-      const gy = y(val);
-      grid += `<line x1="${padL}" y1="${gy.toFixed(1)}" x2="${W-padR}" y2="${gy.toFixed(1)}" stroke="#C9E8C0" stroke-width="1"/>`;
-      grid += `<text x="${padL-8}" y="${(gy+4).toFixed(1)}" text-anchor="end" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${fmtCompact(val)}</text>`;
+    const grid = window.ChartHelpers.gridLines({ padL, padT, W, padR, maxV, steps, monoFont, y, fmtCompact });
+
+    const slot = innerW / m;
+    const barW = Math.min(Math.max(slot * 0.62, 3), 30);
+    const baseline = padT + innerH;
+    const xCenter = idx => padL + slot * ((idx - 1) + 0.5);
+
+    if(chartActiveIdx !== null && (chartActiveIdx > n - 1 || chartActiveIdx < 1)) chartActiveIdx = null;
+    const activeIdx = chartActiveIdx;
+
+    const totalYears = res.totalMonths / 12;
+    const maxLabels = Math.max(4, Math.floor(innerW / 34));
+    const step = Math.max(1, Math.ceil(m / maxLabels));
+    const labelIdxs = [];
+    for(let i = 1; i < n; i += step) labelIdxs.push(i);
+    if(labelIdxs[labelIdxs.length - 1] !== n - 1) labelIdxs.push(n - 1);
+
+    let bars = '', xLabels = '';
+    for(let idx = 1; idx < n; idx++){
+      const total = res.snapshots[idx];
+      const principal = res.contribSnapshots[idx];
+      const gain = Math.max(total - principal, 0);
+      const active = idx === activeIdx;
+      const cx = xCenter(idx);
+      const bx = (cx - barW / 2).toFixed(1);
+      const yPrincipalPx = y(principal);
+      const yTotalPx = y(total);
+
+      let seg = `<rect class="bar-seg" x="${bx}" y="${yPrincipalPx.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(baseline - yPrincipalPx, 0).toFixed(1)}" fill="${active ? INVESTED_ACTIVE_COLOR : INVESTED_COLOR}"/>`;
+      if(gain > 0){
+        seg += `<rect class="bar-seg" x="${bx}" y="${yTotalPx.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(yPrincipalPx - yTotalPx, 0).toFixed(1)}" fill="${active ? RETURN_ACTIVE_COLOR : RETURN_COLOR}"/>`;
+      }
+      bars += `<g class="bar-col" data-idx="${idx}">
+        <rect x="${(cx - slot/2).toFixed(1)}" y="${padT}" width="${slot.toFixed(1)}" height="${innerH.toFixed(1)}" fill="transparent"/>
+        ${seg}
+      </g>`;
+
+      if(labelIdxs.includes(idx)){
+        const isLast = idx === n - 1;
+        const label = isLast && res.totalMonths % 12 !== 0
+          ? totalYears.toLocaleString(locale(), {maximumFractionDigits:1})
+          : String(idx);
+        xLabels += `<text x="${cx.toFixed(1)}" y="${H-10}" text-anchor="middle" font-family="${monoFont}" font-size="11.5" fill="#7C7876">${label}</text>`;
+      }
     }
+    const axisCaption = `<text x="${padL}" y="${H+10}" text-anchor="start" font-family="${monoFont}" font-size="11.5" fill="#7C7876">${t('yearLabel')}</text>`;
 
-    const totalYears = res.totalMonths/12;
-    const xLabels = [0, Math.round((n-1)/2), n-1].map((idx)=>{
-      const isLast = idx === n-1;
-      const label = isLast
-        ? t('yearLabel') + ' ' + totalYears.toLocaleString(locale(),{maximumFractionDigits:1})
-        : t('yearLabel') + ' ' + idx;
-      return `<text x="${x(idx).toFixed(1)}" y="${H-10}" text-anchor="middle" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${label}</text>`;
-    }).join('');
+    // Callout oben rechts im Diagramm: Jahr + Gesamtwert, dann die zwei
+    // Bestandteile mit passenden Punkt-Farben — folgt dem gehoverten/angeklickten
+    // Balken. Wird nur gebaut, wenn gerade ein Balken aktiv ist (Desktop: Hover,
+    // Touch: Tap) — sonst bleibt das Diagramm ohne Callout.
+    let callout = '';
+    if(activeIdx !== null){
+      const activeTotal = res.snapshots[activeIdx];
+      const activePrincipal = res.contribSnapshots[activeIdx];
+      const activeGain = Math.max(activeTotal - activePrincipal, 0);
+      const activeIsLast = activeIdx === n - 1;
+      const activeYearLabel = t('yearLabel') + ' ' + (activeIsLast && res.totalMonths % 12 !== 0
+        ? totalYears.toLocaleString(locale(), {maximumFractionDigits:1})
+        : activeIdx);
 
-    const calloutY = y(res.snapshots[n-1]);
+      const boxRight = W - padR;
+      const boxLeft = boxRight - 220;
+      const rowY = [padT + 8, padT + 30, padT + 50];
+      // Weiße Karte hinter dem Callout, sonst verschwimmt der Text mit den
+      // Gitterlinien/Balken dahinter, wenn man mitten im Diagramm hovert.
+      const boxPad = 14;
+      const boxX = boxLeft - boxPad, boxY = rowY[0] - 22;
+      const boxW = (boxRight + boxPad) - boxX, boxH = (rowY[2] + 12) - boxY;
+      callout = `
+        <g font-family="${sansFont}">
+          <rect x="${boxX}" y="${boxY}" width="${boxW}" height="${boxH}" rx="12" fill="#FFFFFF" stroke="#E7E3DE"/>
+          <text x="${boxLeft}" y="${rowY[0]}" text-anchor="start" font-size="14.5" font-weight="700" fill="#201E1F">${activeYearLabel}</text>
+          <text x="${boxRight}" y="${rowY[0]}" text-anchor="end" font-size="14.5" font-weight="700" fill="#201E1F">${fmtEUR(activeTotal)}</text>
+
+          <circle cx="${boxLeft + 4}" cy="${rowY[1]-4}" r="4" fill="${RETURN_COLOR}"/>
+          <text x="${boxLeft + 14}" y="${rowY[1]}" text-anchor="start" font-family="${monoFont}" font-size="12" fill="#7C7876">${t('roiLegendReturn')}</text>
+          <text x="${boxRight}" y="${rowY[1]}" text-anchor="end" font-size="13" font-weight="600" fill="#201E1F">${fmtEUR(activeGain)}</text>
+
+          <circle cx="${boxLeft + 4}" cy="${rowY[2]-4}" r="4" fill="${INVESTED_COLOR}"/>
+          <text x="${boxLeft + 14}" y="${rowY[2]}" text-anchor="start" font-family="${monoFont}" font-size="12" fill="#7C7876">${t('roiLegendInvested')}</text>
+          <text x="${boxRight}" y="${rowY[2]}" text-anchor="end" font-size="13" font-weight="600" fill="#201E1F">${fmtEUR(activePrincipal)}</text>
+        </g>`;
+    }
 
     const svg = `
     <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; overflow:visible;">
       ${grid}
-      <path d="${gapPath}" fill="#8FE07C" fill-opacity="0.25" stroke="none"/>
-      <path d="${pathContrib}" fill="none" stroke="#9AAA9F" stroke-width="1.5" stroke-dasharray="4 4"/>
-      <path d="${pathValue}" fill="none" stroke="#173C2E" stroke-width="2.5"/>
+      ${bars}
       ${xLabels}
-      <g transform="translate(${x(n-1)+8}, ${calloutY.toFixed(1)})">
-        <text x="0" y="-6" font-family="${sansFont}" font-size="14.5" font-weight="700" fill="#173C2E">${valueText}</text>
-        <text x="0" y="10" font-family="${monoFont}" font-size="11" fill="#5B7167">${labelText}</text>
-      </g>
+      ${axisCaption}
+      ${callout}
     </svg>`;
     $('spar-chart-svg').innerHTML = svg;
+  }
+
+  // Desktop (Maus vorhanden): Callout erscheint beim Hovern über einen Balken
+  // und verschwindet wieder, sobald die Maus das Diagramm verlässt. Touch
+  // (kein Hover): Callout bleibt nach dem Antippen stehen, bis ein anderer
+  // Balken angetippt wird — Tippen simuliert dort keinen Hover-Zustand.
+  const chartHoverCapable = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const sparChartSvg = $('spar-chart-svg');
+
+  sparChartSvg.addEventListener('click', e=>{
+    if(chartHoverCapable) return; // Desktop wird über Hover gesteuert, s.u.
+    const col = e.target.closest('.bar-col');
+    if(!col || !lastSeries) return;
+    chartActiveIdx = parseInt(col.getAttribute('data-idx'), 10);
+    drawChart(lastSeries);
+  });
+
+  if(chartHoverCapable){
+    sparChartSvg.addEventListener('mouseover', e=>{
+      const col = e.target.closest('.bar-col');
+      if(!col || !lastSeries) return;
+      const idx = parseInt(col.getAttribute('data-idx'), 10);
+      if(idx === chartActiveIdx) return;
+      chartActiveIdx = idx;
+      drawChart(lastSeries);
+    });
+    sparChartSvg.addEventListener('mouseleave', ()=>{
+      if(chartActiveIdx === null || !lastSeries) return;
+      chartActiveIdx = null;
+      drawChart(lastSeries);
+    });
   }
 
   function renderTable(res){
@@ -233,14 +327,6 @@
       .replace('{gain}', b(fmtEUR(gain)));
   }
 
-  function resultDescKey(field){
-    return {
-      endkapital: 'sparResultEndkapital',
-      anfangskapital: 'sparResultAnfangskapital',
-      rate: 'sparResultRate',
-      laufzeit: 'sparResultLaufzeit',
-    }[field];
-  }
   function targetLabelKey(field){
     return {
       endkapital: 'sparTargetEndkapital',
@@ -248,6 +334,21 @@
       rate: 'sparTargetRate',
       laufzeit: 'sparTargetLaufzeit',
     }[field];
+  }
+
+  // Hält den Custom-Select-Button ("Was möchtest du berechnen?") und die
+  // aktive Markierung im Menü synchron mit state.target — muss nach jeder
+  // Auswahl UND nach jedem Sprachwechsel neu aufgerufen werden, weil der
+  // Button-Text (anders als die <li>-Optionen) kein data-i18n hat, sondern
+  // hier direkt gesetzt wird (er zeigt ja die aktuell GEWÄHLTE Option, nicht
+  // immer dieselbe fixe Übersetzung).
+  function syncTargetSelectUI(){
+    $('spar-target-value').textContent = t(targetLabelKey(state.target));
+    $('spar-target-select').querySelectorAll('[data-value]').forEach(li=>{
+      const isActive = li.getAttribute('data-value') === state.target;
+      li.classList.toggle('active', isActive);
+      li.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
   }
 
   function updateFieldVisibility(){
@@ -299,8 +400,9 @@
     $('spar-rendite-input').value = state.rendite;
   }
 
-  $('spar-target').addEventListener('change', e=>{
-    state.target = e.target.value;
+  $('spar-target-select').addEventListener('customselect:change', e=>{
+    state.target = e.detail.value;
+    syncTargetSelectUI();
     updateFieldVisibility();
     render();
   });
@@ -329,7 +431,7 @@
   $('spar-rendite-input').addEventListener('input', e=>{
     let v = parseFloat(e.target.value);
     if(isNaN(v)) return;
-    v = Math.max(0, Math.min(20, v));
+    v = Math.max(0, Math.min(50, v));
     state.rendite = v;
     $('spar-rendite').value = v;
     render();
@@ -357,10 +459,10 @@
     });
   });
 
-  document.addEventListener('mwr:langchange', ()=>{ updateFieldVisibility(); updateSliderLabels(); render(); });
+  document.addEventListener('mwr:langchange', ()=>{ syncTargetSelectUI(); updateFieldVisibility(); updateSliderLabels(); render(); });
   document.addEventListener('mwr:currencychange', render);
   document.addEventListener('DOMContentLoaded', ()=>{
-    $('spar-target').value = state.target;
+    syncTargetSelectUI();
     updateFieldVisibility();
     updateSliderLabels();
     render();

@@ -60,7 +60,10 @@
 
 <div class="top-banner">
   <div class="top-banner-inner">
-    <a class="brand-name" href="/" data-i18n="brand">Money with Rami</a>
+    <a class="brand-name" href="/">
+      <span class="brand-line">Money with</span>
+      <span class="brand-line">Rami<span class="brand-dot">.</span></span>
+    </a>
     <div class="lang-switch">
       <button class="lang-btn" data-lang="de">DE</button>
       <button class="lang-btn" data-lang="en">EN</button>
@@ -77,32 +80,6 @@
       <a class="tab-btn" href="/calculator/fund_etf_fees/" data-page="/calculator/fund_etf_fees/" data-i18n="tabCalculator">Kostenvergleich</a>
       <a class="tab-btn" href="/stuff_i_use/brokerage_finder/" data-page="/stuff_i_use/brokerage_finder/" data-i18n="tabBroker">Broker-Finder</a>
     </nav>
-    <div class="currency-switch-row currency-switch-nav">
-      <div class="currency-switch">
-        <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
-          <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
-          <span class="cs-code">EUR</span>
-          <svg class="currency-switch-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <ul class="currency-switch-menu" role="listbox">
-          <li role="option" data-currency="EUR" class="active" aria-selected="true">
-            <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
-            <span class="cs-code">EUR</span>
-            <span class="cs-name">Euro</span>
-          </li>
-          <li role="option" data-currency="USD" aria-selected="false">
-            <svg class="currency-flag-icon"><use href="#flag-usd"></use></svg>
-            <span class="cs-code">USD</span>
-            <span class="cs-name">US Dollar</span>
-          </li>
-          <li role="option" data-currency="AED" aria-selected="false">
-            <svg class="currency-flag-icon"><use href="#flag-aed"></use></svg>
-            <span class="cs-code">AED</span>
-            <span class="cs-name">UAE Dirham</span>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 
   <header>
@@ -117,20 +94,61 @@
 
     <div class="panel panel-input">
       <div class="block">
-        <div class="section-title" data-i18n="sectionDuration">Anlagedauer &amp; Rendite</div>
+        <div class="section-title">
+        <span data-i18n="sectionDuration">Anlagedauer &amp; Rendite</span>
+        <div class="currency-switch currency-switch-compact">
+          <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
+            <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
+            <span class="cs-code">EUR</span>
+            <svg class="currency-switch-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="currency-switch-menu" role="listbox">
+            <li role="option" data-currency="EUR" class="active" aria-selected="true">
+              <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
+              <span class="cs-code">EUR</span>
+              <span class="cs-name">Euro</span>
+            </li>
+            <li role="option" data-currency="USD" aria-selected="false">
+              <svg class="currency-flag-icon"><use href="#flag-usd"></use></svg>
+              <span class="cs-code">USD</span>
+              <span class="cs-name">US Dollar</span>
+            </li>
+            <li role="option" data-currency="AED" aria-selected="false">
+              <svg class="currency-flag-icon"><use href="#flag-aed"></use></svg>
+              <span class="cs-code">AED</span>
+              <span class="cs-name">UAE Dirham</span>
+            </li>
+          </ul>
+        </div>
+        </div>
         <div class="field">
-          <div class="field-label"><span data-i18n="labelYears">Anlagedauer</span><span class="val" id="v-years">20</span></div>
+          <div class="field-label">
+            <span data-i18n="labelYears">Anlagedauer</span>
+            <span class="inline-num-group">
+              <input type="number" id="years-input" class="inline-num-input" value="20" min="1" max="60" step="1">
+              <span class="inline-num-unit" data-i18n="yearsUnit">Jahre</span>
+            </span>
+          </div>
           <input type="range" id="years" min="1" max="60" value="20" step="1">
         </div>
         <div class="field">
-          <div class="field-label"><span data-i18n="labelReturn">Erwartete Rendite p.a. (vor Kosten)</span><span class="val" id="v-rendite">7,0 %</span></div>
-          <input type="range" id="rendite" min="0" max="20" value="7" step="0.1">
+          <div class="field-label">
+            <span data-i18n="labelReturn">Erwartete Rendite p.a. (vor Kosten)</span>
+            <span class="inline-num-group">
+              <input type="number" id="rendite-input" class="inline-num-input" value="7" min="0" max="50" step="0.1">
+              <span class="inline-num-unit">%</span>
+            </span>
+          </div>
+          <input type="range" id="rendite" min="0" max="50" value="7" step="0.1">
         </div>
       </div>
 
       <div class="block">
         <div class="switch-row">
-          <span class="label" data-i18n="labelEinmal">Einmalanlage</span>
+          <span class="label field-label-text">
+            <span data-i18n="labelEinmal">Einmalanlage</span>
+            <span class="info-tip" tabindex="0" data-i18n-tip="sparTipEinmal" data-tip="فعّل هاد الخيار إذا عندك مبلغ جاهز بدك تستثمره كدفعة وحدة بالبداية."><span class="info-tip-glyph"></span></span>
+          </span>
           <div class="switch on" id="sw-einmal"></div>
         </div>
         <div class="fields open" id="fields-einmal">
@@ -148,7 +166,12 @@
         </div>
         <div class="fields open" id="fields-sparplan">
           <div class="field">
-            <div class="field-label"><span data-i18n="labelRate">Monatliche Rate</span></div>
+            <div class="field-label">
+              <span class="field-label-text">
+                <span data-i18n="labelRate">Monatliche Rate</span>
+                <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRate" data-tip="المبلغ يلي بتضيفه لاستثمارك كل شهر."><span class="info-tip-glyph"></span></span>
+              </span>
+            </div>
             <input type="number" id="sparplan-rate" value="200" step="10">
           </div>
         </div>
@@ -210,7 +233,7 @@
         <div class="chart-head">
           <h2 data-i18n="chartTitle">Wertentwicklung im Vergleich</h2>
           <div class="legend">
-            <span><i class="dot" style="background:#9AAA9F"></i><span data-i18n="legendNoCost">ohne Kosten</span></span>
+            <span><i class="dot" style="background:#A9A4A0"></i><span data-i18n="legendNoCost">ohne Kosten</span></span>
             <span><i class="dot" style="background:var(--green)"></i><span data-i18n="etf">ETF</span></span>
             <span><i class="dot" style="background:var(--purple)"></i><span data-i18n="fonds">Fonds</span></span>
           </div>
@@ -263,6 +286,7 @@
 
 <script src="/js/i18n.js"></script>
 <script src="/js/common.js"></script>
+<script src="/js/chart-helpers.js"></script>
 <script src="/js/fund-comparison-calculator.js"></script>
 </body>
 </html>

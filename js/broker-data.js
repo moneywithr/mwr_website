@@ -5,12 +5,12 @@ window.BROKER_DATA = [
     id: "de",
     names: { de: "Deutschland", en: "Germany", ar: "ألمانيا" },
     note: {
-      de: "Das ist keine Finanzberatung! Recherche nach bestem Wissen und Gewissen — der Anfang liegt bei dir.",
-      en: "This is not financial advice! Researched to the best of our knowledge — the rest is up to you.",
-      ar: "هذه ليست نصيحة مالية! تم البحث بأفضل ما لدينا من معرفة — والباقي عليك."
+      de: "Das ist keine Finanzberatung! Recherche nach bestem Wissen und Gewissen. Der Anfang liegt bei dir.",
+      en: "This is not financial advice! Researched to the best of our knowledge. The rest is up to you.",
+      ar: "هذه ليست نصيحة مالية! تم البحث بأفضل ما لدينا من معرفة، والباقي عليك."
     },
     platforms: [
-      { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus.png", tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" } },
+      { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus.png", highlight: true, tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" } },
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
       { name: "Scalable Capital", url: "https://de.scalable.capital/einladung/bsg5qk", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital.png" },
       { name: "ING", url: "https://www.ing.de/", domain: "ing.de", logoUrl: "/img/broker-logos/ing.png" }
@@ -21,7 +21,7 @@ window.BROKER_DATA = [
     names: { de: "Niederlande", en: "Netherlands", ar: "هولندا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
-      { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "https://assets.finanzfluss.de/directus/c1b0e557-b864-49b3-bfbc-539cd0b8075a.svg" },
+      { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "/img/broker-logos/degiro.png" },
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
     ]
   },
@@ -30,7 +30,7 @@ window.BROKER_DATA = [
     names: { de: "Österreich", en: "Austria", ar: "النمسا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
-      { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "https://assets.finanzfluss.de/directus/09a0ea92-e4b9-4118-9fa2-429e4b09db82.svg" }
+      { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "/img/broker-logos/flatex.png" }
     ]
   },
   {
@@ -120,7 +120,7 @@ window.BROKER_DATA = [
     names: { de: "USA", en: "United States", ar: "الولايات المتحدة ألأمريكية" },
     platforms: [
       { name: "Charles Schwab", url: "https://www.schwab.com/", domain: "schwab.com" },
-      { name: "Fidelity", url: "https://www.fidelity.com/", domain: "fidelity.com", logoUrl: "https://assets.finanzfluss.de/directus/2eeebd01-8bb4-41fd-add7-6d13ba773eec.svg" }
+      { name: "Fidelity", url: "https://www.fidelity.com/", domain: "fidelity.com", logoUrl: "/img/broker-logos/fidelity.png" }
     ]
   },
   {

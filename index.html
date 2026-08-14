@@ -6,7 +6,7 @@
 <noscript><style>html{visibility:visible !important;}</style></noscript>
 <script>setTimeout(function(){document.documentElement.style.visibility="visible";}, 1500);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money with Rami — الموقع قيد الإنشاء</title>
+<title>Money with Rami | الموقع قيد الإنشاء</title>
 <link rel="stylesheet" href="/css/style.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
@@ -16,7 +16,10 @@
 
 <div class="top-banner">
   <div class="top-banner-inner">
-    <a class="brand-name" href="/" data-i18n="brand">Money with Rami</a>
+    <a class="brand-name" href="/">
+      <span class="brand-line">Money with</span>
+      <span class="brand-line">Rami<span class="brand-dot">.</span></span>
+    </a>
     <div class="lang-switch">
       <button class="lang-btn" data-lang="de">DE</button>
       <button class="lang-btn" data-lang="en">EN</button>
@@ -33,40 +36,41 @@
   </div>
 
   <div class="landing-services">
-    <div class="section-title" data-i18n="landingServicesTitle">الأدوات المتوفرة حاليًا</div>
-    <div class="service-cards">
+    <div class="services-panel">
+      <div class="section-title" data-i18n="landingServicesTitle">الأدوات المتوفرة حاليًا</div>
+      <div class="service-cards">
 
-      <a class="service-card service-card-featured" href="/calculator/investment/">
-        <div class="service-featured-badge"><span data-i18n="landingCalcTagline">يالله نحسب عوائد الاستثمار</span></div>
-        <div class="service-icon">🧮</div>
-        <div class="service-name" data-i18n="landingCalcTitle">حاسبة الاستثمار</div>
-        <div class="service-desc" data-i18n="landingCalcDesc">احسب الثروة النهائية، المبلغ الشهري، أو المدة المناسبة لخطة ادخارك.</div>
-        <span class="service-cta"><span data-i18n="landingCtaCalc">احسب</span><span class="service-cta-arrow">→</span></span>
-      </a>
-
-      <div class="service-cards-secondary">
-        <a class="service-card card-purple" href="/calculator/fund_etf_fees/">
-          <div class="service-icon">⚖️</div>
-          <div class="service-name" data-i18n="landingCompareTitle">مقارنة التكاليف</div>
-          <div class="service-desc" data-i18n="landingCompareDesc">لسا عم تستثمر عن طريق البنك؟ شوف مقارنة كم عم تخسر من مصاريك لما تستثمر بصناديق استثمارية مُدارة بنشاط، بدل ما تستثمر بـ ETF لحالك بكل سهولة.</div>
-          <span class="service-cta"><span data-i18n="landingCtaCompare">اعمل مقارنة</span><span class="service-cta-arrow">→</span></span>
+        <a class="service-card card-blue" href="/calculator/investment/">
+          <div class="service-card-text">
+            <div class="service-name" data-i18n="landingCalcTitle">حاسبة الاستثمار</div>
+            <div class="service-desc" data-i18n="landingCalcDesc">احسب الثروة النهائية، المبلغ الشهري، أو المدة المناسبة لخطة ادخارك.</div>
+          </div>
+          <span class="service-card-icon"><span class="service-cta-arrow">→</span></span>
         </a>
 
-        <a class="service-card card-orange" href="/stuff_i_use/brokerage_finder/">
-          <div class="service-icon">🌍</div>
-          <div class="service-name" data-i18n="landingBrokerTitle">أفضل المنصات</div>
-          <div class="service-desc" data-i18n="landingBrokerDesc">دورتلك وعملتلك قائمة بأفضل الأماكن الي ممكن تستثمر فيهم حسب بلدك!</div>
-          <span class="service-cta"><span data-i18n="landingCtaBroker">اختار المنصة المناسبة</span><span class="service-cta-arrow">→</span></span>
+        <a class="service-card card-silver" href="/calculator/fund_etf_fees/">
+          <div class="service-card-text">
+            <div class="service-name" data-i18n="landingCompareTitle">مقارنة التكاليف</div>
+            <div class="service-desc" data-i18n="landingCompareDesc">لسا عم تستثمر عن طريق البنك؟ شوف مقارنة كم عم تخسر من مصاريك لما تستثمر بصناديق استثمارية مُدارة بنشاط، بدل ما تستثمر بـ ETF لحالك بكل سهولة.</div>
+          </div>
+          <span class="service-card-icon"><span class="service-cta-arrow">→</span></span>
         </a>
+
+        <a class="service-card card-lime" href="/stuff_i_use/brokerage_finder/">
+          <div class="service-card-text">
+            <div class="service-name" data-i18n="landingBrokerTitle">أفضل المنصات</div>
+            <div class="service-desc" data-i18n="landingBrokerDesc">دورتلك وعملتلك قائمة بأفضل الأماكن الي ممكن تستثمر فيهم حسب بلدك!</div>
+          </div>
+          <span class="service-card-icon"><span class="service-cta-arrow">→</span></span>
+        </a>
+
       </div>
-
     </div>
   </div>
 
   <div class="landing-footnote">
-    <span class="footnote-icon">🚀</span>
     <span data-i18n="landingFootnote">الموقع لسا جديد وعم بشتغل عليه شوي شوي مشان ضيف عليه ميزات جديدة. رأيك وفيدباك كتير بهموني!</span>
-    <span class="footnote-loading"><span></span><span></span><span></span></span>
+    <span class="footnote-dots" aria-hidden="true"><i></i><i></i><i></i></span>
   </div>
 
   <footer>

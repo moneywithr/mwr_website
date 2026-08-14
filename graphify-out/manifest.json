@@ -1,0 +1,140 @@
+{
+  "js/broker-data.js": {
+    "mtime": 1786518534.0,
+    "seen": 1786691065.2732,
+    "ast_hash": "c5af401bd97d767f2c2f708c702eeebe",
+    "semantic_hash": "c5af401bd97d767f2c2f708c702eeebe"
+  },
+  "js/broker.js": {
+    "mtime": 1786430924.0,
+    "seen": 1786691065.273201,
+    "ast_hash": "21a8b4a0c1085cae009ca4f8b4b159d5",
+    "semantic_hash": "21a8b4a0c1085cae009ca4f8b4b159d5"
+  },
+  "js/common.js": {
+    "mtime": 1786648703.009615,
+    "seen": 1786691065.273202,
+    "ast_hash": "b97b9af4af484017e77ea82332065dd6",
+    "semantic_hash": "b97b9af4af484017e77ea82332065dd6"
+  },
+  "js/fund-comparison-calculator.js": {
+    "mtime": 1786650875.6809485,
+    "seen": 1786691065.273202,
+    "ast_hash": "df4cb69d7b6dbf6adc3b3ea4e91d4569",
+    "semantic_hash": "df4cb69d7b6dbf6adc3b3ea4e91d4569"
+  },
+  "js/i18n.js": {
+    "mtime": 1786647029.2383564,
+    "seen": 1786691065.273203,
+    "ast_hash": "3d3fdb6199b06b702ce23b97035d3d74",
+    "semantic_hash": "3d3fdb6199b06b702ce23b97035d3d74"
+  },
+  "js/investment-calculator.js": {
+    "mtime": 1786650880.052654,
+    "seen": 1786691065.273203,
+    "ast_hash": "8831e5878f864dce95393c0e8a1dcda6",
+    "semantic_hash": "8831e5878f864dce95393c0e8a1dcda6"
+  },
+  "README.md": {
+    "mtime": 1786599282.0,
+    "seen": 1786691065.2732038,
+    "ast_hash": "41830c11977b17b2951a15ddf16d0810",
+    "semantic_hash": "41830c11977b17b2951a15ddf16d0810"
+  },
+  "calculator/fund_etf_fees/index.html": {
+    "mtime": 1786644425.5923345,
+    "seen": 1786691065.2732038,
+    "ast_hash": "f283bc47a38dfe1969225d2b62f06d6e",
+    "semantic_hash": "f283bc47a38dfe1969225d2b62f06d6e"
+  },
+  "calculator/investment/index.html": {
+    "mtime": 1786651282.9371283,
+    "seen": 1786691065.2732038,
+    "ast_hash": "1e02d083351acc073189b6147a61700f",
+    "semantic_hash": "1e02d083351acc073189b6147a61700f"
+  },
+  "impressum/index.html": {
+    "mtime": 1786514262.0,
+    "seen": 1786691065.273205,
+    "ast_hash": "ed9415504af05040486ed72f986efd7c",
+    "semantic_hash": "ed9415504af05040486ed72f986efd7c"
+  },
+  "index.html": {
+    "mtime": 1786647983.9489496,
+    "seen": 1786691065.273205,
+    "ast_hash": "2470b245b2381abbf1c0a4fae2335472",
+    "semantic_hash": "2470b245b2381abbf1c0a4fae2335472"
+  },
+  "stuff_i_use/brokerage_finder/index.html": {
+    "mtime": 1786514262.0,
+    "seen": 1786691065.273205,
+    "ast_hash": "fa9cb0d59036f0013c6ea3005bd40f3f",
+    "semantic_hash": "fa9cb0d59036f0013c6ea3005bd40f3f"
+  },
+  "favicon/apple-touch-icon.png": {
+    "mtime": 1786648456.2563815,
+    "seen": 1786691065.273206,
+    "ast_hash": "ad309978e4cecae9a3a2d1ea06786bde",
+    "semantic_hash": "ad309978e4cecae9a3a2d1ea06786bde"
+  },
+  "favicon/favicon.svg": {
+    "mtime": 1786648456.2525635,
+    "seen": 1786691065.273206,
+    "ast_hash": "4a78d0590698d4b7e70c8b55abcb545a",
+    "semantic_hash": "4a78d0590698d4b7e70c8b55abcb545a"
+  },
+  "img/broker-logos/ing.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.273206,
+    "ast_hash": "ddf097a138d910e2ef613f0b41f514ba",
+    "semantic_hash": "ddf097a138d910e2ef613f0b41f514ba"
+  },
+  "img/broker-logos/interactive-brokers.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.273207,
+    "ast_hash": "bf0900633012546fa6c25061720ce621",
+    "semantic_hash": "bf0900633012546fa6c25061720ce621"
+  },
+  "img/broker-logos/scalable-capital.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.273207,
+    "ast_hash": "44f8bf58a9be355d15680c5d9f165716",
+    "semantic_hash": "44f8bf58a9be355d15680c5d9f165716"
+  },
+  "img/broker-logos/smartbroker-plus.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.273207,
+    "ast_hash": "4d00d1d9f49e6849f028dee8991e523b",
+    "semantic_hash": "4d00d1d9f49e6849f028dee8991e523b"
+  },
+  "img/broker-logos/trade-republic.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.2732081,
+    "ast_hash": "f37ee8d5e23448feacecd609e6a7fab7",
+    "semantic_hash": "f37ee8d5e23448feacecd609e6a7fab7"
+  },
+  "img/broker-logos/trading212.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.2732081,
+    "ast_hash": "1b43551986c3fd2cdad89223dad53414",
+    "semantic_hash": "1b43551986c3fd2cdad89223dad53414"
+  },
+  "img/broker-logos/xtb.png": {
+    "mtime": 1786521304.0,
+    "seen": 1786691065.2732081,
+    "ast_hash": "3dcdfc9ed1749a952ee8ebea74774749",
+    "semantic_hash": "3dcdfc9ed1749a952ee8ebea74774749"
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1786651340.8372126,
+    "seen": 1786691065.2731981,
+    "ast_hash": "04b841ca33daff30ff3caf828809e70a",
+    "semantic_hash": "04b841ca33daff30ff3caf828809e70a"
+  },
+  "js/chart-helpers.js": {
+    "mtime": 1786644391.9017773,
+    "seen": 1786691065.273202,
+    "ast_hash": "27eca6d3bf426871e94bc9e199f1856c",
+    "semantic_hash": "27eca6d3bf426871e94bc9e199f1856c"
+  }
+}

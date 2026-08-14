@@ -47,8 +47,11 @@
     const H = 360, padL = 56, padT = 20, padB = 34;
     const n = noCost.snapshots.length;
     const maxV = Math.max(...noCost.snapshots) * 1.06 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
-    const monoFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Mono';
-    const sansFont = window.Site.state.lang === 'ar' ? 'Tajawal' : 'IBM Plex Sans';
+    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic) —
+    // die Arabic-Schrift greift nur als Fallback für tatsächliche arabische
+    // Buchstaben, die in denselben <text>-Elementen vorkommen (z.B. "سنة 5").
+    const monoFont = window.Site.state.lang === 'ar' ? "'IBM Plex Mono','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Mono',monospace";
+    const sansFont = window.Site.state.lang === 'ar' ? "'IBM Plex Sans','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Sans',sans-serif";
 
     const finalGap = etf.snapshots[n-1] - fonds.snapshots[n-1];
     const etfWinsChart = finalGap >= 0;
@@ -60,53 +63,34 @@
     const padR = Math.max(calloutW + 8 + 10, 40);
 
     const W = 860;
-    const innerW = W - padL - padR, innerH = H - padT - padB;
+    const { x, y } = window.ChartHelpers.scales({ padL, padT, padR, padB, W, H, n, maxV });
 
-    const x = i => padL + (innerW * i/(n-1));
-    const y = v => padT + innerH - (innerH * (v/maxV));
+    const pathNoCost = window.ChartHelpers.pathFor(noCost.snapshots, x, y);
+    const pathETF = window.ChartHelpers.pathFor(etf.snapshots, x, y);
+    const pathFonds = window.ChartHelpers.pathFor(fonds.snapshots, x, y);
+    const gapPath = window.ChartHelpers.areaBetween(etf.snapshots, fonds.snapshots, x, y);
 
-    function pathFor(arr){
-      return arr.map((v,i)=> (i===0?'M':'L') + x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
-    }
-
-    const pathNoCost = pathFor(noCost.snapshots);
-    const pathETF = pathFor(etf.snapshots);
-    const pathFonds = pathFor(fonds.snapshots);
-
-    const forward = etf.snapshots.map((v,i)=> x(i).toFixed(1)+','+y(v).toFixed(1)).join(' L ');
-    const backward = fonds.snapshots.slice().reverse().map((v,i)=>{
-      const idx = n-1-i;
-      return x(idx).toFixed(1)+','+y(v).toFixed(1);
-    }).join(' L ');
-    const gapPath = 'M ' + forward + ' L ' + backward + ' Z';
-
-    let grid = '';
     const steps = 4;
-    for(let s=0; s<=steps; s++){
-      const val = maxV * s/steps;
-      const gy = y(val);
-      grid += `<line x1="${padL}" y1="${gy.toFixed(1)}" x2="${W-padR}" y2="${gy.toFixed(1)}" stroke="#C9E8C0" stroke-width="1"/>`;
-      grid += `<text x="${padL-8}" y="${(gy+4).toFixed(1)}" text-anchor="end" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${fmtCompact(val)}</text>`;
-    }
+    const grid = window.ChartHelpers.gridLines({ padL, padT, W, padR, maxV, steps, monoFont, y, fmtCompact });
 
     const xLabels = [0, Math.round((n-1)/2), n-1].map(i=>{
-      return `<text x="${x(i).toFixed(1)}" y="${H-10}" text-anchor="middle" font-family="${monoFont}" font-size="11.5" fill="#5B7167">${t('yearLabel')} ${i}</text>`;
+      return `<text x="${x(i).toFixed(1)}" y="${H-10}" text-anchor="middle" font-family="${monoFont}" font-size="11.5" fill="#7C7876">${t('yearLabel')} ${i}</text>`;
     }).join('');
 
     const calloutY = y(etfWinsChart ? etf.snapshots[n-1] : fonds.snapshots[n-1]);
-    const calloutColor = etfWinsChart ? '#173C2E' : '#8B72E8';
+    const calloutColor = etfWinsChart ? '#685CC8' : '#5347A8';
 
     const svg = `
     <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; overflow:visible;">
       ${grid}
-      <path d="${gapPath}" fill="#8FE07C" fill-opacity="0.25" stroke="none"/>
-      <path d="${pathNoCost}" fill="none" stroke="#9AAA9F" stroke-width="1.5" stroke-dasharray="4 4"/>
-      <path d="${pathFonds}" fill="none" stroke="#8B72E8" stroke-width="2.5"/>
-      <path d="${pathETF}" fill="none" stroke="#173C2E" stroke-width="2.5"/>
+      <path d="${gapPath}" fill="#685CC8" fill-opacity="0.14" stroke="none"/>
+      <path d="${pathNoCost}" fill="none" stroke="#A9A4A0" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <path d="${pathFonds}" fill="none" stroke="#5347A8" stroke-width="2.5"/>
+      <path d="${pathETF}" fill="none" stroke="#685CC8" stroke-width="2.5"/>
       ${xLabels}
       <g transform="translate(${x(n-1)+8}, ${calloutY.toFixed(1)})">
         <text x="0" y="-6" font-family="${sansFont}" font-size="14.5" font-weight="700" fill="${calloutColor}">${valueText}</text>
-        <text x="0" y="10" font-family="${monoFont}" font-size="11" fill="#5B7167">${labelText}</text>
+        <text x="0" y="10" font-family="${monoFont}" font-size="11" fill="#7C7876">${labelText}</text>
       </g>
     </svg>`;
     $('chart-svg').innerHTML = svg;
@@ -146,16 +130,36 @@
   }
 
   function updateSliderLabels(){
-    $('v-years').textContent = state.years + ' ' + t('yearsUnit');
-    $('v-rendite').textContent = fmtPct(state.rendite, 1);
+    $('years-input').value = state.years;
+    $('rendite-input').value = state.rendite;
     $('v-etf-order').textContent = fmtPct(state.etfOrder, 2);
     $('v-etf-ter').textContent = fmtPct(state.etfTer, 2);
     $('v-fonds-aa').textContent = fmtPct(state.fondsAA, 2);
     $('v-fonds-ter').textContent = fmtPct(state.fondsTer, 2);
   }
 
+  // Anlagedauer: Slider und Zahlenfeld halten sich gegenseitig synchron
   $('years').addEventListener('input', ()=>{ state.years = parseInt($('years').value); updateSliderLabels(); render(); });
+  $('years-input').addEventListener('input', e=>{
+    let v = parseInt(e.target.value);
+    if(isNaN(v)) return;
+    v = Math.max(1, Math.min(60, v));
+    state.years = v;
+    $('years').value = v;
+    render();
+  });
+
+  // Erwartete Rendite: Slider und Zahlenfeld halten sich gegenseitig synchron
   $('rendite').addEventListener('input', ()=>{ state.rendite = parseFloat($('rendite').value); updateSliderLabels(); render(); });
+  $('rendite-input').addEventListener('input', e=>{
+    let v = parseFloat(e.target.value);
+    if(isNaN(v)) return;
+    v = Math.max(0, Math.min(50, v));
+    state.rendite = v;
+    $('rendite').value = v;
+    render();
+  });
+
   $('etf-order').addEventListener('input', ()=>{ state.etfOrder = parseFloat($('etf-order').value); updateSliderLabels(); render(); });
   $('etf-ter').addEventListener('input', ()=>{ state.etfTer = parseFloat($('etf-ter').value); updateSliderLabels(); render(); });
   $('fonds-aa').addEventListener('input', ()=>{ state.fondsAA = parseFloat($('fonds-aa').value); updateSliderLabels(); render(); });

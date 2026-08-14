@@ -20,13 +20,18 @@ window.Site = (function(){
   function t(key){ return window.I18N[state.lang][key]; }
   function locale(){ return window.I18N[state.lang].locale; }
 
+  // Intl gibt für USD in arabischer Locale "US$" statt "$" aus (CLDR-Disambiguierung) —
+  // das liest sich wie Symbol+Code zusammen. Für die arabische UI reicht das bloße Symbol.
+  function fixArabicUsdSymbol(str){
+    return state.lang === 'ar' && state.currency === 'USD' ? str.replace('US$','$') : str;
+  }
   function fmtEUR(v){
     // Name historisch gewachsen (früher gab's nur Euro) — formatiert
     // inzwischen in der aktuell gewählten Anzeigewährung (state.currency).
-    return v.toLocaleString(locale(),{style:'currency',currency:state.currency,maximumFractionDigits:0});
+    return fixArabicUsdSymbol(v.toLocaleString(locale(),{style:'currency',currency:state.currency,maximumFractionDigits:0}));
   }
   function fmtCompact(v){
-    return new Intl.NumberFormat(locale(),{style:'currency',currency:state.currency,notation:'compact',maximumFractionDigits:1}).format(v);
+    return fixArabicUsdSymbol(new Intl.NumberFormat(locale(),{style:'currency',currency:state.currency,notation:'compact',maximumFractionDigits:1}).format(v));
   }
   function fmtPct(v, digits){
     return v.toLocaleString(locale(),{minimumFractionDigits:digits,maximumFractionDigits:digits}) + ' %';
@@ -72,13 +77,20 @@ window.Site = (function(){
   }
 
   function setLanguage(lang){
-    if(!window.I18N[lang]) return;
-    state.lang = lang;
-    localStorage.setItem(LANG_KEY, lang);
-    applyStatic();
-    // Andere Skripte (rechner.js, roi.js, broker.js) hören auf dieses Event,
-    // um ihre eigenen dynamischen Inhalte (Zahlen, Charts) neu zu rendern.
-    document.dispatchEvent(new CustomEvent('mwr:langchange', { detail: { lang } }));
+    if(!window.I18N[lang] || lang === state.lang) return;
+    // Kurzes Fade statt hartem Sprung — Text, Schriftart und rtl/ltr
+    // wechseln sonst mitten im Blick des Nutzers ohne jeden Übergang.
+    const wrap = document.querySelector('.wrap') || document.body;
+    wrap.classList.add('lang-fade');
+    window.setTimeout(()=>{
+      state.lang = lang;
+      localStorage.setItem(LANG_KEY, lang);
+      applyStatic();
+      // Andere Skripte (rechner.js, roi.js, broker.js) hören auf dieses Event,
+      // um ihre eigenen dynamischen Inhalte (Zahlen, Charts) neu zu rendern.
+      document.dispatchEvent(new CustomEvent('mwr:langchange', { detail: { lang } }));
+      requestAnimationFrame(()=> wrap.classList.remove('lang-fade'));
+    }, 130);
   }
 
   // Aktualisiert alle Currency-Switch-Instanzen (Desktop- und Mobil-Variante)
@@ -87,7 +99,7 @@ window.Site = (function(){
     document.querySelectorAll('.currency-switch').forEach(el=>{
       const codeEl = el.querySelector('.currency-switch-btn .cs-code');
       const flagUse = el.querySelector('.currency-switch-btn .currency-flag-icon use');
-      if(codeEl) codeEl.textContent = state.currency;
+      if(codeEl) codeEl.textContent = state.lang === 'ar' ? t(CURRENCY_NAME_KEY[state.currency]) : state.currency;
       if(flagUse) flagUse.setAttribute('href', '#' + CURRENCY_FLAG[state.currency]);
       el.querySelectorAll('[data-currency]').forEach(opt=>{
         const code = opt.getAttribute('data-currency');
@@ -156,10 +168,62 @@ window.Site = (function(){
     });
   }
 
+  // Bindet Klick-Interaktionen für jede .custom-select-Instanz (Ersatz für
+  // native <select>-Elemente, siehe css .custom-select). Nutzt Event-
+  // Delegation auf .custom-select-menu statt Listener pro <li> — dadurch
+  // funktioniert es auch, wenn eine Seite (z.B. broker.js) die Optionsliste
+  // per innerHTML neu aufbaut, ohne initCustomSelects() erneut aufzurufen.
+  // Die eigentliche Auswahl-Logik bleibt beim jeweiligen Seiten-Skript: hier
+  // wird nur geöffnet/geschlossen und ein "customselect:change"-Event mit
+  // dem gewählten Wert ausgelöst.
+  function initCustomSelects(){
+    document.querySelectorAll('.custom-select').forEach(el=>{
+      if(el._csInit) return;
+      el._csInit = true;
+      const btn = el.querySelector('.custom-select-btn');
+      const menu = el.querySelector('.custom-select-menu');
+      if(!btn || !menu) return;
+
+      btn.addEventListener('click', e=>{
+        e.stopPropagation();
+        const willOpen = !el.classList.contains('open');
+        document.querySelectorAll('.custom-select.open').forEach(o=>{
+          o.classList.remove('open');
+          o.querySelector('.custom-select-btn').setAttribute('aria-expanded','false');
+        });
+        if(willOpen){
+          el.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
+
+      menu.addEventListener('click', e=>{
+        const opt = e.target.closest('[data-value]');
+        if(!opt) return;
+        el.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        el.dispatchEvent(new CustomEvent('customselect:change', { detail: { value: opt.getAttribute('data-value') }, bubbles: true }));
+      });
+    });
+
+    document.addEventListener('click', ()=>{
+      document.querySelectorAll('.custom-select.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.custom-select-btn').setAttribute('aria-expanded','false');
+      });
+    });
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Escape'){
+        document.querySelectorAll('.custom-select.open').forEach(o=> o.classList.remove('open'));
+      }
+    });
+  }
+
   function init(){
     applyStatic();
     initNav();
     initCurrencySwitches();
+    initCustomSelects();
     document.querySelectorAll('.lang-btn').forEach(btn=>{
       btn.addEventListener('click', ()=> setLanguage(btn.getAttribute('data-lang')));
     });

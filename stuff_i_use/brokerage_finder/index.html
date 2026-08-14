@@ -18,7 +18,10 @@
 
 <div class="top-banner">
   <div class="top-banner-inner">
-    <a class="brand-name" href="/" data-i18n="brand">Money with Rami</a>
+    <a class="brand-name" href="/">
+      <span class="brand-line">Money with</span>
+      <span class="brand-line">Rami<span class="brand-dot">.</span></span>
+    </a>
     <div class="lang-switch">
       <button class="lang-btn" data-lang="de">DE</button>
       <button class="lang-btn" data-lang="en">EN</button>
@@ -46,7 +49,13 @@
   <div class="panel" id="broker-panel">
     <div class="field" style="margin-bottom:18px;">
       <div class="field-label"><span data-i18n="brokerSelectLabel">بلدك</span></div>
-      <select id="broker-country"></select>
+      <div class="custom-select" id="broker-country-select">
+        <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
+          <span class="custom-select-value placeholder" id="broker-country-value"></span>
+          <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="custom-select-menu" role="listbox"></ul>
+      </div>
     </div>
     <div id="broker-placeholder" data-i18n="brokerPlaceholder">اختر بلدًا أعلاه لرؤية المنصات المناسبة.</div>
     <div id="broker-results" style="display:none;">

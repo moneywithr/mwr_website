@@ -6,20 +6,52 @@
 
   const state = { brokerIndex: '' };
 
+  // Länder-Codes sind größtenteils ISO-3166-1-alpha-2 (passend für Flaggen-
+  // Emoji aus Regional-Indicator-Symbolen) — "uk" ist umgangssprachlich und
+  // wird auf "gb" gemappt, "other" hat keine Flagge (Symbol als Platzhalter).
+  const FLAG_OVERRIDE = { uk: 'gb', other: null };
+  function flagEmoji(id){
+    const code = FLAG_OVERRIDE.hasOwnProperty(id) ? FLAG_OVERRIDE[id] : id;
+    if(!code || code.length !== 2) return '🌐';
+    return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E6 + (c.charCodeAt(0) - 65)));
+  }
+
   function renderOptions(){
-    const sel = $('broker-country');
-    sel.innerHTML = '';
-    const empty = document.createElement('option');
-    empty.value = '';
-    empty.textContent = t('brokerSelectPlaceholder');
-    sel.appendChild(empty);
+    const menu = $('broker-country-select').querySelector('.custom-select-menu');
+    menu.innerHTML = '';
     brokerData.forEach((entry, i)=>{
-      const opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = entry.names[window.Site.state.lang];
-      sel.appendChild(opt);
+      const li = document.createElement('li');
+      li.setAttribute('role','option');
+      li.setAttribute('data-value', i);
+      li.setAttribute('aria-selected', String(i) === state.brokerIndex ? 'true' : 'false');
+      li.classList.toggle('active', String(i) === state.brokerIndex);
+      const flag = document.createElement('span');
+      flag.className = 'custom-select-flag';
+      flag.textContent = flagEmoji(entry.id);
+      const name = document.createElement('span');
+      name.textContent = entry.names[window.Site.state.lang];
+      li.appendChild(flag);
+      li.appendChild(name);
+      menu.appendChild(li);
     });
-    sel.value = state.brokerIndex;
+    syncCountrySelectUI();
+  }
+
+  function syncCountrySelectUI(){
+    const valueEl = $('broker-country-value');
+    if(state.brokerIndex === ''){
+      valueEl.textContent = t('brokerSelectPlaceholder');
+      valueEl.classList.add('placeholder');
+    } else {
+      const entry = brokerData[parseInt(state.brokerIndex, 10)];
+      valueEl.textContent = flagEmoji(entry.id) + ' ' + entry.names[window.Site.state.lang];
+      valueEl.classList.remove('placeholder');
+    }
+    $('broker-country-select').querySelectorAll('[data-value]').forEach(li=>{
+      const isActive = li.getAttribute('data-value') === state.brokerIndex;
+      li.classList.toggle('active', isActive);
+      li.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
   }
 
   function renderResults(){
@@ -43,7 +75,7 @@
     cardsEl.innerHTML = '';
     entry.platforms.forEach(p=>{
       const card = document.createElement('div');
-      card.className = 'broker-card';
+      card.className = 'broker-card' + (p.highlight ? ' broker-card-featured' : '');
 
       const main = document.createElement('div');
       main.className = 'broker-card-main';
@@ -117,8 +149,9 @@
     }
   }
 
-  $('broker-country').addEventListener('change', e=>{
-    state.brokerIndex = e.target.value;
+  $('broker-country-select').addEventListener('customselect:change', e=>{
+    state.brokerIndex = e.detail.value;
+    syncCountrySelectUI();
     renderResults();
   });
 
