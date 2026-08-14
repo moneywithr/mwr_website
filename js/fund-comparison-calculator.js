@@ -96,18 +96,29 @@
     $('chart-svg').innerHTML = svg;
   }
 
+  // Bei hoch angesetzter Rendite (>20%) über viele Jahre wachsen die Beträge
+  // exponentiell — als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
+  // so lang, dass sie in den Ergebnis-Boxen umbricht und diese sichtbar
+  // mitwachsen. Ab einer gewissen Länge deshalb kompakt formatieren (z.B.
+  // "12,3 Mio. €"), damit die Boxen stabil bleiben. Siehe investment-calculator.js.
+  function fmtBig(v){
+    const full = fmtEUR(v);
+    const digits = full.replace(/[^0-9]/g, '').length;
+    return digits > 9 ? fmtCompact(v) : full;
+  }
+
   function render(){
     const noCost = simulate(0, 0);
     const etf = simulate(state.etfOrder, state.etfTer);
     const fonds = simulate(state.fondsAA, state.fondsTer);
 
-    $('r-etf').textContent = fmtEUR(etf.finalValue);
-    $('r-fonds').textContent = fmtEUR(fonds.finalValue);
+    $('r-etf').textContent = fmtBig(etf.finalValue);
+    $('r-fonds').textContent = fmtBig(fonds.finalValue);
     const diff = etf.finalValue - fonds.finalValue;
     const etfWins = diff >= 0;
     $('tag-diff').textContent = etfWins ? t('etf') : t('fonds');
     $('k-diff').textContent = etfWins ? t('statAdvantage') : t('fondsAdvantage');
-    $('r-diff').textContent = fmtEUR(Math.abs(diff));
+    $('r-diff').textContent = fmtBig(Math.abs(diff));
     const pctBase = etfWins ? fonds.finalValue : etf.finalValue;
     const pctSuffix = etfWins ? t('diffPctSuffix') : t('diffPctSuffixFonds');
     $('r-diff-pct').textContent = pctBase > 0
@@ -117,14 +128,14 @@
     const etfGesamt = noCost.finalValue - etf.finalValue;
     const fondsGesamt = noCost.finalValue - fonds.finalValue;
 
-    $('b-eingezahlt-etf').textContent = fmtEUR(etf.contributed);
-    $('b-eingezahlt-fonds').textContent = fmtEUR(fonds.contributed);
-    $('b-direkt-etf').textContent = fmtEUR(etf.feesPaid);
-    $('b-direkt-fonds').textContent = fmtEUR(fonds.feesPaid);
-    $('b-ter-etf').textContent = fmtEUR(etfGesamt - etf.feesPaid);
-    $('b-ter-fonds').textContent = fmtEUR(fondsGesamt - fonds.feesPaid);
-    $('b-gesamt-etf').textContent = fmtEUR(etfGesamt);
-    $('b-gesamt-fonds').textContent = fmtEUR(fondsGesamt);
+    $('b-eingezahlt-etf').textContent = fmtBig(etf.contributed);
+    $('b-eingezahlt-fonds').textContent = fmtBig(fonds.contributed);
+    $('b-direkt-etf').textContent = fmtBig(etf.feesPaid);
+    $('b-direkt-fonds').textContent = fmtBig(fonds.feesPaid);
+    $('b-ter-etf').textContent = fmtBig(etfGesamt - etf.feesPaid);
+    $('b-ter-fonds').textContent = fmtBig(fondsGesamt - fonds.feesPaid);
+    $('b-gesamt-etf').textContent = fmtBig(etfGesamt);
+    $('b-gesamt-fonds').textContent = fmtBig(fondsGesamt);
 
     drawChart(noCost, etf, fonds);
   }

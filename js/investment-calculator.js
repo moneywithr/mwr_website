@@ -13,7 +13,14 @@
     anfangskapital: 5000,
     rate: 300,
     endkapital: 100000,
+    taxActive: false,
+    kapst: 26.375,
+    teilfreistellungActive: true,
   };
+  // Feste Teilfreistellungsquote für Aktienfonds (Aktienquote ≥ 51%) — die
+  // Auswahl der Fondsart wird bewusst nicht abgefragt, deshalb hier als
+  // Konstante statt als Eingabefeld.
+  const TEILFREISTELLUNGSQUOTE = 30;
 
   // Balken-Diagramm: welches Jahr aktuell angeklickt/hervorgehoben ist. null =
   // "noch nichts angeklickt", zeigt dann standardmäßig das letzte Jahr. Bleibt
@@ -94,6 +101,15 @@
     }
 
     return { P0, C, N, FV, i, invalid };
+  }
+
+  // Effektiver Steuersatz auf Kapitalerträge: Kapitalertragsteuer, ggf.
+  // reduziert um die steuerfreie Teilfreistellungsquote. 0, wenn die
+  // Steuerberechnung ausgeschaltet ist.
+  function effectiveTaxRate(){
+    if(!state.taxActive) return 0;
+    const taxableFraction = state.teilfreistellungActive ? (1 - TEILFREISTELLUNGSQUOTE/100) : 1;
+    return (state.kapst/100) * taxableFraction;
   }
 
   function simulateSeries(P0, C, totalMonths, i){
@@ -301,7 +317,7 @@
   function formatRateNumber(v){
     return v.toLocaleString(locale(),{maximumFractionDigits:1});
   }
-  function buildExplanation(res, contributed, gain){
+  function buildExplanation(res, contributed, gain, displayFV){
     const lump = state.einmalActive && res.P0 > 0;
     let templateKey;
     if(state.target === 'anfangskapital'){
@@ -322,7 +338,7 @@
       .replace('{c}', b(fmtEUR(res.C)))
       .replace('{years}', b(formatYearsNumber(res.N)))
       .replace('{rate}', b(formatRateNumber(state.rendite)))
-      .replace('{fv}', b(fmtEUR(res.FV)))
+      .replace('{fv}', b(fmtEUR(displayFV !== undefined ? displayFV : res.FV)))
       .replace('{contributed}', b(fmtEUR(contributed)))
       .replace('{gain}', b(fmtEUR(gain)));
   }
@@ -385,22 +401,41 @@
     }
     warningEl.classList.remove('show');
 
+    const contributed = res.P0 + res.C * res.N;
+    const pretaxGain = res.FV - contributed;
+    const taxRate = effectiveTaxRate();
+
+    // Steuer fällt einmalig auf den Gesamtgewinn an (vereinfachte Annahme —
+    // ignoriert Zeitpunkt und Häufigkeit realer Steuerzahlungen).
+    let displayFV = res.FV, displayGain = pretaxGain;
+    if(taxRate > 0){
+      const taxAmount = Math.max(pretaxGain, 0) * taxRate;
+      displayFV = res.FV - taxAmount;
+      displayGain = pretaxGain - taxAmount;
+    }
+
     let resultText;
     if(state.target === 'laufzeit') resultText = formatYears(res.N);
-    else if(state.target === 'endkapital') resultText = fmtBig(res.FV);
+    else if(state.target === 'endkapital') resultText = fmtBig(displayFV);
     else if(state.target === 'anfangskapital') resultText = fmtBig(res.P0);
     else resultText = fmtBig(res.C);
 
     $('stat-result').textContent = resultText;
     $('tag-result').textContent = t(targetLabelKey(state.target));
 
-    const contributed = res.P0 + res.C * res.N;
-    const gain = res.FV - contributed;
     $('stat-contributed').textContent = fmtBig(contributed);
-    $('stat-gain').textContent = fmtBig(gain);
-    $('result-summary-explain').innerHTML = buildExplanation(res, contributed, gain);
+    $('stat-gain').textContent = fmtBig(displayGain);
+    $('result-summary-explain').innerHTML = buildExplanation(res, contributed, displayGain, displayFV);
 
     const series = simulateSeries(res.P0, res.C, res.N, res.i);
+    // Die Kurve wächst brutto weiter, nur der letzte Balken (Ende der
+    // Laufzeit) bekommt die einmalige Steuer auf den Gesamtgewinn
+    // abgezogen — die Zwischenjahre bleiben unversteuert dargestellt.
+    if(taxRate > 0){
+      const lastIdx = series.snapshots.length - 1;
+      const finalGain = series.snapshots[lastIdx] - series.contribSnapshots[lastIdx];
+      if(finalGain > 0) series.snapshots[lastIdx] -= finalGain * taxRate;
+    }
     series.totalMonths = res.N;
     drawChart(series);
     renderTable(series);
@@ -457,6 +492,28 @@
     state.einmalActive = !state.einmalActive;
     swEinmal.classList.toggle('on', state.einmalActive);
     fieldsEinmal.classList.toggle('open', state.einmalActive);
+    render();
+  });
+
+  const swTax = $('sw-tax'), fieldsTax = $('fields-tax');
+  swTax.addEventListener('click', ()=>{
+    state.taxActive = !state.taxActive;
+    swTax.classList.toggle('on', state.taxActive);
+    fieldsTax.classList.toggle('open', state.taxActive);
+    render();
+  });
+
+  $('spar-kapst').addEventListener('input', e=>{
+    const v = parseFloat(e.target.value);
+    state.kapst = isNaN(v) ? 0 : v;
+    render();
+  });
+
+  const swTeilfreistellung = $('sw-teilfreistellung'), fieldsTfq = $('fields-tfq');
+  swTeilfreistellung.addEventListener('click', ()=>{
+    state.teilfreistellungActive = !state.teilfreistellungActive;
+    swTeilfreistellung.classList.toggle('on', state.teilfreistellungActive);
+    fieldsTfq.classList.toggle('open', state.teilfreistellungActive);
     render();
   });
 

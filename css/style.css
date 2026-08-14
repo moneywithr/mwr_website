@@ -447,15 +447,15 @@ body.lang-ar .switch-row .label{font-size:17px;}
   transform:translateY(-50%);
   transition:transform .18s ease, background .18s ease, left .18s ease;
 }
-/* Nur "left" wird je verwendet (nie "right") — sobald "right" gesetzt wird
-   und "left" auf "auto" steht, löst der Browser den Auto-Wert inkonsistent
-   auf (mal gegen Border-Box, mal gegen Padding-Box), was den Thumb im
-   arabischen "on"-Zustand direkt an den Rand klebte statt Abstand zu lassen.
-   Alle vier Positionen (off/on × ltr/rtl) sind hier als feste "left"-
-   Pixelwerte durchgerechnet: 38px Innenbreite (40px Track - 2×1px Rand) -
-   16px Thumb - 3px Rand = 19px für die "rechte" Position, 3px für die
-   "linke". Gilt für jeden .switch auf der Seite (nicht sprach- oder
-   instanzspezifisch). */
+/* Ausprobiert und wieder verworfen: "right" statt eines zweiten "left"-Werts
+   für die rechte Ruheposition (left:auto; right:3px) — das lässt den Thumb
+   beim Sprachwechsel/Umschalten hängen, weil eine Transition nie sauber zu
+   oder von "auto" animieren kann (der Browser springt dann inkonsistent,
+   manchmal bleibt die alte Position optisch stehen). Deshalb wieder wie
+   ursprünglich: nur "left", nie "right" — beide Ruhepositionen (3px bzw.
+   19px) sind rechnerisch exakt symmetrisch (38px Innenbreite - 16px Thumb -
+   3px Rand auf beiden Seiten), unabhängig von der Sprache. Aus/An liegen im
+   Arabischen auf der gespiegelten Seite (rechts/links statt links/rechts). */
 .switch.on::after{left:19px;}
 body.lang-ar .switch::after{left:19px;}
 body.lang-ar .switch.on::after{left:3px;}
@@ -478,9 +478,14 @@ body.lang-ar .switch.on::after{left:3px;}
   margin-bottom:6px;
 }
 body.lang-ar .field-label{font-size:15.5px;}
+/* Bewusst kein Flex-Container: bei längeren Labels, die auf schmalen
+   Screens umbrechen (z.B. die Teilfreistellungs-Frage), soll das
+   Info-Icon mit dem Text mitfließen und direkt nach dem letzten Wort
+   stehen — nicht als eigenes Flex-Item neben einem mehrzeiligen Textblock
+   "schweben". .info-tip bringt für die normale Inline-Ausrichtung schon
+   margin-inline-start und vertical-align:middle mit. */
 .field-label-text{
-  display:inline-flex;
-  align-items:center;
+  display:inline;
 }
 .field-label .val{
   font-family:'IBM Plex Mono',monospace;
@@ -517,6 +522,19 @@ input[type=number].inline-num-input{
 .inline-num-input:focus{border-color:var(--purple);}
 body.lang-ar .inline-num-input{
   font-size:14.5px;
+}
+/* Steuersatz (z.B. "26,375") ist länger als die übrigen Zahlenfelder
+   (Jahre, Rendite) und wurde im festen 56px-Feld abgeschnitten. */
+.inline-num-group.wide{width:118px;}
+input[type=number].inline-num-input.wide{width:82px;}
+/* Ziffern bleiben absichtlich in der Mono-Schrift, egal in welcher Sprache
+   (wie überall sonst auf der Seite, z.B. .rs-value) — sonst sehen dieselben
+   Ziffern im Arabischen anders aus als daneben im Zahlenfeld. */
+.tfq-static{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:700;
+  font-size:15px;
+  color:var(--ink);
 }
 .inline-num-unit{
   font-size:12.5px;

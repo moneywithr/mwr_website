@@ -210,6 +210,48 @@
         </div>
       </div>
 
+      <div class="block" id="field-tax">
+        <div class="switch-row">
+          <span class="label field-label-text">
+            <span data-i18n="labelTax">حابب تحسب الضريبة كمان؟</span>
+            <span class="info-tip" tabindex="0" data-i18n-tip="sparTipTax" data-tip="فعّل هاد الخيار لتشوف قديش بضل من أرباحك بعد ما تنحسم منها ضريبة الأرباح الرأسمالية."><span class="info-tip-glyph"></span></span>
+          </span>
+          <div class="switch" id="sw-tax"></div>
+        </div>
+        <div class="fields" id="fields-tax">
+          <div class="field">
+            <div class="field-label">
+              <span class="field-label-text">
+                <span data-i18n="labelKapSt">ضريبة الأرباح الرأسمالية</span>
+                <span class="info-tip" tabindex="0" data-i18n-tip="sparTipKapSt" data-tip="النسبة يلي بتنحسم كضريبة من أرباح استثمارك. القيمة الافتراضية (26.375%) هي النسبة المعمول فيها بألمانيا، بدون ضريبة الكنيسة."><span class="info-tip-glyph"></span></span>
+              </span>
+              <span class="inline-num-group wide">
+                <input type="number" id="spar-kapst" class="inline-num-input wide" value="26.375" min="0" max="100" step="0.001">
+                <span class="inline-num-unit">%</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="switch-row">
+            <span class="label field-label-text">
+              <span data-i18n="labelTeilfreistellung">إعفاء ضريبي جزئي على سلات الأسهم؟</span><span class="info-tip" tabindex="0" data-i18n-tip="sparTipTeilfreistellung" data-tip="جزء من أرباح صناديق الأسهم بضل معفى من الضريبة، لأنه الصندوق نفسه دافع ضريبة عليه من جهته."><span class="info-tip-glyph"></span></span>
+            </span>
+            <div class="switch on" id="sw-teilfreistellung"></div>
+          </div>
+          <div class="fields open" id="fields-tfq">
+            <div class="field">
+              <div class="field-label">
+                <span class="field-label-text">
+                  <span data-i18n="labelTfq">نسبة الإعفاء الجزئي</span>
+                  <span class="info-tip" tabindex="0" data-i18n-tip="sparTipTfq" data-tip="النسبة الثابتة يلي بتنحسب معفاة من الضريبة على صناديق الأسهم."><span class="info-tip-glyph"></span></span>
+                </span>
+              </div>
+              <div class="tfq-static">30%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="block">
         <div class="calc-warning" id="calc-warning" data-i18n="sparInvalid">Mit diesen Werten nicht lösbar. Bitte Anfangskapital, Rate oder Sparziel anpassen.</div>
       </div>
