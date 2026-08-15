@@ -194,6 +194,18 @@
     for(let i = 1; i < n; i += step) labelIdxs.push(i);
     if(labelIdxs[labelIdxs.length - 1] !== n - 1) labelIdxs.push(n - 1);
 
+    // Nur die Spitze des gestapelten Balkens wird abgerundet (die Basis sitzt
+    // auf der Grundlinie und bleibt eckig), damit die Balken weniger kantig
+    // wirken, ohne die Naht zwischen den beiden Segmenten seltsam aussehen zu
+    // lassen.
+    const roundedTopPath = (x, w, topY, h) => {
+      const r = Math.min(w / 2, h, 6);
+      const xN = parseFloat(x), wN = w;
+      if(r <= 0) return `<rect class="bar-seg" x="${x}" y="${topY.toFixed(1)}" width="${wN.toFixed(1)}" height="${h.toFixed(1)}"`;
+      const bottomY = topY + h;
+      return `<path class="bar-seg" d="M${xN.toFixed(1)},${bottomY.toFixed(1)} L${xN.toFixed(1)},${(topY + r).toFixed(1)} Q${xN.toFixed(1)},${topY.toFixed(1)} ${(xN + r).toFixed(1)},${topY.toFixed(1)} L${(xN + wN - r).toFixed(1)},${topY.toFixed(1)} Q${(xN + wN).toFixed(1)},${topY.toFixed(1)} ${(xN + wN).toFixed(1)},${(topY + r).toFixed(1)} L${(xN + wN).toFixed(1)},${bottomY.toFixed(1)} Z"`;
+    };
+
     let bars = '', xLabels = '';
     for(let idx = 1; idx < n; idx++){
       const total = res.snapshots[idx];
@@ -205,9 +217,13 @@
       const yPrincipalPx = y(principal);
       const yTotalPx = y(total);
 
-      let seg = `<rect class="bar-seg" x="${bx}" y="${yPrincipalPx.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(baseline - yPrincipalPx, 0).toFixed(1)}" fill="${active ? INVESTED_ACTIVE_COLOR : INVESTED_COLOR}"/>`;
+      const principalH = Math.max(baseline - yPrincipalPx, 0);
+      let seg = gain > 0
+        ? `<rect class="bar-seg" x="${bx}" y="${yPrincipalPx.toFixed(1)}" width="${barW.toFixed(1)}" height="${principalH.toFixed(1)}" fill="${active ? INVESTED_ACTIVE_COLOR : INVESTED_COLOR}"/>`
+        : `${roundedTopPath(bx, barW, yPrincipalPx, principalH)} fill="${active ? INVESTED_ACTIVE_COLOR : INVESTED_COLOR}"/>`;
       if(gain > 0){
-        seg += `<rect class="bar-seg" x="${bx}" y="${yTotalPx.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(yPrincipalPx - yTotalPx, 0).toFixed(1)}" fill="${active ? RETURN_ACTIVE_COLOR : RETURN_COLOR}"/>`;
+        const gainH = Math.max(yPrincipalPx - yTotalPx, 0);
+        seg += `${roundedTopPath(bx, barW, yTotalPx, gainH)} fill="${active ? RETURN_ACTIVE_COLOR : RETURN_COLOR}"/>`;
       }
       bars += `<g class="bar-col" data-idx="${idx}">
         <rect x="${(cx - slot/2).toFixed(1)}" y="${padT}" width="${slot.toFixed(1)}" height="${innerH.toFixed(1)}" fill="transparent"/>
