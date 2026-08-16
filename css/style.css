@@ -1610,8 +1610,15 @@ body.lang-ar .footer-social-title{
   letter-spacing:-0.01em;
 }
 body.lang-ar .landing-title{font-family:'Kufam',sans-serif; letter-spacing:0;}
+/* Mobil: engere Wrap-Ränder + etwas mehr negatives Letter-Spacing schaffen
+   genug Platz, dass der Titel bei allen drei Sprachen (auch beim längsten
+   Text, dem englischen "What would you like to do today?") einzeilig
+   bleibt, während die Schrift trotzdem größer ist als vorher. Arabisch hat
+   von Natur aus mehr Platz übrig und bekommt daher einen größeren Sprung. */
 @media (max-width:480px){
-  .landing-title{font-size:21px;}
+  .landing-wrap{padding-left:14px; padding-right:14px;}
+  .landing-title{font-size:22px; letter-spacing:-0.02em;}
+  body.lang-ar .landing-title{font-size:27px;}
 }
 .landing-sub{
   color:var(--text-muted);
@@ -1621,6 +1628,10 @@ body.lang-ar .landing-title{font-family:'Kufam',sans-serif; letter-spacing:0;}
   margin:0 auto;
 }
 body.lang-ar .landing-sub{font-size:17px;}
+@media (max-width:480px){
+  .landing-sub{font-size:14px;}
+  body.lang-ar .landing-sub{font-size:14.5px;}
+}
 
 .landing-services{
   text-align:start;
