@@ -4,7 +4,7 @@
 window.I18N = {
   de: {
     eyebrow: 'Kostenrechner',
-    title: 'ETF vs. Fonds: Was die Kosten wirklich ausmachen',
+    title: 'ETF vs. Fonds: Was die Kosten wirklich ausmachen?',
     intro: 'Wenn du in aktiv gemanagte Fonds investierst statt einfach selbst in einen ETF, verlierst du Geld, ohne es zu merken. Gleiche Anlagesumme, gleiche Laufzeit, gleiche erwartete Rendite: Der einzige Unterschied ist die Kostenstruktur. ETFs zahlen üblicherweise Ordergebühren und eine niedrige laufende Verwaltungsgebühr, aktive Fonds meist einen Ausgabeaufschlag und höhere Verwaltungsgebühren.',
     sectionDuration: 'Anlagedauer & Rendite',
     labelYears: 'Anlagedauer',
@@ -29,8 +29,6 @@ window.I18N = {
     tipTerFonds: 'Die jährliche Gebühr für die aktive Verwaltung des Fonds. Hier stehen oft deutlich höhere Zahlen, die über die Jahre einen großen Teil deiner Rendite auffressen.',
     statFinalLabel: 'Endkapital',
     diffQuestion: 'Wer ist günstiger?',
-    statAdvantage: 'ETF-Vorteil',
-    fondsAdvantage: 'Fonds-Vorteil',
     diffPctSuffix: '% mehr Endkapital mit ETF',
     diffPctSuffixFonds: '% mehr Endkapital mit dem Fonds',
     chartTitle: 'Wertentwicklung im Vergleich',
@@ -152,7 +150,7 @@ window.I18N = {
   },
   en: {
     eyebrow: 'Cost calculator',
-    title: 'ETF vs. fund: what the costs really mean',
+    title: 'ETF vs. fund: what the costs really mean?',
     intro: 'With actively managed funds instead of just investing in an ETF yourself, you lose money without noticing. Same investment amount, same time horizon, same expected return: the only difference is the cost structure. ETFs typically charge order fees and a low ongoing management fee, while actively managed funds usually charge a front-load fee and higher management fees.',
     sectionDuration: 'Time horizon & return',
     labelYears: 'Time horizon',
@@ -177,8 +175,6 @@ window.I18N = {
     tipTerFonds: 'The yearly fee for actively managing the fund. These numbers are often much higher, and over the long run they eat into a big chunk of your returns.',
     statFinalLabel: 'Final value',
     diffQuestion: "Who's cheaper?",
-    statAdvantage: 'ETF advantage',
-    fondsAdvantage: 'Fund advantage',
     diffPctSuffix: '% more final value with the ETF',
     diffPctSuffixFonds: '% more final value with the fund',
     chartTitle: 'Growth comparison',
@@ -300,7 +296,7 @@ window.I18N = {
   },
   ar: {
     eyebrow: 'حاسبة التكاليف',
-    title: 'سلات الاسهم العادية أو صناديق الاستثمار تبع البنك',
+    title: 'سلات الاسهم العادية أو صناديق الاستثمار تبع البنك؟',
     intro: 'لما تستثمر بصناديق استثمارية مُدارة بنشاط بدل ما تستثمر بـ ETF لحالك بكل سهولة، بتخسر مصاري من غير ما تحس. نفس مبلغ الاستثمار، نفس المدة، نفس العائد المتوقع، والفرق الوحيد هو بنية التكاليف. عادةً ما تفرض صناديق المؤشرات رسوم تنفيذ ورسوم إدارة سنوية منخفضة، بينما تفرض الصناديق المُدارة بنشاط عادةً رسوم اشتراك ورسوم إدارة أعلى.',
     sectionDuration: 'مدة الاستثمار والعائد',
     labelYears: 'مدة الاستثمار',
@@ -325,8 +321,6 @@ window.I18N = {
     tipTerFonds: 'رسوم سنوية بياخدها مدير الصندوق مقابل إدارته بنشاط. وبتكون غالبًا أرقام كبيرة كتير، وعلى المدى الطويل رح تاكل جزء كبير من أرباحك.',
     statFinalLabel: 'رأس المال النهائي',
     diffQuestion: 'مين الأوفر؟',
-    statAdvantage: 'ميزة الاستثمار بـ ETF',
-    fondsAdvantage: 'ميزة الاستثمار بصندوق البنك',
     diffPctSuffix: '% رأس مال نهائي أكبر مع ETF',
     diffPctSuffixFonds: '% رأس مال نهائي أكبر مع صندوق البنك',
     chartTitle: 'مقارنة تطور القيمة',

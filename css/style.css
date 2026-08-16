@@ -1523,26 +1523,57 @@ body.lang-ar .footer-social-title{
   z-index:-1;
   pointer-events:none;
   overflow:hidden;
+  --bg-opacity:1;
+  animation:pageBgEnter .9s cubic-bezier(.22,.68,0,1) both;
+}
+/* Leichtere Variante für die Werkzeug-Seiten (Rechner/Kostenvergleich/
+   Broker-Finder) — dieselbe Farbschicht wie auf der Startseite, nur über
+   die Deckkraft des ganzen Layers gedämpft, statt die Verlaufswerte separat
+   zu pflegen. Die Hue-Rotate-Varianten verschieben den Farbton pro Seite
+   leicht, damit sich die drei Tools optisch unterscheiden, ohne die Palette
+   zu verlassen. Die Ziel-Deckkraft läuft über eine Custom Property in die
+   Eintritts-Animation ein, weil eine laufende Opacity-Animation jede
+   statische opacity-Deklaration sonst überstimmen würde. */
+.page-bg.subtle{--bg-opacity:.2;}
+.page-bg.hue-a{filter:hue-rotate(0deg);}
+.page-bg.hue-b{filter:hue-rotate(-22deg);}
+.page-bg.hue-c{filter:hue-rotate(32deg);}
+@keyframes pageBgEnter{
+  from{opacity:0; transform:scale(1.06);}
+  to{opacity:var(--bg-opacity); transform:scale(1);}
+}
+/* Sanfter, nativer Seitenübergang bei Navigation zwischen den Unterseiten
+   (Startseite ↔ Rechner ↔ Kostenvergleich ↔ Broker-Finder) über die
+   Cross-Document View-Transitions-API — ohne JavaScript, in Browsern ohne
+   Unterstützung einfach ignoriert (normale Navigation ohne Effekt). */
+@view-transition{
+  navigation:auto;
 }
 .page-bg::before{
   content:"";
   position:absolute;
   inset:-10%;
   background:
-    radial-gradient(70% 45% at 10% 0%, rgba(174,192,242,.75), transparent 60%),
-    radial-gradient(55% 38% at 92% 4%, rgba(218,255,0,.4), transparent 58%),
-    radial-gradient(50% 35% at 8% 78%, rgba(251,240,196,.62), transparent 60%),
-    radial-gradient(65% 45% at 50% 100%, rgba(83,71,168,.32), transparent 62%),
-    radial-gradient(45% 35% at 78% 60%, rgba(104,92,200,.22), transparent 60%),
+    radial-gradient(95% 65% at 8% -2%, rgba(174,192,242,.42), transparent 82%),
+    radial-gradient(78% 52% at 95% 0%, rgba(218,255,0,.2), transparent 80%),
+    radial-gradient(68% 48% at 4% 82%, rgba(251,240,196,.3), transparent 82%),
+    radial-gradient(85% 58% at 50% 105%, rgba(83,71,168,.16), transparent 82%),
+    radial-gradient(62% 48% at 78% 55%, rgba(104,92,200,.12), transparent 80%),
     var(--bg);
   will-change:transform;
   animation:pageBgDrift 26s ease-in-out infinite alternate;
 }
+/* Einschichtiges Filmkorn — die vorherige Zweischicht-Komposition (grobe +
+   feine Turbulenz per feComposite) hat an den Kachel-Rändern sichtbare
+   Nähte erzeugt ("wie zusammengesetzte Quadrate"), weil die grobe,
+   niederfrequente Schicht bei der Kachelgröße nicht sauber stitcht. Ein
+   einzelner gestitchter Turbulenz-Layer mit moderater Kontrastanhebung
+   bleibt nahtlos und wirkt trotzdem greifbar, nur zurückhaltender. */
 .page-bg::after{
   content:"";
   position:absolute;
   inset:0;
-  opacity:.55;
+  opacity:.3;
   mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size:180px 180px;
@@ -1557,6 +1588,7 @@ body.lang-ar .footer-social-title{
 }
 @media (prefers-reduced-motion:reduce){
   .page-bg::before{animation:none;}
+  .page-bg{animation:none;}
 }
 .landing-wrap{
   max-width:880px;

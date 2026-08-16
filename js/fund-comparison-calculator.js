@@ -114,7 +114,7 @@
     $('r-fonds').textContent = fmtBig(fonds.finalValue);
     const diff = etf.finalValue - fonds.finalValue;
     const etfWins = diff >= 0;
-    $('k-diff').textContent = etfWins ? t('statAdvantage') : t('fondsAdvantage');
+    $('k-diff').textContent = etfWins ? t('etf') : t('fonds');
     $('r-diff').textContent = fmtBig(Math.abs(diff));
     const pctBase = etfWins ? fonds.finalValue : etf.finalValue;
     const pctSuffix = etfWins ? t('diffPctSuffix') : t('diffPctSuffixFonds');
