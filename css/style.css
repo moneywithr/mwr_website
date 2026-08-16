@@ -197,7 +197,7 @@ body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font
    mittlere Nav-Bereich aus der Vorlage bleibt bewusst leer, da die Seite
    noch nicht genug Unterseiten für HOME/LESSONS/TOOLS/PRICING/BLOG hat. */
 .top-banner{
-  background:var(--bg);
+  background:transparent;
   padding:18px 20px 0;
 }
 .top-banner-inner{
@@ -219,7 +219,11 @@ body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font
      tauschen beide beim Sprachwechsel (ar=rtl vs. de/en=ltr) die Seiten,
      was verwirrend ist. */
   direction:ltr;
-  background:#D3D0C9;
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-sm);
   border-radius:999px;
 }
 
@@ -1507,6 +1511,53 @@ body.lang-ar .footer-social-title{
 }
 
 /* Startseite: "Im Aufbau" */
+/* Ganzseitiger Hintergrund-Layer statt nur hinter dem Hero-Text — fixiert,
+   damit er beim Scrollen den ganzen Viewport deckt. Farben stammen aus der
+   eigenen Palette (Periwinkle/Mint/Indigo auf Bone), angelehnt an das
+   Moodboard-Referenzbild des Nutzers (weiche verwaschene Farbflächen +
+   Korn), aber bewusst zurückhaltend (helle, transparente Töne), damit Text
+   und weiße Karten überall genug Kontrast behalten. */
+.page-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+}
+.page-bg::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:
+    radial-gradient(70% 45% at 10% 0%, rgba(174,192,242,.75), transparent 60%),
+    radial-gradient(55% 38% at 92% 4%, rgba(218,255,0,.4), transparent 58%),
+    radial-gradient(50% 35% at 8% 78%, rgba(251,240,196,.62), transparent 60%),
+    radial-gradient(65% 45% at 50% 100%, rgba(83,71,168,.32), transparent 62%),
+    radial-gradient(45% 35% at 78% 60%, rgba(104,92,200,.22), transparent 60%),
+    var(--bg);
+  will-change:transform;
+  animation:pageBgDrift 26s ease-in-out infinite alternate;
+}
+.page-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.55;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:180px 180px;
+}
+/* Sehr langsame, dezente Verschiebung/Farbdrift statt statischem Bild —
+   Positionen und Skalierung wandern leicht, plus ein sanfter Hue-Drift
+   innerhalb der bestehenden Palette (kein neuer Farbton). */
+@keyframes pageBgDrift{
+  0%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-2%,1.5%) scale(1.06);}
+  100%{transform:translate(1.5%,-1%) scale(1.03);}
+}
+@media (prefers-reduced-motion:reduce){
+  .page-bg::before{animation:none;}
+}
 .landing-wrap{
   max-width:880px;
   padding-top:72px;
@@ -1643,23 +1694,22 @@ body.lang-ar .service-card .service-desc{font-size:16px;}
 .service-card.card-ink .service-card-icon{background:rgba(255,255,255,.14);}
 .service-card:hover .service-card-icon{background:#FFFFFF;}
 
-/* Runder Pfeil-Button unten — nur Icon, kein Text: schwarzer Kreis,
-   weißer Pfeil, dreht sich in RTL. */
+/* Kleiner abgerundeter Rechteck-Button unten — nur Icon, kein Text:
+   schwarzes Rechteck mit demselben Eckenradius-Rhythmus wie der Rest des
+   Designs (Karte 24px → Icon-Kachel 16px → Button 12px), kein Kreis mehr
+   und keine Hover-Animation, dreht sich der Pfeil selbst in RTL. */
 .service-card .service-cta-arrow{
   display:flex;
   align-items:center;
   justify-content:center;
-  width:40px;height:40px;
-  border-radius:999px;
+  width:44px;height:36px;
+  border-radius:12px;
   background:var(--ink);
   color:#FFFFFF;
-  transition:transform .18s ease;
 }
 .service-card .service-cta-arrow svg{width:16px;height:16px;}
 .service-card.card-ink .service-cta-arrow{background:#FFFFFF; color:var(--ink);}
-.service-card:hover .service-cta-arrow{transform:translateX(3px);}
 body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
-body.lang-ar .service-card:hover .service-cta-arrow{transform:translateX(-3px);}
 
 @media (max-width:640px){
   .service-card{padding:20px; border-radius:20px; gap:14px;}

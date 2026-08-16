@@ -65,7 +65,6 @@
     const W = 860;
     const { x, y } = window.ChartHelpers.scales({ padL, padT, padR, padB, W, H, n, maxV });
 
-    const pathNoCost = window.ChartHelpers.pathFor(noCost.snapshots, x, y);
     const pathETF = window.ChartHelpers.pathFor(etf.snapshots, x, y);
     const pathFonds = window.ChartHelpers.pathFor(fonds.snapshots, x, y);
     const gapPath = window.ChartHelpers.areaBetween(etf.snapshots, fonds.snapshots, x, y);
@@ -78,15 +77,14 @@
     }).join('');
 
     const calloutY = y(etfWinsChart ? etf.snapshots[n-1] : fonds.snapshots[n-1]);
-    const calloutColor = etfWinsChart ? '#685CC8' : '#5347A8';
+    const calloutColor = etfWinsChart ? '#1FA971' : '#5347A8';
 
     const svg = `
     <svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block; overflow:visible;">
       ${grid}
       <path d="${gapPath}" fill="#685CC8" fill-opacity="0.14" stroke="none"/>
-      <path d="${pathNoCost}" fill="none" stroke="#A9A4A0" stroke-width="1.5" stroke-dasharray="4 4"/>
       <path d="${pathFonds}" fill="none" stroke="#5347A8" stroke-width="2.5"/>
-      <path d="${pathETF}" fill="none" stroke="#685CC8" stroke-width="2.5"/>
+      <path d="${pathETF}" fill="none" stroke="#1FA971" stroke-width="2.5"/>
       ${xLabels}
       <g transform="translate(${x(n-1)+8}, ${calloutY.toFixed(1)})">
         <text x="0" y="-6" font-family="${sansFont}" font-size="14.5" font-weight="700" fill="${calloutColor}">${valueText}</text>
@@ -116,7 +114,6 @@
     $('r-fonds').textContent = fmtBig(fonds.finalValue);
     const diff = etf.finalValue - fonds.finalValue;
     const etfWins = diff >= 0;
-    $('tag-diff').textContent = etfWins ? t('etf') : t('fonds');
     $('k-diff').textContent = etfWins ? t('statAdvantage') : t('fondsAdvantage');
     $('r-diff').textContent = fmtBig(Math.abs(diff));
     const pctBase = etfWins ? fonds.finalValue : etf.finalValue;
