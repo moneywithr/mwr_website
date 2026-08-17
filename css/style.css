@@ -529,18 +529,25 @@ body.lang-ar .field-label .val{
 input[type=number].inline-num-input{
   width:56px;
   flex-shrink:0;
-  background:var(--panel-2);
-  border:1px solid var(--line);
+  background:var(--panel);
+  border:1.5px solid var(--line);
   color:var(--ink);
   font-family:'IBM Plex Mono',monospace;
   font-size:14px;
-  font-weight:600;
+  font-weight:700;
   text-align:center;
   padding:4px 2px;
   border-radius:7px;
   outline:none;
+  box-shadow:inset 0 1px 2px rgba(32,30,31,.06);
+  transition:border-color .15s ease, box-shadow .15s ease;
 }
-.inline-num-input:focus{border-color:var(--purple);}
+/* Zeigt beim Hover, dass das Feld tippbar ist — dieselbe Feld-Optik wie
+   überall sonst im Design (kein gepunkteter Rahmen), nur mit deutlicherem
+   Hover-/Fokus-Signal, weil dieses Feld direkt neben dem Slider leicht als
+   reine Anzeige missverstanden wird. */
+.inline-num-input:hover{border-color:var(--purple); cursor:text;}
+.inline-num-input:focus{border-color:var(--purple); box-shadow:0 0 0 3px var(--purple-dim);}
 body.lang-ar .inline-num-input{
   font-size:14.5px;
 }
@@ -631,29 +638,32 @@ body.lang-ar .info-tip::before{
 input[type=range]{
   -webkit-appearance:none;
   width:100%;
-  height:4px;
+  height:8px;
   background:var(--line-soft);
-  border-radius:2px;
+  border-radius:4px;
   outline:none;
   margin:0;
 }
 /* Lime-Daumen statt Indigo — kleiner Akzent-Touch aus der neuen Palette
    an der Stelle, die am meisten angefasst wird; dunkler Rand hält den
-   Kontrast auf hellem Track. */
+   Kontrast auf hellem Track. Größer als ein Standard-Slider-Daumen, damit
+   er sich leichter treffen/greifen lässt (Touch + Maus). */
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;
-  width:18px;height:18px;
+  width:28px;height:28px;
   border-radius:50%;
   background:var(--mint);
   cursor:pointer;
-  border:1.5px solid var(--ink);
+  border:2px solid var(--ink);
+  box-shadow:0 2px 6px rgba(32,30,31,.25);
 }
 input[type=range]::-moz-range-thumb{
-  width:18px;height:18px;
+  width:28px;height:28px;
   border-radius:50%;
   background:var(--mint);
   cursor:pointer;
-  border:1.5px solid var(--ink);
+  border:2px solid var(--ink);
+  box-shadow:0 2px 6px rgba(32,30,31,.25);
 }
 input[type=number]{
   width:100%;
