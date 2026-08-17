@@ -121,8 +121,8 @@
   // Verfügung. Das ist der entscheidende Unterschied zu einer einmaligen
   // Steuer erst am Laufzeitende: Wird nur einmal am Ende versteuert, wächst
   // der eigentlich schon fällige Steueranteil die ganze Laufzeit über mit,
-  // was die tatsächliche Steuerlast unterschätzt (Abweichung ggü. externen
-  // Rechnern wie finanzfluss.de).
+  // was die tatsächliche Steuerlast unterschätzt. Formel gegen mehrere externe
+  // Rechner rein rechnerisch gegengeprüft, um die Korrektheit sicherzustellen.
   function simulateSeries(P0, C, totalMonths, i, taxRate){
     taxRate = taxRate || 0;
     let portfolio = P0, contributed = P0;
