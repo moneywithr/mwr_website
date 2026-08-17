@@ -834,6 +834,12 @@ body.lang-ar .stat-tag{
 .stat-tag.etf{background:var(--green);}
 .stat-tag.fonds{background:var(--purple-strong);}
 .stat-tag.orange{background:var(--mint); color:var(--ink);}
+/* Fallback für Karten, deren Tag keine eigene Farbklasse (etf/fonds/orange)
+   trägt, z.B. auf der FIRE-Rechner-Seite — sonst bleibt der Tag mit weißer
+   Schrift auf transparentem Grund unsichtbar. */
+.stat-card.green .stat-tag:not(.etf):not(.fonds):not(.orange){background:var(--green);}
+.stat-card.purple .stat-tag:not(.etf):not(.fonds):not(.orange){background:var(--purple-strong);}
+.stat-card.orange .stat-tag:not(.etf):not(.fonds):not(.orange){background:var(--mint); color:var(--ink);}
 .stat-card .k{
   font-family:'IBM Plex Mono',monospace;
   font-size:12px;
@@ -1280,6 +1286,42 @@ body.lang-ar .calc-warning{
 }
 .calc-warning.show{display:block;}
 
+.field-note{
+  margin-top:8px;
+  font-size:13px;
+  color:var(--text-muted);
+}
+body.lang-ar .field-note{font-size:14.5px;}
+
+.stat-row.centered .stat-card{text-align:center;}
+
+/* Eigene Farbvarianten für die FIRE-Rechner-Ergebniskarten (bewusst eigene
+   Klassennamen statt .green/.purple/.orange wiederzuverwenden, damit andere
+   Seiten mit .stat-card unberührt bleiben). */
+.stat-card.fire-yellow{background:#F7FFCC; border-color:var(--mint);}
+.stat-card.fire-yellow .v{color:var(--ink);}
+.stat-card.fire-yellow .k{color:var(--ink); opacity:.72;}
+.stat-card.fire-purple-light{background:#EEECFA;}
+.stat-card.fire-purple-light .v{color:var(--purple);}
+.stat-card.fire-purple{background:var(--purple-dim);}
+.stat-card.fire-purple .v{color:var(--purple-strong);}
+/* Wert zuerst, Beschriftung darunter (statt umgekehrt wie sonst im
+   Standard-Layout) — Ränder entsprechend getauscht. */
+.stat-row.centered .stat-card .v{margin-bottom:6px;}
+.stat-row.centered .stat-card .k{margin-bottom:0;}
+
+.note-banner{
+  margin-top:16px;
+  padding:10px 16px;
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-size:12.5px;
+  line-height:1.6;
+  color:var(--text-muted);
+}
+body.lang-ar .note-banner{font-size:13.5px;}
+
 #broker-placeholder{
   text-align:center;
   padding:32px 20px;
@@ -1538,6 +1580,7 @@ body.lang-ar .footer-social-title{
 .page-bg.hue-a{filter:hue-rotate(0deg);}
 .page-bg.hue-b{filter:hue-rotate(-22deg);}
 .page-bg.hue-c{filter:hue-rotate(32deg);}
+.page-bg.hue-d{filter:hue-rotate(60deg);}
 @keyframes pageBgEnter{
   from{opacity:0; transform:scale(1.06);}
   to{opacity:var(--bg-opacity); transform:scale(1);}
@@ -1674,22 +1717,19 @@ body.lang-ar .landing-services .section-title{
    hier ohne Text im Button, nur Pfeil. */
 .service-cards{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:18px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:16px;
   margin-top:28px;
-}
-@media (max-width:860px){
-  .service-cards{grid-template-columns:1fr;}
 }
 
 .service-card{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:18px;
+  gap:14px;
   background:var(--panel-2);
-  border-radius:24px;
-  padding:26px;
+  border-radius:22px;
+  padding:22px;
   text-decoration:none;
   color:inherit;
   transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
@@ -1699,6 +1739,7 @@ body.lang-ar .landing-services .section-title{
 .service-cards .service-card:nth-child(1){animation-delay:.12s;}
 .service-cards .service-card:nth-child(2){animation-delay:.24s;}
 .service-cards .service-card:nth-child(3){animation-delay:.36s;}
+.service-cards .service-card:nth-child(4){animation-delay:.48s;}
 .service-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
 
 .service-card.card-blue{background:var(--periwinkle); color:var(--ink);}
@@ -1755,6 +1796,7 @@ body.lang-ar .service-card .service-desc{font-size:16px;}
 body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
 
 @media (max-width:640px){
+  .service-cards{gap:12px;}
   .service-card{padding:20px; border-radius:20px; gap:14px;}
   .service-card .service-name{font-size:16px;}
   body.lang-ar .service-card .service-name{font-size:17px;}
@@ -1762,6 +1804,15 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   body.lang-ar .service-card .service-desc{font-size:14px;}
   .service-card-icon{width:48px;height:48px;border-radius:14px;}
   .service-card-icon svg{width:24px;height:24px;}
+}
+@media (max-width:480px){
+  .service-cards{gap:10px;}
+  .service-card{padding:14px; border-radius:16px; gap:10px;}
+  .service-card .service-desc{display:none;}
+  .service-card-icon{width:38px;height:38px;border-radius:11px;}
+  .service-card-icon svg{width:19px;height:19px;}
+  .service-card .service-cta-arrow{width:34px;height:28px;border-radius:9px;}
+  .service-card .service-cta-arrow svg{width:13px;height:13px;}
 }
 
 /* Reiner Fließtext statt Farbfläche — kein Card-Look mehr, nur der Satz
