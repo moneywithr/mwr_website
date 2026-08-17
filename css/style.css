@@ -1717,7 +1717,7 @@ body.lang-ar .landing-sub{font-size:17px;}
 .landing-cta-btn:active{transform:translateY(0);}
 @media (max-width:600px){
   .landing-cta{padding:26px 22px;}
-  .landing-cta-question{font-size:18px;}
+  .landing-cta-question{font-size:16.5px;}
   .landing-cta-btn{width:100%; padding:15px 20px; font-size:15.5px;}
 }
 
