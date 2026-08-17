@@ -11,25 +11,25 @@ window.BROKER_DATA = [
     },
     platforms: [
       { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus.png", highlight: true, tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" } },
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
-      { name: "Scalable Capital", url: "https://de.scalable.capital/einladung/bsg5qk", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital.png" },
-      { name: "ING", url: "https://www.ing.de/", domain: "ing.de", logoUrl: "/img/broker-logos/ing.png" }
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
+      { name: "Scalable Capital", url: "https://de.scalable.capital/einladung/bsg5qk", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital-v2.png" },
+      { name: "ING", url: "https://www.ing.de/", domain: "ing.de", logoUrl: "/img/broker-logos/ing-v2.png" }
     ]
   },
   {
     id: "nl",
     names: { de: "Niederlande", en: "Netherlands", ar: "هولندا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "/img/broker-logos/degiro.png" },
-      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
+      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
   {
     id: "at",
     names: { de: "Österreich", en: "Austria", ar: "النمسا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "/img/broker-logos/flatex.png" }
     ]
   },
@@ -37,7 +37,7 @@ window.BROKER_DATA = [
     id: "it",
     names: { de: "Italien", en: "Italy", ar: "إيطاليا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" },
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Fineco", url: "https://finecobank.com/", domain: "finecobank.com" },
       { name: "Directa", url: "https://www.directa.it/", domain: "directa.it" }
     ]
@@ -54,7 +54,7 @@ window.BROKER_DATA = [
     id: "pt",
     names: { de: "Portugal", en: "Portugal", ar: "البرتغال" },
     platforms: [
-      { name: "Trade Republic", url: "https://www.traderepublic.com/de-de", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" }
+      { name: "Trade Republic", url: "https://www.traderepublic.com/de-de", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
@@ -69,14 +69,14 @@ window.BROKER_DATA = [
     id: "fr",
     names: { de: "Frankreich", en: "France", ar: "فرنسا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" }
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
     id: "es",
     names: { de: "Spanien", en: "Spain", ar: "إسبانيا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic.png" }
+      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
@@ -90,7 +90,7 @@ window.BROKER_DATA = [
     id: "jo",
     names: { de: "Jordanien", en: "Jordan", ar: "الأردن" },
     platforms: [
-      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
+      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
   {
@@ -98,7 +98,7 @@ window.BROKER_DATA = [
     names: { de: "Türkei", en: "Turkey", ar: "تركيا" },
     platforms: [
       { name: "Midas", url: "https://www.getmidas.com/", domain: "getmidas.com" },
-      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
+      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
   {
@@ -112,14 +112,14 @@ window.BROKER_DATA = [
     id: "sa",
     names: { de: "Saudi-Arabien", en: "Saudi Arabia", ar: "المملكة العربية السعودية" },
     platforms: [
-      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
+      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
   {
     id: "us",
     names: { de: "USA", en: "United States", ar: "الولايات المتحدة ألأمريكية" },
     platforms: [
-      { name: "Charles Schwab", url: "https://www.schwab.com/", domain: "schwab.com" },
+      { name: "Charles Schwab", url: "https://www.schwab.com/", domain: "schwab.com", logoUrl: "/img/broker-logos/charles-schwab-v2.png" },
       { name: "Fidelity", url: "https://www.fidelity.com/", domain: "fidelity.com", logoUrl: "/img/broker-logos/fidelity.png" }
     ]
   },
@@ -127,7 +127,7 @@ window.BROKER_DATA = [
     id: "uk",
     names: { de: "UK", en: "United Kingdom", ar: "المملكة المتحدة" },
     platforms: [
-      { name: "Trading 212", url: "https://trading212.com/", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212.png" }
+      { name: "Trading 212", url: "https://trading212.com/", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" }
     ]
   },
   {
@@ -147,7 +147,7 @@ window.BROKER_DATA = [
       ar: "بلدك غير مدرج؟ إنتراكتيف بروكرز متاح في معظم دول العالم."
     },
     platforms: [
-      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers.png" }
+      { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   }
 ];
