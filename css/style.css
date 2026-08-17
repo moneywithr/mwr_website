@@ -1783,10 +1783,10 @@ body.lang-ar .landing-services .section-title{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:14px;
+  gap:22px;
   background:var(--panel-2);
-  border-radius:22px;
-  padding:22px;
+  border-radius:28px;
+  padding:24px;
   text-decoration:none;
   color:inherit;
   transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
@@ -1801,75 +1801,88 @@ body.lang-ar .landing-services .section-title{
 
 .service-card.card-blue{background:var(--periwinkle); color:var(--ink);}
 .service-card.card-lime{background:var(--mint); color:var(--ink);}
+.service-card.card-purple{background:var(--purple-dim); color:var(--ink);}
 .service-card.card-ink{background:var(--ink); color:#FFFFFF;}
 .service-card.card-silver{background:#D9D9D6; color:var(--ink);}
+
+/* Obere Reihe: Icon-Kreis links, Pfeil-Kreis rechts — beide rund und auf
+   gleicher Höhe, angelehnt am Referenz-Design. */
+.service-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
 
 .service-card-text{width:100%;}
 
 .service-card .service-name{
   font-family:'Manrope',sans-serif;
   font-weight:700;
-  font-size:19px;
+  font-size:20px;
   overflow-wrap:break-word;
 }
-body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:20.5px;}
+body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans-serif; font-size:21.5px;}
 .service-card .service-desc{
   font-size:15px;
   line-height:1.6;
-  margin-top:6px;
+  margin-top:8px;
   opacity:.72;
 }
 body.lang-ar .service-card .service-desc{font-size:16px;}
 
-/* Icon-Kachel oben in der Karte — etwas größer als das UI-Standardmaß,
-   damit das Logo/Icon der Kategorie gut lesbar ist. */
+/* Icon-Kreis oben links — rund statt eckig, angelehnt am Referenz-Design. */
 .service-card-icon{
   flex-shrink:0;
-  width:56px;height:56px;
-  border-radius:16px;
+  width:52px;height:52px;
+  border-radius:50%;
   background:rgba(255,255,255,.55);
   display:flex;align-items:center;justify-content:center;
   transition:transform .18s ease, background .18s ease;
 }
-.service-card-icon svg{width:28px;height:28px;}
+.service-card-icon svg{width:24px;height:24px;}
 .service-card.card-ink .service-card-icon{background:rgba(255,255,255,.14);}
 .service-card:hover .service-card-icon{background:#FFFFFF;}
 
-/* Kleiner abgerundeter Rechteck-Button unten — nur Icon, kein Text:
-   schwarzes Rechteck mit demselben Eckenradius-Rhythmus wie der Rest des
-   Designs (Karte 24px → Icon-Kachel 16px → Button 12px), kein Kreis mehr
-   und keine Hover-Animation, dreht sich der Pfeil selbst in RTL. */
+/* Pfeil-Kreis oben rechts, neben dem Icon-Kreis — rund, etwas kleiner und
+   heller als das Icon, dreht sich der Pfeil selbst in RTL. */
 .service-card .service-cta-arrow{
   display:flex;
   align-items:center;
   justify-content:center;
-  width:44px;height:36px;
-  border-radius:12px;
-  background:var(--ink);
-  color:#FFFFFF;
+  flex-shrink:0;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,.35);
+  color:var(--ink);
 }
-.service-card .service-cta-arrow svg{width:16px;height:16px;}
-.service-card.card-ink .service-cta-arrow{background:#FFFFFF; color:var(--ink);}
+.service-card .service-cta-arrow svg{width:15px;height:15px;}
+.service-card.card-ink .service-cta-arrow{background:rgba(255,255,255,.18); color:#FFFFFF;}
 body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
 
 @media (max-width:640px){
   .service-cards{gap:12px;}
-  .service-card{padding:20px; border-radius:20px; gap:14px;}
+  .service-card{padding:18px; border-radius:22px; gap:16px;}
   .service-card .service-name{font-size:16px;}
   body.lang-ar .service-card .service-name{font-size:17px;}
   .service-card .service-desc{font-size:13px;}
   body.lang-ar .service-card .service-desc{font-size:14px;}
-  .service-card-icon{width:48px;height:48px;border-radius:14px;}
-  .service-card-icon svg{width:24px;height:24px;}
+  .service-card-icon{width:42px;height:42px;}
+  .service-card-icon svg{width:20px;height:20px;}
+  .service-card .service-cta-arrow{width:32px;height:32px;}
+  .service-card .service-cta-arrow svg{width:12px;height:12px;}
 }
 @media (max-width:480px){
   .service-cards{gap:10px;}
-  .service-card{padding:14px; border-radius:16px; gap:10px;}
-  .service-card .service-desc{display:none;}
-  .service-card-icon{width:38px;height:38px;border-radius:11px;}
-  .service-card-icon svg{width:19px;height:19px;}
-  .service-card .service-cta-arrow{width:34px;height:28px;border-radius:9px;}
-  .service-card .service-cta-arrow svg{width:13px;height:13px;}
+  .service-card{padding:14px; border-radius:18px; gap:12px;}
+  .service-card .service-name{font-size:14.5px;}
+  body.lang-ar .service-card .service-name{font-size:15.5px;}
+  .service-card .service-desc{font-size:12px;}
+  body.lang-ar .service-card .service-desc{font-size:12.5px;}
+  .service-card-icon{width:36px;height:36px;}
+  .service-card-icon svg{width:17px;height:17px;}
+  .service-card .service-cta-arrow{width:28px;height:28px;}
+  .service-card .service-cta-arrow svg{width:11px;height:11px;}
 }
 
 /* Reiner Fließtext statt Farbfläche — kein Card-Look mehr, nur der Satz
