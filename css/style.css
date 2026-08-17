@@ -1475,7 +1475,13 @@ body.lang-ar .broker-general-note{
 body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
 
 @media (max-width:640px){
-  .broker-card{flex-direction:column; align-items:flex-start;}
+  .broker-card{flex-direction:column; align-items:center; text-align:center;}
+  .broker-card-main{flex-direction:column; align-items:center;}
+  .broker-card-text{display:contents;}
+  .broker-logo{width:120px; height:50px; order:0;}
+  .broker-name{font-size:0; margin:0 0 8px; order:-1;}
+  .broker-name .broker-badge{font-size:10px; margin-inline-start:0;}
+  .broker-note{margin-top:6px;}
   .broker-cta{width:100%; justify-content:center;}
 }
 
