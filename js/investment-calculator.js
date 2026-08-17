@@ -626,4 +626,22 @@
     updateSliderLabels();
     render();
   });
+
+  window.SavedResults.init({
+    cookieKey: 'investment',
+    insertAfter: document.querySelector('.chart-panel'),
+    fields: [
+      { type:'customselect', id:'spar-target-select' },
+      { type:'value', id:'spar-endkapital' },
+      { type:'value', id:'spar-years-input' },
+      { type:'value', id:'spar-rendite-input' },
+      { type:'switch', id:'sw-einmal' },
+      { type:'value', id:'spar-anfangskapital' },
+      { type:'value', id:'spar-rate' },
+      { type:'switch', id:'sw-tax' },
+      { type:'value', id:'spar-kapst' },
+      { type:'switch', id:'sw-teilfreistellung' },
+      { type:'customselect', id:'spar-anlageart-select' },
+    ],
+  });
 })();

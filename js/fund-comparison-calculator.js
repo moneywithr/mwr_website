@@ -201,4 +201,21 @@
   document.addEventListener('mwr:langchange', ()=>{ updateSliderLabels(); render(); });
   document.addEventListener('mwr:currencychange', render);
   document.addEventListener('DOMContentLoaded', ()=>{ updateSliderLabels(); render(); });
+
+  window.SavedResults.init({
+    cookieKey: 'fund_fees',
+    insertAfter: document.querySelector('.chart-panel'),
+    fields: [
+      { type:'value', id:'years-input' },
+      { type:'value', id:'rendite-input' },
+      { type:'switch', id:'sw-einmal' },
+      { type:'value', id:'einmal-betrag' },
+      { type:'switch', id:'sw-sparplan' },
+      { type:'value', id:'sparplan-rate' },
+      { type:'value', id:'etf-order' },
+      { type:'value', id:'etf-ter' },
+      { type:'value', id:'fonds-aa' },
+      { type:'value', id:'fonds-ter' },
+    ],
+  });
 })();

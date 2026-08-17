@@ -191,4 +191,20 @@
     updateSliderLabels();
     render();
   });
+
+  window.SavedResults.init({
+    cookieKey: 'fire',
+    insertAfter: document.querySelector('.note-banner'),
+    fields: [
+      { type:'value', id:'fire-actualage' },
+      { type:'value', id:'fire-goalage' },
+      { type:'value', id:'fire-netoutcome' },
+      { type:'value', id:'fire-interest-input' },
+      { type:'switch', id:'sw-inflation' },
+      { type:'value', id:'fire-inflation' },
+      { type:'switch', id:'sw-depletion' },
+      { type:'value', id:'fire-lifetimeage' },
+      { type:'value', id:'fire-capital' },
+    ],
+  });
 })();
