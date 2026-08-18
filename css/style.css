@@ -1572,12 +1572,21 @@ body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
 
 /* .wrap (20px) + .panel (24px) padding eats 44px per side — on narrow
    screens that leaves too little width for the embedded widget's own
-   mobile layout, causing its cards to clip. Bleed the widget wrapper back
-   out to the viewport edge so it gets the same width it renders at when
-   opened as its own page. */
+   mobile layout, causing its cards to clip. Bleeding just the inner
+   widget-wrap looked jarring (rounded card → hard edge-to-edge → rounded
+   again), so on mobile the whole "compare yourself" panel goes edge-to-edge
+   and drops its rounded-card look — one flat section instead of a card
+   that only partly breaks its own frame. */
 @media (max-width:640px){
-  .find-bank-widget-wrap{
-    margin-inline:-44px;
+  #find-bank-tool-panel{
+    margin-inline:-20px;
+    border-inline:none;
+    border-radius:0;
+    box-shadow:none;
+    padding-inline:16px;
+  }
+  #find-bank-tool-panel .find-bank-widget-wrap{
+    margin-inline:-16px;
     border-inline:none;
     border-radius:0;
     padding-inline:8px;
