@@ -1848,6 +1848,17 @@ body.lang-ar .service-card .service-desc{font-size:16px;}
 .service-card.card-ink .service-card-icon{background:rgba(255,255,255,.14);}
 .service-card:hover .service-card-icon{background:#FFFFFF;}
 
+/* Icons ohne Vektorquelle (z.B. Illustrationen) als Maske eingebunden, damit
+   sie wie die SVG-Icons currentColor übernehmen statt fest schwarz zu sein. */
+.icon-mask{
+  display:block;
+  width:24px;height:24px;
+  background-color:currentColor;
+  -webkit-mask:var(--icon-src) no-repeat center/contain;
+  mask:var(--icon-src) no-repeat center/contain;
+}
+.icon-mask-freedom{--icon-src:url(/img/icons/financial-freedom.png);}
+
 /* Pfeil-Kreis oben rechts, neben dem Icon-Kreis — rund, etwas kleiner und
    heller als das Icon, dreht sich der Pfeil selbst in RTL. */
 .service-card .service-cta-arrow{
@@ -1873,6 +1884,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   body.lang-ar .service-card .service-desc{font-size:14px;}
   .service-card-icon{width:42px;height:42px;}
   .service-card-icon svg{width:20px;height:20px;}
+  .icon-mask{width:20px;height:20px;}
   .service-card .service-cta-arrow{width:32px;height:32px;}
   .service-card .service-cta-arrow svg{width:12px;height:12px;}
 }
@@ -1885,6 +1897,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   body.lang-ar .service-card .service-desc{font-size:12.5px;}
   .service-card-icon{width:36px;height:36px;}
   .service-card-icon svg{width:17px;height:17px;}
+  .icon-mask{width:17px;height:17px;}
   .service-card .service-cta-arrow{width:28px;height:28px;}
   .service-card .service-cta-arrow svg{width:11px;height:11px;}
 }
