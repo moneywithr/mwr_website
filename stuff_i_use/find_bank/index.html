@@ -7,7 +7,7 @@
 <script>setTimeout(function(){document.documentElement.style.visibility="visible";}, 1500);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bank-Finder</title>
-<link rel="stylesheet" href="/css/style.css?v=20260818d">
+<link rel="stylesheet" href="/css/style.css?v=20260818n">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
@@ -51,35 +51,25 @@
   <div class="panel" style="margin-bottom:20px;">
     <div class="section-title" data-i18n="findBankMyBankTitle">Die Banken, die ich selbst nutze</div>
     <div class="find-bank-cards">
-      <div class="broker-card broker-card-featured find-bank-card">
-        <div class="broker-card-main">
-          <div class="broker-logo-wrap">
-            <img class="broker-logo" src="/img/broker-logos/ing-v2.png" alt="ING" loading="lazy">
-          </div>
-          <div class="broker-card-text">
-            <p class="broker-name" data-i18n="findBankMyBankName">ING</p>
-            <p class="broker-note" data-i18n="findBankMyBankDesc">Ich nutze ING (früher ING-DiBa) für mein Girokonto in Deutschland – komplett kostenlos, ohne Kontoführungsgebühren.</p>
-          </div>
+      <div class="find-bank-card">
+        <div class="find-bank-bonus-banner" data-i18n="findBankIngBonus">200 € Bonus</div>
+        <div class="find-bank-card-logo">
+          <img src="/img/broker-logos/ing-v2.png" alt="ING" loading="lazy" style="transform:translateY(-6px);">
         </div>
-        <a class="broker-cta" href="#tcpp-iframe-giro">
+        <a class="find-bank-card-cta" href="#tcpp-iframe-giro">
           <span data-i18n="findBankOpenAccount">Konto eröffnen</span>
-          <span class="broker-cta-arrow">→</span>
+          <span class="find-bank-card-cta-arrow">↓</span>
         </a>
       </div>
 
-      <div class="broker-card broker-card-featured find-bank-card">
-        <div class="broker-card-main">
-          <div class="broker-logo-wrap">
-            <img class="broker-logo" src="/img/broker-logos/c24-bank.svg" alt="C24 Bank" loading="lazy">
-          </div>
-          <div class="broker-card-text">
-            <p class="broker-name" data-i18n="findBankC24Name">C24 Bank</p>
-            <p class="broker-note" data-i18n="findBankC24Desc">Für mein zweites Girokonto nutze ich C24 (von Check24) – ebenfalls kostenlos, ohne Kontoführungsgebühren, mit einer übersichtlichen App.</p>
-          </div>
+      <div class="find-bank-card">
+        <div class="find-bank-bonus-banner" data-i18n="findBankC24Bonus">75 € Bonus</div>
+        <div class="find-bank-card-logo">
+          <img src="/img/broker-logos/c24-bank.svg" alt="C24 Bank" loading="lazy">
         </div>
-        <a class="broker-cta" href="#tcpp-iframe-giro">
+        <a class="find-bank-card-cta" href="#tcpp-iframe-giro">
           <span data-i18n="findBankOpenAccount">Konto eröffnen</span>
-          <span class="broker-cta-arrow">→</span>
+          <span class="find-bank-card-cta-arrow">↓</span>
         </a>
       </div>
     </div>

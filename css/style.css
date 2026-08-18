@@ -1478,7 +1478,7 @@ body.lang-ar .broker-general-note{
   font-size:12.5px;
 }
 
-.broker-affiliate{font-size:12px; color:var(--text-muted); margin:16px 0 0; line-height:1.6;}
+.broker-affiliate{font-size:12px; color:var(--text-muted); margin:16px 0 0; line-height:1.6; white-space:pre-line; unicode-bidi:plaintext;}
 body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
 
 @media (max-width:640px){
@@ -1493,15 +1493,82 @@ body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
   .broker-cta{width:100%; justify-content:center;}
 }
 
-.find-bank-cards{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-.find-bank-cards .find-bank-card{margin-bottom:0;}
-@media (max-width:760px){
-  .find-bank-cards{grid-template-columns:1fr;}
+/* Flex + justify-content:center (not a stretching grid) so the cards stay
+   their natural width and sit centered as a group — leaving open, obviously
+   free space on the sides for a 3rd/4th bank to be added later, instead of
+   auto-stretching the existing two to fill the row. */
+.find-bank-cards{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
+.find-bank-card{
+  width:170px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:14px 16px 16px;
+  box-shadow:var(--shadow-sm);
+  transition:border-color .15s ease;
+}
+.find-bank-card:hover{border-color:var(--purple);}
+@media (max-width:480px){
+  .find-bank-card{width:calc(50% - 7px);}
+}
+.find-bank-bonus-banner{
+  background:var(--mint);
+  color:var(--ink);
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.01em;
+  white-space:nowrap;
+  padding:6px 13px;
+  border-radius:999px;
+  font-family:'IBM Plex Sans',sans-serif;
+  animation:find-bank-badge-wiggle 3.2s ease-in-out infinite;
+}
+body.lang-ar .find-bank-bonus-banner{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+/* Periodic light wiggle, not constant shaking — a brief attention pulse
+   every ~3s, resting the rest of the time. */
+@keyframes find-bank-badge-wiggle{
+  0%, 85%, 100%{transform:rotate(0deg);}
+  88%{transform:rotate(-4deg);}
+  91%{transform:rotate(4deg);}
+  94%{transform:rotate(-3deg);}
+  97%{transform:rotate(2deg);}
+}
+@media (prefers-reduced-motion:reduce){
+  .find-bank-bonus-banner{animation:none;}
 }
 
+.find-bank-card-logo{display:flex; align-items:center; justify-content:center; min-height:40px; flex:1;}
+.find-bank-card-logo img{max-width:96px; max-height:40px; object-fit:contain;}
+.find-bank-card-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:100%;
+  background:var(--ink);
+  border:none;
+  color:#FFFFFF;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:999px;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .15s ease, transform .15s ease;
+}
+.find-bank-card-cta:hover{background:#3A3739; transform:translateY(1px);}
+body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700;}
+.find-bank-card-cta-arrow{display:inline-block;}
+
 .find-bank-widget-wrap{border:2px solid var(--purple); border-radius:16px; padding:14px; background:var(--panel-2);}
-.find-bank-ad-label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:var(--purple-strong); margin-bottom:10px;}
-.find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0;}
+.find-bank-ad-label{font-size:14px; font-weight:700; color:var(--purple-strong); margin-bottom:10px;}
+.find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0; white-space:pre-line; unicode-bidi:plaintext;}
 
 /* .wrap (20px) + .panel (24px) padding eats 44px per side — on narrow
    screens that leaves too little width for the embedded widget's own
