@@ -1387,11 +1387,30 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
 }
 .broker-card-featured:hover{border-color:var(--ink);}
 .broker-card-main{display:flex; align-items:center; gap:14px; min-width:0; flex:1;}
+.broker-logo-wrap{position:relative; flex-shrink:0; display:inline-flex;}
 .broker-logo{
   flex-shrink:0;
   width:96px;height:40px;
   object-fit:contain;
 }
+/* Geschenk-/Favorit-Banner: kompakte Pille, per Auto-Margin mittig
+   zwischen Logo und CTA statt über die ganze Restbreite gestreckt. */
+.broker-bonus-banner{
+  margin-inline:auto;
+  display:inline-flex;
+  align-items:center;
+  text-align:center;
+  background:#12A883;
+  color:#FFFFFF;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.01em;
+  white-space:nowrap;
+  padding:5px 12px;
+  border-radius:999px;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+body.lang-ar .broker-bonus-banner{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
 .broker-logo-fallback{
   flex-shrink:0;
   width:96px;height:40px;
@@ -1407,28 +1426,11 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
 }
 .broker-card-text{min-width:0;}
 /* Name-Text ausgeblendet — das Logo zeigt die Marke schon, der Name daneben
-   war reine Wiederholung. Das Badge (z.B. "aktuell mein Favorit") bleibt
-   sichtbar, da es eigene Infos trägt. */
+   war reine Wiederholung. */
 .broker-name{font-size:0; margin:0; font-weight:600; color:var(--ink); font-family:'IBM Plex Sans',sans-serif;}
 body.lang-ar .broker-name{font-family:'IBM Plex Sans Arabic',sans-serif;}
-.broker-name .broker-badge{font-size:10px;}
 .broker-note{font-size:13px; color:var(--text-muted); margin:0; line-height:1.45;}
 body.lang-ar .broker-note{font-size:14.5px;}
-.broker-badge{
-  display:inline-block;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.03em;
-  text-transform:uppercase;
-  color:#FFFFFF;
-  background:var(--orange-strong);
-  padding:2px 8px;
-  border-radius:999px;
-  margin-inline-start:8px;
-  vertical-align:middle;
-  font-family:'IBM Plex Sans',sans-serif;
-}
-body.lang-ar .broker-badge{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; letter-spacing:0;}
 
 .broker-cta{
   flex-shrink:0;
@@ -1483,8 +1485,9 @@ body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
   .broker-card-main{flex-direction:column; align-items:center;}
   .broker-card-text{display:contents;}
   .broker-logo{width:120px; height:50px; order:0;}
+  .broker-logo-wrap{order:0;}
+  .broker-bonus-banner{margin:8px auto 0;}
   .broker-name{font-size:0; margin:0 0 8px; order:-1;}
-  .broker-name .broker-badge{font-size:10px; margin-inline-start:0;}
   .broker-note{margin-top:6px;}
   .broker-cta{width:100%; justify-content:center;}
 }

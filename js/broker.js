@@ -80,6 +80,9 @@
       const main = document.createElement('div');
       main.className = 'broker-card-main';
 
+      const logoWrap = document.createElement('div');
+      logoWrap.className = 'broker-logo-wrap';
+
       if(p.logoUrl || p.domain){
         const logo = document.createElement('img');
         logo.className = 'broker-logo';
@@ -92,12 +95,21 @@
           fallback.textContent = p.name.slice(0,2).toUpperCase();
           this.replaceWith(fallback);
         };
-        main.appendChild(logo);
+        logoWrap.appendChild(logo);
       } else {
         const fallback = document.createElement('div');
         fallback.className = 'broker-logo-fallback';
         fallback.textContent = p.name.slice(0,2).toUpperCase();
-        main.appendChild(fallback);
+        logoWrap.appendChild(fallback);
+      }
+
+      main.appendChild(logoWrap);
+
+      if(p.tag || p.bonus){
+        const bonusBanner = document.createElement('span');
+        bonusBanner.className = 'broker-bonus-banner';
+        bonusBanner.textContent = [p.tag && p.tag[lang], p.bonus && p.bonus[lang]].filter(Boolean).join(' · ');
+        main.appendChild(bonusBanner);
       }
 
       const left = document.createElement('div');
@@ -105,12 +117,6 @@
       const nameLine = document.createElement('p');
       nameLine.className = 'broker-name';
       nameLine.textContent = p.name;
-      if(p.tag){
-        const badge = document.createElement('span');
-        badge.className = 'broker-badge';
-        badge.textContent = p.tag[lang];
-        nameLine.appendChild(badge);
-      }
       left.appendChild(nameLine);
       if(p.note){
         const noteLine = document.createElement('p');
