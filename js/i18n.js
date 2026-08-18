@@ -173,7 +173,7 @@ window.I18N = {
     landingTitle: 'Was möchtest du heute tun?',
     landingSub: 'Wähle das Tool, das du brauchst.',
     landingCtaQuestion: 'Möchtest du mit dem Investieren anfangen, weißt aber nicht wie – oder hast du Bedenken?',
-    landingBookCall: 'Kostenloses Gespräch buchen',
+    landingBookCall: 'Kostenloses Erstgespräch buchen',
     landingFootnote: 'Diese Seite ist noch neu und ich arbeite Schritt für Schritt an neuen Funktionen. Dein Feedback ist mir sehr wichtig!',
     landingServicesTitle: 'Aktuell verfügbare Tools',
     landingCalcTitle: 'Investitionsrechner',

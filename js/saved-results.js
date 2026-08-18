@@ -69,7 +69,7 @@ window.SavedResults = (function(){
     fields.filter(f => f.type === 'customselect').forEach(f => {
       const el = document.getElementById(f.id);
       if(!el || snap[f.id] == null) return;
-      el.dispatchEvent(new CustomEvent('customselect:change', { detail: { value: snap[f.id] } }));
+      el.dispatchEvent(new CustomEvent('customselect:change', { detail: { value: snap[f.id] }, bubbles: true }));
     });
     fields.filter(f => f.type !== 'switch' && f.type !== 'customselect').forEach(f => {
       const el = document.getElementById(f.id);
@@ -98,6 +98,9 @@ window.SavedResults = (function(){
     insertAfter.parentNode.insertBefore(panel, insertAfter.nextSibling);
 
     function renderPanel(){
+      const openNameInput = document.getElementById('sr-name-input');
+      const pendingName = openNameInput ? openNameInput.value : null;
+
       panel.innerHTML =
         '<div class="saved-results-head">'
         + '<h2>' + svgIcon() + ' ' + t('savedResultsTitle') + '</h2>'
@@ -108,6 +111,11 @@ window.SavedResults = (function(){
 
       document.getElementById('sr-save-btn').addEventListener('click', showForm);
       renderList();
+
+      if(pendingName !== null){
+        showForm();
+        document.getElementById('sr-name-input').value = pendingName;
+      }
     }
 
     function showForm(){
@@ -131,7 +139,6 @@ window.SavedResults = (function(){
         items.unshift({
           id: Date.now(),
           name: name,
-          date: fmtDate(new Date()),
           active: true,
           values: captureSnapshot(config.fields),
         });
@@ -152,7 +159,7 @@ window.SavedResults = (function(){
         + '<div class="saved-result-main"><span class="saved-result-dot"></span>'
         + '<span class="saved-result-name">' + escapeHtml(it.name) + '</span></div>'
         + '<div style="display:flex;align-items:center;gap:8px;">'
-        + '<span class="saved-result-date">' + it.date + '</span>'
+        + '<span class="saved-result-date">' + fmtDate(new Date(it.id)) + '</span>'
         + '<button type="button" class="saved-result-remove" data-remove="' + it.id + '">×</button>'
         + '</div></div>'
       ).join('');
@@ -187,6 +194,8 @@ window.SavedResults = (function(){
     }
 
     renderPanel();
+    const activeItem = items.find(it => it.active);
+    if(activeItem) applySnapshot(config.fields, activeItem.values);
     document.addEventListener('mwr:langchange', renderPanel);
   }
 

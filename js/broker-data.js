@@ -21,7 +21,7 @@ window.BROKER_DATA = [
     names: { de: "Niederlande", en: "Netherlands", ar: "هولندا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
-      { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "/img/broker-logos/degiro.png" },
+      { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "/img/broker-logos/degiro-v2.png" },
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
@@ -30,7 +30,7 @@ window.BROKER_DATA = [
     names: { de: "Österreich", en: "Austria", ar: "النمسا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
-      { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "/img/broker-logos/flatex.png" }
+      { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "/img/broker-logos/flatex-v2.png" }
     ]
   },
   {
@@ -38,7 +38,7 @@ window.BROKER_DATA = [
     names: { de: "Italien", en: "Italy", ar: "إيطاليا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
-      { name: "Fineco", url: "https://finecobank.com/", domain: "finecobank.com" },
+      { name: "Fineco", url: "https://finecobank.com/", domain: "finecobank.com", logoUrl: "/img/broker-logos/fineco.png" },
       { name: "Directa", url: "https://www.directa.it/", domain: "directa.it" }
     ]
   },
@@ -46,8 +46,8 @@ window.BROKER_DATA = [
     id: "se",
     names: { de: "Schweden", en: "Sweden", ar: "السويد" },
     platforms: [
-      { name: "Avanza", url: "https://www.avanza.se/", domain: "avanza.se", note: { de: "Nur auf Schwedisch verfügbar", en: "Only available in Swedish", ar: "متاحة باللغة السويدية فقط" } },
-      { name: "Nordnet", url: "https://www.nordnet.se/", domain: "nordnet.se" }
+      { name: "Avanza", url: "https://www.avanza.se/", domain: "avanza.se", logoUrl: "/img/broker-logos/avanza.png", note: { de: "Nur auf Schwedisch verfügbar", en: "Only available in Swedish", ar: "متاحة باللغة السويدية فقط" } },
+      { name: "Nordnet", url: "https://www.nordnet.se/", domain: "nordnet.se", logoUrl: "/img/broker-logos/nordnet.png" }
     ]
   },
   {
@@ -61,8 +61,8 @@ window.BROKER_DATA = [
     id: "dk",
     names: { de: "Dänemark", en: "Denmark", ar: "الدنمارك" },
     platforms: [
-      { name: "Nordnet", url: "https://www.nordnet.dk/", domain: "nordnet.dk" },
-      { name: "Saxo Bank", url: "https://www.home.saxo/", domain: "home.saxo" }
+      { name: "Nordnet", url: "https://www.nordnet.dk/", domain: "nordnet.dk", logoUrl: "/img/broker-logos/nordnet.png" },
+      { name: "Saxo Bank", url: "https://www.home.saxo/", domain: "home.saxo", logoUrl: "/img/broker-logos/saxo.png" }
     ]
   },
   {
@@ -105,7 +105,7 @@ window.BROKER_DATA = [
     id: "ae",
     names: { de: "Vereinigte Arabische Emirate", en: "United Arab Emirates", ar: "الإمارات العربية المتحدة" },
     platforms: [
-      { name: "XTB", url: "https://link-pso.xtb.com/pso/qw27V", domain: "xtb.com", logoUrl: "/img/broker-logos/xtb.png" }
+      { name: "XTB", url: "https://link-pso.xtb.com/pso/qw27V", domain: "xtb.com", logoUrl: "/img/broker-logos/xtb-v2.png" }
     ]
   },
   {
@@ -134,8 +134,8 @@ window.BROKER_DATA = [
     id: "ca",
     names: { de: "Kanada", en: "Canada", ar: "كندا" },
     platforms: [
-      { name: "Wealthsimple", url: "https://www.wealthsimple.com/", domain: "wealthsimple.com" },
-      { name: "Questrade", url: "https://www.questrade.com/", domain: "questrade.com" }
+      { name: "Wealthsimple", url: "https://www.wealthsimple.com/", domain: "wealthsimple.com", logoUrl: "/img/broker-logos/wealthsimple.svg" },
+      { name: "Questrade", url: "https://www.questrade.com/", domain: "questrade.com", logoUrl: "/img/broker-logos/questrade.png" }
     ]
   },
   {
