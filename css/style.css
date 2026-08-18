@@ -179,6 +179,7 @@
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{
   background:var(--bg);
   color:var(--text);
@@ -1490,6 +1491,12 @@ body.lang-ar .broker-affiliate{font-size:13.5px; line-height:1.75;}
   .broker-name{font-size:0; margin:0 0 8px; order:-1;}
   .broker-note{margin-top:6px;}
   .broker-cta{width:100%; justify-content:center;}
+}
+
+.find-bank-cards{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.find-bank-cards .find-bank-card{margin-bottom:0;}
+@media (max-width:760px){
+  .find-bank-cards{grid-template-columns:1fr;}
 }
 
 footer{
