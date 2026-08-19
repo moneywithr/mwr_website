@@ -1,8 +1,20 @@
+// Kontinente für die Gruppierung im Broker-Finder-Dropdown.
+// Reihenfolge hier bestimmt die Anzeige-Reihenfolge der Gruppen.
+window.BROKER_CONTINENTS = [
+  { id: "europe", icon: "🇪🇺", names: { de: "Europa", en: "Europe", ar: "أوروبا" } },
+  { id: "africa", icon: "🌍", names: { de: "Afrika", en: "Africa", ar: "أفريقيا" } },
+  { id: "asia", icon: "🌏", names: { de: "Asien", en: "Asia", ar: "آسيا" } },
+  { id: "namerica", icon: "🌎", names: { de: "Nordamerika", en: "North America", ar: "أمريكا الشمالية" } },
+  { id: "other", icon: "🌐", names: { de: "Andere", en: "Other", ar: "أخرى" } }
+];
+
 // Alle Broker/Länder-Daten für die Broker-Finder-Seite.
-// Neues Land hinzufügen: einfach ein weiteres Objekt in dieses Array einfügen.
+// Neues Land hinzufügen: einfach ein weiteres Objekt in dieses Array einfügen
+// (mit passendem "continent" aus BROKER_CONTINENTS).
 window.BROKER_DATA = [
   {
     id: "de",
+    continent: "europe",
     names: { de: "Deutschland", en: "Germany", ar: "ألمانيا" },
     note: {
       de: "Das ist keine Finanzberatung! Recherche nach bestem Wissen und Gewissen. Der Anfang liegt bei dir.",
@@ -19,6 +31,7 @@ window.BROKER_DATA = [
   },
   {
     id: "nl",
+    continent: "europe",
     names: { de: "Niederlande", en: "Netherlands", ar: "هولندا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
@@ -28,6 +41,7 @@ window.BROKER_DATA = [
   },
   {
     id: "at",
+    continent: "europe",
     names: { de: "Österreich", en: "Austria", ar: "النمسا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
@@ -36,6 +50,7 @@ window.BROKER_DATA = [
   },
   {
     id: "it",
+    continent: "europe",
     names: { de: "Italien", en: "Italy", ar: "إيطاليا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
@@ -44,7 +59,16 @@ window.BROKER_DATA = [
     ]
   },
   {
+    id: "no",
+    continent: "europe",
+    names: { de: "Norwegen", en: "Norway", ar: "النروج" },
+    platforms: [
+      { name: "Nordnet", url: "https://www.nordnet.no/", domain: "nordnet.no", logoUrl: "/img/broker-logos/nordnet.png" }
+    ]
+  },
+  {
     id: "se",
+    continent: "europe",
     names: { de: "Schweden", en: "Sweden", ar: "السويد" },
     platforms: [
       { name: "Avanza", url: "https://www.avanza.se/", domain: "avanza.se", logoUrl: "/img/broker-logos/avanza.png", note: { de: "Nur auf Schwedisch verfügbar", en: "Only available in Swedish", ar: "متاحة باللغة السويدية فقط" } },
@@ -53,6 +77,7 @@ window.BROKER_DATA = [
   },
   {
     id: "pt",
+    continent: "europe",
     names: { de: "Portugal", en: "Portugal", ar: "البرتغال" },
     platforms: [
       { name: "Trade Republic", url: "https://www.traderepublic.com/de-de", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
@@ -60,6 +85,7 @@ window.BROKER_DATA = [
   },
   {
     id: "dk",
+    continent: "europe",
     names: { de: "Dänemark", en: "Denmark", ar: "الدنمارك" },
     platforms: [
       { name: "Nordnet", url: "https://www.nordnet.dk/", domain: "nordnet.dk", logoUrl: "/img/broker-logos/nordnet.png" },
@@ -68,6 +94,7 @@ window.BROKER_DATA = [
   },
   {
     id: "fr",
+    continent: "europe",
     names: { de: "Frankreich", en: "France", ar: "فرنسا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
@@ -75,13 +102,23 @@ window.BROKER_DATA = [
   },
   {
     id: "es",
+    continent: "europe",
     names: { de: "Spanien", en: "Spain", ar: "إسبانيا" },
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
+    id: "uk",
+    continent: "europe",
+    names: { de: "UK", en: "United Kingdom", ar: "المملكة المتحدة" },
+    platforms: [
+      { name: "Trading 212", url: "https://trading212.com/", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" }
+    ]
+  },
+  {
     id: "eg",
+    continent: "africa",
     names: { de: "Ägypten", en: "Egypt", ar: "مصر" },
     platforms: [
       { name: "Thndr", url: "https://thndr.app/", domain: "thndr.app", note: { de: "Von der ägyptischen Regierung lizenziert", en: "Licensed by the Egyptian government", ar: "مرخصة من الحكومة المصرية" } }
@@ -89,6 +126,7 @@ window.BROKER_DATA = [
   },
   {
     id: "jo",
+    continent: "asia",
     names: { de: "Jordanien", en: "Jordan", ar: "الأردن" },
     platforms: [
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
@@ -96,6 +134,7 @@ window.BROKER_DATA = [
   },
   {
     id: "tr",
+    continent: "asia",
     names: { de: "Türkei", en: "Turkey", ar: "تركيا" },
     platforms: [
       { name: "Midas", url: "https://www.getmidas.com/", domain: "getmidas.com" },
@@ -104,6 +143,7 @@ window.BROKER_DATA = [
   },
   {
     id: "ae",
+    continent: "asia",
     names: { de: "Vereinigte Arabische Emirate", en: "United Arab Emirates", ar: "الإمارات العربية المتحدة" },
     platforms: [
       { name: "XTB", url: "https://link-pso.xtb.com/pso/qw27V", domain: "xtb.com", logoUrl: "/img/broker-logos/xtb-v2.png" }
@@ -111,6 +151,7 @@ window.BROKER_DATA = [
   },
   {
     id: "sa",
+    continent: "asia",
     names: { de: "Saudi-Arabien", en: "Saudi Arabia", ar: "المملكة العربية السعودية" },
     platforms: [
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
@@ -118,6 +159,7 @@ window.BROKER_DATA = [
   },
   {
     id: "us",
+    continent: "namerica",
     names: { de: "USA", en: "United States", ar: "الولايات المتحدة ألأمريكية" },
     platforms: [
       { name: "Charles Schwab", url: "https://www.schwab.com/", domain: "schwab.com", logoUrl: "/img/broker-logos/charles-schwab-v2.png" },
@@ -125,14 +167,8 @@ window.BROKER_DATA = [
     ]
   },
   {
-    id: "uk",
-    names: { de: "UK", en: "United Kingdom", ar: "المملكة المتحدة" },
-    platforms: [
-      { name: "Trading 212", url: "https://trading212.com/", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" }
-    ]
-  },
-  {
     id: "ca",
+    continent: "namerica",
     names: { de: "Kanada", en: "Canada", ar: "كندا" },
     platforms: [
       { name: "Wealthsimple", url: "https://www.wealthsimple.com/", domain: "wealthsimple.com", logoUrl: "/img/broker-logos/wealthsimple.svg" },
@@ -141,6 +177,7 @@ window.BROKER_DATA = [
   },
   {
     id: "other",
+    continent: "other",
     names: { de: "Anderes Land", en: "Other country", ar: "دولتي غير موجودة" },
     note: {
       de: "Dein Land ist nicht dabei? Interactive Brokers ist in den meisten Ländern weltweit verfügbar.",

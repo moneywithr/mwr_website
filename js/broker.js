@@ -16,23 +16,65 @@
     return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E6 + (c.charCodeAt(0) - 65)));
   }
 
+  const continents = window.BROKER_CONTINENTS || [];
+
   function renderOptions(){
     const menu = $('broker-country-select').querySelector('.custom-select-menu');
     menu.innerHTML = '';
-    brokerData.forEach((entry, i)=>{
-      const li = document.createElement('li');
-      li.setAttribute('role','option');
-      li.setAttribute('data-value', i);
-      li.setAttribute('aria-selected', String(i) === state.brokerIndex ? 'true' : 'false');
-      li.classList.toggle('active', String(i) === state.brokerIndex);
-      const flag = document.createElement('span');
-      flag.className = 'custom-select-flag';
-      flag.textContent = flagEmoji(entry.id);
-      const name = document.createElement('span');
-      name.textContent = entry.names[window.Site.state.lang];
-      li.appendChild(flag);
-      li.appendChild(name);
-      menu.appendChild(li);
+    const lang = window.Site.state.lang;
+    continents.forEach(continent=>{
+      const entriesInContinent = brokerData
+        .map((entry, i)=>({ entry, i }))
+        .filter(({entry})=> entry.continent === continent.id);
+      if(!entriesInContinent.length) return;
+
+      if(continent.id === 'other'){
+        entriesInContinent.forEach(({entry, i})=>{
+          const li = document.createElement('li');
+          li.setAttribute('role','option');
+          li.setAttribute('data-value', i);
+          li.setAttribute('aria-selected', String(i) === state.brokerIndex ? 'true' : 'false');
+          li.classList.toggle('active', String(i) === state.brokerIndex);
+          const flag = document.createElement('span');
+          flag.className = 'custom-select-flag';
+          flag.textContent = flagEmoji(entry.id);
+          const name = document.createElement('span');
+          name.textContent = entry.names[lang];
+          li.appendChild(flag);
+          li.appendChild(name);
+          menu.appendChild(li);
+        });
+        return;
+      }
+
+      const groupHeader = document.createElement('li');
+      groupHeader.className = 'custom-select-group';
+      groupHeader.setAttribute('role','presentation');
+      const groupIcon = document.createElement('span');
+      groupIcon.className = 'custom-select-group-icon';
+      groupIcon.textContent = continent.icon;
+      const groupName = document.createElement('span');
+      groupName.className = 'custom-select-group-name';
+      groupName.textContent = continent.names[lang];
+      groupHeader.appendChild(groupIcon);
+      groupHeader.appendChild(groupName);
+      menu.appendChild(groupHeader);
+
+      entriesInContinent.forEach(({entry, i})=>{
+        const li = document.createElement('li');
+        li.setAttribute('role','option');
+        li.setAttribute('data-value', i);
+        li.setAttribute('aria-selected', String(i) === state.brokerIndex ? 'true' : 'false');
+        li.classList.toggle('active', String(i) === state.brokerIndex);
+        const flag = document.createElement('span');
+        flag.className = 'custom-select-flag';
+        flag.textContent = flagEmoji(entry.id);
+        const name = document.createElement('span');
+        name.textContent = entry.names[lang];
+        li.appendChild(flag);
+        li.appendChild(name);
+        menu.appendChild(li);
+      });
     });
     syncCountrySelectUI();
   }
