@@ -349,16 +349,19 @@
     const body = $('spar-table-body');
     body.innerHTML = '';
     const totalYears = res.totalMonths/12;
+    let prevGain = 0;
     res.snapshots.forEach((val, idx)=>{
       const principal = res.contribSnapshots[idx];
       const gainYear = val - principal;
+      const yearlyInterest = idx === 0 ? null : gainYear - prevGain;
+      prevGain = gainYear;
       const isLast = idx === res.snapshots.length-1;
       const yearLabel = (isLast && res.totalMonths % 12 !== 0)
         ? totalYears.toLocaleString(locale(),{maximumFractionDigits:1})
         : String(idx);
       const tr = document.createElement('tr');
       tr.innerHTML = `<td class="col-year">${t('yearLabel')} ${yearLabel}</td>`
-        + `<td>${fmtEUR(principal)}</td>`
+        + `<td>${yearlyInterest === null ? '–' : fmtEUR(yearlyInterest)}</td>`
         + `<td class="col-gain">${fmtEUR(gainYear)}</td>`
         + `<td class="col-total">${fmtEUR(val)}</td>`;
       body.appendChild(tr);
