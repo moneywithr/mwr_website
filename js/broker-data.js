@@ -24,7 +24,7 @@ window.BROKER_DATA = [
     platforms: [
       { name: "TradersPlace", url: "https://api.skynet.mcanism.com/c/09ahVd", domain: "tradersplace.de", logoUrl: "/img/broker-logos/tradersplace.png", highlight: true, tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" }, bonus: { de: "🎁 60€ Bonus", en: "🎁 €60 gift", ar: "🎁 هدية 60 يورو" } },
       { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus-v2.png" },
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
+      { name: "Trade Republic", url: "https://traderepublic.com/de-de/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Scalable Capital", url: "https://de.scalable.capital/einladung/bsg5qk", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital-v2.png" },
       { name: "ING", url: "https://www.ing.de/", domain: "ing.de", logoUrl: "/img/broker-logos/ing-v2.png" }
     ]
@@ -34,7 +34,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Niederlande", en: "Netherlands", ar: "هولندا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
+      { name: "Trade Republic", url: "https://traderepublic.com/nl-nl/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "DEGIRO", url: "https://www.degiro.nl/", domain: "degiro.nl", logoUrl: "/img/broker-logos/degiro-v2.png" },
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
@@ -44,7 +44,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Österreich", en: "Austria", ar: "النمسا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
+      { name: "Trade Republic", url: "https://traderepublic.com/de-at/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Flatex", url: "https://www.flatex.at/", domain: "flatex.at", logoUrl: "/img/broker-logos/flatex-v2.png" }
     ]
   },
@@ -53,7 +53,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Italien", en: "Italy", ar: "إيطاليا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
+      { name: "Trade Republic", url: "https://traderepublic.com/it-it/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Fineco", url: "https://finecobank.com/", domain: "finecobank.com", logoUrl: "/img/broker-logos/fineco.png" },
       { name: "Directa", url: "https://www.directa.it/", domain: "directa.it", logoUrl: "/img/broker-logos/directa.png" }
     ]
@@ -80,7 +80,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Portugal", en: "Portugal", ar: "البرتغال" },
     platforms: [
-      { name: "Trade Republic", url: "https://www.traderepublic.com/de-de", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
+      { name: "Trade Republic", url: "https://traderepublic.com/pt-pt/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
@@ -97,7 +97,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Frankreich", en: "France", ar: "فرنسا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
+      { name: "Trade Republic", url: "https://traderepublic.com/fr-fr/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
@@ -105,7 +105,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "Spanien", en: "Spain", ar: "إسبانيا" },
     platforms: [
-      { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
+      { name: "Trade Republic", url: "https://traderepublic.com/es-es/nocodereferral?code=szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" }
     ]
   },
   {
