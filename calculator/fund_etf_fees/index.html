@@ -193,11 +193,11 @@
             <div class="p-title" data-i18n="etf">ETF</div>
             <div class="p-sub" data-i18n="etfSub">börsengehandelt, meist passiv</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">Ordergebühren</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst – meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="val" id="v-etf-order">0,20 %</span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">Ordergebühren</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst – meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-order-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="etf-order" min="0" max="2" value="0.2" step="0.01">
             </div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerEtf">Verwaltungsgebühren p.a. (TER)</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerEtf" data-tip="Die jährliche Gebühr, die der ETF-Anbieter automatisch vom Fondsvermögen abzieht, um ihn zu verwalten. Wird nicht extra abgebucht, sondern mindert laufend still deine Rendite."><span class="info-tip-glyph"></span></span></span><span class="val" id="v-etf-ter">0,20 %</span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerEtf">Verwaltungsgebühren p.a. (TER)</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerEtf" data-tip="Die jährliche Gebühr, die der ETF-Anbieter automatisch vom Fondsvermögen abzieht, um ihn zu verwalten. Wird nicht extra abgebucht, sondern mindert laufend still deine Rendite."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-ter-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="etf-ter" min="0" max="2" value="0.2" step="0.01">
             </div>
           </div>
@@ -205,11 +205,11 @@
             <div class="p-title" data-i18n="fonds">Fonds</div>
             <div class="p-sub" data-i18n="fondsSub">meist aktiv gemanagt</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2–5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="val" id="v-fonds-aa">3,00 %</span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2–5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-aa-input" class="inline-num-input" value="3" min="0" max="6" step="0.1"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-aa" min="0" max="6" value="3" step="0.1">
             </div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet – meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="val" id="v-fonds-ter">1,50 %</span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet – meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-ter-input" class="inline-num-input" value="1.5" min="0" max="3" step="0.05"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-ter" min="0" max="3" value="1.5" step="0.05">
             </div>
           </div>

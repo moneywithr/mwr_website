@@ -1,7 +1,7 @@
 // Logik NUR für index.html (Kostenrechner: ETF vs. Fonds).
 (function(){
   const $ = id => document.getElementById(id);
-  const { t, locale, fmtEUR, fmtCompact, fmtPct, textWidth } = window.Site;
+  const { t, locale, fmtEUR, fmtCompact, textWidth } = window.Site;
 
   const state = {
     years: 20, rendite: 7,
@@ -140,10 +140,10 @@
   function updateSliderLabels(){
     $('years-input').value = state.years;
     $('rendite-input').value = state.rendite;
-    $('v-etf-order').textContent = fmtPct(state.etfOrder, 2);
-    $('v-etf-ter').textContent = fmtPct(state.etfTer, 2);
-    $('v-fonds-aa').textContent = fmtPct(state.fondsAA, 2);
-    $('v-fonds-ter').textContent = fmtPct(state.fondsTer, 2);
+    $('etf-order-input').value = state.etfOrder;
+    $('etf-ter-input').value = state.etfTer;
+    $('fonds-aa-input').value = state.fondsAA;
+    $('fonds-ter-input').value = state.fondsTer;
   }
 
   // Anlagedauer: Slider und Zahlenfeld halten sich gegenseitig synchron
@@ -168,10 +168,21 @@
     render();
   });
 
-  $('etf-order').addEventListener('input', ()=>{ state.etfOrder = parseFloat($('etf-order').value); updateSliderLabels(); render(); });
-  $('etf-ter').addEventListener('input', ()=>{ state.etfTer = parseFloat($('etf-ter').value); updateSliderLabels(); render(); });
-  $('fonds-aa').addEventListener('input', ()=>{ state.fondsAA = parseFloat($('fonds-aa').value); updateSliderLabels(); render(); });
-  $('fonds-ter').addEventListener('input', ()=>{ state.fondsTer = parseFloat($('fonds-ter').value); updateSliderLabels(); render(); });
+  function bindFeeField(sliderId, inputId, key, min, max){
+    $(sliderId).addEventListener('input', ()=>{ state[key] = parseFloat($(sliderId).value); updateSliderLabels(); render(); });
+    $(inputId).addEventListener('input', e=>{
+      let v = parseFloat(e.target.value);
+      if(isNaN(v)) return;
+      v = Math.max(min, Math.min(max, v));
+      state[key] = v;
+      $(sliderId).value = v;
+      render();
+    });
+  }
+  bindFeeField('etf-order', 'etf-order-input', 'etfOrder', 0, 2);
+  bindFeeField('etf-ter', 'etf-ter-input', 'etfTer', 0, 2);
+  bindFeeField('fonds-aa', 'fonds-aa-input', 'fondsAA', 0, 6);
+  bindFeeField('fonds-ter', 'fonds-ter-input', 'fondsTer', 0, 3);
   // Negative Beträge ergeben hier keinen Sinn, siehe investment-calculator.js.
   $('einmal-betrag').addEventListener('input', e=>{
     const v = Math.max(0, parseFloat(e.target.value)||0);
