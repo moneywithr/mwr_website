@@ -1478,6 +1478,11 @@ body.lang-ar .broker-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans
   border:1px solid var(--line-soft);
   color:var(--text-muted);
   pointer-events:none;
+  white-space:normal;
+  text-align:center;
+  line-height:1.3;
+  font-size:12px;
+  max-width:100%;
 }
 .broker-cta-arrow{display:inline-block;}
 body.lang-ar .broker-cta-arrow{transform:scaleX(-1);}
