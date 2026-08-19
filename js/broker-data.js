@@ -55,7 +55,7 @@ window.BROKER_DATA = [
     platforms: [
       { name: "Trade Republic", url: "https://refnocode.trade.re/szj7742l", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Fineco", url: "https://finecobank.com/", domain: "finecobank.com", logoUrl: "/img/broker-logos/fineco.png" },
-      { name: "Directa", url: "https://www.directa.it/", domain: "directa.it" }
+      { name: "Directa", url: "https://www.directa.it/", domain: "directa.it", logoUrl: "/img/broker-logos/directa.png" }
     ]
   },
   {
