@@ -748,7 +748,7 @@ window.I18N = {
     findBankMyBankName: 'ING',
     findBankMyBankDesc: 'أنا بستخدم ING (كان اسمها سابقًا ING-DiBa) لحسابي الجاري بألمانيا، مجانية بالكامل وبدون أي رسوم شهرية.',
     findBankC24Cta: 'افتح حساب الآن',
-    findBankIngCta: 'اختار حسابك من تحت',
+    findBankIngCta: 'اختار تحت',
     findBankC24Name: 'C24 Bank',
     findBankC24Desc: 'لحسابي البنكي التاني بستخدم C24 (من Check24) — كمان مجاني بالكامل وبدون رسوم شهرية، ومعه تطبيق بسيط ومرتب.',
     findBankToolTitle: 'قارن بنفسك ولاقي الحساب البنكي المناسب إلك',
