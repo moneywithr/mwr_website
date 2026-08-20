@@ -6,7 +6,7 @@ window.Site = (function(){
   const CURRENCY_KEY = 'mwr_currency';
 
   // Anzeigewährungen: reine Anzeige-Umschaltung, KEINE Umrechnung des
-  // zugrunde liegenden Betrags — 100.000 bleiben 100.000, nur das
+  // zugrunde liegenden Betrags, 100.000 bleiben 100.000, nur das
   // Währungssymbol/-format wechselt (siehe fmtEUR/fmtCompact unten).
   const CURRENCIES = ['EUR', 'USD', 'AED'];
   const CURRENCY_FLAG = { EUR: 'flag-eur', USD: 'flag-usd', AED: 'flag-aed' };
@@ -35,13 +35,13 @@ window.Site = (function(){
   function t(key){ return window.I18N[state.lang][key]; }
   function locale(){ return window.I18N[state.lang].locale; }
 
-  // Intl gibt für USD in arabischer Locale "US$" statt "$" aus (CLDR-Disambiguierung) —
+  // Intl gibt für USD in arabischer Locale "US$" statt "$" aus (CLDR-Disambiguierung),
   // das liest sich wie Symbol+Code zusammen. Für die arabische UI reicht das bloße Symbol.
   function fixArabicUsdSymbol(str){
     return state.lang === 'ar' && state.currency === 'USD' ? str.replace('US$','$') : str;
   }
   function fmtEUR(v){
-    // Name historisch gewachsen (früher gab's nur Euro) — formatiert
+    // Name historisch gewachsen (früher gab's nur Euro), formatiert
     // inzwischen in der aktuell gewählten Anzeigewährung (state.currency).
     return fixArabicUsdSymbol(v.toLocaleString(locale(),{style:'currency',currency:state.currency,maximumFractionDigits:0}));
   }
@@ -93,7 +93,7 @@ window.Site = (function(){
 
   function setLanguage(lang){
     if(!window.I18N[lang] || lang === state.lang) return;
-    // Kurzes Fade statt hartem Sprung — Text, Schriftart und rtl/ltr
+    // Kurzes Fade statt hartem Sprung, Text, Schriftart und rtl/ltr
     // wechseln sonst mitten im Blick des Nutzers ohne jeden Übergang.
     const wrap = document.querySelector('.wrap') || document.body;
     wrap.classList.add('lang-fade');
@@ -185,7 +185,7 @@ window.Site = (function(){
 
   // Bindet Klick-Interaktionen für jede .custom-select-Instanz (Ersatz für
   // native <select>-Elemente, siehe css .custom-select). Nutzt Event-
-  // Delegation auf .custom-select-menu statt Listener pro <li> — dadurch
+  // Delegation auf .custom-select-menu statt Listener pro <li>, dadurch
   // funktioniert es auch, wenn eine Seite (z.B. broker.js) die Optionsliste
   // per innerHTML neu aufbaut, ohne initCustomSelects() erneut aufzurufen.
   // Die eigentliche Auswahl-Logik bleibt beim jeweiligen Seiten-Skript: hier

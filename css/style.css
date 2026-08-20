@@ -42,7 +42,7 @@
   src:url('/fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
 }
 /* IBM Plex Sans Arabic (Fließtext) und Kufam (Landing-Headline) ersetzen
-   Tajawal ab Aug 2026 — Tajawal blieb auf 3 echten Schnitten (400/500/700,
+   Tajawal ab Aug 2026, Tajawal blieb auf 3 echten Schnitten (400/500/700,
    600 war nur ein Alias auf 500) und wirkte im Vergleich zu den lateinischen
    Schriften enger/dichter. IBM Plex Sans Arabic teilt die Sans-Familie mit
    dem lateinischen IBM Plex Sans, dazu 4 echte Schnitte für bessere
@@ -75,7 +75,7 @@
   font-display:swap;
   src:url('/fonts/ibm-plex-sans-arabic-700.woff2') format('woff2');
 }
-/* Kufam — nur für die große Landing-Headline "شو حابب تعمل اليوم؟", bewusst
+/* Kufam, nur für die große Landing-Headline "شو حابب تعمل اليوم؟", bewusst
    als Blickfang gewählt statt als generelle Textschrift. */
 @font-face{
   font-family:'Kufam';
@@ -91,7 +91,7 @@
   font-display:swap;
   src:url('/fonts/kufam-700.woff2') format('woff2');
 }
-/* Manrope (Body) und Space Grotesk (Display) — aus dem Money with Rami
+/* Manrope (Body) und Space Grotesk (Display), aus dem Money with Rami
    Design System (Aug 2026). Gelten für Deutsch/Englisch; Arabisch nutzt
    IBM Plex Sans Arabic. Nur für lateinische Zeichen zugeschnitten (inkl.
    Umlaute, ß, Gedankenstriche, Pfeil), passend zu den tatsächlich im
@@ -133,8 +133,8 @@
 }
 
 :root{
-  /* Money with Rami — Design System (Aug 2026 refresh)
-     Palette: ink / bone / indigo / lime / flame — see design-system/readme.md
+  /* Money with Rami, Design System (Aug 2026 refresh)
+     Palette: ink / bone / indigo / lime / flame, see design-system/readme.md
      Indigo covers both "primary brand" (--green, ETF) and "interactive accent"
      (--purple, focus/hover/Fonds) using two steps of the same indigo ramp,
      so the two stay visually distinguishable without inventing a second
@@ -148,25 +148,25 @@
   --line-soft:#EDEAE5;
   --text:#201E1F;
   --text-muted:#585555;
-  --green:#685CC8;        /* indigo-500 — ETF / primary brand */
+  --green:#685CC8;        /* indigo-500, ETF / primary brand */
   --green-dim:#F0EEFA;    /* indigo-050 */
-  --purple:#5347A8;       /* indigo-600 — Fonds / general interactive accent */
+  --purple:#5347A8;       /* indigo-600, Fonds / general interactive accent */
   --purple-strong:#3D3480;/* indigo-700 */
   --purple-dim:#DCD8F3;   /* indigo-100 */
-  --orange:#FE572C;       /* flame-500 — errors/warnings ONLY */
+  --orange:#FE572C;       /* flame-500, errors/warnings ONLY */
   --orange-strong:#D63D16;/* flame-700 */
   --orange-dim:#FFE3DA;   /* flame-100 */
-  --mint:#DAFF00;         /* lime-500 — bright highlight, sparingly, always with ink text */
+  --mint:#DAFF00;         /* lime-500, bright highlight, sparingly, always with ink text */
   --butter:#FBF0C4;       /* decorative third tint (broker-finder card theme only) */
   --butter-strong:#8A6D1F;
   /* Zusätzliche Akzentfarben aus der Pantone-Palette (Sun Glare, Exuberant
-     Orange) — nur für die bunten Kartenköpfe auf der Startseite verwendet.
+     Orange), nur für die bunten Kartenköpfe auf der Startseite verwendet.
      Text sitzt immer im weißen Kartenkörper mit --ink/--purple-strong, daher
      brauchen diese beiden keine eigenen AA-Kontrast-Varianten. */
   --sun-glare:#E2F227;
   --exuberant-orange:#E4633C;
   /* Referenz-Palette (Aug 2026 Landing-Redesign): weiches Periwinkle-Blau
-     als dritte Kartenfarbe neben Lime und Ink-Schwarz — bewusst ruhiger als
+     als dritte Kartenfarbe neben Lime und Ink-Schwarz, bewusst ruhiger als
      die alten Sun-Glare/Exuberant-Orange-Kombination, angelehnt an das
      Moodboard, das der Nutzer als Vorlage geschickt hat. */
   --periwinkle:#AEC0F2;
@@ -192,7 +192,7 @@ body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font
 .wrap{max-width:1180px;margin:0 auto; padding:32px 20px 60px; transition:opacity .13s ease;}
 .wrap.lang-fade{opacity:0;}
 
-/* Freischwebende Pill-Card statt voller Bannerbreite — Layout aus der
+/* Freischwebende Pill-Card statt voller Bannerbreite, Layout aus der
    Referenzvorlage des Nutzers: abgerundete Karte mit silbrigem Rahmen,
    etwas Luft zum Seitenrand statt Full-Bleed + unterer Trennlinie. Der
    mittlere Nav-Bereich aus der Vorlage bleibt bewusst leer, da die Seite
@@ -211,12 +211,12 @@ body.lang-ar{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font
   padding:8px 22px;
   flex-wrap:wrap;
   /* Feste Mindesthöhe, damit die Banner-Höhe beim Sprachwechsel stabil
-     bleibt — IBM Plex Sans Arabic hat andere Font-Metriken (Zeilenhöhe) als
+     bleibt, IBM Plex Sans Arabic hat andere Font-Metriken (Zeilenhöhe) als
      IBM Plex Mono/Unbounded, was sonst die Banner-Höhe minimal springen
      lässt. */
   min-height:46px;
   /* Bewusst IMMER ltr: Markenname bleibt links, Sprachumschalter bleibt
-     rechts — unabhängig von der gewählten Sprache/Textrichtung. Sonst
+     rechts, unabhängig von der gewählten Sprache/Textrichtung. Sonst
      tauschen beide beim Sprachwechsel (ar=rtl vs. de/en=ltr) die Seiten,
      was verwirrend ist. */
   direction:ltr;
@@ -288,11 +288,11 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   cursor:pointer;
   transition:background .15s ease, color .15s ease;
 }
-/* Knalliges Lime statt Indigo für den aktiven Sprach-Button — gleiche
+/* Knalliges Lime statt Indigo für den aktiven Sprach-Button, gleiche
    Akzentfarbe wie der "Start free"-Button im Referenz-Design, dunkler Text
    für genug Kontrast auf der hellen Fläche. */
 .lang-btn.active{background:var(--mint); color:var(--ink);}
-/* Nur der "عربي"-Button selbst braucht die arabische Schrift — die
+/* Nur der "عربي"-Button selbst braucht die arabische Schrift, die
    vorherige Regel hat versehentlich auch DE/EN umgeschaltet, sobald die
    Seite auf Arabisch stand, wodurch die lateinischen Buttons
    Schriftart+Breite wechselten und sichtbar "sprangen". */
@@ -316,7 +316,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
 }
 .brand-name .brand-line{white-space:nowrap;}
 .brand-dot{color:var(--mint);}
-/* Wortmarke bleibt bewusst IMMER in Space Grotesk, auch auf Arabisch —
+/* Wortmarke bleibt bewusst IMMER in Space Grotesk, auch auf Arabisch,
    ein Markenzeichen soll sprachunabhängig gleich aussehen. */
 body.lang-ar .brand-name{
   font-family:'Space Grotesk',sans-serif;
@@ -361,7 +361,7 @@ body.lang-ar .tab-btn{
   display:grid;
   /* minmax(0,1fr) statt nur 1fr: eine reine 1fr-Spur behält implizit eine
      "auto"-Mindestbreite, die sich am breitesten Kindinhalt orientiert (hier
-     die ROI-Tabelle mit min-width:420px) — die Spur wächst dann über die
+     die ROI-Tabelle mit min-width:420px), die Spur wächst dann über die
      Grid-Breite hinaus und reißt die ganze Seite nach rechts auf ("grid
      blowout"). minmax(0,…) kappt die Mindestbreite der Spur auf 0, sodass
      .roi-table-wrap wie vorgesehen selbst scrollt (overflow-x:auto). */
@@ -402,7 +402,7 @@ body.lang-ar .tab-btn{
   gap:8px;
 }
 /* Der Label-Text darf selbst umbrechen (schrumpft statt die Währungsauswahl
-   in eine zweite Zeile zu drängen) — sonst reißt es auf schmalen Screens/EN
+   in eine zweite Zeile zu drängen), sonst reißt es auf schmalen Screens/EN
    (längster Label-Text) die Währungsauswahl unter den Text. */
 .section-title > span:first-child{flex:1 1 auto; min-width:0;}
 .section-title .currency-switch{flex:0 0 auto;}
@@ -419,7 +419,7 @@ body.lang-ar .section-title{
 .block{margin-bottom:22px;}
 .block:last-child{margin-bottom:0;}
 /* Trennt den Ziel-Auswähler ("Was möchtest du berechnen?") optisch von den
-   Eingabefeldern darunter (Laufzeit, Einmalanlage, Rate, ...) — sonst lesen
+   Eingabefeldern darunter (Laufzeit, Einmalanlage, Rate, ...), sonst lesen
    sich diese wie Unterpunkte der Auswahl, obwohl es eigenständige Felder sind. */
 .block-goal{
   padding-bottom:20px;
@@ -439,7 +439,7 @@ body.lang-ar .section-title{
 body.lang-ar .switch-row .label{font-size:17px;}
 .switch{
   /* Flaches Design, aber kompakter skaliert, damit es zur restlichen (eher
-     kleinteiligen) UI passt — plus dünner Rand um den Thumb als leichte
+     kleinteiligen) UI passt, plus dünner Rand um den Thumb als leichte
      Kontur statt der reinen Flächenfarbe. Rand-Farbe bewusst dieselbe wie
      bei .currency-switch-btn (var(--line)), damit beide Controls als ein
      zusammengehöriges Set wirken. */
@@ -465,11 +465,11 @@ body.lang-ar .switch-row .label{font-size:17px;}
   transition:transform .18s ease, background .18s ease, left .18s ease;
 }
 /* Ausprobiert und wieder verworfen: "right" statt eines zweiten "left"-Werts
-   für die rechte Ruheposition (left:auto; right:3px) — das lässt den Thumb
+   für die rechte Ruheposition (left:auto; right:3px), das lässt den Thumb
    beim Sprachwechsel/Umschalten hängen, weil eine Transition nie sauber zu
    oder von "auto" animieren kann (der Browser springt dann inkonsistent,
    manchmal bleibt die alte Position optisch stehen). Deshalb wieder wie
-   ursprünglich: nur "left", nie "right" — beide Ruhepositionen (3px bzw.
+   ursprünglich: nur "left", nie "right", beide Ruhepositionen (3px bzw.
    19px) sind rechnerisch exakt symmetrisch (38px Innenbreite - 16px Thumb -
    3px Rand auf beiden Seiten), unabhängig von der Sprache. Aus/An liegen im
    Arabischen auf der gespiegelten Seite (rechts/links statt links/rechts). */
@@ -483,7 +483,7 @@ body.lang-ar .switch.on::after{left:3px;}
   transition:max-height .25s ease;
 }
 /* overflow bleibt beim Öffnen bis zum Ende der Höhen-Animation verborgen
-   (schönes Aufklappen), wird danach aber sichtbar — sonst würde das
+   (schönes Aufklappen), wird danach aber sichtbar, sonst würde das
    Dropdown-Menü eines custom-select hier drin (z.B. "Anlageart") vom
    overflow:hidden des Akkordeons abgeschnitten und wäre unsichtbar. Beim
    Schließen greift kein delay, overflow wird sofort wieder hidden. */
@@ -503,7 +503,7 @@ body.lang-ar .field-label{font-size:15.5px;}
 /* Bewusst kein Flex-Container: bei längeren Labels, die auf schmalen
    Screens umbrechen (z.B. die Teilfreistellungs-Frage), soll das
    Info-Icon mit dem Text mitfließen und direkt nach dem letzten Wort
-   stehen — nicht als eigenes Flex-Item neben einem mehrzeiligen Textblock
+   stehen, nicht als eigenes Flex-Item neben einem mehrzeiligen Textblock
    "schweben". .info-tip bringt für die normale Inline-Ausrichtung schon
    margin-inline-start und vertical-align:middle mit. */
 .field-label-text{
@@ -543,7 +543,7 @@ input[type=number].inline-num-input{
   box-shadow:inset 0 1px 2px rgba(32,30,31,.06);
   transition:border-color .15s ease, box-shadow .15s ease;
 }
-/* Zeigt beim Hover, dass das Feld tippbar ist — dieselbe Feld-Optik wie
+/* Zeigt beim Hover, dass das Feld tippbar ist, dieselbe Feld-Optik wie
    überall sonst im Design (kein gepunkteter Rahmen), nur mit deutlicherem
    Hover-/Fokus-Signal, weil dieses Feld direkt neben dem Slider leicht als
    reine Anzeige missverstanden wird. */
@@ -645,7 +645,7 @@ input[type=range]{
   outline:none;
   margin:0;
 }
-/* Lime-Daumen statt Indigo — kleiner Akzent-Touch aus der neuen Palette
+/* Lime-Daumen statt Indigo, kleiner Akzent-Touch aus der neuen Palette
    an der Stelle, die am meisten angefasst wird; dunkler Rand hält den
    Kontrast auf hellem Track. Größer als ein Standard-Slider-Daumen, damit
    er sich leichter treffen/greifen lässt (Touch + Maus). */
@@ -754,7 +754,7 @@ body.lang-ar .rs-stat .rs-label{font-size:15px;}
   justify-self:end;
 }
 body.lang-ar .rs-stat .rs-value{
-  /* Ziffern bleiben in der Mono-Schrift wie bei DE/EN — nur die arabischen
+  /* Ziffern bleiben in der Mono-Schrift wie bei DE/EN, nur die arabischen
      Wörter im Fließtext bekommen eine eigene Schrift, keine reinen Zahlen. */
   font-size:17px;
 }
@@ -773,7 +773,7 @@ body.lang-ar .rs-stat .rs-value{
 }
 .result-summary-final .rs-label{
   /* Bewusst über der Zahl zentriert und größer als andere rs-labels, statt
-     rechts-/linksbündig — soll als Titel für den Ergebniswert herausstechen
+     rechts-/linksbündig, soll als Titel für den Ergebniswert herausstechen
      (ändert sich je nach Rechner-Modus: Endkapital / Rate / Laufzeit). */
   font-family:'IBM Plex Mono',monospace;
   font-size:14px;
@@ -847,7 +847,7 @@ body.lang-ar .stat-tag{
 .stat-tag.fonds{background:var(--purple-strong);}
 .stat-tag.orange{background:var(--mint); color:var(--ink);}
 /* Fallback für Karten, deren Tag keine eigene Farbklasse (etf/fonds/orange)
-   trägt, z.B. auf der FIRE-Rechner-Seite — sonst bleibt der Tag mit weißer
+   trägt, z.B. auf der FIRE-Rechner-Seite, sonst bleibt der Tag mit weißer
    Schrift auf transparentem Grund unsichtbar. */
 .stat-card.green .stat-tag:not(.etf):not(.fonds):not(.orange){background:var(--green);}
 .stat-card.purple .stat-tag:not(.etf):not(.fonds):not(.orange){background:var(--purple-strong);}
@@ -1040,7 +1040,7 @@ body.lang-ar .currency-switch-menu .cs-name{font-family:'IBM Plex Sans Arabic','
 body:not(.lang-ar) .currency-switch-menu .cs-name{display:none;}
 body.lang-ar .currency-switch-menu .cs-code{display:none;}
 
-/* Kompakte, knallige Variante — sitzt direkt neben "شو بدك تحسب؟", damit
+/* Kompakte, knallige Variante, sitzt direkt neben "شو بدك تحسب؟", damit
    die Währung als erstes gewählt wird, bevor man Zahlen einträgt. Lime
    statt der neutralen Panel-Fläche, damit sie als eigener kleiner Schritt
    auffällt statt wie ein normaler Formular-Button unterzugehen. */
@@ -1085,7 +1085,7 @@ body.lang-ar table.roi-table thead th{
   font-size:12px;
 }
 body.lang-ar table.roi-table tbody td{
-  /* Tabellenzellen sind reine Zahlen — Mono-Ziffern wie bei DE/EN statt
+  /* Tabellenzellen sind reine Zahlen, Mono-Ziffern wie bei DE/EN statt
      der arabischen Schrift, die vom Tabellen-Level geerbt würde. */
   font-family:'IBM Plex Mono',monospace;
   font-size:13px;
@@ -1149,7 +1149,7 @@ body.lang-ar .b-row .b-val{font-weight:600;}
 }
 
 
-/* Custom-Select — ersetzt native <select>-Elemente, die wie das übrige UI
+/* Custom-Select, ersetzt native <select>-Elemente, die wie das übrige UI
    (z.B. .currency-switch) aussehen sollen, statt wie ein Browser-Standard-
    Dropdown. Wird für "Was möchtest du berechnen?" und die Länderauswahl im
    Broker-Finder verwendet; Optionsliste kann per JS statisch oder dynamisch
@@ -1339,21 +1339,9 @@ body.lang-ar .field-note{font-size:14.5px;}
 .stat-card.fire-purple{background:var(--purple-dim);}
 .stat-card.fire-purple .v{color:var(--purple-strong);}
 /* Wert zuerst, Beschriftung darunter (statt umgekehrt wie sonst im
-   Standard-Layout) — Ränder entsprechend getauscht. */
+   Standard-Layout), Ränder entsprechend getauscht. */
 .stat-row.centered .stat-card .v{margin-bottom:6px;}
 .stat-row.centered .stat-card .k{margin-bottom:0;}
-
-.note-banner{
-  margin-top:16px;
-  padding:10px 16px;
-  background:var(--panel-2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  font-size:12.5px;
-  line-height:1.6;
-  color:var(--text-muted);
-}
-body.lang-ar .note-banner{font-size:13.5px;}
 
 #broker-placeholder{
   text-align:center;
@@ -1401,7 +1389,7 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
   transition:border-color .15s ease;
 }
 .broker-card:hover{border-color:var(--purple);}
-/* Hervorgehobene Karte (z.B. "aktuell mein Favorit") — kräftiges Gelb statt
+/* Hervorgehobene Karte (z.B. "aktuell mein Favorit"), kräftiges Gelb statt
    der neutralen Panel-Fläche, damit sie in der Liste sofort auffällt. Text/
    CTA-Farben bleiben unverändert (dunkles Ink hat auf Gelb genug Kontrast). */
 .broker-card-featured{
@@ -1448,7 +1436,7 @@ body.lang-ar .broker-bonus-banner{font-family:'IBM Plex Sans Arabic','IBM Plex S
   font-family:'IBM Plex Sans',sans-serif;
 }
 .broker-card-text{min-width:0;}
-/* Name-Text ausgeblendet — das Logo zeigt die Marke schon, der Name daneben
+/* Name-Text ausgeblendet, das Logo zeigt die Marke schon, der Name daneben
    war reine Wiederholung. */
 .broker-name{font-size:0; margin:0; font-weight:600; color:var(--ink); font-family:'IBM Plex Sans',sans-serif;}
 body.lang-ar .broker-name{font-family:'IBM Plex Sans Arabic',sans-serif;}
@@ -1524,7 +1512,7 @@ body.lang-ar .broker-criteria{font-size:14px; line-height:1.75;}
 }
 
 /* Flex + justify-content:center (not a stretching grid) so the cards stay
-   their natural width and sit centered as a group — leaving open, obviously
+   their natural width and sit centered as a group, leaving open, obviously
    free space on the sides for a 3rd/4th bank to be added later, instead of
    auto-stretching the existing two to fill the row. */
 .find-bank-cards{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;}
@@ -1560,7 +1548,7 @@ body.lang-ar .broker-criteria{font-size:14px; line-height:1.75;}
   animation:find-bank-badge-wiggle 3.2s ease-in-out infinite;
 }
 body.lang-ar .find-bank-bonus-banner{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
-/* Periodic light wiggle, not constant shaking — a brief attention pulse
+/* Periodic light wiggle, not constant shaking, a brief attention pulse
    every ~3s, resting the rest of the time. */
 @keyframes find-bank-badge-wiggle{
   0%, 85%, 100%{transform:rotate(0deg);}
@@ -1604,12 +1592,12 @@ body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
 .find-bank-ad-label{font-size:14px; font-weight:700; color:var(--purple-strong); margin-bottom:10px;}
 .find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0; white-space:pre-line; unicode-bidi:plaintext; text-align:center;}
 
-/* .wrap (20px) + .panel (24px) padding eats 44px per side — on narrow
+/* .wrap (20px) + .panel (24px) padding eats 44px per side, on narrow
    screens that leaves too little width for the embedded widget's own
    mobile layout, causing its cards to clip. Bleeding just the inner
    widget-wrap looked jarring (rounded card → hard edge-to-edge → rounded
    again), so on mobile the whole "compare yourself" panel goes edge-to-edge
-   and drops its rounded-card look — one flat section instead of a card
+   and drops its rounded-card look, one flat section instead of a card
    that only partly breaks its own frame. */
 @media (max-width:640px){
   #find-bank-tool-panel{
@@ -1652,7 +1640,7 @@ footer .copyright a:hover{text-decoration:underline;}
 
 /* Social-Banner im Footer ("Hier findest du mich") */
 /* Dunkle Banner-Karte, gleiche Sprache wie die schwarze Tool-Karte oben
-   (card-ink): satte Fläche, Icons in runden Kreis-Buttons — aber wie jede
+   (card-ink): satte Fläche, Icons in runden Kreis-Buttons, aber wie jede
    andere Karte auf der Seite als abgerundetes Panel innerhalb von .wrap
    statt randlos über die volle Viewport-Breite. */
 .footer-social-banner{
@@ -1707,7 +1695,7 @@ body.lang-ar .footer-social-title{
 }
 
 /* Startseite: "Im Aufbau" */
-/* Ganzseitiger Hintergrund-Layer statt nur hinter dem Hero-Text — fixiert,
+/* Ganzseitiger Hintergrund-Layer statt nur hinter dem Hero-Text, fixiert,
    damit er beim Scrollen den ganzen Viewport deckt. Farben stammen aus der
    eigenen Palette (Periwinkle/Mint/Indigo auf Bone), angelehnt an das
    Moodboard-Referenzbild des Nutzers (weiche verwaschene Farbflächen +
@@ -1723,7 +1711,7 @@ body.lang-ar .footer-social-title{
   animation:pageBgEnter .9s cubic-bezier(.22,.68,0,1) both;
 }
 /* Leichtere Variante für die Werkzeug-Seiten (Rechner/Kostenvergleich/
-   Broker-Finder) — dieselbe Farbschicht wie auf der Startseite, nur über
+   Broker-Finder), dieselbe Farbschicht wie auf der Startseite, nur über
    die Deckkraft des ganzen Layers gedämpft, statt die Verlaufswerte separat
    zu pflegen. Die Hue-Rotate-Varianten verschieben den Farbton pro Seite
    leicht, damit sich die drei Tools optisch unterscheiden, ohne die Palette
@@ -1741,7 +1729,7 @@ body.lang-ar .footer-social-title{
 }
 /* Sanfter, nativer Seitenübergang bei Navigation zwischen den Unterseiten
    (Startseite ↔ Rechner ↔ Kostenvergleich ↔ Broker-Finder) über die
-   Cross-Document View-Transitions-API — ohne JavaScript, in Browsern ohne
+   Cross-Document View-Transitions-API, ohne JavaScript, in Browsern ohne
    Unterstützung einfach ignoriert (normale Navigation ohne Effekt). */
 @view-transition{
   navigation:auto;
@@ -1760,7 +1748,7 @@ body.lang-ar .footer-social-title{
   will-change:transform;
   animation:pageBgDrift 26s ease-in-out infinite alternate;
 }
-/* Einschichtiges Filmkorn — die vorherige Zweischicht-Komposition (grobe +
+/* Einschichtiges Filmkorn, die vorherige Zweischicht-Komposition (grobe +
    feine Turbulenz per feComposite) hat an den Kachel-Rändern sichtbare
    Nähte erzeugt ("wie zusammengesetzte Quadrate"), weil die grobe,
    niederfrequente Schicht bei der Kachelgröße nicht sauber stitcht. Ein
@@ -1775,7 +1763,7 @@ body.lang-ar .footer-social-title{
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size:180px 180px;
 }
-/* Sehr langsame, dezente Verschiebung/Farbdrift statt statischem Bild —
+/* Sehr langsame, dezente Verschiebung/Farbdrift statt statischem Bild,
    Positionen und Skalierung wandern leicht, plus ein sanfter Hue-Drift
    innerhalb der bestehenden Palette (kein neuer Farbton). */
 @keyframes pageBgDrift{
@@ -1880,7 +1868,7 @@ body.lang-ar .landing-sub{font-size:17px;}
   animation:landingFadeIn .7s ease .1s both;
 }
 
-/* Weißer Rahmen-Panel um Titel + Karten — angelehnt an die große weiße
+/* Weißer Rahmen-Panel um Titel + Karten, angelehnt an die große weiße
    Sektion im Referenz-Design ("Six tools, one subscription"), hier mit
    unseren drei Tools statt sechs. */
 .services-panel{
@@ -1911,7 +1899,7 @@ body.lang-ar .landing-services .section-title{
   font-weight:800;
 }
 
-/* Karten-Grid: Icon oben, Titel + Beschreibung, runder Pfeil-Button unten —
+/* Karten-Grid: Icon oben, Titel + Beschreibung, runder Pfeil-Button unten,
    angelehnt an das Referenz-Design (Icon-Kachel + Titel + Learn-more-Pill),
    hier ohne Text im Button, nur Pfeil. */
 .service-cards{
@@ -1947,7 +1935,7 @@ body.lang-ar .landing-services .section-title{
 .service-card.card-ink{background:var(--ink); color:#FFFFFF;}
 .service-card.card-silver{background:#D9D9D6; color:var(--ink);}
 
-/* Obere Reihe: Icon-Kreis links, Pfeil-Kreis rechts — beide rund und auf
+/* Obere Reihe: Icon-Kreis links, Pfeil-Kreis rechts, beide rund und auf
    gleicher Höhe, angelehnt am Referenz-Design. */
 .service-card-top{
   display:flex;
@@ -1973,7 +1961,7 @@ body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans
 }
 body.lang-ar .service-card .service-desc{font-size:16px;}
 
-/* Icon-Kreis oben links — rund statt eckig, angelehnt am Referenz-Design. */
+/* Icon-Kreis oben links, rund statt eckig, angelehnt am Referenz-Design. */
 .service-card-icon{
   flex-shrink:0;
   width:52px;height:52px;
@@ -1997,7 +1985,7 @@ body.lang-ar .service-card .service-desc{font-size:16px;}
 }
 .icon-mask-freedom{--icon-src:url(/img/icons/financial-freedom.png);}
 
-/* Pfeil-Kreis oben rechts, neben dem Icon-Kreis — rund, etwas kleiner und
+/* Pfeil-Kreis oben rechts, neben dem Icon-Kreis, rund, etwas kleiner und
    heller als das Icon, dreht sich der Pfeil selbst in RTL. */
 .service-card .service-cta-arrow{
   display:flex;
@@ -2040,7 +2028,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   .service-card .service-cta-arrow svg{width:11px;height:11px;}
 }
 
-/* Reiner Fließtext statt Farbfläche — kein Card-Look mehr, nur der Satz
+/* Reiner Fließtext statt Farbfläche, kein Card-Look mehr, nur der Satz
    plus drei pulsierende "Loading"-Punkte darunter als dezenter Hinweis,
    dass hier laufend weitergearbeitet wird. */
 .landing-footnote{
@@ -2095,7 +2083,7 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
   .footnote-dots i{animation:none !important; opacity:.6 !important;}
 }
 
-/* Gespeicherte Ergebnisse (Rechner-Seiten) — schwarzes Panel, bewusst
+/* Gespeicherte Ergebnisse (Rechner-Seiten), schwarzes Panel, bewusst
    kompakt gehalten (kleine Schrift/Chips), damit es nicht so viel Gewicht
    wie die eigentlichen Rechenergebnisse bekommt. Cookie-basiert, siehe
    js/saved-results.js. */

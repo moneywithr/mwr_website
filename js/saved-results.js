@@ -58,7 +58,7 @@ window.SavedResults = (function(){
 
   function applySnapshot(fields, snap){
     // Schalter/Dropdowns zuerst (steuern Sichtbarkeit von Folgefeldern),
-    // Werte danach — Reihenfolge ist funktional nicht zwingend nötig (alle
+    // Werte danach, Reihenfolge ist funktional nicht zwingend nötig (alle
     // Felder bleiben im DOM, nur per CSS versteckt), macht es aber klarer.
     fields.filter(f => f.type === 'switch').forEach(f => {
       const el = document.getElementById(f.id);

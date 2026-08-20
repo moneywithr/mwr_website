@@ -7,7 +7,7 @@
   const state = { brokerIndex: '' };
 
   // Länder-Codes sind größtenteils ISO-3166-1-alpha-2 (passend für Flaggen-
-  // Emoji aus Regional-Indicator-Symbolen) — "uk" ist umgangssprachlich und
+  // Emoji aus Regional-Indicator-Symbolen), "uk" ist umgangssprachlich und
   // wird auf "gb" gemappt, "other" hat keine Flagge (Symbol als Platzhalter).
   const FLAG_OVERRIDE = { uk: 'gb', other: null };
   function flagEmoji(id){

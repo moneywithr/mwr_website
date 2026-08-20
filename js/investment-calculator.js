@@ -92,7 +92,7 @@
       else N = Math.max(1, Math.round(r));
     }
 
-    // Für "laufzeit" ist N auf ganze Monate gerundet (Math.round oben) — würde
+    // Für "laufzeit" ist N auf ganze Monate gerundet (Math.round oben), würde
     // man FV daraus neu berechnen, würde die Zielsumme leicht vom eingegebenen
     // Zielwert abweichen (z.B. 99.688 € statt der eingegebenen 100.000 €), obwohl
     // der Nutzer genau diesen Betrag als festes Ziel vorgegeben hat. FV bleibt
@@ -116,7 +116,7 @@
 
   // Steuer wird jährlich auf den seit dem letzten Steuertermin neu entstandenen
   // Gewinn fällig (wie bei einem thesaurierenden Fonds mit jährlicher
-  // Vorabpauschale) und direkt aus dem Portfolio entnommen — dadurch steht das
+  // Vorabpauschale) und direkt aus dem Portfolio entnommen, dadurch steht das
   // versteuerte Geld in den Folgejahren nicht mehr für den Zinseszins zur
   // Verfügung. Das ist der entscheidende Unterschied zu einer einmaligen
   // Steuer erst am Laufzeitende: Wird nur einmal am Ende versteuert, wächst
@@ -168,7 +168,7 @@
     const n = res.snapshots.length; // enthält auch Jahr 0 (Startpunkt)
     const m = n - 1; // Anzahl gezeichneter Balken (Jahr 1..n-1, Jahr 0 wird nicht als eigener Balken gezeigt)
     const maxV = Math.max(...res.snapshots) * 1.08 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
-    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic) —
+    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic),
     // die Arabic-Schrift greift nur als Fallback für tatsächliche arabische
     // Buchstaben, die in denselben <text>-Elementen vorkommen (z.B. "سنة 5").
     const monoFont = window.Site.state.lang === 'ar' ? "'IBM Plex Mono','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Mono',monospace";
@@ -241,12 +241,12 @@
     const axisCaption = `<text x="${padL}" y="${H+10}" text-anchor="start" font-family="${monoFont}" font-size="11.5" fill="#7C7876">${t('yearLabel')}</text>`;
 
     // Callout: Jahr + Gesamtwert, dann die zwei Bestandteile mit passenden
-    // Punkt-Farben — folgt horizontal dem gehoverten/angeklickten Balken
+    // Punkt-Farben, folgt horizontal dem gehoverten/angeklickten Balken
     // (statt an einer festen Stelle zu kleben), damit man Balken und Zahlen
     // nicht mehr quer über das ganze Diagramm hin- und herlesen muss. Bleibt
     // dabei per Clamping innerhalb der Zeichenfläche, damit die Karte am
     // linken/rechten Rand nicht abgeschnitten wird. Wird nur gebaut, wenn
-    // gerade ein Balken aktiv ist (Desktop: Hover, Touch: Tap) — sonst bleibt
+    // gerade ein Balken aktiv ist (Desktop: Hover, Touch: Tap), sonst bleibt
     // das Diagramm ohne Callout.
     let callout = '';
     if(activeIdx !== null){
@@ -301,7 +301,7 @@
     // Kartenrand (wie "Jahr 5  12.345 €"). Da die gerenderte Breite von
     // "Jahr 5" je nach Sprache/Ziffern/Font variiert, wird sie erst nach dem
     // Einfügen ins DOM gemessen (getComputedTextLength) und der Betrag dann
-    // exakt danach positioniert — ein fester x-Versatz würde bei anderer
+    // exakt danach positioniert, ein fester x-Versatz würde bei anderer
     // Textlänge daneben liegen.
     if(activeIdx !== null){
       const yearEl = $('callout-year'), totalEl = $('callout-total');
@@ -316,7 +316,7 @@
   // Desktop (Maus vorhanden): Callout erscheint beim Hovern über einen Balken
   // und verschwindet wieder, sobald die Maus das Diagramm verlässt. Touch
   // (kein Hover): Callout bleibt nach dem Antippen stehen, bis ein anderer
-  // Balken angetippt wird — Tippen simuliert dort keinen Hover-Zustand.
+  // Balken angetippt wird, Tippen simuliert dort keinen Hover-Zustand.
   const chartHoverCapable = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const sparChartSvg = $('spar-chart-svg');
 
@@ -386,7 +386,7 @@
     const lump = state.einmalActive && res.P0 > 0;
     let templateKey;
     if(state.target === 'anfangskapital'){
-      // Hier ist P0 selbst die gesuchte Antwort — eine "mit/ohne Einmalanlage"-
+      // Hier ist P0 selbst die gesuchte Antwort, eine "mit/ohne Einmalanlage"-
       // Unterscheidung ergibt keinen Sinn, es gibt nur eine Fassung.
       templateKey = 'sparExplainAnfangskapital';
     } else if(state.target === 'rate'){
@@ -418,7 +418,7 @@
   }
 
   // Hält den Custom-Select-Button ("Was möchtest du berechnen?") und die
-  // aktive Markierung im Menü synchron mit state.target — muss nach jeder
+  // aktive Markierung im Menü synchron mit state.target, muss nach jeder
   // Auswahl UND nach jedem Sprachwechsel neu aufgerufen werden, weil der
   // Button-Text (anders als die <li>-Optionen) kein data-i18n hat, sondern
   // hier direkt gesetzt wird (er zeigt ja die aktuell GEWÄHLTE Option, nicht
@@ -454,7 +454,7 @@
   }
 
   // Bei hoch angesetzter Rendite (>20%) über viele Jahre wächst der Endbetrag
-  // exponentiell — als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
+  // exponentiell, als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
   // so lang, dass sie in der Ergebnis-Box umbricht und die Box beim Ziehen des
   // Sliders sichtbar mitwächst. Ab einer gewissen Länge deshalb kompakt
   // formatieren (z.B. "12,3 Mio. €"), damit die Box stabil bleibt.
@@ -549,7 +549,7 @@
   });
 
   // Negative Beträge ergeben hier keinen Sinn (Startkapital, Monatsrate,
-  // Sparziel) und würden nur zu irreführenden negativen Ergebnissen führen —
+  // Sparziel) und würden nur zu irreführenden negativen Ergebnissen führen,
   // deshalb bei 0 gekappt statt roh übernommen. Das HTML-min-Attribut allein
   // reicht nicht: Zahlenfelder lassen sich per Tastatur trotzdem auf Werte
   // außerhalb von min/max setzen.

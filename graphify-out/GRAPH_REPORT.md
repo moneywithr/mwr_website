@@ -25,7 +25,7 @@
 - XTB Logo
 
 ## God Nodes (most connected - your core abstractions)
-1. `Money with Rami — Projektstruktur (README)` - 13 edges
+1. `Money with Rami, Projektstruktur (README)` - 13 edges
 2. `ETF vs. Fonds Kostenrechner Page` - 11 edges
 3. `Investitionsrechner Page` - 11 edges
 4. `render()` - 8 edges
@@ -37,24 +37,24 @@
 10. `init()` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Money with Rami — Projektstruktur (README)` --references--> `ETF vs. Fonds Kostenrechner Page`  [EXTRACTED]
+- `Money with Rami, Projektstruktur (README)` --references--> `ETF vs. Fonds Kostenrechner Page`  [EXTRACTED]
   README.md → calculator/fund_etf_fees/index.html
-- `Money with Rami — Projektstruktur (README)` --references--> `Investitionsrechner Page`  [EXTRACTED]
+- `Money with Rami, Projektstruktur (README)` --references--> `Investitionsrechner Page`  [EXTRACTED]
   README.md → calculator/investment/index.html
-- `Money with Rami — Projektstruktur (README)` --references--> `Impressum legal requirement per § 5 TMG`  [EXTRACTED]
+- `Money with Rami, Projektstruktur (README)` --references--> `Impressum legal requirement per § 5 TMG`  [EXTRACTED]
   README.md → impressum/index.html
-- `Money with Rami — Projektstruktur (README)` --references--> `Impressum page (impressum/index.html)`  [EXTRACTED]
+- `Money with Rami, Projektstruktur (README)` --references--> `Impressum page (impressum/index.html)`  [EXTRACTED]
   README.md → impressum/index.html
-- `Money with Rami — Projektstruktur (README)` --references--> `Money with Rami Landing Page`  [EXTRACTED]
+- `Money with Rami, Projektstruktur (README)` --references--> `Money with Rami Landing Page`  [EXTRACTED]
   README.md → index.html
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **Free static hosting options documented in README** — readme_github_pages, readme_netlify, readme_cloudflare_pages [INFERRED 0.80]
-- **Shared Site Layout, Navigation & i18n Pattern** — index_page, calculator_fund_etf_fees_index_page, calculator_investment_index_page, js_i18n, js_common [EXTRACTED 1.00]
-- **Calculator Pages Chart Rendering Pattern** — calculator_fund_etf_fees_index_page, calculator_investment_index_page, js_chart_helpers [EXTRACTED 1.00]
+- **Free static hosting options documented in README**, readme_github_pages, readme_netlify, readme_cloudflare_pages [INFERRED 0.80]
+- **Shared Site Layout, Navigation & i18n Pattern**, index_page, calculator_fund_etf_fees_index_page, calculator_investment_index_page, js_i18n, js_common [EXTRACTED 1.00]
+- **Calculator Pages Chart Rendering Pattern**, calculator_fund_etf_fees_index_page, calculator_investment_index_page, js_chart_helpers [EXTRACTED 1.00]
 
 ## Communities (16 total, 8 thin omitted)
 
@@ -76,7 +76,7 @@ Nodes (9): ETF vs. Fonds Kostenrechner Page, Investitionsrechner Page, Affiliate
 
 ### Community 4 - "Project README & Deployment Docs"
 Cohesion: 0.31
-Nodes (9): Impressum legal requirement per § 5 TMG, Workflow: adding a new section/page, Cloudflare Pages (free hosting option), pyftsubset font subsetting workflow, GitHub Pages (free hosting option), Netlify (free hosting option), Money with Rami — Projektstruktur (README), Tajawal font-weight:600 registered from 500 cut (missing 600 weight workaround) (+1 more)
+Nodes (9): Impressum legal requirement per § 5 TMG, Workflow: adding a new section/page, Cloudflare Pages (free hosting option), pyftsubset font subsetting workflow, GitHub Pages (free hosting option), Netlify (free hosting option), Money with Rami, Projektstruktur (README), Tajawal font-weight:600 registered from 500 cut (missing 600 weight workaround) (+1 more)
 
 ### Community 5 - "Favicon Brand Mark"
 Cohesion: 0.67
@@ -85,14 +85,14 @@ Nodes (3): Purple/Yellow-Green Brand Color Scheme, "R" Monogram Mark, Site Favic
 ## Knowledge Gaps
 - **10 isolated node(s):** `ING broker logo`, `Interactive Brokers Logo`, `Scalable Capital logo`, `Smartbroker+ Logo`, `Trade Republic Logo` (+5 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report**, run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Investitionsrechner Page` connect `Site Pages & Concepts` to `Investment Calculator Logic`, `Shared Site Utilities`, `Fund/ETF Fee Calculator`, `Project README & Deployment Docs`?**
   _High betweenness centrality (0.238) - this node is a cross-community bridge._
-- **Why does `Money with Rami — Projektstruktur (README)` connect `Project README & Deployment Docs` to `Site Pages & Concepts`?**
+- **Why does `Money with Rami, Projektstruktur (README)` connect `Project README & Deployment Docs` to `Site Pages & Concepts`?**
   _High betweenness centrality (0.144) - this node is a cross-community bridge._
 - **Why does `ETF vs. Fonds Kostenrechner Page` connect `Site Pages & Concepts` to `Shared Site Utilities`, `Fund/ETF Fee Calculator`, `Project README & Deployment Docs`?**
   _High betweenness centrality (0.119) - this node is a cross-community bridge._

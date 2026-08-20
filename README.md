@@ -1,10 +1,10 @@
-# Money with Rami — Projektstruktur
+# Money with Rami, Projektstruktur
 
 ```
 project/
 ├─ index.html                             Startseite "Im Aufbau" mit Links zu den 3 Tools (/)
 ├─ impressum/
-│  └─ index.html                          Impressum-Vorlage — echte Daten eintragen! (/impressum/)
+│  └─ index.html                          Impressum-Vorlage, echte Daten eintragen! (/impressum/)
 ├─ calculator/
 │  ├─ investment/
 │  │  └─ index.html                       Investitionsrechner (/calculator/investment/)
@@ -25,7 +25,7 @@ project/
    └─ broker.js                           Logik nur für stuff_i_use/brokerage_finder/index.html
 ```
 
-Die Startseite `/` ist aktuell eine "Im Aufbau"-Seite ohne eigenes JS — sie nutzt nur
+Die Startseite `/` ist aktuell eine "Im Aufbau"-Seite ohne eigenes JS, sie nutzt nur
 `i18n.js` und `common.js` für Sprachumschaltung und verlinkt auf die drei aktiven Tools.
 
 Alle URL-Pfade sind bewusst auf Englisch gehalten (`calculator`, `investment`,
@@ -34,12 +34,12 @@ die gerade auf der Seite ausgewählt ist.
 
 ## Schriften
 Alle Schriften liegen lokal im Ordner `fonts/` und werden über `@font-face` in
-`css/style.css` eingebunden — keine Abhängigkeit von Google Fonts.
+`css/style.css` eingebunden, keine Abhängigkeit von Google Fonts.
 - **Latein/Zahlen:** IBM Plex Sans, IBM Plex Mono
 - **Arabisch:** Tajawal (ersetzt seit August 2026 IBM Plex Sans Arabic)
 - **Markenname:** Unbounded
 
-Tajawal gibt es nur in den Schnitten 400/500/700 (kein 600) — der 500er-Schnitt
+Tajawal gibt es nur in den Schnitten 400/500/700 (kein 600), der 500er-Schnitt
 ist in `css/style.css` zusätzlich als `font-weight:600` registriert, damit
 bestehende `font-weight:600`-Stellen im CSS ohne weitere Änderungen funktionieren.
 
@@ -57,12 +57,12 @@ erhalten, wo Kontrastregeln nicht gelten.
 ## Impressum
 **Wichtig:** `impressum/index.html` ist nur eine Vorlage mit Platzhaltern
 (Name, Adresse, E-Mail). Vor der Veröffentlichung unbedingt die echten Angaben
-eintragen — ein Impressum mit Platzhaltertext erfüllt die gesetzliche Pflicht
+eintragen, ein Impressum mit Platzhaltertext erfüllt die gesetzliche Pflicht
 nach § 5 TMG nicht.
 
 ## Eine neue Sektion/Seite hinzufügen
 
-1. Neue Datei `meine-seite.html` anlegen — kopiere Kopf/Nav/Footer aus einer
+1. Neue Datei `meine-seite.html` anlegen, kopiere Kopf/Nav/Footer aus einer
    bestehenden Seite (`index.html` etc.), damit Branding und Sprache gleich bleiben.
 2. Im `<nav class="tab-nav">` einen weiteren Link ergänzen, in **allen** HTML-Dateien:
    ```html
@@ -109,16 +109,16 @@ unterstützen eigene Domains.
 
 **2. Netlify**
 1. Auf netlify.com registrieren.
-2. Den `project`-Ordner per Drag & Drop auf die Netlify-Startseite ziehen ("Deploy manually") — fertig, sofort live.
+2. Den `project`-Ordner per Drag & Drop auf die Netlify-Startseite ziehen ("Deploy manually"), fertig, sofort live.
 3. Für automatische Updates: stattdessen das GitHub-Repo verbinden ("Import from Git").
 4. Eigene Domain unter Site settings → Domain management kostenlos verbinden.
 
 **3. Cloudflare Pages**
 1. Auf pages.cloudflare.com registrieren, GitHub-Repo verbinden.
 2. Build-Befehl leer lassen (kein Build nötig), Output-Verzeichnis `/` (root).
-3. Deploy — Seite ist unter `DEIN-PROJEKT.pages.dev` live, eigene Domain kostenlos möglich.
+3. Deploy, Seite ist unter `DEIN-PROJEKT.pages.dev` live, eigene Domain kostenlos möglich.
 
 Alle drei bieten kostenloses HTTPS, unbegrenzten Traffic für so ein statisches
 Projekt und automatische Deployments bei jeder Änderung, wenn du sie mit
-GitHub verbindest — für den Anfang ist GitHub Pages oder Netlify (Drag & Drop)
+GitHub verbindest, für den Anfang ist GitHub Pages oder Netlify (Drag & Drop)
 am schnellsten eingerichtet.

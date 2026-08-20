@@ -1,5 +1,5 @@
 // Gemeinsame SVG-Chart-Bausteine für investment-calculator.js und
-// fund-comparison-calculator.js — beide zeichnen ein Liniendiagramm mit
+// fund-comparison-calculator.js, beide zeichnen ein Liniendiagramm mit
 // gleichem Aufbau (Skalen, Pfade, Füllfläche zwischen zwei Serien, Gitter).
 // Diagramm-spezifische Teile (Callout-Text/-Farbe, Anzahl der Linien) bleiben
 // in den jeweiligen Dateien.

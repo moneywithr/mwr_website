@@ -47,7 +47,7 @@
     const H = 360, padL = 56, padT = 20, padB = 34;
     const n = noCost.snapshots.length;
     const maxV = Math.max(...noCost.snapshots) * 1.06 || 1; // Fallback verhindert Division durch 0, wenn nie eingezahlt wird
-    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic) —
+    // Ziffern bleiben in Mono/Sans wie bei DE/EN (nicht IBM Plex Sans Arabic),
     // die Arabic-Schrift greift nur als Fallback für tatsächliche arabische
     // Buchstaben, die in denselben <text>-Elementen vorkommen (z.B. "سنة 5").
     const monoFont = window.Site.state.lang === 'ar' ? "'IBM Plex Mono','IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Mono',monospace";
@@ -95,7 +95,7 @@
   }
 
   // Bei hoch angesetzter Rendite (>20%) über viele Jahre wachsen die Beträge
-  // exponentiell — als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
+  // exponentiell, als volle Zahl ausgeschrieben (fmtEUR) wird die Ziffernfolge
   // so lang, dass sie in den Ergebnis-Boxen umbricht und diese sichtbar
   // mitwachsen. Ab einer gewissen Länge deshalb kompakt formatieren (z.B.
   // "12,3 Mio. €"), damit die Boxen stabil bleiben. Siehe investment-calculator.js.

@@ -7,9 +7,9 @@
 <script>setTimeout(function(){document.documentElement.style.visibility="visible";}, 1500);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>حاسبة الحرية المالية | Money with Rami</title>
-<meta name="description" content="احسب قديش رأس المال يلي بدك ياه عشان توصل للحرية المالية وتعيش من عوائد استثمارك — حاسبة FIRE مجانية بالعربي.">
+<meta name="description" content="احسب قديش رأس المال يلي بدك ياه عشان توصل للحرية المالية وتعيش من عوائد استثمارك. حاسبة FIRE مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/financial_freedom/">
-<link rel="stylesheet" href="/css/style.css?v=20260820a">
+<link rel="stylesheet" href="/css/style.css?v=20260821a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
@@ -203,11 +203,35 @@
         </div>
       </div>
 
+      <div class="block" id="field-tax">
+        <div class="switch-row">
+          <span class="label field-label-text">
+            <span data-i18n="fireLabelTaxToggle">Kapitalertragsteuer berücksichtigen?</span>
+            <span class="info-tip" tabindex="0" data-i18n-tip="fireTipTaxToggle" data-tip="الضريبة عم تنحسب بمكانين: خلال فترة الادخار رأس مالك بينمو من دون ما تنخصم منه ضريبة، وبس توصل للحرية المالية بتنحسب الضريبة مرة وحدة على كامل ربحك (القيمة النهائية ناقص المبلغ يلي دفعته). وبفترة السحب، الضريبة بتنحسب بس على الأرباح، مش على رأس مالك، يعني إذا فعّلت استهلاك رأس المال، الجزء يلي هو مصاريك الأصلية عم ترجعلك بيضل معفى من الضريبة. الافتراضي هون هو معدل الضريبة الألماني، بس فيك تعدله حسب بلدك أو تصفّره إذا ما في عندك ضرائب على الاستثمار."><span class="info-tip-glyph"></span></span>
+          </span>
+          <div class="switch" id="sw-tax"></div>
+        </div>
+        <div class="fields" id="fields-tax">
+          <div class="field">
+            <div class="field-label">
+              <span class="field-label-text">
+                <span data-i18n="fireLabelTaxRate">Steuersatz der Kapitalertragsteuer</span>
+                <span class="info-tip" tabindex="0" data-i18n-tip="fireTipTaxRate" data-tip="بألمانيا: 25% ضريبة أرباح رأسمالية (Abgeltungsteuer) + 5.5% ضريبة تضامن (Solidaritätszuschlag) عليها = 26.375%، وهاد هو الرقم المعبّى افتراضيًا. إذا عليك ضريبة كنيسة بيصير 27.82% (بافاريا وبادن-فورتمبيرغ) أو 27.99% (باقي الولايات). غيّره حسب ضريبة بلدك، أو خليه صفر إذا ما عندك ضرائب على أرباح الاستثمار."><span class="info-tip-glyph"></span></span>
+              </span>
+              <span class="inline-num-group wide">
+                <input type="number" id="fire-tax-rate" class="inline-num-input wide" value="26.375" min="0" max="99" step="0.005">
+                <span class="inline-num-unit">%</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="block" id="field-depletion">
         <div class="switch-row">
           <span class="label field-label-text">
             <span data-i18n="fireLabelDepletionToggle">Kapitalverzehr?</span>
-            <span class="info-tip" tabindex="0" data-i18n-tip="fireTipDepletionToggle" data-tip="في طريقتين تقدر تعيش فيهم من استثمارك بعد التقاعد. مطفي (الافتراضي): بتعيش بس من عوائد استثمارك، ورأس مالك الأصلي بضل موجود ما بينقص أبدًا — بس بتحتاج مبلغ أكبر بالبداية. مشغّل: رأس مالك بينقص شوي كل شهر ولحد ما يخلص بالضبط بالعمر يلي بتحدده بخانة 'العمر المتوقع لنهاية حياتك' — بتحتاج مبلغ أقل. مثال: لو حددت عمر 90، رأس مالك رح يتناقص تدريجيًا ويوصل صفر بالظبط بعمر 90."><span class="info-tip-glyph"></span></span>
+            <span class="info-tip" tabindex="0" data-i18n-tip="fireTipDepletionToggle" data-tip="في طريقتين تقدر تعيش فيهم من استثمارك بعد التقاعد. مطفي (الافتراضي): بتعيش بس من عوائد استثمارك، ورأس مالك الأصلي بضل موجود ما بينقص أبدًا، بس بتحتاج مبلغ أكبر بالبداية. مشغّل: رأس مالك بينقص شوي كل شهر ولحد ما يخلص بالضبط بالعمر يلي بتحدده بخانة 'العمر المتوقع لنهاية حياتك'، وبتحتاج مبلغ أقل. مثال: لو حددت عمر 90، رأس مالك رح يتناقص تدريجيًا ويوصل صفر بالظبط بعمر 90."><span class="info-tip-glyph"></span></span>
           </span>
           <div class="switch" id="sw-depletion"></div>
         </div>
@@ -287,13 +311,12 @@
         </div>
       </div>
 
-      <p class="note-banner" data-i18n="fireTaxNote">Hinweis: Dieser Rechner berücksichtigt aus Vereinfachungsgründen keine Steuern.</p>
-
     </div>
   </div>
 
   <footer>
-    <p data-i18n="fireFooter">Dieser Rechner arbeitet mit vereinfachten Annahmen (konstante jährliche Rendite und Inflation, keine Steuern oder Gebühren) und dient nur zur Veranschaulichung, keine Anlageberatung. Reale Werte schwanken.</p>
+    <p data-i18n="fireFooter">Dieser Rechner arbeitet mit vereinfachten Annahmen (konstante jährliche Rendite und Inflation, keine Gebühren) und dient nur zur Veranschaulichung, keine Anlageberatung. Reale Werte schwanken.</p>
+    <p data-i18n="fireTaxNote">Die Kapitalertragsteuer ist optional und vereinfacht berechnet: einmalig am Ende der Ansparphase auf den Gewinn, dazu auf die Auszahlungen. Sonderregeln wie Vorabpauschale, Teilfreistellung oder Sparerpauschbetrag bleiben außen vor. Prüfe die genauen Steuerregeln deines Wohnlandes selbst.</p>
     <div class="footer-social-banner">
       <span class="footer-social-title" data-i18n="footerFindMe">تابعني هون</span>
       <div class="footer-social-icons">
@@ -313,9 +336,9 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260819b"></script>
+<script src="/js/i18n.js?v=20260821d"></script>
 <script src="/js/common.js?v=20260817c"></script>
 <script src="/js/saved-results.js?v=20260818a"></script>
-<script src="/js/financial-freedom-calculator.js?v=20260817c"></script>
+<script src="/js/financial-freedom-calculator.js?v=20260821d"></script>
 </body>
 </html>
