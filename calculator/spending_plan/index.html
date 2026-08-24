@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>html{visibility:hidden;}</style>
+<noscript><style>html{visibility:visible !important;}</style></noscript>
+<script>setTimeout(function(){document.documentElement.style.visibility="visible";}, 1500);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف أنظم دخلي؟ | Money with Rami</title>
+<meta name="description" content="احسب كيف توزع دخلك الشهري الصافي: قديش لازم تصرف على مصاريفك الثابتة، قديش تستثمر، قديش تدّخر، وقديش فيك تصرف من دون ما تحاسب حالك. حاسبة خطة الإنفاق الواعي مجانية بالعربي.">
+<link rel="canonical" href="https://moneywithrami.com/calculator/spending_plan/">
+<link rel="stylesheet" href="/css/style.css?v=20260823g">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+</head>
+<body class="lang-ar" data-i18n-title="spendPageTitle">
+
+<div class="page-bg subtle hue-d" aria-hidden="true"></div>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="flag-circle-clip"><circle cx="12" cy="12" r="12"/></clipPath>
+  </defs>
+  <symbol id="flag-eur" viewBox="0 0 24 24">
+    <g clip-path="url(#flag-circle-clip)">
+      <rect width="24" height="24" fill="#1E3A8A"/>
+      <g fill="#FFD700">
+        <circle cx="12" cy="4.6" r="1.05"/>
+        <circle cx="17.6" cy="7" r="1.05"/>
+        <circle cx="19.6" cy="12" r="1.05"/>
+        <circle cx="17.6" cy="17" r="1.05"/>
+        <circle cx="12" cy="19.4" r="1.05"/>
+        <circle cx="6.4" cy="17" r="1.05"/>
+        <circle cx="4.4" cy="12" r="1.05"/>
+        <circle cx="6.4" cy="7" r="1.05"/>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="flag-usd" viewBox="0 0 24 24">
+    <g clip-path="url(#flag-circle-clip)">
+      <rect width="24" height="24" fill="#FFFFFF"/>
+      <g fill="#B22234">
+        <rect y="0" width="24" height="1.85"/>
+        <rect y="3.7" width="24" height="1.85"/>
+        <rect y="7.4" width="24" height="1.85"/>
+        <rect y="11.1" width="24" height="1.85"/>
+        <rect y="14.8" width="24" height="1.85"/>
+        <rect y="18.5" width="24" height="1.85"/>
+        <rect y="22.2" width="24" height="1.85"/>
+      </g>
+      <rect x="0" y="0" width="11" height="13" fill="#3C3B6E"/>
+    </g>
+  </symbol>
+  <symbol id="flag-aed" viewBox="0 0 24 24">
+    <g clip-path="url(#flag-circle-clip)">
+      <rect width="24" height="24" fill="#FFFFFF"/>
+      <rect y="0" width="24" height="8" fill="#00732F"/>
+      <rect y="16" width="24" height="8" fill="#000000"/>
+      <rect x="0" y="0" width="7" height="24" fill="#FF0000"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="top-banner">
+  <div class="top-banner-inner">
+    <a class="brand-name" href="/">
+      <span class="brand-line">Money with</span>
+      <span class="brand-line">Rami<span class="brand-dot">.</span></span>
+    </a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn active" data-lang="ar">عربي</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="nav-row">
+    <nav class="tab-nav">
+      <a class="tab-btn" href="/calculator/investment/" data-page="/calculator/investment/" data-i18n="tabRoi">Rechner</a>
+      <a class="tab-btn" href="/calculator/fund_etf_fees/" data-page="/calculator/fund_etf_fees/" data-i18n="tabCalculator">Kostenvergleich</a>
+      <a class="tab-btn" href="/calculator/financial_freedom/" data-page="/calculator/financial_freedom/" data-i18n="tabFire">FIRE-Rechner</a>
+      <a class="tab-btn" href="/calculator/spending_plan/" data-page="/calculator/spending_plan/" data-i18n="tabSpend">Ausgabenplan</a>
+      <a class="tab-btn" href="/stuff_i_use/brokerage_finder/" data-page="/stuff_i_use/brokerage_finder/" data-i18n="tabBroker">Broker-Finder</a>
+      <a class="tab-btn" href="/stuff_i_use/find_bank/" data-page="/stuff_i_use/find_bank/" data-i18n="tabFindBank">Bank-Finder</a>
+    </nav>
+  </div>
+
+  <header>
+    <div class="header-text">
+      <div class="eyebrow" data-i18n="spendEyebrow">Budgetplan</div>
+      <h1 data-i18n="spendTitle">Wie organisiere ich mein Einkommen?</h1>
+      <p data-i18n="spendIntro">Gib dein monatliches Nettoeinkommen und deine Fixkosten ein und finde heraus, wie viel du investieren, wie viel du sparen und wie viel du dir ohne schlechtes Gewissen gönnen kannst.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <div class="panel panel-input">
+      <div class="block block-goal">
+        <div class="section-title">
+        <span data-i18n="spendSection">Deine Angaben</span>
+        <div class="currency-switch currency-switch-compact">
+          <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
+            <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
+            <span class="cs-code">EUR</span>
+            <svg class="currency-switch-chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="currency-switch-menu" role="listbox">
+            <li role="option" data-currency="EUR" class="active" aria-selected="true">
+              <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
+              <span class="cs-code">EUR</span>
+              <span class="cs-name">Euro</span>
+            </li>
+            <li role="option" data-currency="USD" aria-selected="false">
+              <svg class="currency-flag-icon"><use href="#flag-usd"></use></svg>
+              <span class="cs-code">USD</span>
+              <span class="cs-name">US Dollar</span>
+            </li>
+            <li role="option" data-currency="AED" aria-selected="false">
+              <svg class="currency-flag-icon"><use href="#flag-aed"></use></svg>
+              <span class="cs-code">AED</span>
+              <span class="cs-name">UAE Dirham</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+
+      <div class="block">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelNetIncome">Monatliches Nettoeinkommen</span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipNetIncome" data-tip="دخلك الشهري بعد اقتطاع الضرائب، يعني المبلغ إلي فعليًا بيوصل لحسابك البنكي."><span class="info-tip-glyph"></span></span>
+            </span>
+          </div>
+          <input type="number" id="spend-netincome" value="2500" min="0" step="50">
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="section-title cat-fixed"><span><span data-i18n="spendFixedTitle">Fixkosten</span> <span class="cat-badge">50–60%</span></span></div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelRent">Miete / Hypothekenrate</span>
+            </span>
+          </div>
+          <input type="number" id="spend-rent" value="700" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelUtilities">Nebenkosten (Strom, Wasser, Gas, Internet, Handy)</span>
+            </span>
+          </div>
+          <input type="number" id="spend-utilities" value="170" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelInsurance">Versicherungen (Kranken-, Auto-, Hausrat)</span>
+            </span>
+          </div>
+          <input type="number" id="spend-insurance" value="120" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelDebt">Monatliche Raten (Kreditkarte, Auto)</span>
+            </span>
+          </div>
+          <input type="number" id="spend-debt" value="100" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelSubscriptions">Abos (Netflix, Fitnessstudio, etc.)</span>
+            </span>
+          </div>
+          <input type="number" id="spend-subscriptions" value="30" min="0" step="5">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelOtherFixed">Sonstiges, nicht aufgeführt</span>
+            </span>
+          </div>
+          <input type="number" id="spend-other-fixed" value="0" min="0" step="10">
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="section-title cat-variable"><span><span data-i18n="spendVariableTitle">Variable Kosten</span> <span class="cat-badge">20–35%</span></span></div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelGroceries">Lebensmittel</span>
+            </span>
+          </div>
+          <input type="number" id="spend-groceries" value="250" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelDiningOut">Essen gehen &amp; Freizeit</span>
+            </span>
+          </div>
+          <input type="number" id="spend-diningout" value="100" min="0" step="10">
+        </div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelClothes">Kleidung</span>
+            </span>
+          </div>
+          <input type="number" id="spend-clothes" value="40" min="0" step="10">
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="section-title cat-save"><span><span data-i18n="spendShortTermTitle">Kurzfristiges Sparen</span> <span class="cat-badge">5–10%</span></span></div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelShortTermPct">Anteil fürs Sparen (z. B. Reisen, Geschenke)</span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipShortTermPct" data-tip="النسبة المقترحة من دخلك الصافي لهدف ادخار قصير المدى، متل السفر أو الهدايا. النصيحة الشائعة: 5-10%، أو لحد 20% مع الاستثمار مع بعض حسب قاعدة 50-30-20 (Finanztip)."><span class="info-tip-glyph"></span></span>
+            </span>
+          </div>
+          <div class="pct-choices" id="spend-shortterm-pct-choices">
+            <button type="button" class="pct-choice-btn" data-value="5">5%</button>
+            <button type="button" class="pct-choice-btn active" data-value="10">10%</button>
+            <button type="button" class="pct-choice-btn" data-value="15">15%</button>
+            <button type="button" class="pct-choice-btn" data-value="20">20%</button>
+            <span class="pct-choice-custom">
+              <input type="number" id="spend-shortterm-pct-input" class="inline-num-input" value="10" min="0" max="30" step="0.5">
+              <span class="inline-num-unit">%</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="section-title cat-invest"><span><span data-i18n="spendFutureTitle">Deine Zukunft</span> <span class="cat-badge">10%</span></span></div>
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="spendLabelFuturePct">Anteil fürs Investieren &amp; langfristiges Sparen</span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipFuturePct" data-tip="النسبة المقترحة من دخلك الصافي لمستقبلك: الاستثمار طويل المدى (تقاعد، أسهم، صناديق مؤشرات) والادخار طويل المدى مع بعض. النصيحة الشائعة: حوالي 10%، أو حوالي 15% حسب قاعدة 50-30-20 (Finanztip) إذا بدك تعوّض 80% من دخلك بالتقاعد."><span class="info-tip-glyph"></span></span>
+            </span>
+          </div>
+          <div class="pct-choices" id="spend-future-pct-choices">
+            <button type="button" class="pct-choice-btn" data-value="5">5%</button>
+            <button type="button" class="pct-choice-btn active" data-value="10">10%</button>
+            <button type="button" class="pct-choice-btn" data-value="15">15%</button>
+            <button type="button" class="pct-choice-btn" data-value="20">20%</button>
+            <span class="pct-choice-custom">
+              <input type="number" id="spend-future-pct-input" class="inline-num-input" value="10" min="0" max="40" step="0.5">
+              <span class="inline-num-unit">%</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="calc-warning" id="spend-warning" data-i18n="spendOverspentWarning">Deine Kategorien übersteigen dein Nettoeinkommen.</div>
+      </div>
+    </div>
+
+    <div class="results">
+
+      <div class="panel result-summary">
+        <div class="result-summary-top">
+          <div class="result-summary-stats">
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="spendStatIncomeLabel">Nettoeinkommen</span>
+              <span class="rs-value" id="spend-stat-income">–</span>
+            </div>
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="spendStatAllocatedLabel">Verteilt auf die 4 Kategorien</span>
+              <span class="rs-value" id="spend-stat-allocated">–</span>
+            </div>
+          </div>
+          <div class="result-summary-divider"></div>
+          <div class="result-summary-final">
+            <span class="rs-label" data-i18n="spendStatUnallocatedLabel">Noch nicht zugewiesen</span>
+            <span class="rs-value-big" id="spend-stat-unallocated">–</span>
+          </div>
+        </div>
+        <div class="result-summary-explain" id="spend-result-explain"></div>
+      </div>
+
+      <div class="panel spend-chart-panel">
+        <div class="section-title" data-i18n="spendChartTitle">Einkommensverteilung</div>
+        <div class="spend-chart-row">
+          <div class="spend-donut" id="spend-donut"></div>
+          <div class="spend-legend" id="spend-legend"></div>
+        </div>
+      </div>
+
+      <div class="stat-row centered spend-stat-grid">
+        <div class="stat-card spend-fixed">
+          <div class="v" id="spend-stat-fixed">–</div>
+          <div class="k" data-i18n="spendStatFixedLabel">Feste Kosten</div>
+        </div>
+        <div class="stat-card spend-variable">
+          <div class="v" id="spend-stat-variable">–</div>
+          <div class="k" data-i18n="spendStatVariableLabel">Variable Kosten</div>
+        </div>
+        <div class="stat-card spend-save">
+          <div class="v" id="spend-stat-shortterm">–</div>
+          <div class="k" data-i18n="spendStatShortTermLabel">Kurzfristiges Sparen</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="v" id="spend-stat-future">–</div>
+          <div class="k" data-i18n="spendStatFutureLabel">Für deine Zukunft</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p data-i18n="spendFooter">Dieser Rechner basiert auf dem Modell des "Conscious Spending Plan" und liefert nur eine grobe Orientierung, keine Anlage- oder Finanzberatung. Prüfe deine tatsächliche finanzielle Situation, bevor du Entscheidungen triffst.</p>
+    <div class="footer-social-banner">
+      <span class="footer-social-title" data-i18n="footerFindMe">تابعني هون</span>
+      <div class="footer-social-icons">
+        <a href="https://www.instagram.com/moneywithrami" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@moneywithrami" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="copyright">© <span id="copy-year"></span> moneywithrami</p>
+    <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
+    <p class="copyright"><a href="/impressum/" data-i18n="footerImpressum">Impressum</a></p>
+    <p class="copyright"><a href="/datenschutz/" data-i18n="footerPrivacy">Datenschutzerklärung</a></p>
+  </footer>
+
+</div>
+
+<script src="/js/i18n.js?v=20260823g"></script>
+<script src="/js/common.js?v=20260817c"></script>
+<script src="/js/saved-results.js?v=20260818a"></script>
+<script src="/js/spending-plan-calculator.js?v=20260823h"></script>
+</body>
+</html>

@@ -406,6 +406,57 @@ body.lang-ar .tab-btn{
    (längster Label-Text) die Währungsauswahl unter den Text. */
 .section-title > span:first-child{flex:1 1 auto; min-width:0;}
 .section-title .currency-switch{flex:0 0 auto;}
+
+/* Kategorie-Farben (spending_plan): Die 4 Blöcke (Fixkosten, Variable
+   Kosten, Kurzfristiges Sparen, Deine Zukunft) bekommen jeweils eine eigene
+   Hintergrundfarbe für die ganze Titelzeile (statt nur einem dünnen Rand),
+   damit man sie auf einen Blick auseinanderhält, unabhängig von der Sprache
+   (nicht nur bei .lang-ar, wo der Rand sonst standardmäßig existiert). */
+.section-title.cat-fixed,
+.section-title.cat-invest,
+.section-title.cat-save,
+.section-title.cat-variable{
+  border-inline-start:none;
+  padding:7px 12px;
+  border-radius:10px;
+}
+body.lang-ar .section-title.cat-fixed,
+body.lang-ar .section-title.cat-invest,
+body.lang-ar .section-title.cat-save,
+body.lang-ar .section-title.cat-variable{
+  border-inline-start:none;
+  padding:7px 12px;
+}
+.section-title.cat-fixed{background:var(--periwinkle-dim); color:#31417A;}
+.section-title.cat-invest{background:var(--purple-dim); color:var(--purple-strong);}
+.section-title.cat-save{background:#F7FFCC; color:#5C6600;}
+.section-title.cat-variable{background:#FBEAE3; color:#8A3117;}
+
+.cat-badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0;
+  text-transform:none;
+  padding:2px 9px;
+  border-radius:999px;
+  margin-inline-start:8px;
+  vertical-align:middle;
+  /* Zahlenbereich (z.B. "50–60%") soll immer in dieser Reihenfolge stehen,
+     auch im arabischen RTL-Kontext, sonst dreht die Bidi-Logik den
+     Gedankenstrich-Ausdruck um ("60%–50"). */
+  direction:ltr;
+  unicode-bidi:embed;
+}
+body.lang-ar .cat-badge{font-size:12.5px;}
+.cat-fixed .cat-badge,
+.cat-invest .cat-badge,
+.cat-save .cat-badge,
+.cat-variable .cat-badge{
+  background:rgba(255,255,255,.6);
+  color:inherit;
+}
 body.lang-ar .section-title{
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   letter-spacing:0;
@@ -563,6 +614,36 @@ input[type=number].inline-num-input.wide{width:82px;}
 }
 body.lang-ar .inline-num-unit{font-size:14px;}
 
+/* Quote-Auswahl als Boxen statt Slider (spending_plan): klarer als ein
+   Slider, wo der genaue Wert schwer zu treffen ist. Feste Prozentwerte
+   als Buttons, plus ein Zahlenfeld daneben für einen eigenen Wert. */
+.pct-choices{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+}
+.pct-choice-btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1.5px solid var(--line);
+  background:var(--panel);
+  color:var(--ink);
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.pct-choice-btn:hover{border-color:var(--purple);}
+.pct-choice-btn.active{background:var(--purple); border-color:var(--purple); color:#FFFFFF;}
+body.lang-ar .pct-choice-btn{font-size:15px;}
+.pct-choice-custom{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+
 /* Info-Icon mit Erklärungs-Tooltip beim Hover/Fokus */
 .info-tip{
   display:inline-flex;
@@ -714,6 +795,66 @@ body.lang-ar .product-card .p-sub{font-size:14.5px;}
   margin-bottom:20px;
 }
 @media (max-width:640px){.stat-row{grid-template-columns:1fr;}}
+.stat-row.spend-stat-grid{grid-template-columns:repeat(4, 1fr);}
+@media (max-width:900px){.stat-row.spend-stat-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:480px){.stat-row.spend-stat-grid{grid-template-columns:1fr;}}
+
+/* Einkommensverteilung als Donut (spending_plan): Kreisdiagramm links,
+   Legende mit Ist-/Soll-Prozent rechts, bricht auf schmalen Screens
+   untereinander um. */
+.spend-chart-panel{margin-bottom:20px;}
+.spend-chart-row{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-wrap:wrap;
+}
+.spend-donut{flex:0 0 auto;}
+.spend-donut svg{display:block; width:180px; height:180px;}
+.spend-legend{
+  flex:1 1 240px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-width:0;
+}
+.spend-legend-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.spend-legend-dot{
+  width:11px; height:11px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.spend-legend-text{
+  flex:1 1 auto;
+  min-width:0;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:8px;
+  font-size:14px;
+  color:var(--ink);
+}
+body.lang-ar .spend-legend-text{font-size:15.5px;}
+.spend-legend-name{font-weight:600; overflow-wrap:break-word;}
+.spend-legend-pcts{
+  flex-shrink:0;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--text-muted);
+}
+.spend-legend-pcts strong{color:var(--ink); font-weight:700;}
+/* Nur der Zahlenbereich (z.B. "50–60%") fest LTR, nicht der ganze Satz,
+   sonst wirft unicode-bidi:embed auf dem gemischten arabischen/lateinischen
+   Text die Wortreihenfolge durcheinander (siehe .cat-badge). */
+.num-range{display:inline-block; direction:ltr; unicode-bidi:embed;}
+@media (max-width:480px){
+  .spend-chart-row{justify-content:center;}
+  .spend-donut svg{width:150px; height:150px;}
+}
 
 .result-summary{
   background:var(--green);
@@ -796,6 +937,9 @@ body.lang-ar .result-summary-final .rs-label{
   line-height:1.15;
 }
 body.lang-ar .result-summary-final .rs-value-big{font-size:33px;}
+/* Negativer Rest (spending_plan: mehr verplant als Nettoeinkommen) statt
+   Weiß in einem warnenden Ton, bleibt aber auf dem dunklen Panel lesbar. */
+.rs-value-big.negative{color:#FFB199;}
 .result-summary-explain{
   font-family:'IBM Plex Sans',sans-serif;
   font-size:12.5px;
@@ -895,6 +1039,20 @@ body.lang-ar .stat-card .v{font-size:28px;}
 .stat-card.orange{background:#F2FFB8; border-color:var(--mint);}
 .stat-card.orange .v{color:var(--ink);}
 .stat-card.orange .k{color:var(--ink);}
+/* Eigene Kategorie-Farben für spending_plan, statt der zweideutigen
+   .green (sieht eigentlich indigo/lila aus) und .orange (sieht eigentlich
+   hellgrün aus) Klassen: je eine je Kategorie, passend zu den .cat-*-Farben
+   der Eingabe-Sections (Fixkosten=periwinkle, Variabel=orange,
+   Zukunft=purple, Kurzfristiges Sparen=Limette). */
+.stat-card.spend-fixed{background:var(--periwinkle-dim); border-color:var(--periwinkle);}
+.stat-card.spend-fixed .v{color:#31417A;}
+.stat-card.spend-fixed .k{color:#31417A; opacity:.75;}
+.stat-card.spend-variable{background:#FCE1D6; border-color:var(--exuberant-orange);}
+.stat-card.spend-variable .v{color:var(--exuberant-orange);}
+.stat-card.spend-variable .k{color:var(--exuberant-orange); opacity:.8;}
+.stat-card.spend-save{background:#F7FFCC; border-color:var(--mint);}
+.stat-card.spend-save .v{color:#5C6600;}
+.stat-card.spend-save .k{color:#5C6600; opacity:.75;}
 .stat-card .sub{font-size:13px; color:var(--text-muted); margin-top:6px;}
 body.lang-ar .stat-card .sub{font-size:14.5px;}
 
@@ -1934,6 +2092,7 @@ body.lang-ar .landing-services .section-title{
 .service-card.card-purple{background:var(--purple-dim); color:var(--ink);}
 .service-card.card-ink{background:var(--ink); color:#FFFFFF;}
 .service-card.card-silver{background:#D9D9D6; color:var(--ink);}
+.service-card.card-gold{background:var(--butter); color:var(--ink);}
 
 /* Obere Reihe: Icon-Kreis links, Pfeil-Kreis rechts, beide rund und auf
    gleicher Höhe, angelehnt am Referenz-Design. */
