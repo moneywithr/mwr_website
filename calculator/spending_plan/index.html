@@ -9,7 +9,7 @@
 <title>كيف أنظم دخلي؟ | Money with Rami</title>
 <meta name="description" content="احسب كيف توزع دخلك الشهري الصافي: قديش لازم تصرف على مصاريفك الثابتة، قديش تستثمر، قديش تدّخر، وقديش فيك تصرف من دون ما تحاسب حالك. حاسبة خطة الإنفاق الواعي مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/spending_plan/">
-<link rel="stylesheet" href="/css/style.css?v=20260823g">
+<link rel="stylesheet" href="/css/style.css?v=20260824b">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -229,7 +229,7 @@
           <div class="field-label">
             <span class="field-label-text">
               <span data-i18n="spendLabelShortTermPct">Anteil fürs Sparen (z. B. Reisen, Geschenke)</span>
-              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipShortTermPct" data-tip="النسبة المقترحة من دخلك الصافي لهدف ادخار قصير المدى، متل السفر أو الهدايا. النصيحة الشائعة: 5-10%، أو لحد 20% مع الاستثمار مع بعض حسب قاعدة 50-30-20 (Finanztip)."><span class="info-tip-glyph"></span></span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipShortTermPct" data-tip="النسبة المقترحة من دخلك الصافي لهدف ادخار قصير المدى، متل السفر أو الهدايا. النصيحة الشائعة: 5-10%، أو لحد 20% مع الاستثمار مع بعض حسب قاعدة 50-30-20."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
           <div class="pct-choices" id="spend-shortterm-pct-choices">
@@ -251,7 +251,7 @@
           <div class="field-label">
             <span class="field-label-text">
               <span data-i18n="spendLabelFuturePct">Anteil fürs Investieren &amp; langfristiges Sparen</span>
-              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipFuturePct" data-tip="النسبة المقترحة من دخلك الصافي لمستقبلك: الاستثمار طويل المدى (تقاعد، أسهم، صناديق مؤشرات) والادخار طويل المدى مع بعض. النصيحة الشائعة: حوالي 10%، أو حوالي 15% حسب قاعدة 50-30-20 (Finanztip) إذا بدك تعوّض 80% من دخلك بالتقاعد."><span class="info-tip-glyph"></span></span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="spendTipFuturePct" data-tip="النسبة المقترحة من دخلك الصافي لمستقبلك: الاستثمار طويل المدى (تقاعد، أسهم، صناديق مؤشرات) والادخار طويل المدى مع بعض. النصيحة الشائعة: حوالي 10%، أو حوالي 15% حسب قاعدة 50-30-20 إذا بدك تعوّض 80% من دخلك بالتقاعد."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
           <div class="pct-choices" id="spend-future-pct-choices">
@@ -273,27 +273,6 @@
     </div>
 
     <div class="results">
-
-      <div class="panel result-summary">
-        <div class="result-summary-top">
-          <div class="result-summary-stats">
-            <div class="rs-stat">
-              <span class="rs-label" data-i18n="spendStatIncomeLabel">Nettoeinkommen</span>
-              <span class="rs-value" id="spend-stat-income">–</span>
-            </div>
-            <div class="rs-stat">
-              <span class="rs-label" data-i18n="spendStatAllocatedLabel">Verteilt auf die 4 Kategorien</span>
-              <span class="rs-value" id="spend-stat-allocated">–</span>
-            </div>
-          </div>
-          <div class="result-summary-divider"></div>
-          <div class="result-summary-final">
-            <span class="rs-label" data-i18n="spendStatUnallocatedLabel">Noch nicht zugewiesen</span>
-            <span class="rs-value-big" id="spend-stat-unallocated">–</span>
-          </div>
-        </div>
-        <div class="result-summary-explain" id="spend-result-explain"></div>
-      </div>
 
       <div class="panel spend-chart-panel">
         <div class="section-title" data-i18n="spendChartTitle">Einkommensverteilung</div>
@@ -322,6 +301,27 @@
         </div>
       </div>
 
+      <div class="panel result-summary">
+        <div class="result-summary-top">
+          <div class="result-summary-stats">
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="spendStatIncomeLabel">Nettoeinkommen</span>
+              <span class="rs-value" id="spend-stat-income">–</span>
+            </div>
+            <div class="rs-stat">
+              <span class="rs-label" data-i18n="spendStatAllocatedLabel">Verteilt auf die 4 Kategorien</span>
+              <span class="rs-value" id="spend-stat-allocated">–</span>
+            </div>
+          </div>
+          <div class="result-summary-divider"></div>
+          <div class="result-summary-final">
+            <span class="rs-label" data-i18n="spendStatUnallocatedLabel">Noch nicht zugewiesen</span>
+            <span class="rs-value-big" id="spend-stat-unallocated">–</span>
+          </div>
+        </div>
+        <div class="result-summary-explain" id="spend-result-explain"></div>
+      </div>
+
     </div>
   </div>
 
@@ -346,9 +346,9 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260823g"></script>
+<script src="/js/i18n.js?v=20260824a"></script>
 <script src="/js/common.js?v=20260817c"></script>
 <script src="/js/saved-results.js?v=20260818a"></script>
-<script src="/js/spending-plan-calculator.js?v=20260823h"></script>
+<script src="/js/spending-plan-calculator.js?v=20260824a"></script>
 </body>
 </html>

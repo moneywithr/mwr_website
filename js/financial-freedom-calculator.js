@@ -2,9 +2,9 @@
 // Modell: Wie viel Kapital brauchst du, um von deinen Kapitalerträgen zu leben,
 // und wie viel musst du dafür monatlich sparen. Angelehnt an den Aufbau von
 // investment-calculator.js (state/solve/render), aber ohne Diagramm. Die
-// optionale Kapitalertragsteuer ist bewusst nach dem Modell von finanzfluss.de
-// gerechnet (siehe solve und netFactors), damit die Ergebnisse mit dem dort
-// verbreiteten Rechner vergleichbar bleiben.
+// optionale Kapitalertragsteuer ist bewusst nach einem verbreiteten Modell
+// gerechnet (siehe solve und netFactors), damit die Ergebnisse mit gängigen
+// FIRE-Rechnern vergleichbar bleiben.
 (function(){
   const $ = id => document.getElementById(id);
   const { t, locale, fmtEUR, fmtCompact } = window.Site;
@@ -34,13 +34,13 @@
     return state.taxActive ? Math.min(99, Math.max(0, state.taxRate)) : 0;
   }
 
-  // Steuermodell der Ansparphase, bewusst so gewählt, dass es dem Rechner von
-  // finanzfluss.de entspricht (dort: "Fälligkeit der Kapitalertragsteuer =
-  // am Ende der Laufzeit", die Voreinstellung): Die Steuer wird EINMALIG beim
-  // Erreichen der finanziellen Freiheit auf den gesamten Gewinn fällig, also
-  // auf (Endwert − eingezahlte Summe). Solange du nicht verkaufst, wächst das
-  // Kapital ungeschmälert weiter, das trifft für thesaurierende ETFs zu
-  // (die Vorabpauschale bleibt hier wie bei finanzfluss außen vor).
+  // Steuermodell der Ansparphase, bewusst so gewählt, dass es einer gängigen
+  // Voreinstellung entspricht ("Fälligkeit der Kapitalertragsteuer = am Ende
+  // der Laufzeit"): Die Steuer wird EINMALIG beim Erreichen der finanziellen
+  // Freiheit auf den gesamten Gewinn fällig, also auf (Endwert − eingezahlte
+  // Summe). Solange du nicht verkaufst, wächst das Kapital ungeschmälert
+  // weiter, das trifft für thesaurierende ETFs zu (die Vorabpauschale bleibt
+  // hier außen vor).
   //
   // Daraus lässt sich die Sparrate weiterhin geschlossen bestimmen: von jedem
   // eingezahlten Euro sind am Ende (k − N)/k Gewinn, also bleibt pro Euro

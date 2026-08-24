@@ -102,10 +102,8 @@
       const actualPct = state.netIncome > 0 ? fmtPct(value/state.netIncome*100, 0) : '–';
       return `<div class="spend-legend-row">
         <span class="spend-legend-dot" style="background:${cat.color}"></span>
-        <span class="spend-legend-text">
-          <span class="spend-legend-name">${t(cat.labelKey)}</span>
-          <span class="spend-legend-pcts"><strong>${actualPct}</strong> · ${t('spendLegendTarget')} <span class="num-range">${cat.badge}</span></span>
-        </span>
+        <span class="spend-legend-name">${t(cat.labelKey)}</span>
+        <span class="spend-legend-pcts"><strong>${actualPct}</strong> · ${t('spendLegendTarget')} <span class="num-range">${cat.badge}</span></span>
       </div>`;
     }).join('');
   }
@@ -204,7 +202,7 @@
 
   window.SavedResults.init({
     cookieKey: 'spend',
-    insertAfter: document.querySelector('.stat-row.spend-stat-grid'),
+    insertAfter: document.querySelector('.panel.result-summary'),
     fields: [
       { type:'value', id:'spend-netincome' },
       { type:'value', id:'spend-rent' },

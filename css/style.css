@@ -811,40 +811,39 @@ body.lang-ar .product-card .p-sub{font-size:14.5px;}
 }
 .spend-donut{flex:0 0 auto;}
 .spend-donut svg{display:block; width:180px; height:180px;}
+/* Grid statt Flex: die 3 Spalten (Punkt / Name / Prozente) sollen über alle
+   Zeilen exakt untereinander ausgerichtet sein. Mit Flex ist jede Zeile für
+   sich, die Prozente rutschen je nach Länge des Namens hin und her. Mit
+   einem gemeinsamen Grid + display:contents auf der Zeile werden die
+   Kinder direkt zu Grid-Items der 3 gemeinsamen Spalten. */
 .spend-legend{
   flex:1 1 240px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  row-gap:12px;
+  column-gap:10px;
+  align-items:baseline;
   min-width:0;
 }
-.spend-legend-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+.spend-legend-row{display:contents;}
 .spend-legend-dot{
   width:11px; height:11px;
   border-radius:50%;
   flex-shrink:0;
+  align-self:center;
 }
-.spend-legend-text{
-  flex:1 1 auto;
-  min-width:0;
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:8px;
+.spend-legend-name{
+  font-weight:600;
+  overflow-wrap:break-word;
   font-size:14px;
   color:var(--ink);
 }
-body.lang-ar .spend-legend-text{font-size:15.5px;}
-.spend-legend-name{font-weight:600; overflow-wrap:break-word;}
+body.lang-ar .spend-legend-name{font-size:15.5px;}
 .spend-legend-pcts{
-  flex-shrink:0;
   font-family:'IBM Plex Mono',monospace;
   font-size:12.5px;
   color:var(--text-muted);
+  text-align:end;
 }
 .spend-legend-pcts strong{color:var(--ink); font-weight:700;}
 /* Nur der Zahlenbereich (z.B. "50–60%") fest LTR, nicht der ganze Satz,
@@ -965,7 +964,6 @@ body.lang-ar .result-summary-explain{
 }
 .stat-card{
   background:var(--panel);
-  border:1px solid var(--line);
   border-radius:var(--radius);
   padding:18px 20px;
   box-shadow:var(--shadow-sm);
@@ -1036,7 +1034,7 @@ body.lang-ar .stat-card .v{font-size:28px;}
 .stat-card.green .v{color:var(--green);}
 .stat-card.purple{background:var(--purple-dim);}
 .stat-card.purple .v{color:var(--purple-strong);}
-.stat-card.orange{background:#F2FFB8; border-color:var(--mint);}
+.stat-card.orange{background:#F2FFB8;}
 .stat-card.orange .v{color:var(--ink);}
 .stat-card.orange .k{color:var(--ink);}
 /* Eigene Kategorie-Farben für spending_plan, statt der zweideutigen
@@ -1044,13 +1042,13 @@ body.lang-ar .stat-card .v{font-size:28px;}
    hellgrün aus) Klassen: je eine je Kategorie, passend zu den .cat-*-Farben
    der Eingabe-Sections (Fixkosten=periwinkle, Variabel=orange,
    Zukunft=purple, Kurzfristiges Sparen=Limette). */
-.stat-card.spend-fixed{background:var(--periwinkle-dim); border-color:var(--periwinkle);}
+.stat-card.spend-fixed{background:var(--periwinkle-dim);}
 .stat-card.spend-fixed .v{color:#31417A;}
 .stat-card.spend-fixed .k{color:#31417A; opacity:.75;}
-.stat-card.spend-variable{background:#FCE1D6; border-color:var(--exuberant-orange);}
+.stat-card.spend-variable{background:#FCE1D6;}
 .stat-card.spend-variable .v{color:var(--exuberant-orange);}
 .stat-card.spend-variable .k{color:var(--exuberant-orange); opacity:.8;}
-.stat-card.spend-save{background:#F7FFCC; border-color:var(--mint);}
+.stat-card.spend-save{background:#F7FFCC;}
 .stat-card.spend-save .v{color:#5C6600;}
 .stat-card.spend-save .k{color:#5C6600; opacity:.75;}
 .stat-card .sub{font-size:13px; color:var(--text-muted); margin-top:6px;}
@@ -1489,7 +1487,7 @@ body.lang-ar .field-note{font-size:14.5px;}
 /* Eigene Farbvarianten für die FIRE-Rechner-Ergebniskarten (bewusst eigene
    Klassennamen statt .green/.purple/.orange wiederzuverwenden, damit andere
    Seiten mit .stat-card unberührt bleiben). */
-.stat-card.fire-yellow{background:#F7FFCC; border-color:var(--mint);}
+.stat-card.fire-yellow{background:#F7FFCC;}
 .stat-card.fire-yellow .v{color:var(--ink);}
 .stat-card.fire-yellow .k{color:var(--ink); opacity:.72;}
 .stat-card.fire-purple-light{background:#EEECFA;}
