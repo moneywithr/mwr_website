@@ -87,6 +87,9 @@ window.Site = (function(){
       btn.classList.toggle('active', btn.getAttribute('data-lang') === state.lang);
     });
     updateCurrencyUI();
+    document.querySelectorAll('.category-switch').forEach(el=>{
+      if(el._recomputeThumb) requestAnimationFrame(el._recomputeThumb);
+    });
   }
 
   // Setzt die aktive Klasse in der Navigation anhand des aktuellen Pfads
@@ -116,6 +119,78 @@ window.Site = (function(){
       document.dispatchEvent(new CustomEvent('mwr:langchange', { detail: { lang } }));
       requestAnimationFrame(()=> wrap.classList.remove('lang-fade'));
     }, 130);
+  }
+
+  // Kategorie-Switch im Top-Banner (Rechner/Vergleiche/Tools): auf der
+  // Startseite filtert ein Klick direkt die .cat-section-Blöcke darunter
+  // (nur die passende bleibt sichtbar), auf allen anderen Seiten springt er
+  // stattdessen zur Startseite mit dem passenden Hash. Die gleitende Pille
+  // dahinter nutzt dasselbe Prinzip wie .lang-switch, per transform statt
+  // Layout-Wechsel positioniert, damit sie animiert statt springt.
+  const CATEGORY_COLORS = { calculators: '#AEC0F2', comparisons: '#DCD8F3', tools: '#DAFF00' };
+  const CATEGORY_KEYS = Object.keys(CATEGORY_COLORS);
+
+  function initCategorySwitch(){
+    const sw = document.querySelector('.category-switch');
+    if(!sw) return;
+    const thumb = sw.querySelector('.category-switch-thumb');
+    const buttons = Array.from(sw.querySelectorAll('.category-switch-btn'));
+    if(!thumb || !buttons.length) return;
+
+    let path = location.pathname;
+    if(!path.endsWith('/')) path += '/';
+    const isHome = path === '/' || /\/index\.html\/?$/.test(location.pathname);
+
+    function moveThumb(btn){
+      if(!btn) return;
+      thumb.style.width = btn.offsetWidth + 'px';
+      thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+      thumb.style.backgroundColor = CATEGORY_COLORS[btn.getAttribute('data-category')] || CATEGORY_COLORS.calculators;
+    }
+
+    function setActive(cat, updateHash){
+      const btn = buttons.find(b=> b.getAttribute('data-category') === cat) || buttons[0];
+      buttons.forEach(b=>{
+        const active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      moveThumb(btn);
+      if(isHome){
+        document.querySelectorAll('.cat-section[data-category]').forEach(sec=>{
+          sec.hidden = sec.getAttribute('data-category') !== btn.getAttribute('data-category');
+        });
+        if(updateHash !== false) history.replaceState(null, '', '#cat-' + btn.getAttribute('data-category'));
+      }
+    }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const cat = btn.getAttribute('data-category');
+        if(isHome) setActive(cat);
+        else location.href = '/#cat-' + cat;
+      });
+    });
+
+    const hashCat = (location.hash || '').replace('#cat-', '');
+    const initialCat = (isHome && CATEGORY_KEYS.includes(hashCat)) ? hashCat : CATEGORY_KEYS[0];
+    requestAnimationFrame(()=> setActive(initialCat, false));
+
+    let resizeTimer;
+    window.addEventListener('resize', ()=>{
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(()=>{
+        const active = buttons.find(b=> b.classList.contains('active'));
+        moveThumb(active);
+      }, 120);
+    });
+
+    // Sprachwechsel ändert die Textbreite der Buttons (z.B. Arabisch länger
+    // als Deutsch/Englisch) - Pille muss danach neu vermessen werden.
+    sw._recomputeThumb = ()=>{
+      const active = buttons.find(b=> b.classList.contains('active'));
+      moveThumb(active);
+    };
   }
 
   // Aktualisiert alle Currency-Switch-Instanzen (Desktop- und Mobil-Variante)
@@ -249,6 +324,7 @@ window.Site = (function(){
     initNav();
     initCurrencySwitches();
     initCustomSelects();
+    initCategorySwitch();
     document.querySelectorAll('.lang-btn').forEach(btn=>{
       btn.addEventListener('click', ()=> setLanguage(btn.getAttribute('data-lang')));
     });
@@ -257,6 +333,24 @@ window.Site = (function(){
     // Seite erst jetzt anzeigen: verhindert, dass der deutsche Platzhaltertext
     // kurz aufblitzt, bevor er durch die tatsächlich gespeicherte Sprache ersetzt wird.
     document.documentElement.style.visibility = 'visible';
+    // Der Browser versucht direkt beim Laden zu einem #hash-Ziel zu scrollen,
+    // sieht dabei aber noch visibility:hidden auf <html> und überspringt den
+    // Sprung stillschweigend - und holt ihn später beim Sichtbarwerden nicht
+    // nach. Deshalb hier von Hand nachholen, sobald die Seite sichtbar ist.
+    // behavior:'instant' statt der globalen scroll-behavior:smooth aus
+    // style.css: bei "smooth" verschiebt sich das Ziel während der Animation
+    // noch durch nachladende Webfonts (Layout-Reflow), wodurch der Sprung
+    // bis ganz ans Seitenende weiterlaufen kann statt am Ziel zu stoppen.
+    // document.fonts.ready sorgt zusätzlich dafür, dass die Fonts (und damit
+    // die finalen Zeilenumbrüche/Höhen) schon feststehen, bevor gesprungen wird.
+    if(location.hash){
+      const target = document.querySelector(location.hash);
+      if(target){
+        const jump = ()=> target.scrollIntoView({ block: 'start', behavior: 'instant' });
+        if(document.fonts && document.fonts.ready) document.fonts.ready.then(jump).catch(jump);
+        else requestAnimationFrame(jump);
+      }
+    }
   }
 
   document.addEventListener('DOMContentLoaded', init);

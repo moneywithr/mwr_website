@@ -301,6 +301,73 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   .lang-btn{padding:6px 10px; font-size:12px;}
 }
 
+/* Kategorie-Switch in der Mitte vom Top-Banner: gleiches Prinzip wie der
+   Sprachschalter daneben (aktive Pille rutscht per transform hinter den
+   Button, siehe .lang-switch oben), zusätzlich mit eigener Akzentfarbe pro
+   Kategorie. Immer sichtbar auf jeder Seite; nur auf der Startseite filtert
+   ein Klick direkt die Service-Cards darunter (siehe .cat-section[hidden]
+   unten), auf Unterseiten springt er stattdessen zur Startseite mit dem
+   passenden Hash (#cat-...) - Logik dazu in common.js initCategorySwitch(). */
+.category-switch{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  border-radius:999px;
+  padding:4px;
+  min-width:0;
+  max-width:100%;
+  overflow-x:auto;
+  scrollbar-width:none;
+  direction:ltr;
+}
+.category-switch::-webkit-scrollbar{display:none;}
+.category-switch-thumb{
+  position:absolute;
+  top:4px; bottom:4px; left:4px;
+  width:0;
+  border-radius:999px;
+  background:var(--periwinkle);
+  transition:transform .3s cubic-bezier(.4,0,.2,1), width .3s cubic-bezier(.4,0,.2,1), background-color .25s ease;
+  z-index:0;
+  pointer-events:none;
+}
+.category-switch-btn{
+  position:relative;
+  z-index:1;
+  font-family:'Manrope',sans-serif;
+  font-size:13.5px;
+  font-weight:600;
+  letter-spacing:0;
+  line-height:1.2;
+  border:none;
+  background:transparent;
+  color:var(--text-muted);
+  padding:8px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:color .2s ease;
+}
+.category-switch-btn:hover{color:var(--ink);}
+.category-switch-btn.active{color:var(--ink);}
+body.lang-ar .category-switch-btn{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:14.5px;
+}
+@media (max-width:760px){
+  .top-banner-inner{justify-content:center;}
+  .category-switch{order:3; flex-basis:100%; justify-content:flex-start;}
+}
+@media (max-width:480px){
+  .category-switch-btn{padding:7px 12px; font-size:12px;}
+  body.lang-ar .category-switch-btn{font-size:13px;}
+}
+
 .brand-name{
   font-family:'Space Grotesk',sans-serif;
   font-size:14px;
@@ -1128,6 +1195,28 @@ body.lang-ar .view-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-s
   margin-bottom:28px;
 }
 .nav-row .tab-nav{margin-bottom:0;}
+
+/* Breadcrumb statt Tab-Nav auf den einzelnen Tool-Seiten: zeigt nur "Start
+   / Kategorie / aktuelle Seite" an statt aller anderen Tools - man sieht ja
+   gerade nicht, wofür man in der Übersicht der anderen Tools scrollen soll,
+   wenn man schon mitten in einem Rechner ist. */
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:28px;
+  font-size:14px;
+  color:var(--text-muted);
+}
+.breadcrumb a{color:var(--text-muted); text-decoration:none;}
+.breadcrumb a:hover{color:var(--purple);}
+.breadcrumb-current{color:var(--ink); font-weight:600;}
+.breadcrumb-sep{color:var(--line);}
+body.lang-ar .breadcrumb{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:15.5px;
+}
 .currency-switch-row{
   display:flex;
   margin:0;
@@ -2093,6 +2182,15 @@ body.lang-ar .landing-services .section-title{
    ETF-Overlap-Rechner. */
 .cat-section{margin-top:28px;}
 .cat-section:first-child{margin-top:0;}
+/* Nur eine Kategorie ist je nach Kategorie-Switch sichtbar, daher immer
+   margin-top:0 fuer die gerade angezeigte, unabhaengig davon ob sie im DOM
+   zufaellig zuerst kommt. Ohne JS bleibt [hidden] ungesetzt und alle drei
+   Kategorien stehen wie vorher gestapelt untereinander (Fallback). */
+.cat-section:not([hidden]){margin-top:0; animation:catSectionIn .35s ease both;}
+@keyframes catSectionIn{
+  from{opacity:0; transform:translateY(6px);}
+  to{opacity:1; transform:translateY(0);}
+}
 .cat-heading{
   font-family:'IBM Plex Mono',monospace;
   font-size:13px;
@@ -2435,6 +2533,7 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
 /* ETF-Overlap-Rechner: A = grün (wie .etf), B = lila (wie .fonds), gleiche
    Farblogik wie beim Kostenvergleichs-Rechner. */
 .overlap-select-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.overlap-select-row .field{min-width:0;}
 @media (max-width:560px){.overlap-select-row{grid-template-columns:1fr;}}
 .overlap-select-label{
   font-family:'IBM Plex Mono',monospace;
@@ -2551,6 +2650,7 @@ body.lang-ar .newsletter-desc{font-size:16px;}
 }
 @media (max-width:520px){.newsletter-row{flex-direction:column;}}
 .newsletter-field-block{flex:1; min-width:0;}
+@media (max-width:520px){.newsletter-field-block{width:100%;}}
 .newsletter-input{
   width:100%;
   background:var(--panel-2);
@@ -2607,6 +2707,7 @@ body.lang-ar .newsletter-desc{font-size:16px;}
   margin-bottom:14px;
   text-align:start;
 }
+.sib-form-message-panel.sib-form-message-panel--active{display:block;}
 .newsletter-msg-error{background:var(--orange-dim); color:var(--orange-strong);}
 .newsletter-msg-success{background:#E7FAF0; color:#085229;}
 .sib-form-message-panel__text{display:flex; align-items:center; gap:8px;}
