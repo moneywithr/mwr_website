@@ -9,7 +9,7 @@
 <title>قديش بتتشابه صناديق الـETF تبعك؟ | Money with Rami</title>
 <meta name="description" content="قارن بين صندوقين ETF (وبينهن صناديق إسلامية متوافقة مع الشريعة متل MSCI Islamic وSPUS وHLAL) وشوف قديش من أكبر الشركات فيهن مشتركة. حاسبة تداخل ETF مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/etf_overlap/">
-<link rel="stylesheet" href="/css/style.css?v=20260828c">
+<link rel="stylesheet" href="/css/style.css?v=20260830a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -103,81 +103,72 @@
     </div>
   </header>
 
-  <div class="grid">
+  <div class="panel overlap-select-panel" style="margin-bottom:24px;">
+    <div class="section-title" data-i18n="overlapSectionSelect">ETFs auswählen</div>
+    <div class="overlap-select-stack">
+      <div class="field">
+        <span class="overlap-select-label etf" data-i18n="overlapLabelA">ETF A</span>
+        <div class="custom-select" id="overlap-select-a">
+          <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
+            <span class="custom-select-value" id="overlap-select-a-value">–</span>
+            <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="custom-select-menu" role="listbox"></ul>
+        </div>
+        <div class="overlap-select-meta" id="overlap-select-a-meta"></div>
+      </div>
+      <div class="field">
+        <span class="overlap-select-label fonds" data-i18n="overlapLabelB">ETF B</span>
+        <div class="custom-select" id="overlap-select-b">
+          <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
+            <span class="custom-select-value" id="overlap-select-b-value">–</span>
+            <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="custom-select-menu" role="listbox"></ul>
+        </div>
+        <div class="overlap-select-meta" id="overlap-select-b-meta"></div>
+      </div>
+    </div>
+    <div class="calc-warning" id="overlap-warning" data-i18n="overlapSameWarning">Wähle zwei unterschiedliche ETFs, um sie zu vergleichen.</div>
+    <p class="overlap-select-meta" id="overlap-data-note" data-i18n="overlapDataNote" style="line-height:1.6; margin-top:14px;"></p>
+  </div>
 
-    <div class="panel panel-input">
-      <div class="block">
-        <div class="section-title" data-i18n="overlapSectionSelect">ETFs auswählen</div>
-        <div class="overlap-select-row">
-          <div class="field">
-            <span class="overlap-select-label etf" data-i18n="overlapLabelA">ETF A</span>
-            <div class="custom-select" id="overlap-select-a">
-              <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
-                <span class="custom-select-value" id="overlap-select-a-value">–</span>
-                <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <ul class="custom-select-menu" role="listbox"></ul>
-            </div>
-            <div class="overlap-select-meta" id="overlap-select-a-meta"></div>
-          </div>
-          <div class="field">
-            <span class="overlap-select-label fonds" data-i18n="overlapLabelB">ETF B</span>
-            <div class="custom-select" id="overlap-select-b">
-              <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
-                <span class="custom-select-value" id="overlap-select-b-value">–</span>
-                <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <ul class="custom-select-menu" role="listbox"></ul>
-            </div>
-            <div class="overlap-select-meta" id="overlap-select-b-meta"></div>
+  <div class="results">
+
+    <div class="panel overlap-summary-panel" style="margin-bottom:20px;">
+      <div class="section-title" data-i18n="overlapSectionSummary">Zusammenfassung</div>
+      <div class="overlap-gauge-row">
+        <div class="overlap-gauge" id="overlap-gauge">
+          <div class="overlap-gauge-center">
+            <div class="overlap-gauge-pct" id="overlap-gauge-pct">–</div>
+            <div class="overlap-gauge-verdict" id="overlap-gauge-verdict"></div>
           </div>
         </div>
-      </div>
-      <div class="block">
-        <div class="calc-warning" id="overlap-warning" data-i18n="overlapSameWarning">Wähle zwei unterschiedliche ETFs, um sie zu vergleichen.</div>
-      </div>
-      <div class="block">
-        <p class="overlap-select-meta" id="overlap-data-note" data-i18n="overlapDataNote" style="line-height:1.6;"></p>
+        <div class="overlap-gauge-text">
+          <p class="overlap-summary-text" id="overlap-summary-text"></p>
+        </div>
       </div>
     </div>
 
-    <div class="results">
-
-      <div class="panel overlap-summary-panel" style="margin-bottom:20px;">
-        <div class="section-title" data-i18n="overlapSectionSummary">Zusammenfassung</div>
-        <div class="overlap-gauge-row">
-          <div class="overlap-gauge" id="overlap-gauge">
-            <div class="overlap-gauge-center">
-              <div class="overlap-gauge-pct" id="overlap-gauge-pct">–</div>
-              <div class="overlap-gauge-verdict" id="overlap-gauge-verdict"></div>
-            </div>
-          </div>
-          <div class="overlap-gauge-text">
-            <p class="overlap-summary-text" id="overlap-summary-text"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-bottom:20px;">
-        <div class="section-title" data-i18n="overlapSectionShared">Gemeinsame Top-Positionen</div>
-        <div class="overlap-holdings" id="overlap-shared-list"></div>
-      </div>
-
-      <div class="panel">
-        <div class="section-title" data-i18n="overlapSectionUnique">Nur in einem der beiden ETFs</div>
-        <div class="breakdown">
-          <div class="b-group etf">
-            <div class="b-col-head etf" id="overlap-only-a-heading">Nur in A</div>
-            <div id="overlap-only-a-list"></div>
-          </div>
-          <div class="b-group fonds">
-            <div class="b-col-head fonds" id="overlap-only-b-heading">Nur in B</div>
-            <div id="overlap-only-b-list"></div>
-          </div>
-        </div>
-      </div>
-
+    <div class="panel" style="margin-bottom:20px;">
+      <div class="section-title" data-i18n="overlapSectionShared">Gemeinsame Top-Positionen</div>
+      <div class="overlap-holdings" id="overlap-shared-list"></div>
     </div>
+
+    <div class="panel">
+      <div class="section-title" data-i18n="overlapSectionUnique">Nur in einem der beiden ETFs</div>
+      <div class="breakdown">
+        <div class="b-group etf">
+          <div class="b-col-head etf" id="overlap-only-a-heading">Nur in A</div>
+          <div id="overlap-only-a-list"></div>
+        </div>
+        <div class="b-group fonds">
+          <div class="b-col-head fonds" id="overlap-only-b-heading">Nur in B</div>
+          <div id="overlap-only-b-list"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <footer>
@@ -202,7 +193,7 @@
 </div>
 
 <script src="/js/i18n.js?v=20260827b"></script>
-<script src="/js/common.js?v=20260828a"></script>
+<script src="/js/common.js?v=20260830a"></script>
 <script src="/js/etf-overlap-data.js?v=20260825a"></script>
 <script src="/js/etf-overlap-calculator.js?v=20260825a"></script>
 </body>

@@ -92,18 +92,6 @@ window.Site = (function(){
     });
   }
 
-  // Setzt die aktive Klasse in der Navigation anhand des aktuellen Pfads
-  // (z.B. "/", "/calculator/investment/", "/stuff_i_use/brokerage_finder/" bei sauberen URLs ohne .html).
-  function initNav(){
-    let current = location.pathname;
-    if(!current.endsWith('/')) current += '/';
-    document.querySelectorAll('.tab-nav [data-page]').forEach(link=>{
-      let target = link.getAttribute('data-page');
-      if(!target.endsWith('/')) target += '/';
-      link.classList.toggle('active', target === current);
-    });
-  }
-
   function setLanguage(lang){
     if(!window.I18N[lang] || lang === state.lang) return;
     // Kurzes Fade statt hartem Sprung, Text, Schriftart und rtl/ltr
@@ -338,7 +326,6 @@ window.Site = (function(){
 
   function init(){
     applyStatic();
-    initNav();
     initCurrencySwitches();
     initCustomSelects();
     initCategorySwitch();

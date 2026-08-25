@@ -427,34 +427,6 @@ body.lang-ar .brand-name{
   .brand-name, body.lang-ar .brand-name{font-size:14px;}
 }
 
-.tab-nav{
-  display:flex;
-  gap:8px;
-  margin-bottom:28px;
-  flex-wrap:wrap;
-}
-.tab-btn{
-  font-family:'Manrope',sans-serif;
-  font-weight:600;
-  font-size:14.5px;
-  padding:10px 20px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:var(--panel);
-  color:var(--text-muted);
-  cursor:pointer;
-  transition:background .15s ease, color .15s ease, border-color .15s ease;
-  text-decoration:none;
-  display:inline-block;
-}
-.tab-btn:hover{border-color:var(--purple); color:var(--ink);}
-.tab-btn.active{background:var(--ink); border-color:var(--ink); color:#FFFFFF;}
-body.lang-ar .tab-btn{
-  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
-  font-weight:700;
-  font-size:16px;
-}
-
 .grid{
   display:grid;
   /* minmax(0,1fr) statt nur 1fr: eine reine 1fr-Spur behält implizit eine
@@ -1214,19 +1186,6 @@ body.lang-ar .legend{
 .view-btn.active{background:var(--green); color:#FFFFFF;}
 body.lang-ar .view-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700; font-size:14px;}
 
-/* Currency-Switch: eigener Dropdown (kein natives <select>, damit wir eine
-   runde Flagge im Button/Menü zeigen können). Sitzt direkt neben der
-   Tab-Nav, nicht mehr getrennt für Desktop/Mobil. */
-.nav-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:12px 16px;
-  margin-bottom:28px;
-}
-.nav-row .tab-nav{margin-bottom:0;}
-
 /* Breadcrumb statt Tab-Nav auf den einzelnen Tool-Seiten: zeigt nur "Start
    / Kategorie / aktuelle Seite" an statt aller anderen Tools - man sieht ja
    gerade nicht, wofür man in der Übersicht der anderen Tools scrollen soll,
@@ -1466,9 +1425,13 @@ body.lang-ar .custom-select-btn.variant-panel{font-size:16px;}
 .custom-select-value{
   flex:1;
   min-width:0;
-  display:flex;
-  align-items:center;
-  gap:8px;
+  /* Reines Text-Element (nie ein Icon o.ä. drin, siehe Nutzung überall im
+     Markup) - display:flex verhinderte hier zuverlässig, dass
+     text-overflow:ellipsis greift (funktioniert nur auf Block-Boxen, nicht
+     auf Flex-Containern), wodurch lange Namen ohne sichtbare Ellipse hart
+     abgeschnitten wurden. display:block behebt das; vertikal zentriert wird
+     der Wert sowieso schon vom Flex-Kontext des umgebenden .custom-select-btn. */
+  display:block;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -2562,10 +2525,31 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
 .saved-result-remove:hover{color:#FF6B45; background:rgba(255,107,69,.12);}
 
 /* ETF-Overlap-Rechner: A = grün (wie .etf), B = lila (wie .fonds), gleiche
-   Farblogik wie beim Kostenvergleichs-Rechner. */
-.overlap-select-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-.overlap-select-row .field{min-width:0;}
-@media (max-width:560px){.overlap-select-row{grid-template-columns:1fr;}}
+   Farblogik wie beim Kostenvergleichs-Rechner.
+   Eigene, volle Breite statt der schmalen 360px-Sidebar (.panel-input), die
+   die anderen Rechner nutzen: die ETF-Namen sind oft lang (z.B. "iShares
+   Core MSCI World UCITS ETF"), in einer schmalen Spalte oder gar
+   nebeneinander in zwei Spalten wurden sie unleserlich abgeschnitten. Hier
+   bekommt jedes Auswahlfeld die volle Breite der Seite (max-width:1180px
+   wie .wrap) und steht zentriert untereinander statt nebeneinander. */
+.overlap-select-panel .section-title{justify-content:center;}
+.overlap-select-stack{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin:0 auto 14px;
+  max-width:640px;
+}
+.overlap-select-stack .field{min-width:0;}
+/* ETF-Produktnamen sind immer lateinisch (siehe Kommentar in
+   etf-overlap-data.js), aber .custom-select-value erbt sonst direction:rtl
+   von der arabischen Seite. In einer RTL-Box zählt "Ende" (wo die Ellipse
+   ansetzt) visuell als LINKS statt rechts - bei zu langen Namen wurde
+   dadurch der ANFANG des Namens abgeschnitten (ohne sichtbare Ellipse)
+   statt sauber am Ende zu kürzen. */
+#overlap-select-a-value, #overlap-select-b-value{direction:ltr; text-align:start;}
+.overlap-select-panel .calc-warning,
+.overlap-select-panel > .overlap-select-meta{max-width:640px; margin-left:auto; margin-right:auto;}
 .overlap-select-label{
   font-family:'IBM Plex Mono',monospace;
   font-size:12px;
