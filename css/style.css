@@ -2486,3 +2486,98 @@ body.lang-ar .overlap-holding-name{font-family:'IBM Plex Sans Arabic','IBM Plex 
 body.lang-ar .overlap-empty{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
 
 .overlap-unique-empty{color:var(--text-muted); font-size:13.5px; padding:8px 0;}
+
+/* Newsletter-Box (Brevo-Formular), Design an .landing-cta angelehnt:
+   funktionale Klassen/IDs vom Brevo-Embed (sib-form, entry__*, sib-input
+   usw.) bleiben unangetastet für main.js, hier wird nur die Optik gesetzt.
+   .sib-form-message-panel ist standardmäßig versteckt (wie im Original-CSS
+   von Brevo) - main.js schaltet es per Inline-Style beim Absenden sichtbar. */
+.newsletter-box{
+  margin:36px auto 0;
+  max-width:640px;
+  padding:32px 36px;
+  border-radius:var(--radius);
+  background:var(--panel);
+  box-shadow:var(--shadow-md);
+  text-align:center;
+}
+.newsletter-title{
+  font-weight:700;
+  font-size:22px;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.newsletter-desc{
+  font-size:14.5px;
+  color:var(--text-muted);
+  margin:0 0 20px;
+  line-height:1.6;
+}
+body.lang-ar .newsletter-title{font-size:23px;}
+body.lang-ar .newsletter-desc{font-size:16px;}
+.newsletter-row{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+@media (max-width:520px){.newsletter-row{flex-direction:column;}}
+.newsletter-field-block{flex:1; min-width:0;}
+.newsletter-input{
+  width:100%;
+  background:var(--panel-2);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-family:inherit;
+  font-size:15px;
+  padding:13px 16px;
+  border-radius:999px;
+  outline:none;
+  text-align:start;
+}
+.newsletter-input:focus{border-color:var(--purple);}
+.newsletter-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 30px;
+  border:none;
+  border-radius:999px;
+  background:var(--mint);
+  color:var(--ink);
+  font-family:inherit;
+  font-weight:700;
+  font-size:15.5px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:background .2s ease, transform .2s ease;
+}
+.newsletter-btn:hover{background:#C2E000; transform:translateY(-1px);}
+.newsletter-btn .icon{width:16px; height:16px; display:none; fill:currentColor;}
+@media (max-width:520px){.newsletter-btn{width:100%;}}
+.newsletter-field-error{
+  display:block;
+  font-size:12.5px;
+  color:var(--orange-strong);
+  margin-top:6px;
+  text-align:start;
+}
+.newsletter-captcha{margin-top:14px; display:flex; justify-content:center;}
+.newsletter-disclaimer{
+  font-size:11.5px;
+  line-height:1.6;
+  color:var(--text-muted);
+  margin:16px 0 0;
+  text-align:start;
+}
+.newsletter-disclaimer a{color:var(--purple);}
+.sib-form-message-panel{
+  display:none;
+  font-size:14px;
+  border-radius:10px;
+  padding:10px 14px;
+  margin-bottom:14px;
+  text-align:start;
+}
+.newsletter-msg-error{background:var(--orange-dim); color:var(--orange-strong);}
+.newsletter-msg-success{background:#E7FAF0; color:#085229;}

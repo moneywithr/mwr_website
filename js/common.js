@@ -71,6 +71,16 @@ window.Site = (function(){
     document.querySelectorAll('[data-i18n-tip]').forEach(el=>{
       el.setAttribute('data-tip', t(el.getAttribute('data-i18n-tip')));
     });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+    });
+    // Wie data-i18n, aber setzt innerHTML statt textContent - nur für
+    // Stellen mit eingebautem Markup (z.B. ein Link in einem Rechtstext).
+    // Immer nur mit eigenen, fest im Code stehenden Übersetzungen benutzen,
+    // nie mit Nutzereingaben füttern.
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      el.innerHTML = t(el.getAttribute('data-i18n-html'));
+    });
     const titleKey = document.body.getAttribute('data-i18n-title');
     if(titleKey) document.title = t(titleKey);
     document.querySelectorAll('.lang-btn').forEach(btn=>{

@@ -10,7 +10,7 @@
 <meta name="description" content="أدوات مجانية بالعربي: احسب عوائد استثمارك، قارن تكاليف الصناديق وETF، اعرف رأس مال الحرية المالية، ولاقي أفضل المنصات والبنوك المجانية.">
 <meta name="author" content="Rami Alhasan">
 <link rel="canonical" href="https://moneywithrami.com/">
-<link rel="stylesheet" href="/css/style.css?v=20260825a">
+<link rel="stylesheet" href="/css/style.css?v=20260826a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -237,12 +237,62 @@
     <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
     <p class="copyright"><a href="/impressum/" data-i18n="footerImpressum">Impressum</a></p>
     <p class="copyright"><a href="/datenschutz/" data-i18n="footerPrivacy">Datenschutzerklärung</a></p>
+
+    <!-- Brevo-Anmeldeformular, im Design der Seite nachgebaut: dieselben
+         funktionalen IDs/Klassen wie im Original-Embed (sib-form, EMAIL,
+         error-message/success-message, sib-captcha, entry__*), damit
+         Brevos main.js (Validierung, AJAX-Submit, Message-Panels) unverändert
+         funktioniert - nur die Inline-Styles sind raus, ersetzt durch
+         newsletter-Klassen unten in style.css. -->
+    <div class="newsletter-box">
+      <div class="newsletter-text">
+        <div class="newsletter-title" data-i18n="newsletterTitle">Newsletter</div>
+        <p class="newsletter-desc" data-i18n="newsletterDesc">Trag dich ein und verpass keine neuen Rechner und Tipps.</p>
+      </div>
+      <div id="sib-form-container" class="newsletter-form-container">
+        <div id="error-message" class="sib-form-message-panel newsletter-msg newsletter-msg-error">
+          <span class="sib-form-message-panel__inner-text" data-i18n="newsletterErrorMsg">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuch's nochmal.</span>
+        </div>
+        <div id="success-message" class="sib-form-message-panel newsletter-msg newsletter-msg-success">
+          <span class="sib-form-message-panel__inner-text" data-i18n="newsletterSuccessMsg">Deine Anmeldung war erfolgreich!</span>
+        </div>
+        <div id="sib-container" class="newsletter-container">
+          <form id="sib-form" method="POST" action="https://196246c1.sibforms.com/serve/MUIFAAKPzZe3sgx-opj_k4t2n9BinWvqCFxnxypCjJmO4sRL9mglvlQeZAzU_mTOEi5v3vtbsBFTa8Rgt1QLmz4khmBBsQlYYrvpYR4LvhyLILa4jQj4Lmk7UpccZThNbY6h8OANh_7-APtBeETv7WHdlahryoDJfePvIpwyvqWWwQm7U4C8Gt-2PxwmsTU5ooiiLeSamc9sTUP9AQ==" data-type="subscription">
+            <div class="newsletter-row">
+              <div class="sib-input newsletter-field-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <div class="entry__field">
+                      <input class="input newsletter-input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" value="" data-i18n-placeholder="newsletterPlaceholder" placeholder="بريدك الإلكتروني" data-required="true" required />
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary newsletter-field-error"></label>
+                </div>
+              </div>
+              <button class="sib-form-block__button sib-form-block__button-with-loader newsletter-btn" form="sib-form" type="submit" data-i18n="newsletterBtn">Abonnieren</button>
+            </div>
+            <div class="sib-captcha newsletter-captcha">
+              <div class="form__entry entry_block">
+                <div class="form__label-row">
+                  <script>function handleCaptchaResponse(){ document.getElementById('sib-captcha').dispatchEvent(new Event('captchaChange')); }</script>
+                  <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LcqkZgtAAAAAGM9TUHmkO23iszxLRi_LE0ZG7_K" data-callback="handleCaptchaResponse"></div>
+                </div>
+                <label class="entry__error entry__error--primary"></label>
+              </div>
+            </div>
+            <p class="newsletter-disclaimer" data-i18n-html="newsletterDisclaimer">Wir nutzen Brevo als unsere Marketing-Plattform. Mit dem Absenden dieses Formulars stimmst du zu, dass deine Daten an Brevo übermittelt werden, gemäß der <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzrichtlinie von Brevo</a>.</p>
+            <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
+            <input type="hidden" name="locale" value="de">
+          </form>
+        </div>
+      </div>
+    </div>
   </footer>
 
 </div>
 
-<script src="/js/i18n.js?v=20260825a"></script>
-<script src="/js/common.js?v=20260817c"></script>
+<script src="/js/i18n.js?v=20260826a"></script>
+<script src="/js/common.js?v=20260826a"></script>
 
 <!-- Cal element-click embed code begins -->
 <script type="text/javascript">
@@ -253,6 +303,30 @@
   Cal.ns["15min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#DAFF00"},"dark":{"cal-brand":"#DAFF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 <!-- Cal element-click embed code ends -->
+
+<!-- Brevo-Formular: nötige Skripte fürs Validieren/Absenden (main.js) und
+     das sichtbare reCAPTCHA-Widget. Übernommen aus dem Original-Embed. -->
+<script>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+  window.LOCALE = 'de';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die eingegebene E-Mail-Adresse ist ungültig.";
+  window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer bleiben.";
+  window.GENERIC_INVALID_MESSAGE = "Die eingegebenen Daten sind ungültig. Bitte überprüfe das Format.";
+  window.INVALID_NUMBER = "Die eingegebenen Daten sind ungültig. Bitte überprüfe das Format.";
+  window.INVALID_DATE = "Bitte gib ein gültiges Datum ein.";
+  window.REQUIRED_MULTISELECT_MESSAGE = 'Bitte wähle mindestens 1 Option.';
+  window.translation = {
+    common: {
+      selectedList: '{quantity} list selected',
+      selectedLists: '{quantity} lists selected',
+      selectedOption: '{quantity} selected',
+      selectedOptions: '{quantity} selected',
+    }
+  };
+  var AUTOHIDE = Boolean(0);
+</script>
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?hl=de"></script>
 
 </body>
 </html>
