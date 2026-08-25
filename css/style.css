@@ -342,6 +342,15 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   direction:ltr;
 }
 .category-switch::-webkit-scrollbar{display:none;}
+/* Browser ignorieren durchgehend das ENDE-seitige padding eines
+   scrollbaren Flex-Containers, sobald der Inhalt tatsächlich scrollen muss
+   (z.B. wenn "أدوات بتستخدمها" auf schmalen Screens knapp nicht mehr
+   reinpasst) - nur das ANFANGS-seitige padding bleibt erhalten. Dadurch sah
+   die Markierung auf dem letzten Button plötzlich ungepolstert/an die Kante
+   gequetscht aus, während der erste Button ganz normal Luft hatte. Ein
+   echtes (unsichtbares) Flex-Element am Ende erzwingt den Abstand zuverlässig,
+   weil es echter Inhalt ist statt Container-Padding. */
+.category-switch::after{content:''; flex:0 0 3px; width:3px; height:1px;}
 .category-switch-thumb{
   position:absolute;
   top:4px; bottom:4px; left:4px;
@@ -371,6 +380,14 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
 }
 .category-switch-btn:hover{color:var(--ink);}
 .category-switch-btn.active{color:var(--ink);}
+/* Der native Fokus-Ring (outline) wird von manchen Browsern NICHT sauber
+   auf die abgerundete Form vom .category-switch-Container zurechtgeschnitten
+   und "leckt" dann rechts/außen über die Pille hinaus - sichtbar als
+   schiefer blauer Ring, der über den letzten Button hinausragt. Ein
+   box-shadow inset bleibt dagegen immer innerhalb der eigenen (ebenfalls
+   runden) Button-Form, kann also nirgendwo rausragen. */
+.category-switch-btn:focus{outline:none;}
+.category-switch-btn:focus-visible{box-shadow:inset 0 0 0 2px var(--purple);}
 body.lang-ar .category-switch-btn{
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   font-weight:700;

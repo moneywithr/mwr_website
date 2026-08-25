@@ -146,6 +146,23 @@ window.Site = (function(){
       thumb.style.width = btn.offsetWidth + 'px';
       thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
       thumb.style.backgroundColor = CATEGORY_COLORS[btn.getAttribute('data-category')] || CATEGORY_COLORS.calculators;
+      centerButton(btn);
+    }
+
+    // Wenn die Labels (v.a. Arabisch, meist länger als Deutsch/Englisch)
+    // auf schmalen Screens knapp nicht mehr alle drei nebeneinander
+    // reinpassen, wird .category-switch horizontal scrollbar. Ohne das hier
+    // bliebe scrollLeft immer auf 0 stehen - der erste Button hätte dann
+    // immer sauberen Abstand zum Rand, der letzte (rechte) Button aber
+    // würde an der Kante abgeschnitten aussehen, egal welcher gerade aktiv
+    // ist. Der aktive Button wird deshalb bei jeder Auswahl (und bei jedem
+    // Neu-Vermessen, z.B. nach Sprachwechsel/Resize) in die Mitte des
+    // sichtbaren Bereichs gescrollt, damit links/rechts wieder Luft ist.
+    function centerButton(btn){
+      if(sw.scrollWidth <= sw.clientWidth) return;
+      const target = btn.offsetLeft + btn.offsetWidth / 2 - sw.clientWidth / 2;
+      const max = sw.scrollWidth - sw.clientWidth;
+      sw.scrollLeft = Math.max(0, Math.min(target, max));
     }
 
     function setActive(cat, updateHash){
