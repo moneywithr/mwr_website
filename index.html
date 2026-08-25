@@ -10,7 +10,7 @@
 <meta name="description" content="أدوات مجانية بالعربي: احسب عوائد استثمارك، قارن تكاليف الصناديق وETF، اعرف رأس مال الحرية المالية، ولاقي أفضل المنصات والبنوك المجانية.">
 <meta name="author" content="Rami Alhasan">
 <link rel="canonical" href="https://moneywithrami.com/">
-<link rel="stylesheet" href="/css/style.css?v=20260826a">
+<link rel="stylesheet" href="/css/style.css?v=20260826b">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -240,10 +240,10 @@
 
     <!-- Brevo-Anmeldeformular, im Design der Seite nachgebaut: dieselben
          funktionalen IDs/Klassen wie im Original-Embed (sib-form, EMAIL,
-         error-message/success-message, sib-captcha, entry__*), damit
-         Brevos main.js (Validierung, AJAX-Submit, Message-Panels) unverändert
-         funktioniert - nur die Inline-Styles sind raus, ersetzt durch
-         newsletter-Klassen unten in style.css. -->
+         error-message/success-message, entry__*, g-recaptcha-v3), damit
+         Brevos main.js (Validierung, AJAX-Submit, Message-Panels, unsichtbares
+         reCAPTCHA v3) unverändert funktioniert - nur die Inline-Styles sind
+         raus, ersetzt durch newsletter-Klassen unten in style.css. -->
     <div class="newsletter-box">
       <div class="newsletter-text">
         <div class="newsletter-title" data-i18n="newsletterTitle">Newsletter</div>
@@ -271,15 +271,7 @@
               </div>
               <button class="sib-form-block__button sib-form-block__button-with-loader newsletter-btn" form="sib-form" type="submit" data-i18n="newsletterBtn">Abonnieren</button>
             </div>
-            <div class="sib-captcha newsletter-captcha">
-              <div class="form__entry entry_block">
-                <div class="form__label-row">
-                  <script>function handleCaptchaResponse(){ document.getElementById('sib-captcha').dispatchEvent(new Event('captchaChange')); }</script>
-                  <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LcqkZgtAAAAAGM9TUHmkO23iszxLRi_LE0ZG7_K" data-callback="handleCaptchaResponse"></div>
-                </div>
-                <label class="entry__error entry__error--primary"></label>
-              </div>
-            </div>
+            <div class="g-recaptcha-v3" data-sitekey="6LcqkZgtAAAAAGM9TUHmkO23iszxLRi_LE0ZG7_K" style="display: none"></div>
             <p class="newsletter-disclaimer" data-i18n-html="newsletterDisclaimer">Wir nutzen Brevo als unsere Marketing-Plattform. Mit dem Absenden dieses Formulars stimmst du zu, dass deine Daten an Brevo übermittelt werden, gemäß der <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzrichtlinie von Brevo</a>.</p>
             <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
             <input type="hidden" name="locale" value="de">
@@ -326,7 +318,7 @@
   var AUTOHIDE = Boolean(0);
 </script>
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?hl=de"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LcqkZgtAAAAAGM9TUHmkO23iszxLRi_LE0ZG7_K&hl=de" async defer></script>
 
 </body>
 </html>
