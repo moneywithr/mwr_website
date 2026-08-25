@@ -301,20 +301,37 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   .lang-btn{padding:6px 10px; font-size:12px;}
 }
 
-/* Kategorie-Switch in der Mitte vom Top-Banner: gleiches Prinzip wie der
-   Sprachschalter daneben (aktive Pille rutscht per transform hinter den
-   Button, siehe .lang-switch oben), zusätzlich mit eigener Akzentfarbe pro
-   Kategorie. Immer sichtbar auf jeder Seite; nur auf der Startseite filtert
-   ein Klick direkt die Service-Cards darunter (siehe .cat-section[hidden]
-   unten), auf Unterseiten springt er stattdessen zur Startseite mit dem
-   passenden Hash (#cat-...) - Logik dazu in common.js initCategorySwitch(). */
+/* Kategorie-Switch: EIGENE Pille in einer eigenen Zeile unter der
+   Logo/Sprache-Pille (nicht mehr als drittes Flex-Kind IN der Logo-Pille) -
+   vorher ist die äußere Pille (.top-banner-inner, border-radius:999px) beim
+   Umbruch auf schmalen Screens bzw. mit längeren arabischen Labels auf zwei
+   Zeilen gewachsen, wodurch der volle Kreisradius auf die neue, größere
+   Höhe passen musste und statt einer sauberen Kapsel ein "Blob" entstand,
+   der sich je nach Sprache/Breite sichtbar verformt hat. Zwei feste,
+   jeweils einzeilige Kapseln übereinander bleiben bei jeder Breite/Sprache
+   gleich geformt. Gleiches Slide-Prinzip wie der Sprachschalter (aktive
+   Pille rutscht per transform hinter den Button, siehe .lang-switch oben),
+   zusätzlich mit eigener Akzentfarbe pro Kategorie. Immer sichtbar auf
+   jeder Seite; nur auf der Startseite filtert ein Klick direkt die
+   Service-Cards darunter (siehe .cat-section[hidden] unten), auf
+   Unterseiten springt er stattdessen zur Startseite mit dem passenden Hash
+   (#cat-...) - Logik dazu in common.js initCategorySwitch(). */
+.category-switch-row{
+  display:flex;
+  justify-content:center;
+  margin:10px auto 0;
+  max-width:1180px;
+  padding:0 22px;
+}
 .category-switch{
   position:relative;
   display:flex;
   align-items:center;
   gap:2px;
-  background:var(--panel);
-  border:1px solid var(--line);
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.5);
   box-shadow:var(--shadow-sm);
   border-radius:999px;
   padding:4px;
@@ -359,13 +376,10 @@ body.lang-ar .category-switch-btn{
   font-weight:700;
   font-size:14.5px;
 }
-@media (max-width:760px){
-  .top-banner-inner{justify-content:center;}
-  .category-switch{order:3; flex-basis:100%; justify-content:flex-start;}
-}
 @media (max-width:480px){
   .category-switch-btn{padding:7px 12px; font-size:12px;}
   body.lang-ar .category-switch-btn{font-size:13px;}
+  .category-switch-row{padding:0 16px;}
 }
 
 .brand-name{
