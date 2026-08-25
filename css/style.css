@@ -1391,6 +1391,30 @@ body.lang-ar .custom-select-menu li{font-family:'IBM Plex Sans Arabic','IBM Plex
 .custom-select-menu li.active{background:var(--green-dim); font-weight:600;}
 .custom-select-flag{font-size:17px; line-height:1; flex-shrink:0; width:22px; text-align:center;}
 
+.custom-select-search-row{
+  cursor:default;
+  padding:4px 4px 8px;
+  border-bottom:1px solid var(--line-soft);
+  margin-bottom:4px;
+  position:sticky;
+  top:0;
+  background:var(--panel);
+  z-index:1;
+}
+.custom-select-search-row:hover{background:var(--panel);}
+.custom-select-search-input{
+  width:100%;
+  border:1.5px solid var(--line);
+  border-radius:8px;
+  padding:8px 10px;
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:14px;
+  color:var(--ink);
+  background:#FFFFFF;
+}
+body.lang-ar .custom-select-search-input{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15px;}
+.custom-select-search-input:focus{border-color:var(--purple); outline:none;}
+
 .custom-select-group{
   cursor:default;
   font-weight:700;
@@ -2099,6 +2123,7 @@ body.lang-ar .landing-services .section-title{
 .service-card.card-ink{background:var(--ink); color:#FFFFFF;}
 .service-card.card-silver{background:#D9D9D6; color:var(--ink);}
 .service-card.card-gold{background:var(--butter); color:var(--ink);}
+.service-card.card-green{background:var(--green-dim); color:var(--ink);}
 
 /* Obere Reihe: Icon-Kreis links, Pfeil-Kreis rechts, beide rund und auf
    gleicher Höhe, angelehnt am Referenz-Design. */
@@ -2377,3 +2402,87 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
   flex-shrink:0;
 }
 .saved-result-remove:hover{color:#FF6B45; background:rgba(255,107,69,.12);}
+
+/* ETF-Overlap-Rechner: A = grün (wie .etf), B = lila (wie .fonds), gleiche
+   Farblogik wie beim Kostenvergleichs-Rechner. */
+.overlap-select-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media (max-width:560px){.overlap-select-row{grid-template-columns:1fr;}}
+.overlap-select-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  display:block;
+}
+body.lang-ar .overlap-select-label{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:14.5px; letter-spacing:0; text-transform:none; font-weight:700;}
+.overlap-select-label.etf{color:var(--green);}
+.overlap-select-label.fonds{color:var(--purple-strong);}
+.overlap-select-meta{font-size:12px; color:var(--text-muted); font-family:'IBM Plex Mono',monospace; margin-top:5px;}
+
+/* Überlappungs-Gauge: ein einzelner Donut-Ring (Kreis-Trick wie beim
+   spend-donut), dessen Füllfarbe je nach Überlappungs-% zwischen vier
+   Stufen wechselt (niedrig -> hoch), plus große Zahl + Verdict-Wort in der
+   Mitte statt eigener Farbvariablen im :root (nur hier gebraucht, echte
+   Ampel-Skala statt Marken-Indigo/Lila). */
+.overlap-gauge-row{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
+.overlap-gauge{position:relative; width:168px; height:168px; flex-shrink:0;}
+.overlap-gauge svg{width:100%; height:100%;}
+.overlap-gauge-center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+}
+.overlap-gauge-pct{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:700;
+  font-size:27px;
+  line-height:1;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.overlap-gauge-verdict{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-top:8px;
+}
+body.lang-ar .overlap-gauge-verdict{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:13.5px; letter-spacing:0; text-transform:none;}
+.overlap-gauge-text{flex:1; min-width:220px;}
+.overlap-summary-text{font-size:15px; line-height:1.7; color:var(--text);}
+body.lang-ar .overlap-summary-text{font-size:16.5px; line-height:1.85;}
+.overlap-summary-text strong{font-weight:700;}
+@media (max-width:520px){
+  .overlap-gauge-row{flex-direction:column; text-align:center;}
+}
+
+.overlap-holdings{display:flex; flex-direction:column; gap:14px;}
+.overlap-holding-row{display:flex; flex-direction:column; gap:5px;}
+.overlap-holding-name{font-size:14.5px; font-weight:600;}
+body.lang-ar .overlap-holding-name{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
+.overlap-mini-bar{display:flex; align-items:center; gap:8px;}
+.overlap-mini-bar-track{flex:1; height:9px; border-radius:5px; background:var(--panel-2); overflow:hidden;}
+.overlap-mini-bar-fill{height:100%; border-radius:5px;}
+.overlap-mini-bar-fill.etf{background:var(--green);}
+.overlap-mini-bar-fill.fonds{background:var(--purple-strong);}
+.overlap-mini-bar-val{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  font-weight:600;
+  color:var(--text-muted);
+  width:52px;
+  flex-shrink:0;
+  text-align:end;
+}
+.overlap-empty{color:var(--text-muted); font-size:14.5px; padding:8px 0;}
+body.lang-ar .overlap-empty{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-size:15.5px;}
+
+.overlap-unique-empty{color:var(--text-muted); font-size:13.5px; padding:8px 0;}
