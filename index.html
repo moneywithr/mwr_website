@@ -10,7 +10,7 @@
 <meta name="description" content="أدوات مجانية بالعربي: احسب عوائد استثمارك، قارن تكاليف الصناديق وETF، اعرف رأس مال الحرية المالية، ولاقي أفضل المنصات والبنوك المجانية.">
 <meta name="author" content="Rami Alhasan">
 <link rel="canonical" href="https://moneywithrami.com/">
-<link rel="stylesheet" href="/css/style.css?v=20260826b">
+<link rel="stylesheet" href="/css/style.css?v=20260826c">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -238,41 +238,63 @@
     <p class="copyright"><a href="/impressum/" data-i18n="footerImpressum">Impressum</a></p>
     <p class="copyright"><a href="/datenschutz/" data-i18n="footerPrivacy">Datenschutzerklärung</a></p>
 
-    <!-- Brevo-Anmeldeformular, im Design der Seite nachgebaut: dieselben
-         funktionalen IDs/Klassen wie im Original-Embed (sib-form, EMAIL,
-         error-message/success-message, entry__*, g-recaptcha-v3), damit
-         Brevos main.js (Validierung, AJAX-Submit, Message-Panels, unsichtbares
-         reCAPTCHA v3) unverändert funktioniert - nur die Inline-Styles sind
-         raus, ersetzt durch newsletter-Klassen unten in style.css. -->
-    <div class="newsletter-box">
-      <div class="newsletter-text">
-        <div class="newsletter-title" data-i18n="newsletterTitle">Newsletter</div>
-        <p class="newsletter-desc" data-i18n="newsletterDesc">Trag dich ein und verpass keine neuen Rechner und Tipps.</p>
-      </div>
-      <div id="sib-form-container" class="newsletter-form-container">
+    <!-- Brevo-Anmeldeformular: exakte Klassen-/ID-Struktur des Original-
+         Embeds beibehalten (sib-form, sib-form-container, sib-container--*,
+         sib-form-block, entry__*, sib-form__declaration usw.), weil Brevos
+         main.js beim Initialisieren gezielt danach sucht - ein zu stark
+         gekürztes DOM hat main.js mit "Cannot read properties of null
+         (reading 'removeClass')" abstürzen lassen, wodurch der Submit-
+         Handler nie gebunden wurde. Die newsletter-*-Klassen daneben sind
+         rein fürs Design (style.css), Label/Hinweistext sind mit
+         .newsletter-sr-only visuell versteckt statt entfernt, damit main.js
+         sie trotzdem findet. -->
+    <div class="sib-form newsletter-box" style="text-align:center;">
+      <div id="sib-form-container" class="sib-form-container newsletter-form-container">
         <div id="error-message" class="sib-form-message-panel newsletter-msg newsletter-msg-error">
-          <span class="sib-form-message-panel__inner-text" data-i18n="newsletterErrorMsg">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuch's nochmal.</span>
+          <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+            <span class="sib-form-message-panel__inner-text" data-i18n="newsletterErrorMsg">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuch's nochmal.</span>
+          </div>
         </div>
         <div id="success-message" class="sib-form-message-panel newsletter-msg newsletter-msg-success">
-          <span class="sib-form-message-panel__inner-text" data-i18n="newsletterSuccessMsg">Deine Anmeldung war erfolgreich!</span>
+          <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+            <span class="sib-form-message-panel__inner-text" data-i18n="newsletterSuccessMsg">Deine Anmeldung war erfolgreich!</span>
+          </div>
         </div>
-        <div id="sib-container" class="newsletter-container">
+        <div id="sib-container" class="sib-container--large sib-container--vertical newsletter-container">
           <form id="sib-form" method="POST" action="https://196246c1.sibforms.com/serve/MUIFAAKPzZe3sgx-opj_k4t2n9BinWvqCFxnxypCjJmO4sRL9mglvlQeZAzU_mTOEi5v3vtbsBFTa8Rgt1QLmz4khmBBsQlYYrvpYR4LvhyLILa4jQj4Lmk7UpccZThNbY6h8OANh_7-APtBeETv7WHdlahryoDJfePvIpwyvqWWwQm7U4C8Gt-2PxwmsTU5ooiiLeSamc9sTUP9AQ==" data-type="subscription">
+            <div class="sib-form-block newsletter-title" data-i18n="newsletterTitle">Newsletter</div>
+            <div class="sib-form-block newsletter-desc-block">
+              <div class="sib-text-form-block">
+                <p class="newsletter-desc" data-i18n="newsletterDesc">Trag dich ein und verpass keine neuen Rechner und Tipps.</p>
+              </div>
+            </div>
             <div class="newsletter-row">
-              <div class="sib-input newsletter-field-block">
+              <div class="sib-input sib-form-block newsletter-field-block">
                 <div class="form__entry entry_block">
                   <div class="form__label-row">
+                    <label class="entry__label newsletter-sr-only" for="EMAIL" data-required="*" data-i18n="newsletterFieldLabel">Enter your email address to subscribe</label>
                     <div class="entry__field">
                       <input class="input newsletter-input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" value="" data-i18n-placeholder="newsletterPlaceholder" placeholder="بريدك الإلكتروني" data-required="true" required />
                     </div>
                   </div>
                   <label class="entry__error entry__error--primary newsletter-field-error"></label>
+                  <label class="entry__specification newsletter-sr-only" data-i18n="newsletterFieldHint">Provide your email address to subscribe. For e.g abc@xyz.com</label>
                 </div>
               </div>
-              <button class="sib-form-block__button sib-form-block__button-with-loader newsletter-btn" form="sib-form" type="submit" data-i18n="newsletterBtn">Abonnieren</button>
+              <button class="sib-form-block__button sib-form-block__button-with-loader newsletter-btn" form="sib-form" type="submit">
+                <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                  <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/>
+                </svg>
+                <span data-i18n="newsletterBtn">Abonnieren</span>
+              </button>
             </div>
             <div class="g-recaptcha-v3" data-sitekey="6LcqkZgtAAAAAGM9TUHmkO23iszxLRi_LE0ZG7_K" style="display: none"></div>
-            <p class="newsletter-disclaimer" data-i18n-html="newsletterDisclaimer">Wir nutzen Brevo als unsere Marketing-Plattform. Mit dem Absenden dieses Formulars stimmst du zu, dass deine Daten an Brevo übermittelt werden, gemäß der <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzrichtlinie von Brevo</a>.</p>
+            <div class="sib-form__declaration newsletter-disclaimer">
+              <div class="declaration-block-icon newsletter-sr-only"></div>
+              <div>
+                <p data-i18n-html="newsletterDisclaimer">Wir nutzen Brevo als unsere Marketing-Plattform. Mit dem Absenden dieses Formulars stimmst du zu, dass deine Daten an Brevo übermittelt werden, gemäß der <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzrichtlinie von Brevo</a>.</p>
+              </div>
+            </div>
             <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
             <input type="hidden" name="locale" value="de">
           </form>
@@ -283,7 +305,7 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260826a"></script>
+<script src="/js/i18n.js?v=20260826b"></script>
 <script src="/js/common.js?v=20260826a"></script>
 
 <!-- Cal element-click embed code begins -->

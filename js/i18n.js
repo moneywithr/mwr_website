@@ -335,6 +335,8 @@ window.I18N = {
     newsletterErrorMsg: "Deine Anmeldung konnte nicht gespeichert werden. Bitte versuch's nochmal.",
     newsletterSuccessMsg: 'Deine Anmeldung war erfolgreich!',
     newsletterDisclaimer: 'Wir nutzen Brevo als unsere Marketing-Plattform. Mit dem Absenden dieses Formulars stimmst du zu, dass deine Daten zur Verarbeitung an Brevo übermittelt werden, gemäß der <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Datenschutzrichtlinie von Brevo</a>.',
+    newsletterFieldLabel: 'Gib deine E-Mail-Adresse ein, um dich anzumelden',
+    newsletterFieldHint: 'Gib deine E-Mail-Adresse an, um dich anzumelden, z.B. abc@xyz.com',
   },
   en: {
     eyebrow: 'Cost calculator',
@@ -669,6 +671,8 @@ window.I18N = {
     newsletterErrorMsg: 'Your subscription could not be saved. Please try again.',
     newsletterSuccessMsg: 'Your subscription has been successful!',
     newsletterDisclaimer: 'We use Brevo as our marketing platform. By submitting this form you agree that your data will be transferred to Brevo for processing, in accordance with <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">Brevo\'s Privacy Policy</a>.',
+    newsletterFieldLabel: 'Enter your email address to subscribe',
+    newsletterFieldHint: 'Provide your email address to subscribe, e.g. abc@xyz.com',
   },
   ar: {
     eyebrow: 'حاسبة التكاليف',
@@ -1003,5 +1007,7 @@ window.I18N = {
     newsletterErrorMsg: 'ما قدرنا نحفظ اشتراكك. جرب كمان مرة.',
     newsletterSuccessMsg: 'تم اشتراكك بنجاح!',
     newsletterDisclaimer: 'منستخدم Brevo كمنصة تسويق. لما بتبعت هالفورم، عم توافق إنه بياناتك بتنرسل لـBrevo لمعالجتها، حسب <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener">سياسة الخصوصية تبع Brevo</a>.',
+    newsletterFieldLabel: 'دخّل إيميلك لتشترك',
+    newsletterFieldHint: 'دخّل إيميلك لتشترك، متلاً abc@xyz.com',
   },
 };

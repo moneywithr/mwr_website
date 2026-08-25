@@ -2580,3 +2580,16 @@ body.lang-ar .newsletter-desc{font-size:16px;}
 }
 .newsletter-msg-error{background:var(--orange-dim); color:var(--orange-strong);}
 .newsletter-msg-success{background:#E7FAF0; color:#085229;}
+/* Visuell versteckt, aber weiterhin im DOM/für Screenreader vorhanden -
+   Brevos main.js sucht diese Elemente (Label, Hinweistext, Deko-Icon) beim
+   Initialisieren, ganz entfernen lässt main.js abstürzen (siehe Kommentar
+   im HTML). Standard "sr-only"-Pattern statt display:none. */
+.newsletter-sr-only{
+  position:absolute;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
