@@ -3,34 +3,17 @@
 // als normales Safari/Chrome, wodurch das TARIFCHECK24-Vergleichs-Widget auf
 // /stuff_i_use/find_bank/ und /stuff_i_use/credit_cards/ oft leer bleibt oder
 // nicht lädt. Ein eigenes Cookie-Consent-Banner kann das NICHT beheben - das
-// ist eine Browser-Richtlinie, keine Consent-Frage. Der einzige verlässliche
-// Fix ist, die Seite im echten Browser zu öffnen; das bietet dieses Banner an.
+// ist eine Browser-Richtlinie, keine Consent-Frage. Frühere Versionen haben
+// versucht, per intent:// (Android) bzw. x-safari-https:// (iOS) automatisch
+// in den echten Browser umzuleiten - beides sind inoffizielle Tricks, die
+// Instagram & Co. gezielt blockieren, weshalb der Button oft einfach nichts
+// tat. Verlässlich funktioniert nur, was der In-App-Browser selbst anbietet:
+// das ⋯-Menü "Im Browser öffnen" - plus Link kopieren als Fallback.
 (function(){
   function ua(){ return navigator.userAgent || ''; }
   function isInAppBrowser(){
     return /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Line\/|MicroMessenger|TikTok|BytedanceWebview|Snapchat/i.test(ua());
   }
-  function isAndroid(){ return /Android/i.test(ua()); }
-
-  // Android: kein "package=com.android.chrome" hier - das würde immer Chrome
-  // erzwingen, egal was der Nutzer eingestellt hat. Ohne package entscheidet
-  // Android selbst: Standardbrowser öffnet direkt, sonst zeigt es die normale
-  // "Öffnen mit"-Auswahl (Chrome, Firefox, Samsung Internet, ...).
-  function buildAndroidIntentUrl(){
-    var stripped = location.href.replace(/^https?:\/\//, '');
-    return 'intent://' + stripped + '#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end';
-  }
-
-  // iOS-WebViews (Instagram, Facebook, ...) haben kein Android-Intent-System,
-  // reagieren aber oft auf das x-safari-https-Schema und öffnen damit direkt
-  // Safari statt der eingebetteten Ansicht - kein offizielles API, aber der
-  // gängige Best-Effort-Trick dafür (iOS kennt keine "Öffnen mit"-Auswahl über
-  // einen Link, Safari ist dort ohnehin so gut wie immer der Standardbrowser).
-  function buildOpenBrowserUrl(){
-    if(isAndroid()) return buildAndroidIntentUrl();
-    return 'x-safari-' + location.href;
-  }
-
   function copyLink(btn, doneLabel){
     var url = location.href;
     function onDone(){
@@ -69,10 +52,13 @@
         '<div class="inapp-browser-text">' +
           '<strong class="inapp-browser-title" data-i18n="inappTitle"></strong>' +
           '<span class="inapp-browser-desc" data-i18n="inappDesc"></span>' +
+          '<ol class="inapp-browser-steps">' +
+            '<li data-i18n="inappStep1"></li>' +
+            '<li data-i18n="inappStep2"></li>' +
+          '</ol>' +
         '</div>' +
         '<div class="inapp-browser-actions">' +
-          '<a class="inapp-browser-btn inapp-browser-btn-primary" data-i18n="inappOpenBrowser" href="' + buildOpenBrowserUrl() + '"></a>' +
-          '<button type="button" class="inapp-browser-btn inapp-browser-btn-secondary" data-i18n="inappCopyLink"></button>' +
+          '<button type="button" class="inapp-browser-btn" data-i18n="inappCopyLink"></button>' +
         '</div>' +
         '<button type="button" class="inapp-browser-close" aria-label="Close">&times;</button>' +
       '</div>';
@@ -87,7 +73,7 @@
       sessionStorage.setItem('mwr_inapp_notice_dismissed', '1');
     });
 
-    var copyBtn = banner.querySelector('.inapp-browser-btn-secondary');
+    var copyBtn = banner.querySelector('.inapp-browser-btn');
     if(copyBtn){
       copyBtn.addEventListener('click', function(){
         copyLink(copyBtn, window.Site.t('inappCopied'));
