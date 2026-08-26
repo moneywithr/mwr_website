@@ -2754,6 +2754,25 @@ body.lang-ar .newsletter-compact .newsletter-desc{font-size:13.5px;}
   margin:16px 0 0;
   text-align:start;
 }
+.newsletter-optin{margin-top:12px; text-align:start;}
+.newsletter-optin-label{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  cursor:pointer;
+  font-size:12.5px;
+  line-height:1.5;
+  color:var(--text-muted);
+}
+.newsletter-optin-checkbox{
+  flex-shrink:0;
+  width:16px;
+  height:16px;
+  margin-top:2px;
+  accent-color:var(--purple);
+  cursor:pointer;
+}
+body.lang-ar .newsletter-optin-label{font-size:13.5px;}
 .newsletter-disclaimer a{color:var(--purple);}
 .sib-form-message-panel{
   display:none;
