@@ -178,7 +178,17 @@ window.Site = (function(){
     });
 
     const hashCat = (location.hash || '').replace('#cat-', '');
-    const initialCat = (isHome && CATEGORY_KEYS.includes(hashCat)) ? hashCat : CATEGORY_KEYS[0];
+    let initialCat;
+    if(isHome){
+      initialCat = CATEGORY_KEYS.includes(hashCat) ? hashCat : CATEGORY_KEYS[0];
+    } else {
+      // Auf Unterseiten steht die eigentliche Kategorie in der Breadcrumb
+      // (z.B. "Tools, die ich nutze"), nicht in der URL. Von dort ableiten,
+      // statt hart auf den ersten Button ("Rechner") zu fallen.
+      const crumbKey = document.querySelector('.breadcrumb [data-i18n^="landingCat"]');
+      const crumbCat = crumbKey && buttons.find(b=> b.getAttribute('data-i18n') === crumbKey.getAttribute('data-i18n'));
+      initialCat = crumbCat ? crumbCat.getAttribute('data-category') : CATEGORY_KEYS[0];
+    }
     requestAnimationFrame(()=> setActive(initialCat, false));
 
     let resizeTimer;
