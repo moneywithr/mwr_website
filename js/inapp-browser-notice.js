@@ -12,9 +12,23 @@
   }
   function isAndroid(){ return /Android/i.test(ua()); }
 
-  function buildChromeIntentUrl(){
+  // Android: kein "package=com.android.chrome" hier - das würde immer Chrome
+  // erzwingen, egal was der Nutzer eingestellt hat. Ohne package entscheidet
+  // Android selbst: Standardbrowser öffnet direkt, sonst zeigt es die normale
+  // "Öffnen mit"-Auswahl (Chrome, Firefox, Samsung Internet, ...).
+  function buildAndroidIntentUrl(){
     var stripped = location.href.replace(/^https?:\/\//, '');
-    return 'intent://' + stripped + '#Intent;scheme=https;package=com.android.chrome;end';
+    return 'intent://' + stripped + '#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end';
+  }
+
+  // iOS-WebViews (Instagram, Facebook, ...) haben kein Android-Intent-System,
+  // reagieren aber oft auf das x-safari-https-Schema und öffnen damit direkt
+  // Safari statt der eingebetteten Ansicht - kein offizielles API, aber der
+  // gängige Best-Effort-Trick dafür (iOS kennt keine "Öffnen mit"-Auswahl über
+  // einen Link, Safari ist dort ohnehin so gut wie immer der Standardbrowser).
+  function buildOpenBrowserUrl(){
+    if(isAndroid()) return buildAndroidIntentUrl();
+    return 'x-safari-' + location.href;
   }
 
   function copyLink(btn, doneLabel){
@@ -57,7 +71,7 @@
           '<span class="inapp-browser-desc" data-i18n="inappDesc"></span>' +
         '</div>' +
         '<div class="inapp-browser-actions">' +
-          (isAndroid() ? '<a class="inapp-browser-btn" data-i18n="inappOpenChrome" href="' + buildChromeIntentUrl() + '"></a>' : '') +
+          '<a class="inapp-browser-btn inapp-browser-btn-primary" data-i18n="inappOpenBrowser" href="' + buildOpenBrowserUrl() + '"></a>' +
           '<button type="button" class="inapp-browser-btn inapp-browser-btn-secondary" data-i18n="inappCopyLink"></button>' +
         '</div>' +
         '<button type="button" class="inapp-browser-close" aria-label="Close">&times;</button>' +

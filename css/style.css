@@ -2821,6 +2821,13 @@ body.lang-ar .inapp-browser-desc{font-size:13.5px;}
   cursor:pointer;
   white-space:nowrap;
 }
+.inapp-browser-btn-primary{
+  background:var(--mint);
+  color:var(--ink);
+  padding:9px 20px;
+  font-size:13.5px;
+}
+.inapp-browser-btn-primary:hover{background:#C2E000;}
 .inapp-browser-btn-secondary{
   background:transparent;
   color:var(--orange-strong);
