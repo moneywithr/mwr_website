@@ -1908,6 +1908,15 @@ footer .copyright a{
   text-decoration:none;
 }
 footer .copyright a:hover{text-decoration:underline;}
+footer .footer-legal{margin-top:14px;}
+footer .footer-legal .copyright{margin-top:4px;}
+footer .footer-legal-heading{
+  font-weight:700;
+  color:var(--ink);
+  font-size:12.5px;
+  margin-top:14px;
+}
+body.lang-ar footer .footer-legal-heading{font-size:14px;}
 
 /* Social-Banner im Footer ("Hier findest du mich") */
 /* Dunkle Banner-Karte, gleiche Sprache wie die schwarze Tool-Karte oben
@@ -2376,6 +2385,8 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
 }
 
 .landing-wrap footer{text-align:center;}
+.landing-wrap footer .footer-legal .copyright,
+.landing-wrap footer .footer-legal-heading{text-align:start;}
 
 @keyframes landingFadeIn{
   from{opacity:0; transform:translateY(10px);}
@@ -2658,6 +2669,21 @@ body.lang-ar .overlap-empty{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',s
 }
 body.lang-ar .newsletter-title{font-size:23px;}
 body.lang-ar .newsletter-desc{font-size:16px;}
+
+/* Kompakte Variante: zwischen Footnote und Footer statt als große Box
+   ganz unten, deshalb spürbar kleiner als das Standard-.newsletter-box. */
+.newsletter-compact{
+  margin:20px auto 0;
+  max-width:440px;
+  padding:18px 22px;
+}
+.newsletter-compact .newsletter-title{font-size:16px; margin-bottom:4px;}
+.newsletter-compact .newsletter-desc{font-size:12.5px; margin:0 0 12px;}
+body.lang-ar .newsletter-compact .newsletter-title{font-size:17px;}
+body.lang-ar .newsletter-compact .newsletter-desc{font-size:13.5px;}
+.newsletter-compact .newsletter-input{padding:9px 14px; font-size:13.5px;}
+.newsletter-compact .newsletter-btn{padding:9px 20px; font-size:13px;}
+.newsletter-compact .newsletter-disclaimer{font-size:10.5px; margin-top:10px;}
 .newsletter-row{
   display:flex;
   gap:10px;
