@@ -2688,8 +2688,12 @@ body.lang-ar .newsletter-desc{font-size:16px;}
   max-width:440px;
   padding:18px 22px;
 }
-.newsletter-compact .newsletter-title{font-size:16px; margin-bottom:4px;}
-.newsletter-compact .newsletter-desc{font-size:12.5px; margin:0 0 12px;}
+.newsletter-compact .newsletter-title{font-size:16px; margin-bottom:12px;}
+/* Beschreibungstext ausgeblendet statt entfernt (Brevos main.js sucht beim
+   Initialisieren gezielt nach .sib-form-block-Elementen - komplettes
+   Entfernen von DOM-Knoten hat main.js früher abstürzen lassen, siehe
+   Kommentar beim Formular-Markup weiter oben). */
+.newsletter-compact .newsletter-desc-block{display:none;}
 body.lang-ar .newsletter-compact .newsletter-title{font-size:17px;}
 body.lang-ar .newsletter-compact .newsletter-desc{font-size:13.5px;}
 .newsletter-compact .newsletter-input{padding:9px 14px; font-size:13.5px;}
