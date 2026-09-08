@@ -1941,6 +1941,7 @@ body.lang-ar .insurance-status-badge{
   border-radius:18px;
   padding:18px 20px;
   border:1px solid var(--line);
+  min-width:0;
 }
 .insurance-need-card.need-yes{background:var(--purple-dim);}
 .insurance-need-card.need-no{background:var(--orange-dim);}
@@ -2430,6 +2431,12 @@ body.lang-ar .cat-heading{
   transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
   opacity:0;
   animation:landingCardPop .55s cubic-bezier(.34,1.56,.64,1) forwards;
+  /* Grid-Items sind standardmäßig min-width:auto, schrumpfen also nicht
+     unter die Breite ihres längsten unzerbrechlichen Worts (z.B. lange
+     deutsche Fachbegriffe wie "Haftpflichtversicherung" in Klammern).
+     Ohne das hier sprengt so ein Wort die halbe .service-cards-Spalte
+     und die ganze Seite bekommt horizontalen Overflow. */
+  min-width:0;
 }
 .service-cards .service-card:nth-child(1){animation-delay:.12s;}
 .service-cards .service-card:nth-child(2){animation-delay:.24s;}
@@ -2470,6 +2477,26 @@ body.lang-ar .service-card .service-name{font-family:'IBM Plex Sans Arabic',sans
   opacity:.72;
 }
 body.lang-ar .service-card .service-desc{font-size:13.5px;}
+
+/* Deutscher Fachbegriff unter dem übersetzten Kartentitel, eigene Zeile
+   statt inline angehängt, sonst sprengen lange zusammengesetzte Wörter
+   (z.B. "Haftpflichtversicherung") die schmale Grid-Spalte auf dem Handy.
+   Auf Deutsch selbst ist der Titel schon der Fachbegriff, daher hier
+   ausgeblendet. */
+.service-card .service-name-de{
+  font-size:11px;
+  font-weight:600;
+  opacity:.55;
+  margin-top:2px;
+  line-height:1.3;
+  unicode-bidi:plaintext;
+}
+body.lang-ar .service-card .service-name-de{font-size:11.5px;}
+/* Auf Deutsch ist der Titel selbst schon der Fachbegriff, daher liefert
+   i18n.js für den de-Block einen leeren String statt des Begriffs, und
+   :empty blendet die Zeile dann aus (es gibt keine body.lang-de-Klasse,
+   nur body.lang-ar wird gesetzt, Deutsch/Englisch bleiben ohne Klasse). */
+.service-card .service-name-de:empty{display:none;}
 
 /* Icon-Kreis oben links, rund statt eckig, angelehnt am Referenz-Design. */
 .service-card-icon{
@@ -2529,6 +2556,8 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   .service-card{padding:14px; border-radius:18px; gap:12px;}
   .service-card .service-name{font-size:14.5px;}
   body.lang-ar .service-card .service-name{font-size:15.5px;}
+  .service-card .service-name-de{font-size:10px;}
+  body.lang-ar .service-card .service-name-de{font-size:10.5px;}
   .service-card .service-desc{font-size:12px;}
   body.lang-ar .service-card .service-desc{font-size:12.5px;}
   .service-card-icon{width:36px;height:36px;}
