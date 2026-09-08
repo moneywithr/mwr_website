@@ -1882,20 +1882,128 @@ body.lang-ar .find-bank-cookie-tip{font-size:13.5px;}
    and drops its rounded-card look, one flat section instead of a card
    that only partly breaks its own frame. */
 @media (max-width:640px){
-  #find-bank-tool-panel{
+  #find-bank-tool-panel,
+  #insurance-tool-panel{
     margin-inline:-20px;
     border-inline:none;
     border-radius:0;
     box-shadow:none;
     padding-inline:16px;
   }
-  #find-bank-tool-panel .find-bank-widget-wrap{
+  #find-bank-tool-panel .find-bank-widget-wrap,
+  #insurance-tool-panel .find-bank-widget-wrap{
     margin-inline:-16px;
     border-inline:none;
     border-radius:0;
     padding-inline:8px;
   }
 }
+
+/* Versicherungsseiten: Status-Badge (Pflicht/Muss vs. Kann-Versicherung)
+   und die "Brauchst Du das?"-Gegenüberstellung, angelehnt an die
+   cat-fixed/cat-invest-Farbchips vom Spending-Plan-Rechner, damit die
+   Einordnung auf einen Blick erkennbar ist statt nur im Fließtext zu
+   stehen. */
+.insurance-status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:6px 14px;
+  border-radius:999px;
+  margin:0 0 14px;
+}
+body.lang-ar .insurance-status-badge{
+  font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  font-size:13px;
+  letter-spacing:0;
+  text-transform:none;
+  font-weight:700;
+}
+.insurance-status-badge.status-must{background:var(--purple-dim); color:var(--purple-strong);}
+.insurance-status-badge.status-optional{background:var(--periwinkle-dim); color:#31417A;}
+.insurance-status-dot{width:7px; height:7px; border-radius:50%; background:currentColor; flex:0 0 auto;}
+
+.insurance-need-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:22px 0;
+}
+@media (max-width:640px){
+  .insurance-need-grid{grid-template-columns:1fr;}
+}
+.insurance-need-card{
+  border-radius:18px;
+  padding:18px 20px;
+  border:1px solid var(--line);
+}
+.insurance-need-card.need-yes{background:var(--purple-dim);}
+.insurance-need-card.need-no{background:var(--orange-dim);}
+.insurance-need-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:14.5px;
+  font-weight:700;
+  color:var(--ink);
+  margin:0 0 12px;
+}
+body.lang-ar .insurance-need-title{font-size:15.5px;}
+.insurance-need-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:800;
+  color:#fff;
+  flex:0 0 auto;
+}
+.insurance-need-card.need-yes .insurance-need-icon{background:var(--purple-strong);}
+.insurance-need-card.need-no .insurance-need-icon{background:var(--orange-strong);}
+.insurance-need-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.insurance-need-list li{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--text);
+  padding-inline-start:18px;
+  position:relative;
+}
+.insurance-need-list li::before{
+  content:'';
+  position:absolute;
+  inset-inline-start:0;
+  top:9px;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.45;
+}
+body.lang-ar .insurance-need-list li{font-size:14.5px; line-height:1.8;}
+.insurance-need-list li strong{font-weight:700;}
+
+.insurance-need-source{
+  font-size:12px;
+  color:var(--text-muted);
+  margin:-8px 0 0;
+}
+body.lang-ar .insurance-need-source{font-size:13px;}
+.insurance-need-source a{color:var(--purple-strong); text-decoration:underline;}
 
 footer{
   margin-top:28px;
