@@ -112,7 +112,7 @@
   }
 
   function buildOnlyList(list){
-    if(!list.length) return '–';
+    if(!list.length) return '-';
     return list.map(h=> `<div class="b-row"><span class="b-label">${companyName(h.key)}</span><span class="b-val">${fmtPct(h.w,2)}</span></div>`).join('');
   }
 
@@ -234,7 +234,7 @@
   function syncSelectUI(selectId, valueId, metaId, stateKey){
     const entry = etfById[state[stateKey]];
     $(valueId).textContent = entry.name;
-    const metaParts = ['ISIN: ' + (entry.isin || '–'), 'Ticker: ' + entry.ticker];
+    const metaParts = ['ISIN: ' + (entry.isin || '-'), 'Ticker: ' + entry.ticker];
     if(entry.wkn) metaParts.splice(1, 0, 'WKN: ' + entry.wkn);
     $(metaId).textContent = metaParts.join('  ·  ');
     $(selectId).querySelectorAll('[data-value]').forEach(li=>{

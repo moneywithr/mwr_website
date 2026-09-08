@@ -144,13 +144,13 @@
 
     if(res.invalid){
       warningEl.classList.add('show');
-      $('fire-stat-needed').textContent = '–';
-      $('fire-stat-needed-card').textContent = '–';
-      $('fire-stat-capital').textContent = '–';
-      $('fire-stat-remaining').textContent = '–';
-      $('fire-stat-payments').textContent = '–';
-      $('fire-stat-years-to').textContent = '–';
-      $('fire-stat-years-after').textContent = '–';
+      $('fire-stat-needed').textContent = '-';
+      $('fire-stat-needed-card').textContent = '-';
+      $('fire-stat-capital').textContent = '-';
+      $('fire-stat-remaining').textContent = '-';
+      $('fire-stat-payments').textContent = '-';
+      $('fire-stat-years-to').textContent = '-';
+      $('fire-stat-years-after').textContent = '-';
       $('fire-result-explain').textContent = '';
       return;
     }

@@ -1,10 +1,10 @@
 // Logik NUR für calculator/spending_plan/index.html (Ausgabenplan-Rechner).
 // Angelehnt an den "Conscious Spending Plan" von Ramit Sethi (I Will Teach
 // You To Be Rich), aber in 4 eigene Kategorien umsortiert:
-//   Fixkosten (50-60%)      – Miete, Rechnungen, Abos, ...
-//   Variable Kosten (20-35%) – Essen, Ausgehen, Kleidung, ...
-//   Deine Zukunft (10%)      – Investieren + langfristiges Sparen
-//   Kurzfristiges Sparen (5-10%) – Reisen, Geschenke, ...
+//   Fixkosten (50-60%)      - Miete, Rechnungen, Abos, ...
+//   Variable Kosten (20-35%) - Essen, Ausgehen, Kleidung, ...
+//   Deine Zukunft (10%)      - Investieren + langfristiges Sparen
+//   Kurzfristiges Sparen (5-10%) - Reisen, Geschenke, ...
 // Die Prozentbänder sind bewusst dieselben wie im Original-Sheet, nur die
 // Gruppierung der Posten wurde geändert. Kein automatischer Puffer mehr:
 // das übernimmt jetzt das "Sonstiges"-Feld bei den Fixkosten. Aufbau
@@ -19,9 +19,9 @@
   // Reihenfolge = Reihenfolge im Donut/in der Legende. textColor = lesbare
   // Beschriftungsfarbe auf dem jeweiligen Segment (hell vs. dunkel).
   const CATEGORIES = [
-    { key:'fixed',     color:'#AEC0F2', textColor:'#243B7A', labelKey:'spendFixedTitle',     badge:'50–60%' },
-    { key:'variable',  color:'#E4633C', textColor:'#FFFFFF', labelKey:'spendVariableTitle',  badge:'20–35%' },
-    { key:'shortterm', color:'#DAFF00', textColor:'#3D3D0A', labelKey:'spendShortTermTitle', badge:'5–10%' },
+    { key:'fixed',     color:'#AEC0F2', textColor:'#243B7A', labelKey:'spendFixedTitle',     badge:'50-60%' },
+    { key:'variable',  color:'#E4633C', textColor:'#FFFFFF', labelKey:'spendVariableTitle',  badge:'20-35%' },
+    { key:'shortterm', color:'#DAFF00', textColor:'#3D3D0A', labelKey:'spendShortTermTitle', badge:'5-10%' },
     { key:'future',    color:'#3D3480', textColor:'#FFFFFF', labelKey:'spendFutureTitle',    badge:'10%' },
   ];
 
@@ -112,7 +112,7 @@
     const values = { fixed:res.fixedTotal, variable:res.variableTotal, future:res.futureAmount, shortterm:res.shorttermAmount };
     let rows = CATEGORIES.map(cat=>{
       const value = values[cat.key];
-      const actualPct = state.netIncome > 0 ? fmtPct(value/state.netIncome*100, 0) : '–';
+      const actualPct = state.netIncome > 0 ? fmtPct(value/state.netIncome*100, 0) : '-';
       return `<div class="spend-legend-row">
         <span class="spend-legend-dot" style="background:${cat.color}"></span>
         <span class="spend-legend-name">${t(cat.labelKey)}</span>
@@ -123,7 +123,7 @@
     // Grauer Ring-Rest = noch nicht zugewiesenes Geld, nur wenn er im Donut
     // tatsächlich sichtbar ist (kein grauer Rest mehr bei Überschreitung).
     if(!res.overspent && res.remaining > 0){
-      const actualPct = state.netIncome > 0 ? fmtPct(res.remaining/state.netIncome*100, 0) : '–';
+      const actualPct = state.netIncome > 0 ? fmtPct(res.remaining/state.netIncome*100, 0) : '-';
       rows += `<div class="spend-legend-row">
         <span class="spend-legend-dot" style="background:#E7E3DE"></span>
         <span class="spend-legend-name">${t('spendStatUnallocatedLabel')}</span>

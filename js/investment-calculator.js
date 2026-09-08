@@ -19,7 +19,7 @@
     anlageart: 'aktien', // 'aktien' | 'misch' | 'renten'
   };
   // Teilfreistellungsquote nach Fondsart (§20 InvStG): Aktienfonds ab 51%
-  // Aktienquote 30%, Mischfonds (25–50%) 15%, alle anderen (u.a. Rentenfonds)
+  // Aktienquote 30%, Mischfonds (25-50%) 15%, alle anderen (u.a. Rentenfonds)
   // 0%.
   const TEILFREISTELLUNGSQUOTE_BY_ANLAGEART = { aktien: 30, misch: 15, renten: 0 };
 
@@ -361,7 +361,7 @@
         : String(idx);
       const tr = document.createElement('tr');
       tr.innerHTML = `<td class="col-year">${t('yearLabel')} ${yearLabel}</td>`
-        + `<td>${yearlyInterest === null ? '–' : fmtEUR(yearlyInterest)}</td>`
+        + `<td>${yearlyInterest === null ? '-' : fmtEUR(yearlyInterest)}</td>`
         + `<td class="col-gain">${fmtEUR(gainYear)}</td>`
         + `<td class="col-total">${fmtEUR(val)}</td>`;
       body.appendChild(tr);
@@ -470,9 +470,9 @@
 
     if(res.invalid){
       warningEl.classList.add('show');
-      $('stat-result').textContent = '–';
-      $('stat-contributed').textContent = '–';
-      $('stat-gain').textContent = '–';
+      $('stat-result').textContent = '-';
+      $('stat-contributed').textContent = '-';
+      $('stat-gain').textContent = '-';
       $('result-summary-explain').textContent = '';
       return;
     }

@@ -2005,6 +2005,78 @@ body.lang-ar .insurance-need-list li{font-size:14.5px; line-height:1.8;}
 body.lang-ar .insurance-need-source{font-size:13px;}
 .insurance-need-source a{color:var(--purple-strong); text-decoration:underline;}
 
+/* Zweck-Hinweis: kein Verkauf, sondern Hilfe zur eigenen Entscheidung -
+   bewusst optisch getrennt von den Yes/No-Karten (neutrales Periwinkle
+   statt Purple/Orange), damit er nicht wie eine weitere Werbefläche
+   wirkt, sondern wie eine redaktionelle Einordnung. */
+.insurance-purpose-note{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--periwinkle-dim);
+  border:1px solid var(--periwinkle);
+  border-radius:18px;
+  padding:16px 20px;
+  margin:0 0 20px;
+}
+.insurance-purpose-icon{
+  flex:0 0 auto;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--periwinkle);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#243B7A;
+}
+.insurance-purpose-icon svg{width:18px; height:18px;}
+.insurance-purpose-text{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--ink);
+  margin:0;
+}
+body.lang-ar .insurance-purpose-text{font-size:14.5px; line-height:1.8;}
+.insurance-purpose-text strong{font-weight:700;}
+
+/* Entscheidungsfrage: bewusst mit Purple-Akzent statt Periwinkle, damit
+   sie sich von der Zweck-Erklärung darüber abhebt, obwohl beide Boxen
+   ruhig/neutral bleiben sollen (keine Alarmfarbe wie beim Orange der
+   Need-No-Karte). */
+.insurance-key-question{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  border-inline-start:4px solid var(--purple);
+  border-radius:14px;
+  padding:16px 20px;
+  margin:0 0 20px;
+}
+.insurance-key-question-icon{
+  flex:0 0 auto;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:var(--purple);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:15px;
+}
+.insurance-key-question-text{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--ink);
+  margin:0;
+}
+body.lang-ar .insurance-key-question-text{font-size:14.5px; line-height:1.8;}
+.insurance-key-question-text strong{font-weight:700;}
+
 footer{
   margin-top:28px;
   font-size:13px;

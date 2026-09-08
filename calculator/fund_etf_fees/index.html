@@ -9,7 +9,7 @@
 <title>مقارنة تكاليف ETF والصناديق | Money with Rami</title>
 <meta name="description" content="قارن بين تكاليف صناديق الاستثمار وETF وشوف قديش عم تخسر مصاري بسبب الرسوم على المدى الطويل. حاسبة مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/fund_etf_fees/">
-<link rel="stylesheet" href="/css/style.css?v=20260908a">
+<link rel="stylesheet" href="/css/style.css?v=20260908c">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -200,7 +200,7 @@
             <div class="p-title" data-i18n="etf">ETF</div>
             <div class="p-sub" data-i18n="etfSub">börsengehandelt, meist passiv</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">Ordergebühren</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst – meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-order-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">Ordergebühren</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst, meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-order-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="etf-order" min="0" max="2" value="0.2" step="0.01">
             </div>
             <div class="field">
@@ -212,11 +212,11 @@
             <div class="p-title" data-i18n="fonds">Fonds</div>
             <div class="p-sub" data-i18n="fondsSub">meist aktiv gemanagt</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2–5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-aa-input" class="inline-num-input" value="3" min="0" max="6" step="0.1"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2-5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-aa-input" class="inline-num-input" value="3" min="0" max="6" step="0.1"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-aa" min="0" max="6" value="3" step="0.1">
             </div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet – meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-ter-input" class="inline-num-input" value="1.5" min="0" max="3" step="0.05"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet, meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-ter-input" class="inline-num-input" value="1.5" min="0" max="3" step="0.05"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-ter" min="0" max="3" value="1.5" step="0.05">
             </div>
           </div>
@@ -227,17 +227,17 @@
         <div class="stat-card green">
           <div class="stat-tag etf" data-i18n="etf">ETF</div>
           <div class="k" data-i18n="statFinalLabel">Endkapital</div>
-          <div class="v" id="r-etf">–</div>
+          <div class="v" id="r-etf">-</div>
         </div>
         <div class="stat-card purple">
           <div class="stat-tag fonds" data-i18n="fonds">Fonds</div>
           <div class="k" data-i18n="statFinalLabel">Endkapital</div>
-          <div class="v" id="r-fonds">–</div>
+          <div class="v" id="r-fonds">-</div>
         </div>
         <div class="stat-card orange">
           <div class="stat-tag orange" data-i18n="diffQuestion">Wer ist günstiger?</div>
           <div class="k" id="k-diff">ETF-Vorteil</div>
-          <div class="v" id="r-diff">–</div>
+          <div class="v" id="r-diff">-</div>
           <div class="sub" id="r-diff-pct"></div>
         </div>
       </div>
@@ -258,17 +258,17 @@
         <div class="breakdown">
           <div class="b-group etf">
             <div class="b-col-head etf" data-i18n="etf">ETF</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-etf">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-etf">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-etf">–</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-etf" style="color:var(--green)">–</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-etf">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-etf">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-etf">-</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-etf" style="color:var(--green)">-</span></div>
           </div>
           <div class="b-group fonds">
             <div class="b-col-head fonds" data-i18n="fonds">Fonds</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-fonds">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-fonds">–</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-fonds">–</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-fonds" style="color:var(--purple)">–</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-fonds">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-fonds">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-fonds">-</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-fonds" style="color:var(--purple)">-</span></div>
           </div>
         </div>
       </div>
@@ -303,7 +303,7 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260908a"></script>
+<script src="/js/i18n.js?v=20260908c"></script>
 <script src="/js/common.js?v=20260826a"></script>
 <script src="/js/chart-helpers.js?v=20260817c"></script>
 <script src="/js/saved-results.js?v=20260818a"></script>
