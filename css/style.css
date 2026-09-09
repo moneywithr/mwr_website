@@ -1872,20 +1872,34 @@ body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
   margin:0 0 14px;
 }
 body.lang-ar .find-bank-cookie-tip{font-size:13.5px;}
-.find-bank-fullscreen-link{
-  display:block;
-  text-align:center;
-  font-size:13px;
-  font-weight:700;
-  color:var(--purple-strong);
-  background:var(--panel);
-  border:1.5px solid var(--purple);
-  border-radius:10px;
-  padding:9px 12px;
-  margin:0 0 14px;
-  text-decoration:none;
+.tcpp-widget-hidden{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  opacity:0;
+  pointer-events:none;
+  left:-9999px;
 }
-.find-bank-fullscreen-link:hover{background:var(--purple); color:#fff;}
+.find-bank-fullscreen-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  text-align:center;
+  font-size:15px;
+  font-weight:700;
+  color:#FFFFFF;
+  background:var(--purple);
+  border:none;
+  border-radius:12px;
+  padding:16px 18px;
+  text-decoration:none;
+  transition:background .15s ease, transform .15s ease;
+}
+.find-bank-fullscreen-link:hover{background:var(--purple-strong); transform:translateY(-1px);}
+body.lang-ar .find-bank-fullscreen-link{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
 .find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0; white-space:pre-line; unicode-bidi:plaintext; text-align:center;}
 
 /* .wrap (20px) + .panel (24px) padding eats 44px per side, on narrow
@@ -3102,3 +3116,117 @@ body.lang-ar .inapp-browser-steps{font-size:13.5px;}
   cursor:pointer;
 }
 .inapp-browser-close:hover{background:rgba(0,0,0,.06);}
+
+/* Consent-Banner für das eingebettete TARIFCHECK24-Vergleichs-Widget
+   (Girokonto/Kreditkarte/Versicherung): sticky unten, nur per JS eingefügt,
+   siehe js/cookie-consent.js. Erscheint nur auf den 6 Seiten mit dem
+   Widget, da nur dort tatsächlich zustimmungspflichtige Cookies laden. */
+.cookie-consent-banner{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:2100;
+  background:var(--panel);
+  border-top:1px solid var(--line);
+  box-shadow:0 -4px 20px rgba(0,0,0,.08);
+}
+.cookie-consent-banner-inner{
+  max-width:1040px;
+  margin:0 auto;
+  padding:16px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px 20px;
+}
+.cookie-consent-text{flex:1 1 320px; min-width:0;}
+.cookie-consent-title{
+  display:block;
+  font-weight:700;
+  font-size:14px;
+  color:var(--purple-strong);
+}
+.cookie-consent-desc{
+  display:block;
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.55;
+  margin-top:3px;
+}
+.cookie-consent-link{
+  display:inline-block;
+  font-size:12.5px;
+  color:var(--purple);
+  text-decoration:underline;
+  margin-top:4px;
+}
+.cookie-consent-actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+.cookie-consent-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 20px;
+  border-radius:999px;
+  font-family:inherit;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  border:1.5px solid var(--ink);
+}
+.cookie-consent-accept{background:var(--ink); color:#FFFFFF;}
+.cookie-consent-accept:hover{background:#3A3739;}
+.cookie-consent-reject{background:transparent; color:var(--ink);}
+.cookie-consent-reject:hover{background:rgba(0,0,0,.06);}
+body.lang-ar .cookie-consent-title,
+body.lang-ar .cookie-consent-desc,
+body.lang-ar .cookie-consent-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+@media (max-width:640px){
+  .cookie-consent-actions{width:100%;}
+  .cookie-consent-btn{flex:1 1 auto;}
+}
+
+/* Platzhalter, wenn der Nutzer die Widget-Cookies abgelehnt hat oder noch
+   nicht entschieden hat - ersetzt den Vergleich, solange keine Zustimmung
+   vorliegt (siehe js/cookie-consent.js). */
+.tcpp-consent-placeholder{
+  text-align:center;
+  padding:28px 16px;
+  border:1.5px dashed var(--line);
+  border-radius:12px;
+  margin:0 0 14px;
+}
+.tcpp-consent-placeholder-text{
+  font-size:13.5px;
+  color:var(--text-muted);
+  line-height:1.6;
+  margin:0 0 14px;
+}
+.tcpp-consent-placeholder-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 22px;
+  border:none;
+  border-radius:999px;
+  background:var(--purple);
+  color:#FFFFFF;
+  font-family:inherit;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+}
+.tcpp-consent-placeholder-btn:hover{background:var(--purple-strong);}
+body.lang-ar .tcpp-consent-placeholder-text,
+body.lang-ar .tcpp-consent-placeholder-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+
+.footer-cookie-settings-link{
+  background:none;
+  border:none;
+  padding:0;
+  font:inherit;
+  color:inherit;
+  text-decoration:underline;
+  cursor:pointer;
+}
