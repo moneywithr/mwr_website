@@ -25,6 +25,8 @@
 // öffnet.
 (function(){
   function swapIn(container){
+    if(container.dataset.mwrFallbackAdded) return true;
+
     var iframe = container.querySelector('iframe');
     if(!iframe || !iframe.src) return false;
 
