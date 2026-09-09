@@ -1872,6 +1872,20 @@ body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
   margin:0 0 14px;
 }
 body.lang-ar .find-bank-cookie-tip{font-size:13.5px;}
+.find-bank-fullscreen-link{
+  display:block;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  color:var(--purple-strong);
+  background:var(--panel);
+  border:1.5px solid var(--purple);
+  border-radius:10px;
+  padding:9px 12px;
+  margin:0 0 14px;
+  text-decoration:none;
+}
+.find-bank-fullscreen-link:hover{background:var(--purple); color:#fff;}
 .find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0; white-space:pre-line; unicode-bidi:plaintext; text-align:center;}
 
 /* .wrap (20px) + .panel (24px) padding eats 44px per side, on narrow
