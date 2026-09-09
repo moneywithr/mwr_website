@@ -1875,59 +1875,35 @@ body.lang-ar .find-bank-card-cta{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
 }
 body.lang-ar .find-bank-cookie-tip{font-size:13.5px;}
 .tcpp-widget-hidden{
-  position:absolute;
   width:1px;
   height:1px;
   overflow:hidden;
   opacity:0;
   pointer-events:none;
-  left:-9999px;
 }
+[id^="tcpp-cta-slot-"]{text-align:center;}
 .find-bank-fullscreen-link{
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:8px;
-  width:100%;
+  width:auto;
   text-align:center;
-  font-size:15px;
+  font-size:13.5px;
   font-weight:700;
-  color:#FFFFFF;
-  background:var(--purple);
+  color:var(--ink);
+  background:var(--mint);
   border:none;
-  border-radius:12px;
-  padding:16px 18px;
+  border-radius:999px;
+  padding:11px 22px;
+  margin:0 0 22px;
   text-decoration:none;
   transition:background .15s ease, transform .15s ease;
 }
-.find-bank-fullscreen-link:hover{background:var(--purple-strong); transform:translateY(-1px);}
+.find-bank-fullscreen-link:hover{background:#C2E000; transform:translateY(-1px);}
 body.lang-ar .find-bank-fullscreen-link{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
 .find-bank-powered-by{font-size:12px; color:var(--text-muted); margin:10px 0 0; white-space:pre-line; unicode-bidi:plaintext; text-align:center;}
 
-/* .wrap (20px) + .panel (24px) padding eats 44px per side, on narrow
-   screens that leaves too little width for the embedded widget's own
-   mobile layout, causing its cards to clip. Bleeding just the inner
-   widget-wrap looked jarring (rounded card → hard edge-to-edge → rounded
-   again), so on mobile the whole "compare yourself" panel goes edge-to-edge
-   and drops its rounded-card look, one flat section instead of a card
-   that only partly breaks its own frame. */
-@media (max-width:640px){
-  #find-bank-tool-panel,
-  #insurance-tool-panel{
-    margin-inline:-20px;
-    border-inline:none;
-    border-radius:0;
-    box-shadow:none;
-    padding-inline:16px;
-  }
-  #find-bank-tool-panel .find-bank-widget-wrap,
-  #insurance-tool-panel .find-bank-widget-wrap{
-    margin-inline:-16px;
-    border-inline:none;
-    border-radius:0;
-    padding-inline:8px;
-  }
-}
 
 /* Versicherungsseiten: Status-Badge (Pflicht/Muss vs. Kann-Versicherung)
    und die "Brauchst Du das?"-Gegenüberstellung, angelehnt an die
@@ -3222,6 +3198,47 @@ body.lang-ar .cookie-consent-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sa
 .tcpp-consent-placeholder-btn:hover{background:var(--purple-strong);}
 body.lang-ar .tcpp-consent-placeholder-text,
 body.lang-ar .tcpp-consent-placeholder-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+
+/* Kompakte Schnell-Navigation zwischen den Geschwister-Seiten einer
+   Kategorie (z.B. auf dem Bank-Finder zu den anderen "Tools, die ich
+   nutze"-Seiten springen), direkt unter dem Breadcrumb. Bewusst klein/
+   schmal gehalten (Icon + kurzer Text in einer Pille) statt einer vollen
+   Sub-Nav, damit sie den eigentlichen Seiteninhalt nicht verdrängt. */
+.tools-quick-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  margin:0 0 20px;
+  padding-bottom:2px;
+  direction:ltr;
+}
+.tools-quick-nav::-webkit-scrollbar{display:none;}
+.tools-quick-nav-item{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+  padding:7px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--text-muted);
+  font-size:12.5px;
+  font-weight:600;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background .15s ease, border-color .15s ease, color .15s ease;
+}
+.tools-quick-nav-item:hover{border-color:var(--purple); color:var(--ink);}
+.tools-quick-nav-item.active{
+  background:var(--ink);
+  border-color:var(--ink);
+  color:#FFFFFF;
+}
+.tools-quick-nav-icon{width:14px; height:14px; flex-shrink:0;}
+body.lang-ar .tools-quick-nav-item{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif; font-weight:700;}
 
 .footer-cookie-settings-link{
   background:none;

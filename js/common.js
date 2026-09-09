@@ -180,7 +180,7 @@ window.Site = (function(){
     const hashCat = (location.hash || '').replace('#cat-', '');
     let initialCat;
     if(isHome){
-      initialCat = CATEGORY_KEYS.includes(hashCat) ? hashCat : CATEGORY_KEYS[0];
+      initialCat = CATEGORY_KEYS.includes(hashCat) ? hashCat : 'tools';
     } else {
       // Auf Unterseiten steht die eigentliche Kategorie in der Breadcrumb
       // (z.B. "Tools, die ich nutze"), nicht in der URL. Von dort ableiten,
