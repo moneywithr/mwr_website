@@ -43,9 +43,19 @@
     link.target = '_blank';
     link.rel = 'noopener';
     link.setAttribute('data-i18n', 'widgetFullscreenLink');
-    link.textContent = (window.Site && window.Site.t) ? window.Site.t('widgetFullscreenLink') : 'Vergleich jetzt starten ↗';
+    link.textContent = (window.Site && window.Site.t) ? window.Site.t('widgetFullscreenLink') : 'Jetzt zum Vergleich';
 
-    container.parentNode.insertBefore(link, container);
+    // Zeigt den Button direkt oben, unter der "Vergleiche selbst..."
+    // Einleitung, in einem dafür vorgesehenen Slot (id="tcpp-cta-slot-<suffix>")
+    // statt unten beim jetzt versteckten iframe - dort ist er als
+    // eigentliche Handlungsaufforderung viel sichtbarer.
+    var suffix = container.id.replace(/^tcpp-iframe-/, '');
+    var slot = document.getElementById('tcpp-cta-slot-' + suffix);
+    if(slot){
+      slot.appendChild(link);
+    } else {
+      container.parentNode.insertBefore(link, container);
+    }
     container.dataset.mwrFallbackAdded = '1';
     return true;
   }

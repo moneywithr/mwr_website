@@ -24,6 +24,17 @@
     try{ localStorage.setItem(STORAGE_KEY, value); }catch(e){}
   }
 
+  // Ausprobiert und verworfen: den Container künstlich auf Desktop-Breite
+  // zu ziehen, damit das Partner-Skript in seinen "desktop"-Modus schaltet
+  // (siehe widget-fullscreen-link.js) und der Antrag ohne neuen Tab läuft.
+  // Ergebnis am echten Mobile-Viewport: Check24s Desktop-Ansicht ist ein
+  // mehrspaltiges, nicht responsives Layout - bei 375px überlappt sich
+  // alles und ist unbedienbar. Fazit: der "desktop"-Modus ist nicht nur ein
+  // anderer Antrags-Ablauf, sondern ein komplett anderes, absichtlich
+  // breites Layout. Es gibt daher keinen Weg, auf einem Handy-Bildschirm
+  // sowohl ein lesbares Layout als auch den funktionierenden Antrags-Ablauf
+  // zu bekommen - deshalb bleibt es beim Button, der in einem eigenen Tab
+  // öffnet (siehe widget-fullscreen-link.js).
   function activateGatedScripts(){
     var tags = document.querySelectorAll('script[type="text/plain"][data-consent="tarifcheck24"]');
     tags.forEach(function(tag){
