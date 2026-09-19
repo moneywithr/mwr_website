@@ -3147,7 +3147,6 @@ body.lang-ar .tcpp-consent-placeholder-btn{font-family:'IBM Plex Sans Arabic','I
   -webkit-overflow-scrolling:touch;
   margin:0 0 20px;
   padding-bottom:2px;
-  direction:ltr;
 }
 .tools-quick-nav::-webkit-scrollbar{display:none;}
 .tools-quick-nav-item{
@@ -3275,7 +3274,6 @@ body.lang-ar .home-hero-text{font-size:20px;}
 .card-blue .service-card-icon{background:#E6ECFC;} .card-purple .service-card-icon{background:#E8E5F8;}
 .card-gold .service-card-icon{background:#FBF3D3;} .card-lime .service-card-icon{background:#F1FFB0;}
 .card-green .service-card-icon{background:#E4F2E6;} .card-silver .service-card-icon{background:#EDEDF0;}
-.card-ink .service-card-icon{background:#E5E5EA;}
 @keyframes serviceCardFade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
 @media (prefers-reduced-motion:reduce){ .service-card{animation:none;} }
 
@@ -3288,7 +3286,8 @@ body.lang-ar .home-hero-text{font-size:20px;}
 .panel,.stat-card,.landing-cta,.newsletter-box,.newsletter-compact,.coach-box,.faq-item,.saved-results-panel,.review-card{
   border-radius:22px; border:0; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
 }
-.panel,.stat-card,.landing-cta,.newsletter-box,.newsletter-compact,.coach-box,.faq-item{background:#fff;}
+/* .panel und .stat-card bleiben bewusst ohne eigenes background, damit farbige Varianten (z.B. .result-summary in Violett) ihre Farbe behalten */
+.landing-cta,.newsletter-box,.newsletter-compact,.coach-box,.faq-item{background:#fff;}
 .footer-social-banner,.coaching-disclaimer{border-radius:22px;}
 
 /* Eingabefelder: klare violette Fokus-Ring beim Antippen, Tastatur-Fokus für Links und Knöpfe */
@@ -3296,3 +3295,22 @@ input[type=number]:focus,input[type=text]:focus,input[type=email]:focus,select:f
   border-color:#685CC8; box-shadow:0 0 0 4px rgba(104,92,200,.18); outline:none;
 }
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #685CC8; outline-offset:3px;}
+
+/* Symbol-Felder der Karten behalten ihre Farbe (auch beim Darüberfahren/Antippen und bei der früher dunklen Karte) */
+.service-card{--tile:#F2F2F7; --tile-hover:#E6E6EC;}
+.service-card.card-blue{--tile:#E6ECFC; --tile-hover:#D6E1FB;}
+.service-card.card-purple{--tile:#E8E5F8; --tile-hover:#DAD5F4;}
+.service-card.card-gold{--tile:#FBF3D3; --tile-hover:#F6E8B5;}
+.service-card.card-lime{--tile:#F1FFB0; --tile-hover:#E6F98A;}
+.service-card.card-green{--tile:#E4F2E6; --tile-hover:#D3E8D6;}
+.service-card.card-silver{--tile:#EDEDF0; --tile-hover:#DEDEE3;}
+.service-card.card-ink{--tile:#FFE3DA; --tile-hover:#FFD3C5;}
+.service-card .service-card-icon,.service-card.card-ink .service-card-icon{background:var(--tile);}
+.service-card:hover .service-card-icon{background:var(--tile-hover);}
+
+/* Einblend-Effekte nur nach einem Klick auf einen Tab (nicht beim Laden/Zurückkehren) */
+.service-card{animation:none; opacity:1;}
+.cat-section.cat-anim .service-card{animation:serviceCardFade .3s ease both;}
+.landing-services{animation:none;}
+.category-switch.no-anim .category-switch-thumb{transition:none !important;}
+@media (prefers-reduced-motion:reduce){ .cat-section.cat-anim .service-card{animation:none;} }

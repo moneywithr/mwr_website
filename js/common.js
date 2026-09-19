@@ -156,8 +156,13 @@ window.Site = (function(){
       });
       moveThumb(btn);
       if(isHome){
+        // Der Einblend-Effekt der Karten läuft nur nach einem Klick auf einen Tab,
+        // nicht beim Laden oder Zurückkehren auf die Seite (sonst wirkt es, als wäre der Tab neu gewählt worden).
+        const animate = updateHash !== false;
         document.querySelectorAll('.cat-section[data-category]').forEach(sec=>{
-          sec.hidden = sec.getAttribute('data-category') !== btn.getAttribute('data-category');
+          const show = sec.getAttribute('data-category') === btn.getAttribute('data-category');
+          sec.hidden = !show;
+          sec.classList.toggle('cat-anim', animate && show);
         });
         // Elemente mit data-hide-on="<kategorie>" (z.B. das Tool-Panel) sind auf
         // dem Start-Tab ausgeblendet.
@@ -189,7 +194,17 @@ window.Site = (function(){
       const crumbCat = crumbKey && buttons.find(b=> b.getAttribute('data-i18n') === crumbKey.getAttribute('data-i18n'));
       initialCat = crumbCat ? crumbCat.getAttribute('data-category') : CATEGORY_KEYS[0];
     }
+    // Erste Platzierung der Pille ohne Gleit-Animation (auch nach dem Laden der Schriften),
+    // damit beim Öffnen/Zurückkehren nichts "neu angewählt" aussieht.
+    sw.classList.add('no-anim');
     requestAnimationFrame(()=> setActive(initialCat, false));
+    const settle = ()=>{
+      const a = buttons.find(b=> b.classList.contains('active'));
+      if(a) moveThumb(a);
+      requestAnimationFrame(()=> requestAnimationFrame(()=> sw.classList.remove('no-anim')));
+    };
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=> requestAnimationFrame(settle));
+    else setTimeout(settle, 400);
 
     let resizeTimer;
     window.addEventListener('resize', ()=>{
