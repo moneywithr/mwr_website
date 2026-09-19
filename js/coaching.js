@@ -61,7 +61,6 @@
   let setWidth = 0;   // Breite einer Kopie der Kartenliste (inkl. Abstände)
   let pos = 0;        // Scroll-Position als Kommazahl (scrollLeft rundet auf ganze Pixel)
   let paused = false;
-  let resumeTimer = null;
   let started = false;
 
   function render(){
@@ -87,13 +86,24 @@
   }
 
   // Automatisch laufen lassen, aber als normaler Scroll-Container: Nutzer können
-  // jederzeit selbst wischen/scrollen, der Lauf pausiert dann kurz.
+  // jederzeit selbst wischen/scrollen. Wichtig gegen Zittern auf dem Handy:
+  // solange der Nutzer wischt oder die Fingerbewegung noch nachrollt (Momentum),
+  // schreibt der Code NICHT in scrollLeft und springt auch nicht. Erst nach kurzer
+  // Ruhe läuft es weiter, und die Endlosschleife wird erst dann neu zentriert.
+  var lastUser = 0;        // Zeitpunkt der letzten Nutzer-Interaktion (Touch/Rad/Scroll)
+  var lastWritten = null;  // zuletzt von uns gesetzte Position (zum Erkennen eigener Scroll-Events)
+  var wrapTimer = null;
+  var IDLE_MS = 1500;
+
+  function touch(){ lastUser = performance.now(); }
+
   function tick(now){
     var dt = Math.min((now - tick.last) / 1000, 0.1); tick.last = now;
-    if(!paused && setWidth){
+    if(!paused && setWidth && now - lastUser > IDLE_MS){
       var speed = window.innerWidth < 760 ? 16 : 24; // Pixel pro Sekunde
       pos += speed * dt;
       wrap();
+      lastWritten = pos;
       marquee.scrollLeft = pos;
     }
     requestAnimationFrame(tick);
@@ -105,30 +115,39 @@
     if(pos >= 2 * setWidth) pos -= setWidth;
     else if(pos < setWidth) pos += setWidth;
   }
-  function pauseFor(ms){
-    paused = true;
-    clearTimeout(resumeTimer);
-    if(ms) resumeTimer = setTimeout(resume, ms);
+  // Nach dem Wischen (wenn nichts mehr scrollt) unsichtbar in die mittlere Kopie zurückspringen.
+  function normalize(){
+    if(!setWidth) return;
+    var x = marquee.scrollLeft;
+    if(x >= 2 * setWidth || x < setWidth){
+      var target = x >= 2 * setWidth ? x - setWidth : x + setWidth;
+      lastWritten = target;
+      marquee.scrollLeft = target;
+      pos = target;
+    } else {
+      pos = x;
+    }
   }
-  function resume(){ pos = marquee.scrollLeft; wrap(); paused = false; }
 
   var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduceMotion){
-    marquee.addEventListener('mouseenter', ()=> pauseFor(0));
-    marquee.addEventListener('mouseleave', resume);
-    marquee.addEventListener('touchstart', ()=> pauseFor(3000), { passive:true });
-    marquee.addEventListener('touchmove', ()=> pauseFor(3000), { passive:true });
-    marquee.addEventListener('wheel', ()=> pauseFor(3000), { passive:true });
-    marquee.addEventListener('focusin', ()=> pauseFor(0));
-    marquee.addEventListener('focusout', resume);
+    marquee.addEventListener('mouseenter', ()=>{ paused = true; });
+    marquee.addEventListener('mouseleave', ()=>{ pos = marquee.scrollLeft; paused = false; });
+    marquee.addEventListener('focusin', ()=>{ paused = true; });
+    marquee.addEventListener('focusout', ()=>{ pos = marquee.scrollLeft; paused = false; });
   }
-  // Manuelles Scrollen: Position in der mittleren Kopie halten (endlos in beide Richtungen).
+  ['touchstart', 'touchmove', 'touchend', 'wheel', 'pointerdown'].forEach(ev=>{
+    marquee.addEventListener(ev, touch, { passive:true });
+  });
   marquee.addEventListener('scroll', ()=>{
     if(!setWidth) return;
     var x = marquee.scrollLeft;
-    if(x >= 2 * setWidth){ marquee.scrollLeft = x - setWidth; }
-    else if(x < setWidth){ marquee.scrollLeft = x + setWidth; }
-    if(paused) pos = marquee.scrollLeft;
+    // Eigene Schreibzugriffe (Auto-Lauf) ignorieren, alles andere ist Nutzer/Momentum.
+    if(lastWritten !== null && Math.abs(x - lastWritten) < 2) return;
+    touch();
+    pos = x;
+    clearTimeout(wrapTimer);
+    wrapTimer = setTimeout(normalize, 250);
   }, { passive:true });
   window.addEventListener('resize', ()=> measure());
   window.addEventListener('load', ()=> measure());
