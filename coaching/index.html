@@ -39,14 +39,16 @@
     <div class="coaching-eyebrow" data-i18n="coachingEyebrow">جلسات تدريبية</div>
     <h1 class="coaching-title" data-i18n-html="coachingHeadline">ما بتحتاج <em>فيديو جديد</em>. بتحتاج <em>خطة</em>، وبتحتاج <em>تبدأ</em> كمان.</h1>
     <p class="coaching-sub" data-i18n="coachingSub"></p>
-    <form class="waitlist-form" novalidate data-endpoint="">
+    <form class="waitlist-form" novalidate method="POST" action="https://196246c1.sibforms.com/serve/MUIFAJUqN3g8L2S6WdYkZquoivPbtScccgv5CtbgcmxZYFZuGk0LWmwgj1nxxZelmnu5c74zVLi2s0_jGmuOXOfQGJt-Knrvxz48RAvLA8vYn5tvNy2ggRsmiHMVR_9bkgFu58WN_wdhjaBhHZPl78gSutNUZ6ukzJifixzAB5951jjUCvM7Byfh0VGikP66_ZTvS5jGSU72jOPjRw==">
       <div class="waitlist-row">
-        <input class="waitlist-input" type="email" name="email" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
+        <input class="waitlist-input" type="email" name="EMAIL" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
         <button type="submit" class="coaching-btn"><span data-i18n="coachingCta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </div>
-      <label class="waitlist-consent"><input type="checkbox" name="consent" required><span data-i18n-html="coachingConsent"></span></label>
+      <label class="waitlist-consent"><input type="checkbox" class="waitlist-consent-box" required><span data-i18n-html="coachingConsent"></span></label>
+      <input type="text" name="email_address_check" value="" class="waitlist-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="en">
       <p class="waitlist-status" role="status" aria-live="polite"></p>
     </form>
     <p class="coaching-note" data-i18n="coachingCtaNote"></p>
@@ -83,14 +85,16 @@
 
   <section class="coaching-final coaching-dark">
     <h2 data-i18n="coachingFinalTitle"></h2>
-    <form class="waitlist-form" novalidate data-endpoint="">
+    <form class="waitlist-form" novalidate method="POST" action="https://196246c1.sibforms.com/serve/MUIFAJUqN3g8L2S6WdYkZquoivPbtScccgv5CtbgcmxZYFZuGk0LWmwgj1nxxZelmnu5c74zVLi2s0_jGmuOXOfQGJt-Knrvxz48RAvLA8vYn5tvNy2ggRsmiHMVR_9bkgFu58WN_wdhjaBhHZPl78gSutNUZ6ukzJifixzAB5951jjUCvM7Byfh0VGikP66_ZTvS5jGSU72jOPjRw==">
       <div class="waitlist-row">
-        <input class="waitlist-input" type="email" name="email" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
+        <input class="waitlist-input" type="email" name="EMAIL" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
         <button type="submit" class="coaching-btn"><span data-i18n="coachingCta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </div>
-      <label class="waitlist-consent"><input type="checkbox" name="consent" required><span data-i18n-html="coachingConsent"></span></label>
+      <label class="waitlist-consent"><input type="checkbox" class="waitlist-consent-box" required><span data-i18n-html="coachingConsent"></span></label>
+      <input type="text" name="email_address_check" value="" class="waitlist-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="en">
       <p class="waitlist-status" role="status" aria-live="polite"></p>
     </form>
   </section>

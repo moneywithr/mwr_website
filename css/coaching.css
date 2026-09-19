@@ -128,3 +128,10 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-disclaimer{max-width:760px; margin:0 auto 56px; padding:24px 26px; border:1px solid #D9D3CC; border-radius:22px; color:#201E1F;}
 .coaching-disclaimer h2{margin:0 0 8px; font-size:18px; color:#201E1F;}
 .coaching-disclaimer p{margin:0; line-height:1.8; font-size:15.5px; color:#585555;}
+
+.coaching-hero .coaching-sub{margin-bottom:0;}
+.thanks-actions{display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:center; padding:12px 16px 56px;}
+.coaching-link{color:var(--c-text); text-decoration:underline; text-underline-offset:4px; font-weight:600;}
+.coaching-page .coaching-btn{text-decoration:none;}
+
+.waitlist-hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
