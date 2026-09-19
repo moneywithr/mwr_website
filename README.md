@@ -2,46 +2,77 @@
 
 ```
 project/
-├─ index.html                             Startseite "Im Aufbau" mit Links zu den 3 Tools (/)
-├─ impressum/
-│  └─ index.html                          Impressum-Vorlage, echte Daten eintragen! (/impressum/)
-├─ calculator/
-│  ├─ investment/
-│  │  └─ index.html                       Investitionsrechner (/calculator/investment/)
-│  └─ fund_etf_fees/
-│     └─ index.html                       ETF vs. Fonds Kostenvergleich (/calculator/fund_etf_fees/)
-├─ stuff_i_use/
-│  └─ brokerage_finder/
-│     └─ index.html                       Broker-Finder (/stuff_i_use/brokerage_finder/)
-├─ fonts/                                  Selbst gehostete IBM-Plex-Schriftdateien (woff2)
+├─ index.html                             Startseite mit 3 Tabs: Investieren starten, Tools, die ich nutze, Rechner (/)
+├─ calculator/                            Tab "Rechner" (alle 5 Seiten, inkl. der früheren "Vergleiche")
+│  ├─ investment/                         Investitionsrechner
+│  ├─ financial_freedom/                  Finanzielle Freiheit
+│  ├─ spending_plan/                      Ausgabenplan
+│  ├─ fund_etf_fees/                      ETF vs. Fonds Kostenvergleich
+│  └─ etf_overlap/                        ETF-Overlap
+├─ stuff_i_use/                           Tab "Tools, die ich nutze"
+│  ├─ brokerage_finder/                   Broker-Finder
+│  ├─ find_bank/                          Bank-Finder
+│  ├─ credit_cards/                       Kreditkarten-Finder
+│  └─ insurance/                          Versicherungen (Übersicht + car, home, legal, liability)
+├─ one-on-one-coaching/                   Coaching 1:1 (öffentlich, in der Sitemap): Termin per Cal.com buchen
+├─ coaching/                              Trainingssessions in Kleingruppen (versteckt, noindex, nicht in der Sitemap)
+│  ├─ thank-you/                          Bestätigungsseite nach dem Absenden des Wartelisten-Formulars
+│  └─ confirmed/                          Seite nach Klick auf den Double-Opt-In-Link
+├─ impressum/  datenschutz/               Rechtstexte
+├─ fonts/                                 Selbst gehostete Schriften (woff2)
+├─ img/flags/                             Länderflaggen (SVG) für die Bewertungen
 ├─ css/
-│  └─ style.css                           Alle Styles + @font-face-Deklarationen
+│  ├─ style.css                           Alle Styles der Website + @font-face-Deklarationen
+│  └─ coaching.css                        Nur für die Coaching-Seiten
 └─ js/
    ├─ i18n.js                             Alle Übersetzungstexte (de/en/ar)
-   ├─ broker-data.js                      Länder- und Broker-Liste
-   ├─ common.js                           Sprachumschaltung, Formatierung, Navigation
-   ├─ investment-calculator.js            Logik nur für calculator/investment/index.html
-   ├─ fund-comparison-calculator.js       Logik nur für calculator/fund_etf_fees/index.html
-   └─ broker.js                           Logik nur für stuff_i_use/brokerage_finder/index.html
+   ├─ common.js                           Sprachumschaltung, Formatierung, Tab-Leiste (Kategorien)
+   ├─ coaching.js                         Bewertungs-Karussell, Dialog und Wartelisten-Formular
+   ├─ coaching-reviews.js                 Die Bewertungen (Name, Text, Land, Datum)
+   ├─ coach-box.js                        Coaching-Hinweis-Box am Ende der Rechner-Seiten
+   └─ *-calculator.js, broker*.js ...     Logik der jeweiligen Rechner/Finder
 ```
 
-Die Startseite `/` ist aktuell eine "Im Aufbau"-Seite ohne eigenes JS, sie nutzt nur
-`i18n.js` und `common.js` für Sprachumschaltung und verlinkt auf die drei aktiven Tools.
+## Startseite und Tabs
 
-Alle URL-Pfade sind bewusst auf Englisch gehalten (`calculator`, `investment`,
-`fund_etf_fees`, `stuff_i_use`, `brokerage_finder`), unabhängig von der Sprache,
-die gerade auf der Seite ausgewählt ist.
+Die Tab-Leiste oben (`.category-switch`) hat drei Kategorien, in dieser Reihenfolge:
+`start` (Investieren starten), `tools` (Tools, die ich nutze), `calculators` (Rechner).
+Die Farben stehen in `CATEGORY_COLORS` in `js/common.js`. Vergleiche gibt es nicht
+mehr als eigene Kategorie, alter Link `#cat-comparisons` führt automatisch zu
+`calculators`. Der Tab `start` zeigt den Einstiegsbereich (`.home-hero`), die anderen
+beiden das Karten-Panel. Elemente mit `data-hide-on="start"` sind auf dem Start-Tab
+ausgeblendet. Die Leiste steht auf allen Seiten mit Banner, wer eine Kategorie
+ergänzt, muss sie in allen HTML-Dateien eintragen.
+
+Die Rechner-Seiten (`/calculator/…`) tragen `data-coach-box` im `<body>`, dann fügt
+`js/coach-box.js` vor dem Footer die Box "Hilfe beim Einstieg?" mit Link zu
+`/one-on-one-coaching/` ein.
+
+## Coaching-Seiten und Warteliste
+
+- `/one-on-one-coaching/`: öffentlich, Buchung über Cal.com (`moneywithrami/15min`).
+- `/coaching/`: Kleingruppen-Training, absichtlich nicht verlinkt und auf `noindex`.
+  Das Formular sendet direkt (normales POST) an Brevo, die Adresse steht im
+  `action`-Attribut der Formulare. Brevo leitet danach auf `/coaching/thank-you/`
+  und nach dem Klick auf den Bestätigungslink auf `/coaching/confirmed/` weiter
+  (im Brevo-Formular eintragen). Double Opt-In ist aktiv.
+- Die Bewertungen stehen fest in `js/coaching-reviews.js` (nur Zeilen mit
+  "Ja" bei Einverstanden aus der Google-Tabelle). Neue Bewertung: Datei anpassen und
+  ggf. die Flagge in `img/flags/` ergänzen.
+- Beim Ändern von `i18n.js`, `coaching.css` oder `common.js` die Versionsnummer
+  (`?v=…`) in den HTML-Dateien erhöhen, sonst sehen Besucher die alte Datei aus dem Cache.
+
+Alle URL-Pfade sind bewusst auf Englisch gehalten, unabhängig von der Sprache, die
+gerade auf der Seite ausgewählt ist.
 
 ## Schriften
 Alle Schriften liegen lokal im Ordner `fonts/` und werden über `@font-face` in
 `css/style.css` eingebunden, keine Abhängigkeit von Google Fonts.
 - **Latein/Zahlen:** IBM Plex Sans, IBM Plex Mono
-- **Arabisch:** Tajawal (ersetzt seit August 2026 IBM Plex Sans Arabic)
-- **Markenname:** Unbounded
+- **Arabisch:** IBM Plex Sans Arabic (Fließtext), Kufam (Startseiten-Headline); Tajawal nur auf den Coaching-Seiten und in der Startseiten-Einstiegssektion
+- **Markenname:** Space Grotesk
 
-Tajawal gibt es nur in den Schnitten 400/500/700 (kein 600), der 500er-Schnitt
-ist in `css/style.css` zusätzlich als `font-weight:600` registriert, damit
-bestehende `font-weight:600`-Stellen im CSS ohne weitere Änderungen funktionieren.
+Tajawal liegt in den Schnitten 400/500/700 vor (`fonts/tajawal-arabic-*.woff2`), ohne 600.
 
 Alle Schriftdateien sind mit `pyftsubset` auf die tatsächlich im Projekt
 verwendeten Zeichen zugeschnitten (siehe frühere Learnings: immer alle

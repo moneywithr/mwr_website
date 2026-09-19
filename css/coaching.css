@@ -127,7 +127,6 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-disclaimer p{margin:0; line-height:1.8; font-size:15.5px; color:#585555;}
 
 .thanks-actions{display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:center; padding:12px 16px 56px;}
-.coaching-link{color:var(--c-text); text-decoration:underline; text-underline-offset:4px; font-weight:600;}
 .coaching-page .coaching-btn{text-decoration:none;}
 
 .waitlist-hp{position:absolute; top:0; left:0; width:1px; height:1px; opacity:0; overflow:hidden; clip-path:inset(50%); pointer-events:none;}

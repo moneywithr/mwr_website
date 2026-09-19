@@ -109,7 +109,7 @@ window.Site = (function(){
     }, 130);
   }
 
-  // Kategorie-Switch im Top-Banner (Rechner/Vergleiche/Tools): auf der
+  // Kategorie-Switch im Top-Banner (Start/Tools/Rechner): auf der
   // Startseite filtert ein Klick direkt die .cat-section-Blöcke darunter
   // (nur die passende bleibt sichtbar), auf allen anderen Seiten springt er
   // stattdessen zur Startseite mit dem passenden Hash. Die gleitende Pille

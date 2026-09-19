@@ -2258,41 +2258,9 @@ body.lang-ar .footer-social-title{
   padding-bottom:72px;
   text-align:center;
 }
-.landing-hero{
-  margin-bottom:60px;
-  animation:landingFadeIn .6s ease both;
-}
-.landing-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-weight:700;
-  font-size:clamp(38px,6.5vw,60px);
-  line-height:1.15;
-  color:var(--ink);
-  margin:0 0 10px;
-  letter-spacing:-0.01em;
-}
-body.lang-ar .landing-title{font-family:'Kufam',sans-serif; letter-spacing:0;}
-/* Mobil: engere Wrap-Ränder + etwas mehr negatives Letter-Spacing schaffen
-   genug Platz, dass der Titel bei allen drei Sprachen (auch beim längsten
-   Text, dem englischen "What would you like to do today?") einzeilig
-   bleibt, während die Schrift trotzdem größer ist als vorher. Arabisch hat
-   von Natur aus mehr Platz übrig und bekommt daher einen größeren Sprung. */
+/* Mobil: engere Wrap-Ränder auf der Startseite */
 @media (max-width:480px){
   .landing-wrap{padding-left:14px; padding-right:14px;}
-  .landing-title{font-size:22px; letter-spacing:-0.02em;}
-  body.lang-ar .landing-title{font-size:27px;}
-}
-.landing-sub{
-  color:var(--text-muted);
-  font-size:19.5px;
-  line-height:1.7;
-  max-width:600px;
-  margin:0 auto;
-}
-body.lang-ar .landing-sub{font-size:17px;}
-@media (max-width:480px){
-  .landing-sub{font-size:14px;}
-  body.lang-ar .landing-sub{font-size:14.5px;}
 }
 
 .landing-cta{
@@ -2376,7 +2344,7 @@ body.lang-ar .landing-services .section-title{
   font-weight:800;
 }
 
-/* Karten nach Kategorie gruppiert (Rechner / Vergleiche / Tools), statt
+/* Karten nach Kategorie gruppiert (Tools / Rechner), statt
    einer einzigen langen Liste - jede Gruppe hat ihre eigene kleine
    Überschrift mit Trennlinie, angelehnt an den .cat-heading-Stil vom
    ETF-Overlap-Rechner. */
@@ -2623,7 +2591,7 @@ body.lang-ar .landing-footnote{font-size:14.5px;}
   100%{opacity:1; transform:translateY(0) scale(1);}
 }
 @media (prefers-reduced-motion:reduce){
-  .landing-hero,.landing-services,.service-card,.landing-footnote{
+  .home-hero,.landing-services,.service-card,.landing-footnote{
     animation:none !important;
     opacity:1 !important;
   }
