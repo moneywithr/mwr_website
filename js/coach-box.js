@@ -16,7 +16,7 @@
       '<li><span class="coach-check">' + check + '</span><span data-i18n="coachBoxPoint3"></span></li>' +
     '</ul>' +
     '<div class="coach-box-actions">' +
-      '<a class="landing-cta-btn" href="/one-on-one-coaching/" data-i18n="coachBoxCta"></a>' +
+      '<a class="landing-cta-btn" href="/one-on-one-coaching/"><span data-i18n="coachBoxCta"></span></a>' +
     '</div>';
   footer.parentNode.insertBefore(box, footer);
 })();

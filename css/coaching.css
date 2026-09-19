@@ -33,11 +33,6 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-btn:focus-visible, .review-card:focus-visible, .review-close:focus-visible{outline:3px solid #AEC0F2; outline-offset:3px;}
 .coaching-note{margin:16px 0 0; font-size:14px; color:var(--c-muted);}
 
-.coaching-points{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:0 20px 20px;}
-.coaching-point{background:var(--c-card); border:1px solid var(--c-line); border-radius:24px; padding:26px;}
-.coaching-point-num{font-family:'IBM Plex Mono',monospace; color:#DAFF00; font-size:14px;}
-.coaching-point h3{margin:14px 0 8px; font-size:20px; color:var(--c-text);}
-.coaching-point p{margin:0; color:var(--c-muted); line-height:1.65; font-size:15.5px;}
 
 .coaching-reviews{
   text-align:center; margin:0 -16px; padding:64px 0 56px; color:#201E1F;
@@ -74,8 +69,7 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 
 @media (max-width:760px){
   .coaching-hero{padding:44px 16px 40px;} .coaching-dark{border-radius:28px;}
-  .coaching-points{grid-template-columns:1fr;}
-  .review-card{flex-basis:290px; height:320px;} 
+    .review-card{flex-basis:290px; height:320px;} 
 }
 @media (prefers-reduced-motion:reduce){
   .coaching-btn, .coaching-btn svg, .review-card{transition:none;}
@@ -153,16 +147,14 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .waitlist-name{margin-bottom:0;}
 
 /* Tajawal sitzt optisch etwas zu hoch im Button, deshalb leicht nach unten schieben */
-body.lang-ar .coaching-btn > span{position:relative; top:3px;}
+body.lang-ar .coaching-btn > span{position:relative; top:2px;}
 
 /* 1:1-Seite: Farben der restlichen Website (hell, weiße Panels, Indigo-Akzent) statt Dunkel */
 .one-page .coaching-dark{
   --c-card:#F5F1ED; --c-line:#E7E3DE; --c-text:#201E1F; --c-muted:#585555;
   background:#fff; box-shadow:var(--shadow-md);
 }
-.one-page .coaching-title em, .one-page .coaching-point-num{color:#685CC8;}
-.one-page .coaching-point{border-color:transparent;}
-.one-page .coaching-eyebrow{background:#F0EEFA; border-color:transparent; color:#5347A8;}
+.one-page .one-page .one-page .coaching-eyebrow{background:#F0EEFA; border-color:transparent; color:#5347A8;}
 
 .review-nav-btn{
   width:44px; height:44px; border-radius:50%; border:1px solid var(--c-line); background:transparent; color:var(--c-text);
@@ -294,3 +286,37 @@ body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .r
 .review-card,.faq-item{border-radius:22px; border:0; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);}
 .coaching-btn:active,.coaching-btn-alt:active{transform:scale(.97);}
 .coaching-btn:hover{transform:none;}
+
+/* Hervorhebung im Titel: dünne Linie unter dem Wort statt Kursivschrift (deckt keine Buchstaben oder Punkte ab) */
+.coaching-title em,.one-page .coaching-title em{font-style:normal; color:inherit; text-decoration:underline; text-decoration-color:#DAFF00; text-decoration-thickness:.07em; text-underline-offset:.3em; text-decoration-skip-ink:none;}
+.one-page .coaching-title em{text-decoration-color:#685CC8;}
+body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
+
+/* Finanzsystem in 5 Schritten: Wellenlinie mit nummerierten Punkten (ohne die Schritte inhaltlich zu verraten) */
+.fin-system{
+  max-width:1000px; margin:0 auto 28px; padding:44px 28px 36px; border-radius:32px;
+  background:#3D3480; color:#F7F4FF; text-align:center; box-shadow:0 2px 6px rgba(61,52,128,.18), 0 24px 56px rgba(61,52,128,.22);
+}
+.fin-system h2{margin:0 0 10px; font-size:clamp(24px,4vw,38px); line-height:1.25; color:#FFFFFF;}
+.fin-sub{margin:0 auto; max-width:620px; font-size:clamp(16px,2.2vw,19px); line-height:1.6; color:#D9D3F5;}
+.fin-wave{position:relative; height:220px; margin:34px auto 30px; max-width:900px;}
+.fin-wave svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible;}
+[dir="rtl"] .fin-wave svg{transform:scaleX(-1);}
+.fin-wave path{fill:none; stroke:#DAFF00; stroke-opacity:.55; stroke-width:2.5; vector-effect:non-scaling-stroke;}
+.fin-dot{
+  position:absolute; inset-inline-start:var(--x); top:var(--y); transform:translate(-50%,-50%); width:52px; height:52px; border-radius:50%;
+  background:#DAFF00; color:#201E1F; font-weight:700; font-size:22px; display:inline-flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 22px rgba(0,0,0,.28);
+}
+[dir="rtl"] .fin-dot{transform:translate(50%,-50%);}
+.fin-points{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; text-align:start;}
+.fin-points li{background:rgba(255,255,255,.08); border-radius:20px; padding:20px 18px;}
+.fin-points h3{margin:0 0 8px; font-size:17px; line-height:1.3; color:#FFFFFF;}
+.fin-points p{margin:0; font-size:14.5px; line-height:1.65; color:#D9D3F5;}
+@media (max-width:900px){ .fin-points{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){
+  .fin-system{padding:32px 18px 24px; border-radius:26px;}
+  .fin-wave{height:170px; margin:26px auto 24px;}
+  .fin-dot{width:42px; height:42px; font-size:18px;}
+  .fin-points{grid-template-columns:1fr;}
+}

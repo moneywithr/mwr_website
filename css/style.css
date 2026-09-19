@@ -3194,10 +3194,9 @@ body.lang-ar .home-hero-eyebrow{letter-spacing:0; font-size:15px; font-family:in
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
 body.lang-ar .home-hero-title{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif; letter-spacing:0; line-height:1.4;}
-body.lang-ar .home-hero-text, body.lang-ar .home-hero-note, body.lang-ar .home-hero-btn, body.lang-ar .home-hero-eyebrow{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.lang-ar .home-hero-text, body.lang-ar .home-hero-btn, body.lang-ar .home-hero-eyebrow{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
 .home-hero-text{font-size:18px; line-height:1.75; color:var(--text-muted); margin:0 0 10px; max-width:720px;}
 body.lang-ar .home-hero-text{font-size:17px;}
-.home-hero-note{font-style:italic; font-size:15px; color:var(--text-muted); opacity:.85; margin:0 0 24px;}
 .home-hero-actions{display:flex; flex-wrap:wrap; gap:12px;}
 .home-hero-btn{
   display:inline-flex; align-items:center; gap:10px; padding:16px 28px; border-radius:999px; text-decoration:none; cursor:pointer;
@@ -3257,7 +3256,6 @@ body.lang-ar .coach-box{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;
 body.lang-ar .home-hero-title{letter-spacing:0; line-height:1.3;}
 .home-hero-text{font-size:20px; line-height:1.6; color:var(--text-muted);}
 body.lang-ar .home-hero-text{font-size:20px;}
-.home-hero-note{font-style:normal; font-size:15px; color:var(--text-muted); opacity:1;}
 
 /* Karten: weiß, ruhig, weicher Schatten. Farbe nur noch im Symbol-Feld. */
 .services-panel{background:transparent; box-shadow:none; padding:0;}
@@ -3314,3 +3312,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #68
 .landing-services{animation:none;}
 .category-switch.no-anim .category-switch-thumb{transition:none !important;}
 @media (prefers-reduced-motion:reduce){ .cat-section.cat-anim .service-card{animation:none;} }
+
+/* Arabische Beschriftungen optisch mittig in Knöpfen (die Schriften sitzen nicht auf der Mittellinie) */
+body.lang-ar .home-hero-btn > span{position:relative; top:1.8px;}
+body.lang-ar .landing-cta-btn > span{position:relative; top:-1.5px;}
+body.lang-ar .newsletter-btn > span{position:relative; top:-1.2px;}
+.lang-btn[data-lang="ar"]{padding-top:2.5px; padding-bottom:9.5px;}
