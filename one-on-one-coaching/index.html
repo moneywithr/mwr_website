@@ -10,7 +10,7 @@
 <meta name="description" content="Persönliches Coaching 1:1 zum Investieren: kostenloses Kennenlerngespräch buchen und gemeinsam deinen Plan erstellen.">
 <link rel="canonical" href="https://moneywithrami.com/one-on-one-coaching/">
 <link rel="stylesheet" href="/css/style.css?v=20260919l">
-<link rel="stylesheet" href="/css/coaching.css?v=20260919r">
+<link rel="stylesheet" href="/css/coaching.css?v=20260919x">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
@@ -107,10 +107,17 @@
 
 <dialog class="review-dialog" id="review-dialog">
   <div class="review-dialog-head">
-    <span class="review-meta"><img id="review-dialog-flag" alt=""><span class="review-dialog-who"><strong id="review-dialog-name" dir="auto"></strong><span id="review-dialog-date"></span></span></span>
-    <button type="button" class="review-close" id="review-close" data-i18n-aria="coachingClose" aria-label="Close">&times;</button>
+    <strong class="review-dialog-name" id="review-dialog-name" dir="auto"></strong>
+    <button type="button" class="review-close" id="review-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
   </div>
-  <p class="review-full" id="review-dialog-text" dir="auto"></p>
+  <div class="review-body">
+    <p class="review-full" id="review-dialog-text" dir="auto"></p>
+    <div class="review-meta-row">
+      <span class="review-date-line" id="review-dialog-date" dir="ltr"></span>
+      <span class="review-meta-line" aria-hidden="true"></span>
+      <img class="review-dialog-flag" id="review-dialog-flag" alt="">
+    </div>
+  </div>
   <div class="review-nav">
     <button type="button" class="review-nav-btn" id="review-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
     <button type="button" class="review-nav-btn" id="review-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
@@ -121,7 +128,6 @@
 <script src="/js/common.js?v=20260919d"></script>
 <script src="/js/coaching-reviews.js?v=20260919b"></script>
 <script src="/js/coaching.js?v=20260919e"></script>
-<script src="/js/inapp-browser-notice.js?v=20260826e"></script>
 <script>
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "15min", {origin:"https://app.cal.com"});
