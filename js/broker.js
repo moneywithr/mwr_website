@@ -18,6 +18,30 @@
 
   const continents = window.BROKER_CONTINENTS || [];
 
+  // Automatische Länderauswahl: nur aus Zeitzone und Browsersprache des Geräts abgeleitet.
+  // Es wird nichts gespeichert, keine IP abgefragt und nichts an Dritte gesendet.
+  const TZ_COUNTRY = {
+    'Europe/Berlin':'de','Europe/Busingen':'de','Europe/Amsterdam':'nl','Europe/Vienna':'at','Europe/Rome':'it','Europe/Oslo':'no',
+    'Europe/Stockholm':'se','Europe/Lisbon':'pt','Atlantic/Madeira':'pt','Atlantic/Azores':'pt','Europe/Copenhagen':'dk','Europe/Paris':'fr',
+    'Europe/Madrid':'es','Atlantic/Canary':'es','Africa/Ceuta':'es','Europe/London':'uk','Africa/Cairo':'eg','Asia/Amman':'jo',
+    'Europe/Istanbul':'tr','Asia/Istanbul':'tr','Asia/Dubai':'ae','Asia/Riyadh':'sa',
+    'America/New_York':'us','America/Detroit':'us','America/Chicago':'us','America/Denver':'us','America/Phoenix':'us','America/Boise':'us',
+    'America/Los_Angeles':'us','America/Anchorage':'us','Pacific/Honolulu':'us','America/Indiana/Indianapolis':'us','America/Kentucky/Louisville':'us',
+    'America/Toronto':'ca','America/Vancouver':'ca','America/Edmonton':'ca','America/Winnipeg':'ca','America/Regina':'ca','America/Halifax':'ca','America/St_Johns':'ca','America/Montreal':'ca'
+  };
+  function detectCountryId(){
+    let id = null;
+    try{ id = TZ_COUNTRY[Intl.DateTimeFormat().resolvedOptions().timeZone] || null; }catch(e){}
+    if(!id){
+      const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+      for(const l of langs){
+        const m = /[-_]([A-Za-z]{2})$/.exec(l || '');
+        if(m){ const c = m[1].toLowerCase() === 'gb' ? 'uk' : m[1].toLowerCase(); if(brokerData.some(e=>e.id === c && c !== 'other')){ id = c; break; } }
+      }
+    }
+    return id;
+  }
+
   function renderOptions(){
     const menu = $('broker-country-select').querySelector('.custom-select-menu');
     menu.innerHTML = '';
@@ -203,6 +227,11 @@
     renderResults();
   });
 
+
   document.addEventListener('mwr:langchange', ()=>{ renderOptions(); renderResults(); });
-  document.addEventListener('DOMContentLoaded', ()=>{ renderOptions(); renderResults(); });
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const idx = brokerData.findIndex(e=>e.id === detectCountryId());
+    if(idx >= 0) state.brokerIndex = String(idx);
+    renderOptions(); renderResults();
+  });
 })();

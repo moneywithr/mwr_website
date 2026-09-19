@@ -1411,7 +1411,7 @@ body.lang-ar .b-row .b-val{font-weight:600;}
   font-size:15.5px;
   font-weight:600;
   padding:12px 14px;
-  border-radius:10px;
+  border-radius:22px;
   outline:none;
   cursor:pointer;
   text-align:start;
@@ -1447,7 +1447,7 @@ body.lang-ar .custom-select-btn.variant-panel{font-size:16px;}
   inset-inline-end:0;
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:22px;
   padding:6px;
   box-shadow:var(--shadow-md);
   list-style:none;
@@ -1463,7 +1463,7 @@ body.lang-ar .custom-select-btn.variant-panel{font-size:16px;}
   align-items:center;
   gap:10px;
   padding:10px 12px;
-  border-radius:9px;
+  border-radius:14px;
   cursor:pointer;
   font-family:'IBM Plex Sans',sans-serif;
   font-size:14.5px;
@@ -2634,7 +2634,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
 .save-result-form input:focus{border-color:var(--mint);}
 .save-result-form button{
   border:none;
-  border-radius:8px;
+  border-radius:999px;
   padding:0 12px;
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   font-weight:700;
@@ -3282,3 +3282,11 @@ body.lang-ar .cc-btn > span{position:relative; top:1.6px;}
 .footer-cookie-settings-link{background:none; border:0; padding:0; font:inherit; color:inherit; text-decoration:underline; cursor:pointer;}
 @media (min-width:640px){ .cc-banner{inset-inline:auto 20px; bottom:20px; justify-content:flex-end;} [dir="rtl"] .cc-banner{inset-inline:auto 20px;} }
 @media (prefers-reduced-motion:reduce){ .cc-card{animation:none;} }
+
+/* Broker-Finder: Länderauswahl. Kontinent-Zeile zentriert auf hellem Lila (statt grüner Pille), Länder darunter in Leserichtung.
+   Vorschlag-Button für das erkannte Land. */
+#broker-country-select .custom-select-group{justify-content:center; gap:8px; background:#EEEBFA; border-radius:9px; padding:8px 12px; margin:8px 0 4px; color:var(--purple-strong);}
+#broker-country-select .custom-select-group:first-child{margin-top:0;}
+#broker-country-select .custom-select-group-name{background:none; padding:0; color:inherit; font-weight:700;}
+#broker-country-select .custom-select-group-icon{width:auto;}
+.broker-auto-note{margin:6px 0 10px; font-size:14px; line-height:1.7; color:var(--text-muted);}

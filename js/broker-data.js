@@ -24,7 +24,7 @@ window.BROKER_DATA = [
     platforms: [
       { name: "TradersPlace", url: "https://api.skynet.mcanism.com/c/09ahVd", domain: "tradersplace.de", logoUrl: "/img/broker-logos/tradersplace.png", highlight: true, tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" }, bonus: { de: "🎁 60€ Bonus", en: "🎁 €60 gift", ar: "🎁 هدية 60 يورو" } },
       { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus-v2.png" },
-      { name: "Trading 212", url: "https://www.trading212.com/de", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" },
+      { name: "Trading 212", url: "", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" },
       { name: "Trade Republic", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Scalable Capital", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital-v2.png" }
     ]
@@ -113,7 +113,7 @@ window.BROKER_DATA = [
     continent: "europe",
     names: { de: "UK", en: "United Kingdom", ar: "المملكة المتحدة" },
     platforms: [
-      { name: "Trading 212", url: "https://www.trading212.com/uk", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" }
+      { name: "Trading 212", url: "", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" }
     ]
   },
   {
