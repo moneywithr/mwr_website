@@ -122,9 +122,6 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .faq-item summary:focus-visible{outline:3px solid #AEC0F2; outline-offset:2px; border-radius:22px;}
 .faq-item p{margin:0; padding:0 24px 22px; line-height:1.8; font-size:16px; color:#3A3637;}
 
-.coaching-disclaimer{max-width:760px; margin:0 auto 56px; padding:24px 26px; border:1px solid #D9D3CC; border-radius:22px; color:#201E1F;}
-.coaching-disclaimer h2{margin:0 0 8px; font-size:18px; color:#201E1F;}
-.coaching-disclaimer p{margin:0; line-height:1.8; font-size:15.5px; color:#585555;}
 
 .thanks-actions{display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:center; padding:12px 16px 56px;}
 .coaching-page .coaching-btn{text-decoration:none;}
@@ -218,3 +215,16 @@ body.lang-ar .coaching-btn > span{position:relative; top:3px;}
 .coaching-btn-alt:focus-visible{outline:3px solid #685CC8; outline-offset:3px;}
 #faq{scroll-margin-top:20px;}
 @media (max-width:560px){ .coaching-actions{flex-direction:column;} .coaching-actions > *{width:100%; justify-content:center;} }
+
+/* Wichtiger Hinweis: Kasten mit Akzentbalken und getöntem Hintergrund (ohne Symbol) */
+.coaching-disclaimer{
+  max-width:760px; margin:0 auto 56px; padding:24px 28px;
+  background:#FFF3EA; color:#201E1F; border:0; border-inline-start:6px solid #E4633C; border-radius:24px;
+  box-shadow:0 2px 6px rgba(228,99,60,.10), 0 16px 36px rgba(228,99,60,.14);
+}
+.disc-body{min-width:0; text-align:start;}
+.coaching-disclaimer h2{margin:2px 0 6px; font-size:20px; line-height:1.3; color:#201E1F;}
+.coaching-disclaimer p{margin:0; line-height:1.8; font-size:16px; color:#3A3637;}
+@media (max-width:560px){
+  .coaching-disclaimer{padding:20px 18px; gap:14px; border-radius:20px;}
+}
