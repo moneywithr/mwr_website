@@ -12,18 +12,12 @@ window.Site = (function(){
   const CURRENCY_FLAG = { EUR: 'flag-eur', USD: 'flag-usd', AED: 'flag-aed' };
   const CURRENCY_NAME_KEY = { EUR: 'currencyEUR', USD: 'currencyUSD', AED: 'currencyAED' };
 
-  // Für Erstbesucher (kein gespeicherter Wert) die Gerätesprache erkennen
-  // und auf de/en/ar mappen; alles andere fällt auf Arabisch zurück, die
-  // Hauptzielgruppe. Sobald einmal (auto oder manuell) gewählt, wird das
-  // in localStorage gemerkt und bleibt bei künftigen Besuchen bestehen.
+  // Erstbesucher (kein gespeicherter Wert) bekommen immer Arabisch, die
+  // Hauptzielgruppe, unabhängig von der Gerätesprache. Sobald jemand die Sprache
+  // per Umschalter wählt, wird das in localStorage gemerkt und bleibt bestehen.
   function detectLang(){
     const stored = localStorage.getItem(LANG_KEY);
-    if(stored) return stored;
-    const navLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-    for(const l of navLangs){
-      const code = (l || '').toLowerCase().slice(0,2);
-      if(code === 'de' || code === 'en' || code === 'ar') return code;
-    }
+    if(stored && window.I18N && window.I18N[stored]) return stored;
     return 'ar';
   }
 
