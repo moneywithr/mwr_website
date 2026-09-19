@@ -329,12 +329,6 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 /* Gruppenseite: schwarze Fläche wie die übrigen dunklen Boxen (Einzelcoaching bleibt Indigo) */
 .coaching-page:not(.one-page) .fin-box{background:#201E1F; box-shadow:0 2px 6px rgba(0,0,0,.15), 0 20px 48px rgba(0,0,0,.18);}
 .coaching-page:not(.one-page) .fin-sub{color:#B8B2AC;}
-/* Einzelcoaching: weiße Fläche wie die übrigen Karten, dunkle Schrift, Wellenlinie und Punkte in Indigo */
-.one-page .fin-box{background:#FFFFFF; color:#201E1F; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);}
-.one-page .fin-system h2{color:#201E1F;}
-.one-page .fin-sub{color:#4B4A4C;}
-.one-page .fin-wave path{stroke:#685CC8;}
-.one-page .fin-dot{background:#685CC8; color:#FFFFFF;}
 /* Animation beim Erscheinen: Linie zeichnet sich, Punkte 1 bis 5 poppen nacheinander auf, danach die Erklärung */
 .fin-system.fin-anim .fin-wave svg{clip-path:inset(0 100% 0 0);}
 .fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal 1.8s linear both;}
@@ -345,3 +339,20 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 .fin-system.fin-anim .fin-points li{opacity:0; transform:translateY(10px);}
 .fin-system.fin-anim.is-in .fin-points li{animation:finUp .5s ease both; animation-delay:calc(2s + var(--j) * .12s);}
 @keyframes finUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+/* Abstand Bewertungen zu Finanzsystem: Bewertungen bringen unten schon Luft mit (Section-Padding plus Track-Schatten) */
+.coaching-reviews + .fin-system{margin-top:-28px;}
+/* Einzelcoaching: die vier Punkte sind zu einem Textblock unter der Grafik zusammengefasst */
+.fin-story{margin:20px 0 0; padding:24px 26px; background:#FFFFFF; border-radius:22px; text-align:start; font-size:clamp(16px,2vw,18px); line-height:1.95; color:#201E1F; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);}
+.fin-system.fin-anim .fin-story{opacity:0; transform:translateY(10px);}
+.fin-system.fin-anim.is-in .fin-story{animation:finUp .5s ease both; animation-delay:2s;}
+@media (max-width:560px){ .fin-story{padding:20px 18px;} }
+/* Einzelcoaching: Wellenlinie läuft über die Ränder der Box hinaus bis an den Bildschirmrand.
+   Außerhalb der Box indigo (auf hellem Grund sichtbar), innerhalb der Box limette (Lime-Kopie wird auf die Box-Breite zugeschnitten). */
+.one-page .fin-box{--fp:28px;}
+.one-page .fin-out path{stroke:#3D3480;}
+.one-page .fin-clip{position:absolute; inset:0; clip-path:inset(-200px calc(var(--fp) * -1));}
+.one-page .fin-system.fin-anim .fin-wave svg{clip-path:inset(-150px 100% -150px -3000px);}
+.one-page .fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal2 1.8s linear both;}
+@keyframes finReveal2{from{clip-path:inset(-150px 100% -150px -3000px);} to{clip-path:inset(-150px -3000px -150px -3000px);}}
+.one-page .fin-wave svg{clip-path:inset(-150px -3000px -150px -3000px);}
+@media (max-width:560px){ .one-page .fin-box{--fp:16px;} }
