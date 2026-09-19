@@ -45,11 +45,11 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-reviews h2{font-size:clamp(26px,4vw,38px); margin:0 0 8px; color:#201E1F;}
 .coaching-reviews-hint{color:#585555; margin:0 0 32px; font-size:15px;}
 .reviews-marquee{
-  overflow-x:auto; overflow-y:hidden; direction:ltr; scrollbar-width:none; -ms-overflow-style:none; overscroll-behavior-x:contain;
+  overflow:hidden; direction:ltr; touch-action:pan-y; cursor:grab; user-select:none; -webkit-user-select:none;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
 }
-.reviews-track{display:flex; gap:20px; width:max-content; padding:8px 0;}
+.reviews-track{display:flex; gap:20px; width:max-content; padding:8px 0; will-change:transform;}
 .reviews-marquee::-webkit-scrollbar{display:none;}
 .review-card{
   flex:0 0 360px; height:300px; text-align:start; background:#fff; border:1px solid transparent; border-radius:28px;
@@ -281,3 +281,11 @@ body.lang-ar.has-light-reviews .home-reviews *{font-family:'Tajawal','IBM Plex S
 .has-light-reviews .review-dialog{--c-card:#FFFFFF; --c-line:#E7E3DE; --c-text:#201E1F; --c-muted:#585555;}
 .has-light-reviews .review-nav-btn:hover{border-color:#685CC8; background:rgba(104,92,200,.08);}
 body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .review-dialog *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+
+/* Endlos-Karussell: Bewegung per transform (JS), Ziehen mit Finger oder Maus */
+.reviews-marquee:active{cursor:grabbing;}
+.reviews-track{will-change:transform;}
+@media (prefers-reduced-motion:reduce){
+  .reviews-marquee{overflow-x:auto; touch-action:auto; cursor:auto;}
+  .reviews-track{will-change:auto;}
+}

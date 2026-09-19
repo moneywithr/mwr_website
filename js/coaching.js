@@ -58,113 +58,134 @@
   }
 
   const marquee = document.getElementById('reviews-marquee');
-  let setWidth = 0;   // Breite einer Kopie der Kartenliste (inkl. Abstände)
-  let pos = 0;        // Scroll-Position als Kommazahl (scrollLeft rundet auf ganze Pixel)
-  let paused = false;
-  let started = false;
+  const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N = reviews.length;
+
+  // Endlos-Karussell per transform (butterweich, auch mit Bruchteilen von Pixeln):
+  // Die Karten stehen genau einmal im Track, dahinter so viele Klone, dass der
+  // sichtbare Bereich immer gefüllt ist. Bei x >= setWidth springt es unsichtbar
+  // auf 0 zurück (die Klone sehen identisch aus). Wischen/Ziehen und Nachrollen
+  // laufen über Pointer-Events, senkrechtes Scrollen der Seite bleibt erhalten.
+  let setWidth = 0;   // Breite einer Kartenliste inkl. Abstand
+  let x = 0;          // aktuelle Verschiebung in Pixeln
+  let paused = false; // Maus über dem Bereich / Fokus
+  let dragging = false;
+  let inertia = 0;    // Nachroll-Geschwindigkeit in Pixel pro Sekunde
+  let suppressClick = false;
 
   function render(){
     track.replaceChildren();
-    // Drei Kopien: die mittlere ist die echte, die äußeren sind Klone für die
-    // Endlosschleife (Scroll-Position bleibt immer in der mittleren Kopie).
-    reviews.forEach(r => track.appendChild(card(r, true)));
     reviews.forEach(r => track.appendChild(card(r, false)));
-    reviews.forEach(r => track.appendChild(card(r, true)));
     closeBtn.setAttribute('aria-label', Site.t('coachingClose'));
     prevBtn.setAttribute('aria-label', Site.t('coachingReviewPrev'));
     nextBtn.setAttribute('aria-label', Site.t('coachingReviewNext'));
     if(openReview) fill(openReview);
-    measure();
+    layout();
   }
 
-  function measure(){
-    var n = reviews.length;
-    if(!n || track.children.length < 2 * n) return;
-    setWidth = track.children[n].offsetLeft - track.children[0].offsetLeft;
-    pos = setWidth;
-    marquee.scrollLeft = pos;
+  // Klone anhängen und die Breite einer Liste messen (bei Größenänderung erneut).
+  function layout(){
+    var real = N;
+    while(track.children.length > real) track.removeChild(track.lastChild);
+    if(!N || reduceMotion){ setWidth = 0; track.style.transform = ''; return; }
+    if(!marquee.clientWidth){ setWidth = 0; return; } // versteckt (anderer Tab)
+    // Ein Klon reicht zum Messen, danach genug Klone für Sichtbereich + eine Karte.
+    track.appendChild(card(reviews[0], true));
+    setWidth = track.children[real].offsetLeft - track.children[0].offsetLeft;
+    var need = marquee.clientWidth + track.children[0].offsetWidth + 40;
+    var i = 1;
+    while(track.scrollWidth - setWidth < need && i < N){
+      track.appendChild(card(reviews[i % N], true));
+      i++;
+    }
+    normalize();
+    apply();
   }
 
-  // Automatisch laufen lassen, aber als normaler Scroll-Container: Nutzer können
-  // jederzeit selbst wischen/scrollen. Wichtig gegen Zittern auf dem Handy:
-  // solange der Nutzer wischt oder die Fingerbewegung noch nachrollt (Momentum),
-  // schreibt der Code NICHT in scrollLeft und springt auch nicht. Erst nach kurzer
-  // Ruhe läuft es weiter, und die Endlosschleife wird erst dann neu zentriert.
-  var lastUser = 0;        // Zeitpunkt der letzten Nutzer-Interaktion (Touch/Rad/Scroll)
-  var lastWritten = null;  // zuletzt von uns gesetzte Position (zum Erkennen eigener Scroll-Events)
-  var wrapTimer = null;
-  var IDLE_MS = 1500;
+  function normalize(){
+    if(!setWidth) return;
+    x = ((x % setWidth) + setWidth) % setWidth;
+  }
+  function apply(){
+    track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+  }
 
-  function touch(){ lastUser = performance.now(); }
-
+  var last = performance.now();
   function tick(now){
-    var dt = Math.min((now - tick.last) / 1000, 0.1); tick.last = now;
-    if(!paused && setWidth && now - lastUser > IDLE_MS){
+    var dt = Math.min((now - last) / 1000, 0.05); last = now;
+    if(setWidth && !dragging){
       var speed = window.innerWidth < 760 ? 16 : 24; // Pixel pro Sekunde
-      pos += speed * dt;
-      wrap();
-      lastWritten = pos;
-      marquee.scrollLeft = pos;
+      if(Math.abs(inertia) > speed){
+        x += inertia * dt;
+        inertia *= Math.pow(0.92, dt * 60); // sanftes Ausrollen
+      } else {
+        inertia = 0;
+        if(!paused) x += speed * dt;
+      }
+      normalize();
+      apply();
     }
     requestAnimationFrame(tick);
   }
-  tick.last = performance.now();
 
-  function wrap(){
-    if(!setWidth) return;
-    if(pos >= 2 * setWidth) pos -= setWidth;
-    else if(pos < setWidth) pos += setWidth;
-  }
-  // Nach dem Wischen (wenn nichts mehr scrollt) unsichtbar in die mittlere Kopie zurückspringen.
-  function normalize(){
-    if(!setWidth) return;
-    var x = marquee.scrollLeft;
-    if(x >= 2 * setWidth || x < setWidth){
-      var target = x >= 2 * setWidth ? x - setWidth : x + setWidth;
-      lastWritten = target;
-      marquee.scrollLeft = target;
-      pos = target;
-    } else {
-      pos = x;
-    }
-  }
-
-  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduceMotion){
-    marquee.addEventListener('mouseenter', ()=>{ paused = true; });
-    marquee.addEventListener('mouseleave', ()=>{ pos = marquee.scrollLeft; paused = false; });
-    marquee.addEventListener('focusin', ()=>{ paused = true; });
-    marquee.addEventListener('focusout', ()=>{ pos = marquee.scrollLeft; paused = false; });
+    var startX = 0, lastX = 0, lastT = 0, vel = 0, captured = false;
+    marquee.addEventListener('pointerdown', e=>{
+      if(e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true; captured = false; inertia = 0; vel = 0;
+      startX = lastX = e.clientX; lastT = performance.now();
+    });
+    marquee.addEventListener('pointermove', e=>{
+      if(!dragging) return;
+      var dx = e.clientX - lastX, now = performance.now();
+      if(!captured && Math.abs(e.clientX - startX) > 6){
+        captured = true;
+        try{ marquee.setPointerCapture(e.pointerId); }catch(err){}
+      }
+      if(captured){
+        x -= dx; normalize(); apply();
+        var dtm = Math.max(now - lastT, 1);
+        vel = 0.8 * vel + 0.2 * (-dx / dtm * 1000); // geglättete Geschwindigkeit
+      }
+      lastX = e.clientX; lastT = now;
+    });
+    function end(e){
+      if(!dragging) return;
+      dragging = false;
+      if(captured){
+        inertia = Math.max(-2500, Math.min(2500, vel));
+        suppressClick = true;
+        setTimeout(()=>{ suppressClick = false; }, 80);
+        try{ marquee.releasePointerCapture(e.pointerId); }catch(err){}
+      }
+    }
+    marquee.addEventListener('pointerup', end);
+    marquee.addEventListener('pointercancel', end);
+    // Nach einem Wisch soll kein Klick auf die Karte darunter durchgehen.
+    marquee.addEventListener('click', e=>{ if(suppressClick){ e.stopPropagation(); e.preventDefault(); } }, true);
+    marquee.addEventListener('pointerenter', e=>{ if(e.pointerType === 'mouse') paused = true; });
+    marquee.addEventListener('pointerleave', e=>{ if(e.pointerType === 'mouse') paused = false; });
+    marquee.addEventListener('focusin', e=>{
+      paused = true;
+      // Karte per Tastatur fokussiert: in den sichtbaren Bereich schieben.
+      var c = e.target.closest ? e.target.closest('.review-card') : null;
+      if(c && setWidth){ x = c.offsetLeft - 24; normalize(); apply(); }
+    });
+    marquee.addEventListener('focusout', ()=>{ paused = false; });
+    marquee.addEventListener('scroll', ()=>{ marquee.scrollLeft = 0; }, { passive:true });
+    // Waagerechtes Trackpad-Wischen
+    marquee.addEventListener('wheel', e=>{
+      if(Math.abs(e.deltaX) > Math.abs(e.deltaY) && setWidth){
+        x += e.deltaX; inertia = 0; normalize(); apply(); e.preventDefault();
+      }
+    }, { passive:false });
+    requestAnimationFrame(tick);
   }
-  ['touchstart', 'touchmove', 'touchend', 'wheel', 'pointerdown'].forEach(ev=>{
-    marquee.addEventListener(ev, touch, { passive:true });
-  });
-  marquee.addEventListener('scroll', ()=>{
-    if(!setWidth || restoring) return;
-    var x = marquee.scrollLeft;
-    // Eigene Schreibzugriffe (Auto-Lauf) ignorieren, alles andere ist Nutzer/Momentum.
-    if(lastWritten !== null && Math.abs(x - lastWritten) < 2) return;
-    touch();
-    pos = x;
-    clearTimeout(wrapTimer);
-    wrapTimer = setTimeout(normalize, 250);
-  }, { passive:true });
-  // Auf der Startseite ist der Bereich anfangs evtl. versteckt (anderer Tab): messen, sobald er sichtbar wird.
-  // Beim Wiedereinblenden (display:none setzt scrollLeft auf 0) die letzte Position wiederherstellen.
-  var restoring = false;
-  if(window.ResizeObserver){
-    new ResizeObserver(()=>{
-      if(!marquee.clientWidth) return;
-      if(!setWidth){ measure(); return; }
-      restoring = true;
-      lastWritten = pos;
-      marquee.scrollLeft = pos;
-      setTimeout(()=>{ restoring = false; }, 150);
-    }).observe(marquee);
-  }
-  window.addEventListener('resize', ()=> measure());
-  window.addEventListener('load', ()=> measure());
-  if(!reduceMotion) requestAnimationFrame(tick);
+
+  // Neu messen bei Größenänderung und sobald der Bereich sichtbar wird (Startseiten-Tab).
+  if(window.ResizeObserver){ new ResizeObserver(()=> layout()).observe(marquee); }
+  window.addEventListener('resize', ()=> layout());
+  window.addEventListener('load', ()=> layout());
 
   function fill(r){
     dlgFlag.src = '/img/flags/' + r.country + '.svg';
