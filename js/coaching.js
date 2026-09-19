@@ -140,7 +140,7 @@
     marquee.addEventListener(ev, touch, { passive:true });
   });
   marquee.addEventListener('scroll', ()=>{
-    if(!setWidth) return;
+    if(!setWidth || restoring) return;
     var x = marquee.scrollLeft;
     // Eigene Schreibzugriffe (Auto-Lauf) ignorieren, alles andere ist Nutzer/Momentum.
     if(lastWritten !== null && Math.abs(x - lastWritten) < 2) return;
@@ -149,6 +149,19 @@
     clearTimeout(wrapTimer);
     wrapTimer = setTimeout(normalize, 250);
   }, { passive:true });
+  // Auf der Startseite ist der Bereich anfangs evtl. versteckt (anderer Tab): messen, sobald er sichtbar wird.
+  // Beim Wiedereinblenden (display:none setzt scrollLeft auf 0) die letzte Position wiederherstellen.
+  var restoring = false;
+  if(window.ResizeObserver){
+    new ResizeObserver(()=>{
+      if(!marquee.clientWidth) return;
+      if(!setWidth){ measure(); return; }
+      restoring = true;
+      lastWritten = pos;
+      marquee.scrollLeft = pos;
+      setTimeout(()=>{ restoring = false; }, 150);
+    }).observe(marquee);
+  }
   window.addEventListener('resize', ()=> measure());
   window.addEventListener('load', ()=> measure());
   if(!reduceMotion) requestAnimationFrame(tick);

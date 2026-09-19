@@ -10,7 +10,8 @@
 <meta name="description" content="أدوات مجانية بالعربي: احسب عوائد استثمارك، قارن تكاليف الصناديق وETF، اعرف رأس مال الحرية المالية، ولاقي منصات إستثمارية وحسابات بنكية مجانية.">
 <meta name="author" content="Rami Alhasan">
 <link rel="canonical" href="https://moneywithrami.com/">
-<link rel="stylesheet" href="/css/style.css?v=20260919l">
+<link rel="stylesheet" href="/css/style.css?v=20260919m">
+<link rel="stylesheet" href="/css/coaching.css?v=20260919y">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -33,7 +34,7 @@
 }
 </script>
 </head>
-<body class="lang-ar" data-i18n-title="landingPageTitle">
+<body class="lang-ar has-light-reviews" data-i18n-title="landingPageTitle">
 
 <div class="page-bg" aria-hidden="true"></div>
 
@@ -74,6 +75,12 @@
       </button>
       <a class="home-hero-btn" href="/one-on-one-coaching/" data-i18n="homeHeroMore">اعرف أكتر عن الكوتشينغ</a>
     </div>
+  </section>
+
+  <section class="home-reviews cat-section" data-category="start" aria-labelledby="home-reviews-title">
+    <h2 id="home-reviews-title" data-i18n="oneReviewsTitle">شو بيقولوا اللي عملوا كوتشينغ معي</h2>
+    <p class="coaching-reviews-hint" data-i18n="coachingReviewsHint">اضغط على أي تقييم لتقرأه كامل.</p>
+    <div class="reviews-marquee" id="reviews-marquee"><div class="reviews-track" id="reviews-track"></div></div>
   </section>
 
   <div class="landing-services" id="tools" data-hide-on="start">
@@ -277,10 +284,6 @@
     <a class="landing-cta-btn" href="/one-on-one-coaching/" data-i18n="coachBoxCta">تعرف على برنامج الكوتشينغ</a>
   </div>
 
-  <div class="landing-footnote">
-    <span data-i18n="landingFootnote">الموقع لسا جديد وعم بشتغل عليه شوي شوي مشان ضيف عليه ميزات جديدة. رأيك وفيدباك كتير بهموني!</span>
-    <span class="footnote-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-  </div>
 
   <!-- Brevo-Anmeldeformular: exakte Klassen-/ID-Struktur des Original-
        Embeds beibehalten (sib-form, sib-form-container, sib-container--*,
@@ -390,8 +393,29 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260919n"></script>
+<dialog class="review-dialog" id="review-dialog">
+  <div class="review-dialog-head">
+    <strong class="review-dialog-name" id="review-dialog-name" dir="auto"></strong>
+    <button type="button" class="review-close" id="review-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
+  </div>
+  <div class="review-body">
+    <p class="review-full" id="review-dialog-text" dir="auto"></p>
+    <div class="review-meta-row">
+      <span class="review-date-line" id="review-dialog-date" dir="ltr"></span>
+      <span class="review-meta-line" aria-hidden="true"></span>
+      <img class="review-dialog-flag" id="review-dialog-flag" alt="">
+    </div>
+  </div>
+  <div class="review-nav">
+    <button type="button" class="review-nav-btn" id="review-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+    <button type="button" class="review-nav-btn" id="review-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+  </div>
+</dialog>
+
+<script src="/js/i18n.js?v=20260919o"></script>
 <script src="/js/common.js?v=20260919d"></script>
+<script src="/js/coaching-reviews.js?v=20260919b"></script>
+<script src="/js/coaching.js?v=20260919h"></script>
 
 <!-- Cal element-click embed code begins -->
 <script type="text/javascript">
