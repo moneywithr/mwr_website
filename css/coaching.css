@@ -133,7 +133,7 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-link{color:var(--c-text); text-decoration:underline; text-underline-offset:4px; font-weight:600;}
 .coaching-page .coaching-btn{text-decoration:none;}
 
-.waitlist-hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
+.waitlist-hp{position:absolute; top:0; left:0; width:1px; height:1px; opacity:0; overflow:hidden; clip-path:inset(50%); pointer-events:none;}
 
 .thanks-hero{padding-top:56px;}
 .stepper{list-style:none; display:flex; margin:0 auto 40px; padding:0; max-width:480px;}
@@ -158,3 +158,67 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .ig-btn .ig-icon{width:22px; height:22px;}
 
 .waitlist-name{width:100%; margin-bottom:10px;}
+
+/* Wartelisten-Button: Text exakt mittig, Pfeil sitzt am Rand */
+.waitlist-row .coaching-btn{position:relative; justify-content:center; padding:0 52px;}
+.waitlist-row .coaching-btn svg{position:absolute; inset-inline-end:20px; top:50%; margin-top:-10px;}
+.waitlist-status:empty{display:none;}
+
+/* Anmeldeformular: drei Zeilen untereinander (E-Mail, Vorname, Button) */
+.waitlist-row{flex-direction:column;}
+.waitlist-input{flex:none; width:100%;}
+.waitlist-row .coaching-btn{width:100%; height:56px;}
+.waitlist-name{margin-bottom:0;}
+
+/* Tajawal sitzt optisch etwas zu hoch im Button, deshalb leicht nach unten schieben */
+body.lang-ar .coaching-btn > span{position:relative; top:3px;}
+
+/* 1:1-Seite: Farben der restlichen Website (hell, weiße Panels, Indigo-Akzent) statt Dunkel */
+.one-page .coaching-dark{
+  --c-card:#F5F1ED; --c-line:#E7E3DE; --c-text:#201E1F; --c-muted:#585555;
+  background:#fff; box-shadow:var(--shadow-md);
+}
+.one-page .coaching-title em, .one-page .coaching-point-num{color:#685CC8;}
+.one-page .coaching-point{border-color:transparent;}
+.one-page .coaching-eyebrow{background:#F0EEFA; border-color:transparent; color:#5347A8;}
+
+.review-dialog-who{display:flex; flex-direction:column; gap:2px; font-size:13px;}
+.review-dialog-who strong{font-size:15px; color:var(--c-text);}
+.review-meta{gap:12px;}
+.review-nav{display:flex; align-items:center; justify-content:center; gap:18px; margin-top:22px; direction:ltr;}
+[dir="rtl"] .review-nav{direction:rtl;}
+.review-nav-btn{
+  width:44px; height:44px; border-radius:50%; border:1px solid var(--c-line); background:transparent; color:var(--c-text);
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:border-color .18s ease, background .18s ease;
+}
+.review-nav-btn:hover{border-color:#DAFF00; background:rgba(218,255,0,.08);}
+.review-nav-btn:focus-visible{outline:3px solid #AEC0F2; outline-offset:2px;}
+.review-nav-btn svg{width:20px; height:20px;}
+
+/* Der Dialog liegt außerhalb von .coaching-dark, braucht seine Farbwerte also selbst */
+.review-dialog{--c-card:#2B2829; --c-line:#3A3637; --c-text:#F5F1ED; --c-muted:#B8B2AC; box-shadow:0 30px 80px rgba(0,0,0,.35);}
+.one-page .review-dialog{--c-card:#FFFFFF; --c-line:#E7E3DE; --c-text:#201E1F; --c-muted:#585555;}
+.one-page .review-nav-btn:hover{border-color:#685CC8; background:rgba(104,92,200,.08);}
+.one-page .review-close:hover{border-color:#685CC8;}
+[dir="rtl"] .review-nav-btn svg{transform:scaleX(-1);}
+
+.one-page .coaching-hero{padding-top:44px;}
+@media (max-width:760px){ .one-page .coaching-hero{padding-top:30px;} }
+.one-page .coaching-title{font-size:clamp(30px,4.6vw,50px); text-wrap:balance;}
+
+/* 1:1-Seite: kompakter Abschluss-Kasten */
+.one-page .coaching-final{max-width:520px; margin:0 auto 40px; padding:30px 24px;}
+.one-page .coaching-final h2{font-size:clamp(20px,3vw,26px); margin:0 0 18px;}
+.one-page .coaching-final .coaching-btn{font-size:16px; padding:14px 26px;}
+
+/* Zwei Buttons nebeneinander im Hero (Buchen + Sprung zu den Fragen) */
+.coaching-actions{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;}
+.coaching-btn-alt{
+  display:inline-flex; align-items:center; padding:16px 26px; border-radius:999px; text-decoration:none; font-weight:700; font-size:17px;
+  color:var(--c-text); background:var(--c-card); box-shadow:0 1px 2px rgba(32,30,31,.06), 0 8px 20px rgba(32,30,31,.08);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.coaching-btn-alt:hover{transform:translateY(-2px); box-shadow:0 2px 4px rgba(32,30,31,.06), 0 14px 28px rgba(32,30,31,.12);}
+.coaching-btn-alt:focus-visible{outline:3px solid #685CC8; outline-offset:3px;}
+#faq{scroll-margin-top:20px;}
+@media (max-width:560px){ .coaching-actions{flex-direction:column;} .coaching-actions > *{width:100%; justify-content:center;} }

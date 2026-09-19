@@ -8,7 +8,10 @@
   const dlgDate = document.getElementById('review-dialog-date');
   const dlgText = document.getElementById('review-dialog-text');
   const closeBtn = document.getElementById('review-close');
-  const COUNTRY_NAMES = { de:'Deutschland', at:'Österreich', se:'Schweden', us:'USA' };
+  const dlgName = document.getElementById('review-dialog-name');
+  const prevBtn = document.getElementById('review-prev');
+  const nextBtn = document.getElementById('review-next');
+  const COUNTRY_NAMES = { de:'Deutschland', at:'Österreich', se:'Schweden', us:'USA', uk:'United Kingdom' };
   let openReview = null;
   // Reihenfolge bei jedem Seitenaufruf zufällig (Fisher-Yates).
   for(let i = reviews.length - 1; i > 0; i--){
@@ -60,17 +63,46 @@
     reviews.forEach(r => track.appendChild(card(r, false)));
     reviews.forEach(r => track.appendChild(card(r, true)));
     closeBtn.setAttribute('aria-label', Site.t('coachingClose'));
+    prevBtn.setAttribute('aria-label', Site.t('coachingReviewPrev'));
+    nextBtn.setAttribute('aria-label', Site.t('coachingReviewNext'));
     if(openReview) fill(openReview);
   }
 
   function fill(r){
     dlgFlag.src = '/img/flags/' + r.country + '.svg';
     dlgFlag.alt = COUNTRY_NAMES[r.country] || '';
+    dlgName.textContent = r.name;
     dlgDate.textContent = fmtDate(r.date);
     dlgDate.dir = 'ltr';
     dlgText.textContent = r.text;
+    dialog.scrollTop = 0;
   }
   function show(r){ openReview = r; fill(r); dialog.showModal(); }
+  // Vor/zurück durch alle Bewertungen (Reihenfolge wie im Karussell), mit Umlauf.
+  function step(delta){
+    var i = reviews.indexOf(openReview);
+    openReview = reviews[(i + delta + reviews.length) % reviews.length];
+    fill(openReview);
+  }
+  prevBtn.addEventListener('click', ()=> step(-1));
+  nextBtn.addEventListener('click', ()=> step(1));
+  // Pfeiltasten: in RTL zeigt "links" auf die nächste Bewertung.
+  dialog.addEventListener('keydown', e=>{
+    if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var rtl = document.documentElement.dir === 'rtl';
+    step((e.key === 'ArrowRight') === rtl ? -1 : 1);
+    e.preventDefault();
+  });
+  // Wischen auf Touch-Geräten.
+  var touchX = null;
+  dialog.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; }, { passive:true });
+  dialog.addEventListener('touchend', e=>{
+    if(touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX; touchX = null;
+    if(Math.abs(dx) < 60) return;
+    var rtl = document.documentElement.dir === 'rtl';
+    step((dx > 0) === rtl ? 1 : -1);
+  }, { passive:true });
 
   closeBtn.addEventListener('click', ()=> dialog.close());
   dialog.addEventListener('close', ()=>{ openReview = null; });

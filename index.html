@@ -10,7 +10,7 @@
 <meta name="description" content="أدوات مجانية بالعربي: احسب عوائد استثمارك، قارن تكاليف الصناديق وETF، اعرف رأس مال الحرية المالية، ولاقي منصات إستثمارية وحسابات بنكية مجانية.">
 <meta name="author" content="Rami Alhasan">
 <link rel="canonical" href="https://moneywithrami.com/">
-<link rel="stylesheet" href="/css/style.css?v=20260919a">
+<link rel="stylesheet" href="/css/style.css?v=20260919i">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -52,6 +52,7 @@
   <div class="category-switch-row">
     <nav class="category-switch" aria-label="Kategorien">
       <span class="category-switch-thumb" aria-hidden="true"></span>
+      <button type="button" class="category-switch-btn" data-category="start" data-i18n="landingCatStart">ابدأ الاستثمار</button>
       <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">Rechner</button>
       <button type="button" class="category-switch-btn" data-category="comparisons" data-i18n="landingCatComparisons">Vergleiche</button>
       <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">Tools, die ich nutze</button>
@@ -61,12 +62,22 @@
 
 <div class="wrap landing-wrap">
 
-  <div class="landing-hero">
-    <h1 class="landing-title" data-i18n="landingTitle">شو حابب تعمل اليوم؟</h1>
-    <p class="landing-sub" data-i18n="landingSub">اختار الأداة الي بتحتاجها من الأدوات المتوفرة حاليًا.</p>
-  </div>
+  <section class="home-hero cat-section" data-category="start">
+    <div class="home-hero-eyebrow"><span data-i18n="homeHeroEyebrow">خطوتك الأولى بالاستثمار</span></div>
+    <h1 class="home-hero-title" data-i18n="homeHeroTitle">خايف تبدأ بالاستثمار؟ منعمل الخطة سوا، خطوة بخطوة.</h1>
+    <p class="home-hero-text" data-i18n="homeHeroText">كتير ناس بتتابع فيديوهات وبتقرا عن الاستثمار، بس بتضل خايفة تبدأ وما بتعرف من وين. بالكوتشينغ 1:1 برافقك لحتى تعمل أول استثمار، وبضل معك بعدها كمان.</p>
+    <p class="home-hero-note" data-i18n="homeHeroNote">المكالمة الأولى مجانية وبدون التزام.</p>
+    <div class="home-hero-actions">
+      <button type="button" class="home-hero-btn primary"
+        data-cal-link="moneywithrami/15min" data-cal-namespace="15min"
+        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
+        <span data-i18n="homeHeroCta">احجز مكالمة مجانية</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+      <a class="home-hero-btn" href="/one-on-one-coaching/" data-i18n="homeHeroMore">اعرف أكتر عن الكوتشينغ</a>
+    </div>
+  </section>
 
-  <div class="landing-services">
+  <div class="landing-services" id="tools" data-hide-on="start">
     <div class="services-panel">
       <div class="section-title" data-i18n="landingServicesTitle">الأدوات المتوفرة حاليًا</div>
 
@@ -266,16 +277,9 @@
     </div>
   </div>
 
-  <div class="landing-cta">
+  <div class="landing-cta" data-hide-on="start">
     <p class="landing-cta-question" data-i18n="landingCtaQuestion">حابب تبدأ الاستثمار وما بتعرف كيف أو خايف؟</p>
-    <button
-      type="button"
-      class="landing-cta-btn"
-      data-cal-link="moneywithrami/15min"
-      data-cal-namespace="15min"
-      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-      data-i18n="landingBookCall"
-    >احجز مكالمة مجانية</button>
+    <a class="landing-cta-btn" href="/one-on-one-coaching/" data-i18n="coachBoxCta">تعرف على برنامج الكوتشينغ</a>
   </div>
 
   <div class="landing-footnote">
@@ -391,8 +395,8 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260919a"></script>
-<script src="/js/common.js?v=20260919a"></script>
+<script src="/js/i18n.js?v=20260919k"></script>
+<script src="/js/common.js?v=20260919b"></script>
 
 <!-- Cal element-click embed code begins -->
 <script type="text/javascript">

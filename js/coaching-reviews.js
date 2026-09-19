@@ -55,6 +55,12 @@ window.COACHING_REVIEWS = [
   "date": "2026-05-18"
  },
  {
+  "name": "Wafaa",
+  "text": "I had very little understanding of ETFs or how to approach long‑term investing, and you explained everything in a way that finally made sense. You helped me figure out a realistic investment plan and how much I could comfortably put aside without affecting my day‑to‑day life. I walked away feeling confident, informed, and genuinely supported.\nThanks a lot 😊",
+  "country": "uk",
+  "date": "2026-03-28"
+ },
+ {
   "name": "Mahmud",
   "text": "أنا كتير مبسوط اني تعاملت معك و فدتني بخبرتك ومعلوماتك شكراً كتير الك صرت افهم واعرف شو يعني ETF  وعادة كلو بفضلك شكراً الك ❤️❤️",
   "country": "se",
