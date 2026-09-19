@@ -353,7 +353,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
 .category-switch::after{content:''; flex:0 0 3px; width:3px; height:1px;}
 .category-switch-thumb{
   position:absolute;
-  top:4px; bottom:4px; left:4px;
+  top:4px; bottom:4px; left:0;
   width:0;
   border-radius:999px;
   background:var(--periwinkle);
@@ -3306,3 +3306,7 @@ body.lang-ar .coach-box{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;
 @media (max-width:600px){
   .coach-box, .landing-cta, .newsletter-box, .newsletter-compact{padding:22px 20px;}
 }
+
+/* Aktiver Tab: weißer Text auf Indigo (Rechner) und Orange (Tools) */
+.category-switch-btn.active[data-category="calculators"]{color:#fff;}
+.category-switch-btn.active[data-category="tools"]{color:#fff;}

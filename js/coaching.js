@@ -57,16 +57,82 @@
     return b;
   }
 
+  const marquee = document.getElementById('reviews-marquee');
+  let setWidth = 0;   // Breite einer Kopie der Kartenliste (inkl. Abstände)
+  let pos = 0;        // Scroll-Position als Kommazahl (scrollLeft rundet auf ganze Pixel)
+  let paused = false;
+  let resumeTimer = null;
+  let started = false;
+
   function render(){
     track.replaceChildren();
-    // Liste doppelt, damit die Endlosschleife (translateX -50%) nahtlos ist.
+    // Drei Kopien: die mittlere ist die echte, die äußeren sind Klone für die
+    // Endlosschleife (Scroll-Position bleibt immer in der mittleren Kopie).
+    reviews.forEach(r => track.appendChild(card(r, true)));
     reviews.forEach(r => track.appendChild(card(r, false)));
     reviews.forEach(r => track.appendChild(card(r, true)));
     closeBtn.setAttribute('aria-label', Site.t('coachingClose'));
     prevBtn.setAttribute('aria-label', Site.t('coachingReviewPrev'));
     nextBtn.setAttribute('aria-label', Site.t('coachingReviewNext'));
     if(openReview) fill(openReview);
+    measure();
   }
+
+  function measure(){
+    var n = reviews.length;
+    if(!n || track.children.length < 2 * n) return;
+    setWidth = track.children[n].offsetLeft - track.children[0].offsetLeft;
+    pos = setWidth;
+    marquee.scrollLeft = pos;
+  }
+
+  // Automatisch laufen lassen, aber als normaler Scroll-Container: Nutzer können
+  // jederzeit selbst wischen/scrollen, der Lauf pausiert dann kurz.
+  function tick(now){
+    var dt = Math.min((now - tick.last) / 1000, 0.1); tick.last = now;
+    if(!paused && setWidth){
+      var speed = window.innerWidth < 760 ? 16 : 24; // Pixel pro Sekunde
+      pos += speed * dt;
+      wrap();
+      marquee.scrollLeft = pos;
+    }
+    requestAnimationFrame(tick);
+  }
+  tick.last = performance.now();
+
+  function wrap(){
+    if(!setWidth) return;
+    if(pos >= 2 * setWidth) pos -= setWidth;
+    else if(pos < setWidth) pos += setWidth;
+  }
+  function pauseFor(ms){
+    paused = true;
+    clearTimeout(resumeTimer);
+    if(ms) resumeTimer = setTimeout(resume, ms);
+  }
+  function resume(){ pos = marquee.scrollLeft; wrap(); paused = false; }
+
+  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion){
+    marquee.addEventListener('mouseenter', ()=> pauseFor(0));
+    marquee.addEventListener('mouseleave', resume);
+    marquee.addEventListener('touchstart', ()=> pauseFor(3000), { passive:true });
+    marquee.addEventListener('touchmove', ()=> pauseFor(3000), { passive:true });
+    marquee.addEventListener('wheel', ()=> pauseFor(3000), { passive:true });
+    marquee.addEventListener('focusin', ()=> pauseFor(0));
+    marquee.addEventListener('focusout', resume);
+  }
+  // Manuelles Scrollen: Position in der mittleren Kopie halten (endlos in beide Richtungen).
+  marquee.addEventListener('scroll', ()=>{
+    if(!setWidth) return;
+    var x = marquee.scrollLeft;
+    if(x >= 2 * setWidth){ marquee.scrollLeft = x - setWidth; }
+    else if(x < setWidth){ marquee.scrollLeft = x + setWidth; }
+    if(paused) pos = marquee.scrollLeft;
+  }, { passive:true });
+  window.addEventListener('resize', ()=> measure());
+  window.addEventListener('load', ()=> measure());
+  if(!reduceMotion) requestAnimationFrame(tick);
 
   function fill(r){
     dlgFlag.src = '/img/flags/' + r.country + '.svg';

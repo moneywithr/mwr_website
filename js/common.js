@@ -115,7 +115,7 @@ window.Site = (function(){
   // stattdessen zur Startseite mit dem passenden Hash. Die gleitende Pille
   // dahinter nutzt dasselbe Prinzip wie .lang-switch, per transform statt
   // Layout-Wechsel positioniert, damit sie animiert statt springt.
-  const CATEGORY_COLORS = { start: '#DAFF00', calculators: '#AEC0F2', comparisons: '#DCD8F3', tools: '#FBF0C4' };
+  const CATEGORY_COLORS = { start: '#DAFF00', tools: '#E4633C', calculators: '#685CC8' };
   const CATEGORY_KEYS = Object.keys(CATEGORY_COLORS);
 
   function initCategorySwitch(){
@@ -182,7 +182,8 @@ window.Site = (function(){
       });
     });
 
-    const hashCat = (location.hash || '').replace('#cat-', '');
+    // Alte Links auf #cat-comparisons landen im zusammengelegten Rechner-Tab.
+    const hashCat = (location.hash || '').replace('#cat-', '').replace('comparisons', 'calculators');
     let initialCat;
     if(isHome){
       initialCat = CATEGORY_KEYS.includes(hashCat) ? hashCat : 'start';
