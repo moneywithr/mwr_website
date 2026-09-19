@@ -61,17 +61,25 @@
   const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   const N = reviews.length;
 
-  // Endlos-Karussell per transform (butterweich, auch mit Bruchteilen von Pixeln):
-  // Die Karten stehen genau einmal im Track, dahinter so viele Klone, dass der
-  // sichtbare Bereich immer gefüllt ist. Bei x >= setWidth springt es unsichtbar
-  // auf 0 zurück (die Klone sehen identisch aus). Wischen/Ziehen und Nachrollen
-  // laufen über Pointer-Events, senkrechtes Scrollen der Seite bleibt erhalten.
-  let setWidth = 0;   // Breite einer Kartenliste inkl. Abstand
-  let x = 0;          // aktuelle Verschiebung in Pixeln
-  let paused = false; // Maus über dem Bereich / Fokus
+  // Endlos-Karussell. Der Dauerlauf ist eine Web-Animation (transform) und läuft damit
+  // im Compositor, also unabhängig vom Haupt-Thread: kein Ruckeln, auch wenn die Seite
+  // gerade noch Skripte lädt (Cal.com, Fonts, Bilder) und sofort beim Laden aktiv.
+  // Nur beim Ziehen mit Finger/Maus und beim Ausrollen übernimmt JS per requestAnimationFrame.
+  // Die Karten stehen einmal im Track, dahinter genug Klone, um den sichtbaren Bereich zu
+  // füllen. Bei x >= setWidth springt es unsichtbar auf 0 (Klone sehen identisch aus).
+  let setWidth = 0;    // Breite einer Kartenliste inkl. Abstand
+  let x = 0;           // Verschiebung in Pixeln (bei manueller Steuerung)
+  let anim = null;     // laufende Web-Animation
+  let animDur = 0;     // Dauer eines Durchlaufs in ms
+  let paused = false;  // Maus über dem Bereich / Fokus
   let dragging = false;
-  let inertia = 0;    // Nachroll-Geschwindigkeit in Pixel pro Sekunde
+  let manual = false;  // JS steuert gerade (Ziehen oder Ausrollen)
+  let inertia = 0;     // Nachroll-Geschwindigkeit in Pixel pro Sekunde
   let suppressClick = false;
+  let raf = 0;
+  let wheelTimer = null;
+
+  function speed(){ return window.innerWidth < 760 ? 26 : 30; } // Pixel pro Sekunde
 
   function render(){
     track.replaceChildren();
@@ -83,15 +91,40 @@
     layout();
   }
 
-  // Klone anhängen und die Breite einer Liste messen (bei Größenänderung erneut).
+  function normalize(){
+    if(!setWidth) return;
+    x = ((x % setWidth) + setWidth) % setWidth;
+  }
+  function apply(){ track.style.transform = 'translate3d(' + (-x) + 'px,0,0)'; }
+
+  function currentX(){
+    if(anim && animDur) return (((anim.currentTime || 0) % animDur) / animDur) * setWidth;
+    return x;
+  }
+  function stopAuto(){
+    if(anim){ x = currentX(); anim.cancel(); anim = null; apply(); }
+  }
+  function startAuto(){
+    stopAuto();
+    if(!setWidth || reduceMotion || !track.animate) return;
+    animDur = setWidth / speed() * 1000;
+    anim = track.animate(
+      [{ transform: 'translate3d(0,0,0)' }, { transform: 'translate3d(' + (-setWidth) + 'px,0,0)' }],
+      { duration: animDur, iterations: Infinity, easing: 'linear' }
+    );
+    anim.currentTime = (x / setWidth) * animDur;
+    if(paused) anim.pause();
+  }
+
+  // Klone anhängen, Breite einer Liste messen und den Dauerlauf (neu) starten.
   function layout(){
-    var real = N;
-    while(track.children.length > real) track.removeChild(track.lastChild);
+    if(anim) x = currentX();
+    if(anim){ anim.cancel(); anim = null; }
+    while(track.children.length > N) track.removeChild(track.lastChild);
     if(!N || reduceMotion){ setWidth = 0; track.style.transform = ''; return; }
     if(!marquee.clientWidth){ setWidth = 0; return; } // versteckt (anderer Tab)
-    // Ein Klon reicht zum Messen, danach genug Klone für Sichtbereich + eine Karte.
     track.appendChild(card(reviews[0], true));
-    setWidth = track.children[real].offsetLeft - track.children[0].offsetLeft;
+    setWidth = track.children[N].offsetLeft - track.children[0].offsetLeft;
     var need = marquee.clientWidth + track.children[0].offsetWidth + 40;
     var i = 1;
     while(track.scrollWidth - setWidth < need && i < N){
@@ -100,40 +133,41 @@
     }
     normalize();
     apply();
+    if(!manual) startAuto();
   }
 
-  function normalize(){
-    if(!setWidth) return;
-    x = ((x % setWidth) + setWidth) % setWidth;
-  }
-  function apply(){
-    track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
-  }
-
-  var last = performance.now();
-  function tick(now){
-    var dt = Math.min((now - last) / 1000, 0.05); last = now;
-    if(setWidth && !dragging){
-      var speed = window.innerWidth < 760 ? 16 : 24; // Pixel pro Sekunde
-      if(Math.abs(inertia) > speed){
+  // Manuelle Phase: Ziehen und Ausrollen. Danach übernimmt wieder die Animation.
+  var lastFrame = 0;
+  function manualLoop(now){
+    var dt = Math.min((now - lastFrame) / 1000, 0.05); lastFrame = now;
+    if(!dragging){
+      if(Math.abs(inertia) > speed()){
         x += inertia * dt;
         inertia *= Math.pow(0.92, dt * 60); // sanftes Ausrollen
+        normalize(); apply();
       } else {
-        inertia = 0;
-        if(!paused) x += speed * dt;
+        inertia = 0; manual = false;
+        startAuto();
+        return;
       }
-      normalize();
-      apply();
     }
-    requestAnimationFrame(tick);
+    raf = requestAnimationFrame(manualLoop);
+  }
+  function beginManual(){
+    stopAuto(); manual = true; inertia = 0;
+    cancelAnimationFrame(raf);
+    lastFrame = performance.now();
+    raf = requestAnimationFrame(manualLoop);
   }
 
   if(!reduceMotion){
     var startX = 0, lastX = 0, lastT = 0, vel = 0, captured = false;
     marquee.addEventListener('pointerdown', e=>{
       if(e.pointerType === 'mouse' && e.button !== 0) return;
-      dragging = true; captured = false; inertia = 0; vel = 0;
+      if(!setWidth) return;
+      dragging = true; captured = false; vel = 0;
       startX = lastX = e.clientX; lastT = performance.now();
+      beginManual();
     });
     marquee.addEventListener('pointermove', e=>{
       if(!dragging) return;
@@ -163,23 +197,24 @@
     marquee.addEventListener('pointercancel', end);
     // Nach einem Wisch soll kein Klick auf die Karte darunter durchgehen.
     marquee.addEventListener('click', e=>{ if(suppressClick){ e.stopPropagation(); e.preventDefault(); } }, true);
-    marquee.addEventListener('pointerenter', e=>{ if(e.pointerType === 'mouse') paused = true; });
-    marquee.addEventListener('pointerleave', e=>{ if(e.pointerType === 'mouse') paused = false; });
+    marquee.addEventListener('pointerenter', e=>{ if(e.pointerType === 'mouse'){ paused = true; if(anim) anim.pause(); } });
+    marquee.addEventListener('pointerleave', e=>{ if(e.pointerType === 'mouse'){ paused = false; if(anim) anim.play(); } });
     marquee.addEventListener('focusin', e=>{
       paused = true;
       // Karte per Tastatur fokussiert: in den sichtbaren Bereich schieben.
       var c = e.target.closest ? e.target.closest('.review-card') : null;
-      if(c && setWidth){ x = c.offsetLeft - 24; normalize(); apply(); }
+      if(c && setWidth){ stopAuto(); x = c.offsetLeft - 24; normalize(); apply(); }
     });
-    marquee.addEventListener('focusout', ()=>{ paused = false; });
+    marquee.addEventListener('focusout', ()=>{ paused = false; if(!manual) startAuto(); });
     marquee.addEventListener('scroll', ()=>{ marquee.scrollLeft = 0; }, { passive:true });
     // Waagerechtes Trackpad-Wischen
     marquee.addEventListener('wheel', e=>{
       if(Math.abs(e.deltaX) > Math.abs(e.deltaY) && setWidth){
-        x += e.deltaX; inertia = 0; normalize(); apply(); e.preventDefault();
+        stopAuto(); x += e.deltaX; normalize(); apply(); e.preventDefault();
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(()=>{ if(!manual && !dragging) startAuto(); }, 250);
       }
     }, { passive:false });
-    requestAnimationFrame(tick);
   }
 
   // Neu messen bei Größenänderung und sobald der Bereich sichtbar wird (Startseiten-Tab).
