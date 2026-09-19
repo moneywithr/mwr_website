@@ -3123,8 +3123,8 @@ body.lang-ar .home-hero-eyebrow{letter-spacing:0; font-size:15px; font-family:in
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
-body.lang-ar .home-hero-title{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif; letter-spacing:0; line-height:1.4;}
-body.lang-ar .home-hero-text, body.lang-ar .home-hero-btn, body.lang-ar .home-hero-eyebrow{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.lang-ar .home-hero-title{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif; letter-spacing:0; line-height:1.4;}
+body.lang-ar .home-hero-text, body.lang-ar .home-hero-btn, body.lang-ar .home-hero-eyebrow{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 .home-hero-text{font-size:18px; line-height:1.75; color:var(--text-muted); margin:0 0 10px; max-width:720px;}
 body.lang-ar .home-hero-text{font-size:17px;}
 .home-hero-actions{display:flex; flex-wrap:wrap; gap:12px;}
@@ -3165,7 +3165,7 @@ body.lang-ar .home-hero-text{font-size:17px;}
 .coach-check{width:24px; height:24px; border-radius:50%; background:var(--mint); color:var(--ink); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;}
 .coach-check svg{width:14px; height:14px;}
 a.landing-cta-btn{text-decoration:none;}
-body.lang-ar .coach-box{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.lang-ar .coach-box{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 @media (max-width:600px){
   .coach-box, .landing-cta, .newsletter-box, .newsletter-compact{padding:22px 20px;}
 }

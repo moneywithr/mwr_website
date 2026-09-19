@@ -1,7 +1,11 @@
+/* Ziffern 0-9 in IBM Plex Sans (wie in den Rechnern), damit Zahlen in arabischen Texten überall gleich aussehen; Buchstaben bleiben Tajawal */
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:400;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:600;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:700;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
-body.coaching-page.lang-ar .coaching-wrap section, body.coaching-page.lang-ar .coaching-wrap section *, body.coaching-page.lang-ar .review-dialog, body.coaching-page.lang-ar .review-dialog *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.coaching-page.lang-ar .coaching-wrap section, body.coaching-page.lang-ar .coaching-wrap section *, body.coaching-page.lang-ar .review-dialog, body.coaching-page.lang-ar .review-dialog *{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 body.coaching-page.lang-ar .review-excerpt{font-size:17px; line-height:1.75;}
 /* Coaching-Landingpage: Banner und Footer wie auf der restlichen Seite (hell),
    dazwischen dunkle Flächen im Stil der Referenz mit Lime-CTA. */
@@ -268,11 +272,11 @@ body.lang-ar .coaching-btn > span{position:relative; top:2px;}
 .home-reviews .review-date{font-size:12px;}
 .home-reviews .review-flag{width:26px; height:17px; border-radius:3px;}
 @media (max-width:760px){ .home-reviews .review-card{flex-basis:220px; height:196px;} }
-body.lang-ar.has-light-reviews .home-reviews *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.lang-ar.has-light-reviews .home-reviews *{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 /* Dialog auf der Startseite im hellen Stil */
 .has-light-reviews .review-dialog{--c-card:#FFFFFF; --c-line:#E7E3DE; --c-text:#201E1F; --c-muted:#585555;}
 .has-light-reviews .review-nav-btn:hover{border-color:#685CC8; background:rgba(104,92,200,.08);}
-body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .review-dialog *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .review-dialog *{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 
 /* Endlos-Karussell: Bewegung per transform (JS), Ziehen mit Finger oder Maus */
 .reviews-marquee:active{cursor:grabbing;}
@@ -331,20 +335,20 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 .coaching-page:not(.one-page) .fin-sub{color:#B8B2AC;}
 /* Animation beim Erscheinen: Linie zeichnet sich, Punkte 1 bis 5 poppen nacheinander auf, danach die Erklärung */
 .fin-system.fin-anim .fin-wave svg{clip-path:inset(0 100% 0 0);}
-.fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal 1.8s linear both;}
+.fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal 3.4s linear both;}
 @keyframes finReveal{from{clip-path:inset(0 100% 0 0);} to{clip-path:inset(0 0 0 0);}}
 .fin-system.fin-anim .fin-dot{opacity:0; scale:.4;}
-.fin-system.fin-anim.is-in .fin-dot{animation:finPop .45s cubic-bezier(.34,1.56,.64,1) both; animation-delay:calc(var(--i) * .36s + .1s);}
+.fin-system.fin-anim.is-in .fin-dot{animation:finPop .45s cubic-bezier(.34,1.56,.64,1) both; animation-delay:calc(var(--i) * .68s + .2s);}
 @keyframes finPop{from{opacity:0; scale:.4;} to{opacity:1; scale:1;}}
 .fin-system.fin-anim .fin-points li{opacity:0; transform:translateY(10px);}
-.fin-system.fin-anim.is-in .fin-points li{animation:finUp .5s ease both; animation-delay:calc(2s + var(--j) * .12s);}
+.fin-system.fin-anim.is-in .fin-points li{animation:finUp .5s ease both; animation-delay:calc(3.6s + var(--j) * .12s);}
 @keyframes finUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
 /* Abstand Bewertungen zu Finanzsystem: Bewertungen bringen unten schon Luft mit (Section-Padding plus Track-Schatten) */
 .coaching-reviews + .fin-system{margin-top:-28px;}
 /* Einzelcoaching: die vier Punkte sind zu einem Textblock unter der Grafik zusammengefasst */
 .fin-story{margin:20px 0 0; padding:24px 26px; background:#FFFFFF; border-radius:22px; text-align:start; font-size:clamp(16px,2vw,18px); line-height:1.95; color:#201E1F; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);}
 .fin-system.fin-anim .fin-story{opacity:0; transform:translateY(10px);}
-.fin-system.fin-anim.is-in .fin-story{animation:finUp .5s ease both; animation-delay:2s;}
+.fin-system.fin-anim.is-in .fin-story{animation:finUp .5s ease both; animation-delay:3.6s;}
 @media (max-width:560px){ .fin-story{padding:20px 18px;} }
 /* Einzelcoaching: Wellenlinie läuft über die Ränder der Box hinaus bis an den Bildschirmrand.
    Außerhalb der Box indigo (auf hellem Grund sichtbar), innerhalb der Box limette (Lime-Kopie wird auf die Box-Breite zugeschnitten). */
@@ -352,7 +356,7 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 .one-page .fin-out path{stroke:#3D3480;}
 .one-page .fin-clip{position:absolute; inset:0; clip-path:inset(-200px calc(var(--fp) * -1));}
 .one-page .fin-system.fin-anim .fin-wave svg{clip-path:inset(-150px 100% -150px -3000px);}
-.one-page .fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal2 1.8s linear both;}
+.one-page .fin-system.fin-anim.is-in .fin-wave svg{animation:finReveal2 3.4s linear both;}
 @keyframes finReveal2{from{clip-path:inset(-150px 100% -150px -3000px);} to{clip-path:inset(-150px -3000px -150px -3000px);}}
 .one-page .fin-wave svg{clip-path:inset(-150px -3000px -150px -3000px);}
 @media (max-width:560px){ .one-page .fin-box{--fp:16px;} }
