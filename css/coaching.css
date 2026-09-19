@@ -135,3 +135,25 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-page .coaching-btn{text-decoration:none;}
 
 .waitlist-hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
+
+.thanks-hero{padding-top:56px;}
+.stepper{list-style:none; display:flex; margin:0 auto 40px; padding:0; max-width:480px;}
+.stepper li{flex:1; position:relative; text-align:center; color:var(--c-muted);}
+.stepper li + li::before{content:''; position:absolute; top:17px; inset-inline-start:-50%; width:100%; height:2px; background:var(--c-line);}
+.stepper li.done + li::before, .stepper li.current::before{background:#DAFF00;}
+.step-dot{
+  position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px;
+  border-radius:50%; border:2px solid var(--c-line); background:#201E1F; font-weight:700; font-size:15px;
+}
+.step-dot svg{width:18px; height:18px;}
+.stepper li.done .step-dot{background:#DAFF00; border-color:#DAFF00; color:#201E1F;}
+.stepper li.current .step-dot{border-color:#DAFF00; color:#DAFF00;}
+.stepper li.current .step-label, .stepper li.done .step-label{color:var(--c-text);}
+.step-label{display:block; margin-top:10px; font-size:14px;}
+.thanks-hero .coaching-sub{margin-bottom:0;}
+.ig-btn{
+  display:inline-flex; align-items:center; gap:10px; padding:14px 24px; border-radius:999px; text-decoration:none;
+  border:1px solid var(--c-line); color:var(--c-text); font-weight:600; transition:border-color .18s ease, background .18s ease;
+}
+.ig-btn:hover{border-color:#DAFF00; background:rgba(218,255,0,.06);}
+.ig-btn .ig-icon{width:22px; height:22px;}
