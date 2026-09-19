@@ -1,22 +1,17 @@
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
 @font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
-body.coaching-page.lang-ar, body.coaching-page.lang-ar *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
+body.coaching-page.lang-ar .coaching-wrap section, body.coaching-page.lang-ar .coaching-wrap section *, body.coaching-page.lang-ar .review-dialog, body.coaching-page.lang-ar .review-dialog *{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;}
 body.coaching-page.lang-ar .review-excerpt{font-size:17px; line-height:1.75;}
-/* Coaching-Landingpage: dunkles, ruhiges Layout mit Lime-CTA */
-body.coaching-page{
-  --c-bg:#201E1F; --c-card:#2B2829; --c-line:#3A3637; --c-text:#F5F1ED; --c-muted:#B8B2AC;
-  background:var(--c-bg); color:var(--c-text);
+/* Coaching-Landingpage: Banner und Footer wie auf der restlichen Seite (hell),
+   dazwischen dunkle Flächen im Stil der Referenz mit Lime-CTA. */
+.coaching-dark{
+  --c-card:#2B2829; --c-line:#3A3637; --c-text:#F5F1ED; --c-muted:#B8B2AC;
+  background:#201E1F; color:var(--c-text); border-radius:36px; margin-top:16px;
 }
-html:has(body.coaching-page){background:#201E1F;}
-.coaching-page .top-banner{background:transparent; border-color:var(--c-line);}
-.coaching-page .brand-name, .coaching-page .brand-line{color:var(--c-text);}
-.coaching-page .lang-switch{background:var(--c-card);}
-.coaching-page .lang-btn{color:var(--c-muted);}
-.coaching-page .lang-btn.active{color:#201E1F;}
 .coaching-wrap{max-width:1100px; margin:0 auto; padding:0 16px 40px;}
 
-.coaching-hero{text-align:center; max-width:760px; margin:0 auto; padding:72px 0 56px;}
+.coaching-hero{text-align:center; max-width:760px; margin:0 auto; padding:72px 16px 56px;}
 .coaching-eyebrow{
   display:inline-block; padding:6px 14px; border:1px solid var(--c-line); border-radius:999px;
   color:var(--c-muted); font-size:13px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:28px;
@@ -38,15 +33,14 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .coaching-btn:focus-visible, .review-card:focus-visible, .review-close:focus-visible{outline:3px solid #AEC0F2; outline-offset:3px;}
 .coaching-note{margin:16px 0 0; font-size:14px; color:var(--c-muted);}
 
-.coaching-points{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:88px;}
+.coaching-points{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:0 20px 20px;}
 .coaching-point{background:var(--c-card); border:1px solid var(--c-line); border-radius:24px; padding:26px;}
 .coaching-point-num{font-family:'IBM Plex Mono',monospace; color:#DAFF00; font-size:14px;}
 .coaching-point h3{margin:14px 0 8px; font-size:20px; color:var(--c-text);}
 .coaching-point p{margin:0; color:var(--c-muted); line-height:1.65; font-size:15.5px;}
 
 .coaching-reviews{
-  text-align:center; margin:0 -16px 88px; padding:56px 0 48px; border-radius:36px;
-  background:#F5F1ED; color:#201E1F;
+  text-align:center; margin:0 -16px; padding:64px 0 56px; color:#201E1F;
 }
 .coaching-reviews h2{font-size:clamp(26px,4vw,38px); margin:0 0 8px; color:#201E1F;}
 .coaching-reviews-hint{color:#585555; margin:0 0 32px; font-size:15px;}
@@ -77,10 +71,8 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .review-meta{display:flex; align-items:center; gap:10px; color:var(--c-muted); font-size:13px;}
 .review-meta img{width:28px; height:19px; border-radius:3px; object-fit:cover; box-shadow:0 0 0 1px rgba(255,255,255,.15);}
 
-.coaching-final{text-align:center; padding:56px 0; border-top:1px solid var(--c-line);}
+.coaching-final{text-align:center; padding:56px 16px;}
 .coaching-final h2{font-size:clamp(26px,4vw,38px); margin:0 0 26px; color:var(--c-text);}
-.coaching-page footer, .coaching-page footer .copyright, .coaching-page footer a, .coaching-page .footer-social-title, .coaching-page .footer-legal-heading{color:var(--c-muted);}
-.coaching-page .footer-social-icons svg{fill:var(--c-text);}
 
 .review-dialog{
   width:min(640px,calc(100vw - 32px)); max-height:85vh; border:1px solid var(--c-line); border-radius:28px;
@@ -93,12 +85,46 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .review-full{margin:0; line-height:1.85; font-size:16.5px; white-space:pre-line; text-align:start;}
 
 @media (max-width:760px){
-  .coaching-hero{padding:44px 0 40px;}
-  .coaching-points{grid-template-columns:1fr; margin-bottom:56px;}
-  .review-card{flex-basis:290px; height:320px;} .coaching-reviews{border-radius:28px;}
+  .coaching-hero{padding:44px 16px 40px;} .coaching-dark{border-radius:28px;}
+  .coaching-points{grid-template-columns:1fr;}
+  .review-card{flex-basis:290px; height:320px;} 
 }
 @media (prefers-reduced-motion:reduce){
   .reviews-marquee{overflow-x:auto;}
   .reviews-track{animation:none;}
   .coaching-btn, .coaching-btn svg, .review-card{transition:none;}
 }
+
+.waitlist-form{max-width:520px; margin:0 auto;}
+.waitlist-row{display:flex; gap:10px; align-items:stretch;}
+.waitlist-input{
+  flex:1; min-width:0; background:var(--c-card); color:var(--c-text); border:1px solid var(--c-line);
+  border-radius:999px; padding:0 22px; font:inherit; font-size:16px; height:56px;
+}
+.waitlist-input::placeholder{color:var(--c-muted);}
+.waitlist-input:focus-visible{outline:3px solid #AEC0F2; outline-offset:2px;}
+.waitlist-row .coaching-btn{white-space:nowrap; height:56px; padding:0 24px;}
+.waitlist-consent{display:flex; gap:10px; align-items:flex-start; text-align:start; margin-top:14px; font-size:13px; line-height:1.6; color:var(--c-muted);}
+.waitlist-consent input{margin-top:4px; accent-color:#DAFF00; flex-shrink:0;}
+.waitlist-consent a{color:var(--c-text); text-decoration:underline;}
+.waitlist-status{min-height:22px; margin:12px 0 0; font-size:14px; color:var(--c-muted);}
+.waitlist-status.ok{color:#DAFF00;} .waitlist-status.err{color:#FF9C85;}
+@media (max-width:560px){ .waitlist-row{flex-direction:column;} .waitlist-input{flex:none;} .waitlist-row .coaching-btn{justify-content:center;} }
+
+.coaching-faq{max-width:760px; margin:0 auto 56px; color:#201E1F;}
+.coaching-faq h2{text-align:center; font-size:clamp(26px,4vw,38px); margin:0 0 28px; color:#201E1F;}
+.faq-list{display:flex; flex-direction:column; gap:12px;}
+.faq-item{background:#fff; border-radius:22px; box-shadow:0 2px 6px rgba(32,30,31,.05);}
+.faq-item summary{
+  list-style:none; cursor:pointer; padding:20px 24px; font-weight:700; font-size:17px; display:flex;
+  justify-content:space-between; align-items:center; gap:16px;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+'; font-size:24px; font-weight:400; line-height:1; flex-shrink:0; transition:transform .2s ease;}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item summary:focus-visible{outline:3px solid #AEC0F2; outline-offset:2px; border-radius:22px;}
+.faq-item p{margin:0; padding:0 24px 22px; line-height:1.8; font-size:16px; color:#3A3637;}
+
+.coaching-disclaimer{max-width:760px; margin:0 auto 56px; padding:24px 26px; border:1px solid #D9D3CC; border-radius:22px; color:#201E1F;}
+.coaching-disclaimer h2{margin:0 0 8px; font-size:18px; color:#201E1F;}
+.coaching-disclaimer p{margin:0; line-height:1.8; font-size:15.5px; color:#585555;}

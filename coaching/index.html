@@ -2,12 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<style>html{visibility:hidden;background:#201E1F;}</style>
+<style>html{visibility:hidden;}</style>
 <noscript><style>html{visibility:visible !important;}</style></noscript>
 <script>setTimeout(function(){document.documentElement.style.visibility="visible";}, 1500);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>جلسات تدريبية | Money with Rami</title>
-<meta name="description" content="Kleine, praxisnahe Trainingssessions mit Rami: Finanzen ordnen, Investieren verstehen und Schritt für Schritt starten.">
+<meta name="description" content="Trainingssessions in kleinen Gruppen (5 bis 10 Teilnehmende) mit Rami: Finanzen ordnen, Investieren verstehen und Schritt für Schritt starten.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://moneywithrami.com/coaching/">
 <link rel="stylesheet" href="/css/style.css?v=20260909b">
@@ -34,16 +34,21 @@
 
 <div class="wrap coaching-wrap">
 
+  <div class="coaching-dark">
   <section class="coaching-hero">
     <div class="coaching-eyebrow" data-i18n="coachingEyebrow">جلسات تدريبية</div>
-    <h1 class="coaching-title" data-i18n-html="coachingHeadline">ما بتحتاج <em>فيديو جديد</em>. بتحتاج <em>خطة</em> مناسبة إلك.</h1>
+    <h1 class="coaching-title" data-i18n-html="coachingHeadline">ما بتحتاج <em>فيديو جديد</em>. بتحتاج <em>خطة</em>، وبتحتاج <em>تبدأ</em> كمان.</h1>
     <p class="coaching-sub" data-i18n="coachingSub"></p>
-    <button type="button" class="coaching-btn"
-      data-cal-link="moneywithrami/15min" data-cal-namespace="15min"
-      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
-      <span data-i18n="coachingCta">احجز مكالمة تعارف مجانية</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-    </button>
+    <form class="waitlist-form" novalidate data-endpoint="">
+      <div class="waitlist-row">
+        <input class="waitlist-input" type="email" name="email" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
+        <button type="submit" class="coaching-btn"><span data-i18n="coachingCta"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+      <label class="waitlist-consent"><input type="checkbox" name="consent" required><span data-i18n-html="coachingConsent"></span></label>
+      <p class="waitlist-status" role="status" aria-live="polite"></p>
+    </form>
     <p class="coaching-note" data-i18n="coachingCtaNote"></p>
   </section>
 
@@ -52,6 +57,7 @@
     <div class="coaching-point"><span class="coaching-point-num">02</span><h3 data-i18n="coachingPoint2Title"></h3><p data-i18n="coachingPoint2Text"></p></div>
     <div class="coaching-point"><span class="coaching-point-num">03</span><h3 data-i18n="coachingPoint3Title"></h3><p data-i18n="coachingPoint3Text"></p></div>
   </section>
+  </div>
 
   <section class="coaching-reviews" aria-labelledby="reviews-title">
     <h2 id="reviews-title" data-i18n="coachingReviewsTitle"></h2>
@@ -59,15 +65,34 @@
     <div class="reviews-marquee" id="reviews-marquee"><div class="reviews-track" id="reviews-track"></div></div>
   </section>
 
-  <section class="coaching-final">
+  <section class="coaching-faq" aria-labelledby="faq-title">
+    <h2 id="faq-title" data-i18n="coachingFaqTitle"></h2>
+    <div class="faq-list">
+    <details class="faq-item"><summary data-i18n="coachingFaqQ1"></summary><p data-i18n="coachingFaqA1"></p></details>
+    <details class="faq-item"><summary data-i18n="coachingFaqQ2"></summary><p data-i18n="coachingFaqA2"></p></details>
+    <details class="faq-item"><summary data-i18n="coachingFaqQ3"></summary><p data-i18n="coachingFaqA3"></p></details>
+    <details class="faq-item"><summary data-i18n="coachingFaqQ4"></summary><p data-i18n="coachingFaqA4"></p></details>
+    <details class="faq-item"><summary data-i18n="coachingFaqQ5"></summary><p data-i18n="coachingFaqA5"></p></details>
+    </div>
+  </section>
+
+  <section class="coaching-disclaimer" aria-labelledby="disc-title">
+    <h2 id="disc-title" data-i18n="coachingDiscTitle"></h2>
+    <p data-i18n="coachingDiscText"></p>
+  </section>
+
+  <section class="coaching-final coaching-dark">
     <h2 data-i18n="coachingFinalTitle"></h2>
-    <button type="button" class="coaching-btn"
-      data-cal-link="moneywithrami/15min" data-cal-namespace="15min"
-      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
-      <span data-i18n="coachingCta"></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-    </button>
-    <p class="coaching-note" data-i18n="coachingDisclaimer"></p>
+    <form class="waitlist-form" novalidate data-endpoint="">
+      <div class="waitlist-row">
+        <input class="waitlist-input" type="email" name="email" autocomplete="email" required data-i18n-placeholder="coachingEmailPlaceholder" placeholder="Email">
+        <button type="submit" class="coaching-btn"><span data-i18n="coachingCta"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+      <label class="waitlist-consent"><input type="checkbox" name="consent" required><span data-i18n-html="coachingConsent"></span></label>
+      <p class="waitlist-status" role="status" aria-live="polite"></p>
+    </form>
   </section>
 
   <footer>
@@ -109,10 +134,5 @@
 <script src="/js/coaching-reviews.js?v=1"></script>
 <script src="/js/coaching.js?v=1"></script>
 <script src="/js/inapp-browser-notice.js?v=20260826e"></script>
-<script>
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  Cal("init", "15min", {origin:"https://app.cal.com"});
-  Cal.ns["15min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#DAFF00"},"dark":{"cal-brand":"#DAFF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
-</script>
 </body>
 </html>

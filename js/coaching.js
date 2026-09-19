@@ -78,4 +78,26 @@
 
   document.addEventListener('mwr:langchange', render);
   render();
+
+  // Wartelisten-Formular. Der Ziel-Endpunkt (z.B. Brevo-Formular-URL) steht im
+  // data-endpoint-Attribut der Formulare in coaching/index.html.
+  document.querySelectorAll('.waitlist-form').forEach(form=>{
+    const status = form.querySelector('.waitlist-status');
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const email = form.elements.email.value.trim();
+      const setStatus = (key, cls)=>{ status.textContent = Site.t(key); status.className = 'waitlist-status ' + cls; };
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !form.elements.consent.checked){
+        setStatus('coachingWaitlistInvalid', 'err');
+        return;
+      }
+      const endpoint = form.dataset.endpoint;
+      if(!endpoint){ setStatus('coachingWaitlistErr', 'err'); return; }
+      try{
+        await fetch(endpoint, { method:'POST', mode:'no-cors', body:new URLSearchParams({ EMAIL: email, OPT_IN: '1', email_address_check: '', locale: Site.state.lang }) });
+        setStatus('coachingWaitlistOk', 'ok');
+        form.reset();
+      }catch(err){ setStatus('coachingWaitlistErr', 'err'); }
+    });
+  });
 })();
