@@ -209,7 +209,7 @@ body.lang-ar .coaching-btn > span{position:relative; top:3px;}
 .coaching-disclaimer h2{margin:2px 0 6px; font-size:20px; line-height:1.3; color:#201E1F;}
 .coaching-disclaimer p{margin:0; line-height:1.8; font-size:16px; color:#3A3637;}
 @media (max-width:560px){
-  .coaching-disclaimer{padding:20px 18px; gap:14px; border-radius:20px;}
+  .coaching-disclaimer{padding:20px 18px; gap:14px; border-radius:22px;}
 }
 
 /* Bewertungs-Dialog: Name und Flagge auf einer Zeile, darunter Text und Datum, unten Steuerung mit Schließen-Knopf in der Mitte */
@@ -289,3 +289,8 @@ body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .r
   .reviews-marquee{overflow-x:auto; touch-action:auto; cursor:auto;}
   .reviews-track{will-change:auto;}
 }
+
+/* Apple-inspiriert (Teil 2): Bewertungskarten und Fragen wie die übrigen Boxen (coaching.css lädt nach style.css) */
+.review-card,.faq-item{border-radius:22px; border:0; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);}
+.coaching-btn:active,.coaching-btn-alt:active{transform:scale(.97);}
+.coaching-btn:hover{transform:none;}

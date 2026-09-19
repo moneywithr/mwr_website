@@ -3245,3 +3245,54 @@ body.lang-ar .coach-box{font-family:'Tajawal','IBM Plex Sans Arabic',sans-serif;
 /* Aktiver Tab: weißer Text auf Indigo (Rechner) und Orange (Tools) */
 .category-switch-btn.active[data-category="calculators"]{color:#fff;}
 .category-switch-btn.active[data-category="tools"]{color:#fff;}
+
+/* ===== Apple-inspirierte Auswahl: Einstiegstext, Karten der Tabs "Tools" und "Rechner", einheitliche Rundung ===== */
+/* Gleiche Rundung für alle Boxen, Karten und Panels (Newsletter-Box, Coaching-Box, Rechner-Panels ...). */
+:root{--radius:22px;}
+.review-card{border-radius:22px;}
+
+/* Einstiegstext: ruhiger, größer, klare Hierarchie */
+.home-hero{max-width:760px; margin-bottom:44px;}
+.home-hero-eyebrow{color:var(--text-muted); font-size:15px; font-weight:600; letter-spacing:0; text-transform:none;}
+.home-hero-title{font-size:clamp(34px,6vw,60px); letter-spacing:-.025em; line-height:1.1;}
+body.lang-ar .home-hero-title{letter-spacing:0; line-height:1.3;}
+.home-hero-text{font-size:20px; line-height:1.6; color:var(--text-muted);}
+body.lang-ar .home-hero-text{font-size:20px;}
+.home-hero-note{font-style:normal; font-size:15px; color:var(--text-muted); opacity:1;}
+
+/* Karten: weiß, ruhig, weicher Schatten. Farbe nur noch im Symbol-Feld. */
+.services-panel{background:transparent; box-shadow:none; padding:0;}
+.section-title{color:var(--text-muted);}
+.cat-heading{color:var(--text-muted);}
+.service-card{background:#fff; color:var(--ink); border-radius:22px; padding:22px; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+  opacity:1; animation:serviceCardFade .3s ease both; transition:transform .2s ease, box-shadow .2s ease;}
+.service-card:hover{transform:translateY(-2px); box-shadow:0 2px 4px rgba(0,0,0,.05),0 20px 48px rgba(0,0,0,.10);}
+.service-card.card-blue,.service-card.card-purple,.service-card.card-gold,.service-card.card-silver,.service-card.card-green,.service-card.card-lime,.service-card.card-ink{background:#fff; color:var(--ink);}
+.service-name{color:var(--ink);}
+.service-desc{color:var(--text-muted); opacity:1;}
+.service-card-icon{background:#F2F2F7; color:var(--ink); border-radius:14px; width:44px; height:44px;}
+.service-cta-arrow{background:transparent; color:var(--text-muted);}
+.card-blue .service-card-icon{background:#E6ECFC;} .card-purple .service-card-icon{background:#E8E5F8;}
+.card-gold .service-card-icon{background:#FBF3D3;} .card-lime .service-card-icon{background:#F1FFB0;}
+.card-green .service-card-icon{background:#E4F2E6;} .card-silver .service-card-icon{background:#EDEDF0;}
+.card-ink .service-card-icon{background:#E5E5EA;}
+@keyframes serviceCardFade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion:reduce){ .service-card{animation:none;} }
+
+/* ===== Apple-inspiriert (Teil 2): Druck-Zustand, einheitliche Boxen, sichtbarer Fokus ===== */
+/* Knöpfe werden beim Drücken kurz kleiner */
+.home-hero-btn,.landing-cta-btn,.coaching-btn,.coaching-btn-alt,.newsletter-btn{transition:background .18s ease, transform .12s ease, box-shadow .18s ease;}
+.home-hero-btn:active,.landing-cta-btn:active,.coaching-btn:active,.coaching-btn-alt:active,.newsletter-btn:active{transform:scale(.97);}
+
+/* Karten und Boxen: weiß, einheitlich 22 px, weicher Schatten statt Rahmen */
+.panel,.stat-card,.landing-cta,.newsletter-box,.newsletter-compact,.coach-box,.faq-item,.saved-results-panel,.review-card{
+  border-radius:22px; border:0; box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+}
+.panel,.stat-card,.landing-cta,.newsletter-box,.newsletter-compact,.coach-box,.faq-item{background:#fff;}
+.footer-social-banner,.coaching-disclaimer{border-radius:22px;}
+
+/* Eingabefelder: klare violette Fokus-Ring beim Antippen, Tastatur-Fokus für Links und Knöpfe */
+input[type=number]:focus,input[type=text]:focus,input[type=email]:focus,select:focus,textarea:focus,.newsletter-input:focus{
+  border-color:#685CC8; box-shadow:0 0 0 4px rgba(104,92,200,.18); outline:none;
+}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #685CC8; outline-offset:3px;}
