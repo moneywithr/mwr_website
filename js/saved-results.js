@@ -155,12 +155,12 @@ window.SavedResults = (function(){
         return;
       }
       list.innerHTML = items.map(it =>
-        '<div class="saved-result-item' + (it.active ? ' active' : '') + '" data-id="' + it.id + '">'
+        '<div class="saved-result-item' + (it.active ? ' active' : '') + '" data-id="' + Number(it.id) + '">'
         + '<div class="saved-result-main"><span class="saved-result-dot"></span>'
         + '<span class="saved-result-name">' + escapeHtml(it.name) + '</span></div>'
         + '<div style="display:flex;align-items:center;gap:8px;">'
         + '<span class="saved-result-date">' + fmtDate(new Date(it.id)) + '</span>'
-        + '<button type="button" class="saved-result-remove" data-remove="' + it.id + '">×</button>'
+        + '<button type="button" class="saved-result-remove" data-remove="' + Number(it.id) + '">×</button>'
         + '</div></div>'
       ).join('');
 

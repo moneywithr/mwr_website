@@ -284,3 +284,16 @@
     });
   });
 })();
+
+// Finanzsystem-Abschnitt: Animation starten, sobald er zu sehen ist (nicht bei reduzierter Bewegung).
+(function(){
+  var fin = document.querySelector('.fin-system');
+  if(!fin) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  fin.classList.add('fin-anim');
+  if(!('IntersectionObserver' in window)){ fin.classList.add('is-in'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ fin.classList.add('is-in'); io.disconnect(); } });
+  }, { threshold: 0.3 });
+  io.observe(fin);
+})();

@@ -59,6 +59,7 @@ Die Rechner-Seiten (`/calculator/…`) tragen `data-coach-box` im `<body>`, dann
 - Die Bewertungen stehen fest in `js/coaching-reviews.js` (nur Zeilen mit
   "Ja" bei Einverstanden aus der Google-Tabelle). Neue Bewertung: Datei anpassen und
   ggf. die Flagge in `img/flags/` ergänzen.
+- **Cookie-Einwilligung:** `js/consent.js` zeigt beim ersten Besuch das Banner (Nur notwendige / Anpassen / Alle akzeptieren) und speichert die Wahl in `localStorage` (`mwr_consent`). Externe Dienste laden erst nach Zustimmung: Cal.com (`js/booking.js`), Google reCAPTCHA und Brevo (Skripte als `type="text/plain" data-consent="services"` im HTML), TARIFCHECK24-Widgets (`js/cookie-consent.js`). Eine Analyse-Kategorie erscheint nur, wenn in `consent.js` `ANALYTICS_SRC` gesetzt ist. Der Footer-Link „Cookie-Einstellungen“ wird automatisch überall eingefügt.
 - Beim Ändern von `i18n.js`, `coaching.css` oder `common.js` die Versionsnummer
   (`?v=…`) in den HTML-Dateien erhöhen, sonst sehen Besucher die alte Datei aus dem Cache.
 

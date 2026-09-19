@@ -3030,76 +3030,6 @@ body.lang-ar .inapp-browser-steps{font-size:13.5px;}
 }
 .inapp-browser-close:hover{background:rgba(0,0,0,.06);}
 
-/* Consent-Banner für das eingebettete TARIFCHECK24-Vergleichs-Widget
-   (Girokonto/Kreditkarte/Versicherung): sticky unten, nur per JS eingefügt,
-   siehe js/cookie-consent.js. Erscheint nur auf den 6 Seiten mit dem
-   Widget, da nur dort tatsächlich zustimmungspflichtige Cookies laden. */
-.cookie-consent-banner{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:2100;
-  background:var(--panel);
-  border-top:1px solid var(--line);
-  box-shadow:0 -4px 20px rgba(0,0,0,.08);
-}
-.cookie-consent-banner-inner{
-  max-width:1040px;
-  margin:0 auto;
-  padding:16px;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:12px 20px;
-}
-.cookie-consent-text{flex:1 1 320px; min-width:0;}
-.cookie-consent-title{
-  display:block;
-  font-weight:700;
-  font-size:14px;
-  color:var(--purple-strong);
-}
-.cookie-consent-desc{
-  display:block;
-  font-size:13px;
-  color:var(--ink);
-  line-height:1.55;
-  margin-top:3px;
-}
-.cookie-consent-link{
-  display:inline-block;
-  font-size:12.5px;
-  color:var(--purple);
-  text-decoration:underline;
-  margin-top:4px;
-}
-.cookie-consent-actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
-.cookie-consent-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 20px;
-  border-radius:999px;
-  font-family:inherit;
-  font-weight:700;
-  font-size:13px;
-  cursor:pointer;
-  white-space:nowrap;
-  border:1.5px solid var(--ink);
-}
-.cookie-consent-accept{background:var(--ink); color:#FFFFFF;}
-.cookie-consent-accept:hover{background:#3A3739;}
-.cookie-consent-reject{background:transparent; color:var(--ink);}
-.cookie-consent-reject:hover{background:rgba(0,0,0,.06);}
-body.lang-ar .cookie-consent-title,
-body.lang-ar .cookie-consent-desc,
-body.lang-ar .cookie-consent-btn{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
-@media (max-width:640px){
-  .cookie-consent-actions{width:100%;}
-  .cookie-consent-btn{flex:1 1 auto;}
-}
-
 /* Platzhalter, wenn der Nutzer die Widget-Cookies abgelehnt hat oder noch
    nicht entschieden hat - ersetzt den Vergleich, solange keine Zustimmung
    vorliegt (siehe js/cookie-consent.js). */
@@ -3318,3 +3248,37 @@ body.lang-ar .home-hero-btn > span{position:relative; top:1.8px;}
 body.lang-ar .landing-cta-btn > span{position:relative; top:-1.5px;}
 body.lang-ar .newsletter-btn > span{position:relative; top:-1.2px;}
 .lang-btn[data-lang="ar"]{padding-top:2.5px; padding-bottom:9.5px;}
+
+/* ===== Cookie-Banner (consent.js) ===== */
+.cc-banner{position:fixed; inset-inline:12px; bottom:12px; z-index:1000; display:flex; justify-content:center; pointer-events:none;}
+.cc-card{
+  pointer-events:auto; width:100%; max-width:440px; background:#fff; color:var(--ink); border-radius:22px; padding:22px 22px 18px;
+  box-shadow:0 2px 6px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.22); animation:ccIn .28s ease both; max-height:calc(100dvh - 24px); overflow:auto;
+}
+@keyframes ccIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+.cc-icon{display:inline-flex; width:44px; height:44px; border-radius:14px; background:#F1FFB0; color:var(--ink); align-items:center; justify-content:center; margin-bottom:12px;}
+.cc-icon svg{width:24px; height:24px;}
+.cc-title{margin:0 0 6px; font-size:20px; line-height:1.3; outline:none;}
+.cc-text{margin:0 0 16px; font-size:15px; line-height:1.65; color:var(--text-muted);}
+.cc-text a{color:var(--ink); font-weight:700; text-decoration:underline; text-underline-offset:3px;}
+.cc-panel{margin:0 0 16px; display:flex; flex-direction:column; gap:10px;}
+.cc-panel[hidden]{display:none;}
+.cc-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 14px; border-radius:16px; background:#F5F5F7; cursor:pointer;}
+.cc-row-text{display:flex; flex-direction:column; gap:3px; min-width:0;}
+.cc-row-text strong{font-size:15px;}
+.cc-row-text small{font-size:13px; line-height:1.5; color:var(--text-muted);}
+.cc-check{appearance:none; -webkit-appearance:none; flex-shrink:0; width:46px; height:28px; border-radius:999px; background:#C7C7CC; position:relative; cursor:pointer; transition:background .2s ease; margin:0;}
+.cc-check::after{content:''; position:absolute; top:3px; inset-inline-start:3px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:inset-inline-start .2s ease;}
+.cc-check:checked{background:#685CC8;}
+.cc-check:checked::after{inset-inline-start:21px;}
+.cc-check:disabled{opacity:.6; cursor:not-allowed;}
+.cc-actions{display:flex; flex-direction:column; gap:8px;}
+.cc-btn{min-height:48px; border:0; border-radius:999px; background:rgba(0,0,0,.06); color:var(--ink); font:inherit; font-weight:700; font-size:16px; cursor:pointer; padding:0 20px; display:flex; align-items:center; justify-content:center; transition:background .18s ease, transform .12s ease;}
+.cc-btn:hover{background:rgba(0,0,0,.1);}
+.cc-btn:active{transform:scale(.97);}
+.cc-btn.primary{background:var(--mint); box-shadow:0 1px 2px rgba(0,0,0,.1);}
+.cc-btn.primary:hover{background:#CFF000;}
+body.lang-ar .cc-btn > span{position:relative; top:1.6px;}
+.footer-cookie-settings-link{background:none; border:0; padding:0; font:inherit; color:inherit; text-decoration:underline; cursor:pointer;}
+@media (min-width:640px){ .cc-banner{inset-inline:auto 20px; bottom:20px; justify-content:flex-end;} [dir="rtl"] .cc-banner{inset-inline:auto 20px;} }
+@media (prefers-reduced-motion:reduce){ .cc-card{animation:none;} }

@@ -125,10 +125,10 @@
       const logoWrap = document.createElement('div');
       logoWrap.className = 'broker-logo-wrap';
 
-      if(p.logoUrl || p.domain){
+      if(p.logoUrl){
         const logo = document.createElement('img');
         logo.className = 'broker-logo';
-        logo.src = p.logoUrl || ('https://www.google.com/s2/favicons?domain=' + p.domain + '&sz=128');
+        logo.src = p.logoUrl;
         logo.alt = p.name;
         logo.loading = 'lazy';
         logo.onerror = function(){

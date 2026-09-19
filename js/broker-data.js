@@ -121,7 +121,7 @@ window.BROKER_DATA = [
     continent: "africa",
     names: { de: "Ägypten", en: "Egypt", ar: "مصر" },
     platforms: [
-      { name: "Thndr", url: "https://thndr.app/", domain: "thndr.app", note: { de: "Von der ägyptischen Regierung lizenziert", en: "Licensed by the Egyptian government", ar: "مرخصة من الحكومة المصرية" } }
+      { name: "Thndr", url: "https://thndr.app/", domain: "thndr.app", logoUrl: "/img/broker-logos/thndr.png", note: { de: "Von der ägyptischen Regierung lizenziert", en: "Licensed by the Egyptian government", ar: "مرخصة من الحكومة المصرية" } }
     ]
   },
   {
@@ -137,7 +137,7 @@ window.BROKER_DATA = [
     continent: "asia",
     names: { de: "Türkei", en: "Turkey", ar: "تركيا" },
     platforms: [
-      { name: "Midas", url: "https://www.getmidas.com/", domain: "getmidas.com" },
+      { name: "Midas", url: "https://www.getmidas.com/", domain: "getmidas.com", logoUrl: "/img/broker-logos/midas.png" },
       { name: "Interactive Brokers (IBKR)", url: "https://www.interactivebrokers.com/", domain: "interactivebrokers.com", logoUrl: "/img/broker-logos/interactive-brokers-v2.svg" }
     ]
   },
