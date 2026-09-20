@@ -365,3 +365,8 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 
 /* Markierte Wörter: mehr Zeilenabstand im Titel, damit sich die Marker benachbarter Zeilen nicht berühren oder Text überdecken */
 .coaching-title{line-height:1.42;}
+
+/* Wartelisten-Formular: Button steht unter der Einwilligung */
+.waitlist-form > .waitlist-submit{position:relative; justify-content:center; width:100%; min-height:56px; padding:8px 46px; margin-top:16px; white-space:normal; line-height:1.25; text-align:center;}
+.waitlist-form > .waitlist-submit svg{position:absolute; inset-inline-end:20px; top:50%; margin-top:-10px;}
+
