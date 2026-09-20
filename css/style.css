@@ -51,28 +51,28 @@
   font-family:'IBM Plex Sans Arabic';
   font-style:normal;
   font-weight:400;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/ibm-plex-sans-arabic-400.woff2') format('woff2');
 }
 @font-face{
   font-family:'IBM Plex Sans Arabic';
   font-style:normal;
   font-weight:500;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/ibm-plex-sans-arabic-500.woff2') format('woff2');
 }
 @font-face{
   font-family:'IBM Plex Sans Arabic';
   font-style:normal;
   font-weight:600;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/ibm-plex-sans-arabic-600.woff2') format('woff2');
 }
 @font-face{
   font-family:'IBM Plex Sans Arabic';
   font-style:normal;
   font-weight:700;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/ibm-plex-sans-arabic-700.woff2') format('woff2');
 }
 /* Kufam, nur für die große Landing-Headline "شو حابب تعمل اليوم؟", bewusst
@@ -81,14 +81,14 @@
   font-family:'Kufam';
   font-style:normal;
   font-weight:400;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/kufam-400.woff2') format('woff2');
 }
 @font-face{
   font-family:'Kufam';
   font-style:normal;
   font-weight:700;
-  font-display:swap;
+  font-display:block;
   src:url('/fonts/kufam-700.woff2') format('woff2');
 }
 /* Manrope (Body) und Space Grotesk (Display), aus dem Money with Rami
@@ -3120,9 +3120,9 @@ body.lang-ar .tools-quick-nav-item{font-family:'IBM Plex Sans Arabic','IBM Plex 
 .home-hero-eyebrow{display:flex; align-items:center; gap:14px; margin-bottom:18px; color:var(--text-muted); font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; font-family:'IBM Plex Mono',monospace;}
 body.lang-ar .home-hero-eyebrow{letter-spacing:0; font-size:15px; font-family:inherit; text-transform:none;}
 .home-hero-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5.2vw,52px); line-height:1.15; letter-spacing:-.01em; color:var(--ink); margin:0 0 18px;}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:block;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:block;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:block;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
 body.lang-ar .home-hero-title{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif; letter-spacing:0; line-height:1.4;}
 body.lang-ar .home-hero-text, body.lang-ar .home-hero-btn, body.lang-ar .home-hero-eyebrow{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 .home-hero-text{font-size:18px; line-height:1.75; color:var(--text-muted); margin:0 0 10px; max-width:720px;}

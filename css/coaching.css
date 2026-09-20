@@ -1,10 +1,10 @@
 /* Ziffern 0-9 in IBM Plex Sans (wie in den Rechnern), damit Zahlen in arabischen Texten überall gleich aussehen; Buchstaben bleiben Tajawal */
-@font-face{font-family:'MWR Digits';font-style:normal;font-weight:400;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'MWR Digits';font-style:normal;font-weight:600;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2');}
-@font-face{font-family:'MWR Digits';font-style:normal;font-weight:700;font-display:swap;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2');}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
-@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:400;font-display:block;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:600;font-display:block;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'MWR Digits';font-style:normal;font-weight:700;font-display:block;unicode-range:U+0030-0039;src:url('/fonts/ibm-plex-sans-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:block;src:url('/fonts/tajawal-arabic-400.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:500;font-display:block;src:url('/fonts/tajawal-arabic-500.woff2') format('woff2');}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:block;src:url('/fonts/tajawal-arabic-700.woff2') format('woff2');}
 body.coaching-page.lang-ar .coaching-wrap section, body.coaching-page.lang-ar .coaching-wrap section *, body.coaching-page.lang-ar .review-dialog, body.coaching-page.lang-ar .review-dialog *{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic',sans-serif;}
 body.coaching-page.lang-ar .review-excerpt{font-size:17px; line-height:1.75;}
 /* Coaching-Landingpage: Banner und Footer wie auf der restlichen Seite (hell),

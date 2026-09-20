@@ -361,7 +361,25 @@ window.Site = (function(){
     if(yearEl) yearEl.textContent = new Date().getFullYear();
     // Seite erst jetzt anzeigen: verhindert, dass der deutsche Platzhaltertext
     // kurz aufblitzt, bevor er durch die tatsächlich gespeicherte Sprache ersetzt wird.
-    document.documentElement.style.visibility = 'visible';
+    // Erst zeigen, wenn die (vorgeladene) arabische Schrift bereit ist, damit
+    // kein Wechsel von Ersatzschrift zu IBM Plex Sans Arabic sichtbar wird.
+    // Das 1,5-s-Limit im <head> greift weiterhin als Sicherheitsnetz.
+    const reveal = ()=>{ document.documentElement.style.visibility = 'visible'; };
+    if(state.lang === 'ar' && document.fonts && document.fonts.load){
+      const need = [
+        document.fonts.load("400 1em 'IBM Plex Sans Arabic'"),
+        document.fonts.load("700 1em 'IBM Plex Sans Arabic'")
+      ];
+      // Seiten mit coaching.css (Startseite, Coaching) setzen Tajawal + Ziffern ein.
+      if(document.querySelector('link[href*="coaching.css"]')){
+        need.push(
+          document.fonts.load("400 1em 'Tajawal'"),
+          document.fonts.load("700 1em 'Tajawal'"),
+          document.fonts.load("400 1em 'MWR Digits'", '0123456789')
+        );
+      }
+      Promise.all(need).then(reveal, reveal);
+    } else reveal();
     // Der Browser versucht direkt beim Laden zu einem #hash-Ziel zu scrollen,
     // sieht dabei aber noch visibility:hidden auf <html> und überspringt den
     // Sprung stillschweigend - und holt ihn später beim Sichtbarwerden nicht
