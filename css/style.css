@@ -284,7 +284,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   background:transparent;
   color:var(--text-muted);
   padding:6px 13px;
-  border-radius:999px;
+  border-radius:22px;
   cursor:pointer;
   transition:background .15s ease, color .15s ease;
 }
@@ -355,7 +355,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   position:absolute;
   top:4px; bottom:4px; left:0;
   width:0;
-  border-radius:999px;
+  border-radius:22px;
   background:var(--periwinkle);
   transition:transform .3s cubic-bezier(.4,0,.2,1), width .3s cubic-bezier(.4,0,.2,1), background-color .25s ease;
   z-index:0;
@@ -373,7 +373,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   background:transparent;
   color:var(--text-muted);
   padding:8px 16px;
-  border-radius:999px;
+  border-radius:22px;
   cursor:pointer;
   white-space:nowrap;
   transition:color .2s ease;
@@ -698,7 +698,7 @@ body.lang-ar .inline-num-unit{font-size:14px;}
   font-size:14px;
   font-weight:700;
   padding:8px 14px;
-  border-radius:999px;
+  border-radius:22px;
   border:1.5px solid var(--line);
   background:var(--panel);
   color:var(--ink);
@@ -1178,7 +1178,7 @@ body.lang-ar .legend{
   background:transparent;
   color:var(--text-muted);
   padding:7px 14px;
-  border-radius:999px;
+  border-radius:22px;
   cursor:pointer;
   transition:background .15s ease, color .15s ease;
   white-space:nowrap;
@@ -1221,7 +1221,7 @@ body.lang-ar .breadcrumb{
   gap:8px;
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:999px;
+  border-radius:22px;
   padding:7px 12px;
   cursor:pointer;
   font-family:'IBM Plex Mono',monospace;
@@ -1726,7 +1726,7 @@ body.lang-ar .broker-note{font-size:14.5px;}
   font-size:13px;
   font-weight:600;
   padding:9px 18px;
-  border-radius:999px;
+  border-radius:22px;
   text-decoration:none;
   white-space:nowrap;
   transition:background .15s ease, transform .15s ease;
@@ -1847,7 +1847,7 @@ body.lang-ar .find-bank-bonus-banner{font-family:'IBM Plex Sans Arabic','IBM Ple
   font-size:12px;
   font-weight:600;
   padding:9px 14px;
-  border-radius:999px;
+  border-radius:22px;
   text-decoration:none;
   white-space:normal;
   text-align:center;
@@ -1894,7 +1894,7 @@ body.lang-ar .find-bank-cookie-tip{font-size:13.5px;}
   color:var(--ink);
   background:var(--mint);
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   padding:11px 22px;
   margin:0 0 22px;
   text-decoration:none;
@@ -2286,7 +2286,7 @@ body.lang-ar .footer-social-title{
   justify-content:center;
   padding:16px 38px;
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   background:var(--mint);
   color:var(--ink);
   font-family:inherit;
@@ -2602,7 +2602,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
   background:var(--mint);
   color:var(--ink);
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   padding:6px 13px;
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   font-weight:700;
@@ -2634,7 +2634,7 @@ body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
 .save-result-form input:focus{border-color:var(--mint);}
 .save-result-form button{
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   padding:0 12px;
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   font-weight:700;
@@ -2864,7 +2864,7 @@ body.lang-ar .newsletter-compact .newsletter-desc{font-size:13.5px;}
   font-family:inherit;
   font-size:15px;
   padding:13px 16px;
-  border-radius:999px;
+  border-radius:22px;
   outline:none;
   text-align:start;
 }
@@ -2876,7 +2876,7 @@ body.lang-ar .newsletter-compact .newsletter-desc{font-size:13.5px;}
   gap:8px;
   padding:13px 30px;
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   background:var(--mint);
   color:var(--ink);
   font-family:inherit;
@@ -3003,7 +3003,7 @@ body.lang-ar .inapp-browser-steps{font-size:13.5px;}
   justify-content:center;
   padding:8px 16px;
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   background:var(--ink);
   color:#FFFFFF;
   font-family:inherit;
@@ -3052,7 +3052,7 @@ body.lang-ar .inapp-browser-steps{font-size:13.5px;}
   justify-content:center;
   padding:10px 22px;
   border:none;
-  border-radius:999px;
+  border-radius:22px;
   background:var(--purple);
   color:#FFFFFF;
   font-family:inherit;
@@ -3085,7 +3085,7 @@ body.lang-ar .tcpp-consent-placeholder-btn{font-family:'IBM Plex Sans Arabic','I
   gap:6px;
   flex:0 0 auto;
   padding:7px 14px;
-  border-radius:999px;
+  border-radius:22px;
   border:1px solid var(--line);
   background:var(--panel);
   color:var(--text-muted);
@@ -3129,7 +3129,7 @@ body.lang-ar .home-hero-text, body.lang-ar .home-hero-btn, body.lang-ar .home-he
 body.lang-ar .home-hero-text{font-size:17px;}
 .home-hero-actions{display:flex; flex-wrap:wrap; gap:12px;}
 .home-hero-btn{
-  display:inline-flex; align-items:center; gap:10px; padding:16px 28px; border-radius:999px; text-decoration:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:10px; padding:16px 28px; border-radius:22px; text-decoration:none; cursor:pointer;
   font:inherit; font-weight:700; font-size:16px; color:var(--ink); background:#fff; border:0;
   box-shadow:0 1px 2px rgba(32,30,31,.06), 0 8px 22px rgba(32,30,31,.10);
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
@@ -3273,7 +3273,7 @@ body.lang-ar .newsletter-btn > span{position:relative; top:-1.2px;}
 .cc-check:checked::after{inset-inline-start:21px;}
 .cc-check:disabled{opacity:.6; cursor:not-allowed;}
 .cc-actions{display:flex; flex-direction:column; gap:8px;}
-.cc-btn{min-height:48px; border:0; border-radius:999px; background:rgba(0,0,0,.06); color:var(--ink); font:inherit; font-weight:700; font-size:16px; cursor:pointer; padding:0 20px; display:flex; align-items:center; justify-content:center; transition:background .18s ease, transform .12s ease;}
+.cc-btn{min-height:48px; border:0; border-radius:22px; background:rgba(0,0,0,.06); color:var(--ink); font:inherit; font-weight:700; font-size:16px; cursor:pointer; padding:0 20px; display:flex; align-items:center; justify-content:center; transition:background .18s ease, transform .12s ease;}
 .cc-btn:hover{background:rgba(0,0,0,.1);}
 .cc-btn:active{transform:scale(.97);}
 .cc-btn.primary{background:var(--mint); box-shadow:0 1px 2px rgba(0,0,0,.1);}
@@ -3285,8 +3285,17 @@ body.lang-ar .cc-btn > span{position:relative; top:1.6px;}
 
 /* Broker-Finder: Länderauswahl. Kontinent-Zeile zentriert auf hellem Lila (statt grüner Pille), Länder darunter in Leserichtung.
    Vorschlag-Button für das erkannte Land. */
-#broker-country-select .custom-select-group{justify-content:center; gap:8px; background:#EEEBFA; border-radius:9px; padding:8px 12px; margin:8px 0 4px; color:var(--purple-strong);}
+#broker-country-select .custom-select-group{justify-content:center; gap:8px; background:#B9AFEA; border-radius:14px; padding:8px 12px; margin:8px 0 4px; color:var(--purple-strong);}
 #broker-country-select .custom-select-group:first-child{margin-top:0;}
 #broker-country-select .custom-select-group-name{background:none; padding:0; color:inherit; font-weight:700;}
 #broker-country-select .custom-select-group-icon{width:auto;}
 .broker-auto-note{margin:6px 0 10px; font-size:14px; line-height:1.7; color:var(--text-muted);}
+/* Scrollbar der Dropdown-Listen im selben Lila wie die Kontinent-Zeile (statt Systemgrau).
+   Der Daumen sitzt eingerückt (transparenter Rand), damit er bei der 22-px-Rundung nicht am Rand der Liste klebt oder darüber hinausragt. */
+.custom-select-menu::-webkit-scrollbar{width:16px;}
+.custom-select-menu::-webkit-scrollbar-track{background:transparent; margin:14px 0;}
+.custom-select-menu::-webkit-scrollbar-thumb{background:#B9AFEA; border:5px solid transparent; background-clip:padding-box; border-radius:999px;}
+@supports (-moz-appearance:none){ .custom-select-menu{scrollbar-width:thin; scrollbar-color:#B9AFEA transparent;} }
+/* Dropdown-Listen: Hover und gewählter Eintrag im selben Lila (Kontinent-Zeile und Scrollbar bleiben eine Stufe dunkler) */
+.custom-select-menu li:hover,.custom-select-menu li.active{background:#F0EEFA;}
+.custom-select-menu li.custom-select-group:hover{background:#B9AFEA;}
