@@ -3,6 +3,9 @@
 // und in jeder HTML-Seite einen weiteren <button class="lang-btn" data-lang="xx"> einfügen.
 window.I18N = {
   de: {
+    navCategories: "Kategorien",
+    navProgress: "Fortschritt",
+    ariaClose: "Schließen",
     cookieTitle: "Wir verwenden Cookies",
     cookieText: "Notwendige Speicherungen halten die Website am Laufen. Externe Dienste (Terminbuchung, Newsletter-Schutz, Vergleichs-Tools) sind optional und laden erst nach deiner Zustimmung.",
     cookiePolicy: "Datenschutzerklärung",
@@ -516,6 +519,9 @@ window.I18N = {
     newsletterFieldHint: 'Gib deine E-Mail-Adresse an, um dich anzumelden, z.B. abc@xyz.com',
   },
   en: {
+    navCategories: "Categories",
+    navProgress: "Progress",
+    ariaClose: "Close",
     cookieTitle: "We use cookies",
     cookieText: "Necessary storage keeps the website running. External services (booking, newsletter protection, comparison tools) are optional and only load after your consent.",
     cookiePolicy: "Privacy policy",
@@ -1029,6 +1035,9 @@ window.I18N = {
     newsletterFieldHint: 'Provide your email address to subscribe, e.g. abc@xyz.com',
   },
   ar: {
+    navCategories: "الأقسام",
+    navProgress: "مراحل التسجيل",
+    ariaClose: "إغلاق",
     cookieTitle: "نستخدم ملفات تعريف الارتباط",
     cookieText: "الملفات الضرورية تساعد الموقع على العمل. الخدمات الخارجية (الحجز، حماية النشرة، أدوات المقارنة) اختيارية ولا تعمل إلا بعد موافقتك.",
     cookiePolicy: "سياسة الخصوصية",

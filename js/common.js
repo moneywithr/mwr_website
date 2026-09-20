@@ -68,6 +68,12 @@ window.Site = (function(){
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
       el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
     });
+    // Beschriftungen, die nur Screenreader hören (Navigationsbereiche, Knöpfe
+    // mit reinem Icon). Standen vorher fest auf Deutsch/Englisch im HTML und
+    // blieben dadurch auch auf der arabischen Seite deutsch.
+    document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
     // Wie data-i18n, aber setzt innerHTML statt textContent - nur für
     // Stellen mit eingebautem Markup (z.B. ein Link in einem Rechtstext).
     // Immer nur mit eigenen, fest im Code stehenden Übersetzungen benutzen,
@@ -123,11 +129,31 @@ window.Site = (function(){
     if(!path.endsWith('/')) path += '/';
     const isHome = path === '/' || /\/index\.html\/?$/.test(location.pathname);
 
+    // Beschriftungs-Kopie in der Pille (siehe .category-switch-mask in style.css).
+    // data-i18n bleibt an den Kopien, dadurch aktualisiert applyStatic() sie mit.
+    const mask = document.createElement('span');
+    mask.className = 'category-switch-mask';
+    mask.setAttribute('aria-hidden', 'true');
+    mask.setAttribute('inert', '');
+    buttons.forEach(b=>{
+      const c = b.cloneNode(true);
+      c.removeAttribute('data-category');
+      c.removeAttribute('aria-pressed');
+      c.classList.remove('active');
+      c.tabIndex = -1;
+      mask.appendChild(c);
+    });
+    thumb.appendChild(mask);
+
     function moveThumb(btn){
       if(!btn) return;
+      const cat = btn.getAttribute('data-category');
       thumb.style.width = btn.offsetWidth + 'px';
       thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
-      thumb.style.backgroundColor = CATEGORY_COLORS[btn.getAttribute('data-category')] || CATEGORY_COLORS.calculators;
+      thumb.style.backgroundColor = CATEGORY_COLORS[cat] || CATEGORY_COLORS.calculators;
+      thumb.setAttribute('data-category', cat);
+      // Gegenbewegung: Kopie bleibt relativ zum Container an der Stelle der echten Buttons.
+      mask.style.transform = 'translateX(' + (buttons[0].offsetLeft - btn.offsetLeft) + 'px)';
       centerButton(btn);
     }
 

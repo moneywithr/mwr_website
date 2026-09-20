@@ -9,10 +9,24 @@
 <title>قديش بتتشابه صناديق الـETF تبعك؟ | Money with Rami</title>
 <meta name="description" content="قارن بين صندوقين ETF (وبينهن صناديق إسلامية متوافقة مع الشريعة متل MSCI Islamic وSPUS وHLAL) وشوف قديش من أكبر الشركات فيهن مشتركة. حاسبة تداخل ETF مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/etf_overlap/">
+<!-- Vorschau beim Teilen (erzeugt von tools/sync-html.js) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="moneywithrami">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://moneywithrami.com/calculator/etf_overlap/">
+<meta property="og:title" content="قديش بتتشابه صناديق الـETF تبعك؟ | Money with Rami">
+<meta property="og:description" content="قارن بين صندوقين ETF (وبينهن صناديق إسلامية متوافقة مع الشريعة متل MSCI Islamic وSPUS وHLAL) وشوف قديش من أكبر الشركات فيهن مشتركة. حاسبة تداخل ETF مجانية بالعربي.">
+<meta property="og:image" content="https://moneywithrami.com/img/social/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="قديش بتتشابه صناديق الـETF تبعك؟ | Money with Rami">
+<meta name="twitter:description" content="قارن بين صندوقين ETF (وبينهن صناديق إسلامية متوافقة مع الشريعة متل MSCI Islamic وSPUS وHLAL) وشوف قديش من أكبر الشركات فيهن مشتركة. حاسبة تداخل ETF مجانية بالعربي.">
+<meta name="twitter:image" content="https://moneywithrami.com/img/social/og-cover.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=20260920p">
+<link rel="stylesheet" href="/css/style.css?v=d397340a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -79,11 +93,11 @@
     </div>
   </div>
   <div class="category-switch-row">
-    <nav class="category-switch" aria-label="Kategorien">
+    <nav class="category-switch" data-i18n-aria="navCategories" aria-label="الأقسام">
       <span class="category-switch-thumb" aria-hidden="true"></span>
       <button type="button" class="category-switch-btn" data-category="start" data-i18n="landingCatStart">ابدأ الاستثمار</button>
-      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">Tools, die ich nutze</button>
-      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">Rechner</button>
+      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">أدوات بستخدمها</button>
+      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">الحاسبات</button>
     </nav>
   </div>
 </div>
@@ -91,14 +105,14 @@
 <div class="wrap">
 
   <nav class="breadcrumb">
-    <a href="/" data-i18n="breadcrumbHome">Start</a>
+    <a href="/" data-i18n="breadcrumbHome">الرئيسية</a>
     <span class="breadcrumb-sep">/</span>
-    <span data-i18n="landingCatCalculators">Rechner</span>
+    <span data-i18n="landingCatCalculators">الحاسبات</span>
     <span class="breadcrumb-sep">/</span>
-    <span class="breadcrumb-current" data-i18n="tabOverlap">ETF-Overlap</span>
+    <span class="breadcrumb-current" data-i18n="tabOverlap">تداخل ETF</span>
   </nav>
 
-  <nav class="tools-quick-nav" aria-label="Rechner">
+  <nav class="tools-quick-nav" data-i18n-aria="landingCatCalculators" aria-label="الحاسبات">
     <a class="tools-quick-nav-item" href="/calculator/investment/">
       <svg class="tools-quick-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="11" x2="8" y2="11"></line><line x1="12" y1="11" x2="12" y2="11"></line><line x1="16" y1="11" x2="16" y2="11"></line><line x1="8" y1="15" x2="8" y2="15"></line><line x1="12" y1="15" x2="12" y2="15"></line><line x1="16" y1="15" x2="16" y2="18"></line></svg>
       <span data-i18n="landingCalcTitle">حاسبة الاستثمار</span>
@@ -123,17 +137,17 @@
 
   <header>
     <div class="header-text">
-      <div class="eyebrow" data-i18n="overlapEyebrow">ETF-Vergleich</div>
-      <h1 data-i18n="overlapTitle">Wie stark überschneiden sich deine ETFs?</h1>
-      <p data-i18n="overlapIntro">Wähle zwei ETFs aus (darunter auch mehrere islamische/Schariah-konforme Fonds) und finde heraus, wie viele ihrer größten Positionen sich überschneiden.</p>
+      <div class="eyebrow" data-i18n="overlapEyebrow">مقارنة ETF</div>
+      <h1 data-i18n="overlapTitle">قديش بتتداخل صناديق الـETF تبعك؟</h1>
+      <p data-i18n="overlapIntro">اختار اتنين ETF (فيها كمان كذا صندوق إسلامي متوافق مع الشريعة) وشوف قديش من أكبر الشركات فيهن مشتركة بينهن. بيفيدك تعرف إذا عندك خطر تركيز، متلاً إذا عم تستثمر بنفس الوقت بصندوق MSCI World وصندوق Nasdaq 100.</p>
     </div>
   </header>
 
   <div class="panel overlap-select-panel" style="margin-bottom:24px;">
-    <div class="section-title" data-i18n="overlapSectionSelect">ETFs auswählen</div>
+    <div class="section-title" data-i18n="overlapSectionSelect">اختار الصندوقين</div>
     <div class="overlap-select-stack">
       <div class="field">
-        <span class="overlap-select-label etf" data-i18n="overlapLabelA">ETF A</span>
+        <span class="overlap-select-label etf" data-i18n="overlapLabelA">الصندوق الأول</span>
         <div class="custom-select" id="overlap-select-a">
           <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
             <span class="custom-select-value" id="overlap-select-a-value">-</span>
@@ -144,7 +158,7 @@
         <div class="overlap-select-meta" id="overlap-select-a-meta"></div>
       </div>
       <div class="field">
-        <span class="overlap-select-label fonds" data-i18n="overlapLabelB">ETF B</span>
+        <span class="overlap-select-label fonds" data-i18n="overlapLabelB">الصندوق الثاني</span>
         <div class="custom-select" id="overlap-select-b">
           <button type="button" class="custom-select-btn variant-panel" aria-haspopup="listbox" aria-expanded="false">
             <span class="custom-select-value" id="overlap-select-b-value">-</span>
@@ -155,14 +169,14 @@
         <div class="overlap-select-meta" id="overlap-select-b-meta"></div>
       </div>
     </div>
-    <div class="calc-warning" id="overlap-warning" data-i18n="overlapSameWarning">Wähle zwei unterschiedliche ETFs, um sie zu vergleichen.</div>
+    <div class="calc-warning" id="overlap-warning" data-i18n="overlapSameWarning">اختار صندوقين مختلفين لتقارن بينهن.</div>
     <p class="overlap-select-meta" id="overlap-data-note" data-i18n="overlapDataNote" style="line-height:1.6; margin-top:14px;"></p>
   </div>
 
   <div class="results">
 
     <div class="panel overlap-summary-panel" style="margin-bottom:20px;">
-      <div class="section-title" data-i18n="overlapSectionSummary">Zusammenfassung</div>
+      <div class="section-title" data-i18n="overlapSectionSummary">الخلاصة</div>
       <div class="overlap-gauge-row">
         <div class="overlap-gauge" id="overlap-gauge">
           <div class="overlap-gauge-center">
@@ -177,12 +191,12 @@
     </div>
 
     <div class="panel" style="margin-bottom:20px;">
-      <div class="section-title" data-i18n="overlapSectionShared">Gemeinsame Top-Positionen</div>
+      <div class="section-title" data-i18n="overlapSectionShared">أكبر الشركات المشتركة</div>
       <div class="overlap-holdings" id="overlap-shared-list"></div>
     </div>
 
     <div class="panel">
-      <div class="section-title" data-i18n="overlapSectionUnique">Nur in einem der beiden ETFs</div>
+      <div class="section-title" data-i18n="overlapSectionUnique">موجودة بصندوق واحد بس</div>
       <div class="breakdown">
         <div class="b-group etf">
           <div class="b-col-head etf" id="overlap-only-a-heading">Nur in A</div>
@@ -198,7 +212,7 @@
   </div>
 
   <footer>
-    <p data-i18n="overlapFooter">Dieser Vergleich dient nur zur groben Orientierung und ersetzt keine Anlageberatung.</p>
+    <p data-i18n="overlapFooter">هالمقارنة للتوجيه العام بس وما بتعوض عن استشارة مالية. بيانات تقريبية لأكبر المراكز المعروفة بالصناديق المختارة، لغاية آب 2026 تقريبًا.</p>
     <div class="footer-social-banner">
       <span class="footer-social-title" data-i18n="footerFindMe">تابعني هون</span>
       <div class="footer-social-icons">
@@ -211,7 +225,7 @@
       </div>
     </div>
     <div class="footer-brand">
-      <p class="copyright">© <span id="copy-year"></span> Money with Rami</p>
+      <p class="copyright">© <span id="copy-year"></span> moneywithrami</p>
       <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
     </div>
 
@@ -224,11 +238,11 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260920r"></script>
-<script src="/js/common.js?v=20260920h"></script>
-<script src="/js/consent.js?v=20260920a"></script>
-<script src="/js/coach-box.js?v=20260920b"></script>
-<script src="/js/etf-overlap-data.js?v=20260825a"></script>
-<script src="/js/etf-overlap-calculator.js?v=20260908a"></script>
+<script src="/js/i18n.js?v=25791ebb"></script>
+<script src="/js/common.js?v=f5ece724"></script>
+<script src="/js/consent.js?v=2f4761b5"></script>
+<script src="/js/coach-box.js?v=befd341e"></script>
+<script src="/js/etf-overlap-data.js?v=0856c25f"></script>
+<script src="/js/etf-overlap-calculator.js?v=a38293e1"></script>
 </body>
 </html>

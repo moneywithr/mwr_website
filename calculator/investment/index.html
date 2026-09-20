@@ -9,10 +9,24 @@
 <title>حاسبة الاستثمار | Money with Rami</title>
 <meta name="description" content="احسب نمو استثمارك بالفائدة المركبة: الثروة النهائية، القسط الشهري المطلوب، أو مدة الاستثمار. حاسبة استثمار مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/investment/">
+<!-- Vorschau beim Teilen (erzeugt von tools/sync-html.js) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="moneywithrami">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://moneywithrami.com/calculator/investment/">
+<meta property="og:title" content="حاسبة الاستثمار | Money with Rami">
+<meta property="og:description" content="احسب نمو استثمارك بالفائدة المركبة: الثروة النهائية، القسط الشهري المطلوب، أو مدة الاستثمار. حاسبة استثمار مجانية بالعربي.">
+<meta property="og:image" content="https://moneywithrami.com/img/social/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="حاسبة الاستثمار | Money with Rami">
+<meta name="twitter:description" content="احسب نمو استثمارك بالفائدة المركبة: الثروة النهائية، القسط الشهري المطلوب، أو مدة الاستثمار. حاسبة استثمار مجانية بالعربي.">
+<meta name="twitter:image" content="https://moneywithrami.com/img/social/og-cover.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=20260920p">
+<link rel="stylesheet" href="/css/style.css?v=d397340a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -79,11 +93,11 @@
     </div>
   </div>
   <div class="category-switch-row">
-    <nav class="category-switch" aria-label="Kategorien">
+    <nav class="category-switch" data-i18n-aria="navCategories" aria-label="الأقسام">
       <span class="category-switch-thumb" aria-hidden="true"></span>
       <button type="button" class="category-switch-btn" data-category="start" data-i18n="landingCatStart">ابدأ الاستثمار</button>
-      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">Tools, die ich nutze</button>
-      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">Rechner</button>
+      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">أدوات بستخدمها</button>
+      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">الحاسبات</button>
     </nav>
   </div>
 </div>
@@ -91,14 +105,14 @@
 <div class="wrap">
 
   <nav class="breadcrumb">
-    <a href="/" data-i18n="breadcrumbHome">Start</a>
+    <a href="/" data-i18n="breadcrumbHome">الرئيسية</a>
     <span class="breadcrumb-sep">/</span>
-    <span data-i18n="landingCatCalculators">Rechner</span>
+    <span data-i18n="landingCatCalculators">الحاسبات</span>
     <span class="breadcrumb-sep">/</span>
-    <span class="breadcrumb-current" data-i18n="tabRoi">Rechner</span>
+    <span class="breadcrumb-current" data-i18n="tabRoi">الحاسبة</span>
   </nav>
 
-  <nav class="tools-quick-nav" aria-label="Rechner">
+  <nav class="tools-quick-nav" data-i18n-aria="landingCatCalculators" aria-label="الحاسبات">
     <a class="tools-quick-nav-item active" href="/calculator/investment/">
       <svg class="tools-quick-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="11" x2="8" y2="11"></line><line x1="12" y1="11" x2="12" y2="11"></line><line x1="16" y1="11" x2="16" y2="11"></line><line x1="8" y1="15" x2="8" y2="15"></line><line x1="12" y1="15" x2="12" y2="15"></line><line x1="16" y1="15" x2="16" y2="18"></line></svg>
       <span data-i18n="landingCalcTitle">حاسبة الاستثمار</span>
@@ -123,9 +137,9 @@
 
   <header>
     <div class="header-text">
-      <div class="eyebrow" data-i18n="sparEyebrow">Investitionsrechner</div>
-      <h1 data-i18n="sparTitle">Endkapital, Sparrate, Laufzeit oder Anfangskapital berechnen</h1>
-      <p data-i18n="sparIntro">Wähle aus, was du berechnen möchtest. Der Rechner löst die passende Formel für dich und zeigt dir den Verlauf deines Vermögens.</p>
+      <div class="eyebrow" data-i18n="sparEyebrow">حاسبة الاستثمار</div>
+      <h1 data-i18n="sparTitle">احسب الثروة النهائية، القسط الشهري، أو المدة</h1>
+      <p data-i18n="sparIntro">اختر ما تريد حسابه. تقوم الحاسبة بحل المعادلة المناسبة وتعرض لك كيف ينمو مالك بمرور الوقت.</p>
     </div>
   </header>
 
@@ -134,7 +148,7 @@
     <div class="panel panel-input">
       <div class="block block-goal">
         <div class="section-title">
-        <span data-i18n="sparGoalSection">Was möchtest du berechnen?</span>
+        <span data-i18n="sparGoalSection">شو بدك تحسب؟</span>
         <div class="currency-switch currency-switch-compact">
           <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
             <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
@@ -167,9 +181,9 @@
               <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <ul class="custom-select-menu" role="listbox">
-              <li role="option" data-value="endkapital" class="active" aria-selected="true" data-i18n="sparTargetEndkapital">Endkapital</li>
-              <li role="option" data-value="rate" aria-selected="false" data-i18n="sparTargetRate">Monatlicher Investitionsbetrag</li>
-              <li role="option" data-value="laufzeit" aria-selected="false" data-i18n="sparTargetLaufzeit">Laufzeit</li>
+              <li role="option" data-value="endkapital" class="active" aria-selected="true" data-i18n="sparTargetEndkapital">الثروة النهائية</li>
+              <li role="option" data-value="rate" aria-selected="false" data-i18n="sparTargetRate">مبلغ الاستثمار الشهري</li>
+              <li role="option" data-value="laufzeit" aria-selected="false" data-i18n="sparTargetLaufzeit">المدة</li>
             </ul>
           </div>
         </div>
@@ -179,7 +193,7 @@
         <div class="field">
           <div class="field-label">
             <span class="field-label-text">
-              <span data-i18n="sparLabelGoal">Wie hoch soll dein Endkapital sein?</span>
+              <span data-i18n="sparLabelGoal">كم حابب توصل ثروتك؟</span>
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipGoal" data-tip="هاد المبلغ يلي بدك توصله بنهاية مدة الاستثمار، هدفك النهائي."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
@@ -191,12 +205,12 @@
         <div class="field">
           <div class="field-label">
             <span class="field-label-text">
-              <span data-i18n="labelYears">Anlagedauer</span>
+              <span data-i18n="labelYears">مدة الاستثمار</span>
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipLaufzeit" data-tip="عدد السنين يلي بدك تستثمر خلالها لحتى توصل لهدفك."><span class="info-tip-glyph"></span></span>
             </span>
             <span class="inline-num-group">
               <input type="number" id="spar-years-input" class="inline-num-input" value="15" min="1" max="60" step="1">
-              <span class="inline-num-unit" data-i18n="yearsUnit">Jahre</span>
+              <span class="inline-num-unit" data-i18n="yearsUnit">سنة</span>
             </span>
           </div>
           <input type="range" id="spar-years" min="1" max="60" value="15" step="1">
@@ -207,7 +221,7 @@
         <div class="field">
           <div class="field-label">
             <span class="field-label-text">
-              <span data-i18n="sparLabelReturn">Erwartete Rendite p.a.</span>
+              <span data-i18n="sparLabelReturn">معدّل العائد السنوي المتوقع</span>
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRendite" data-tip="متوسط العائد السنوي يلي بتتوقعه على استثمارك، مثلاً حوالي 7% لصناديق المؤشرات على المدى الطويل."><span class="info-tip-glyph"></span></span>
             </span>
             <span class="inline-num-group">
@@ -222,7 +236,7 @@
       <div class="block" id="field-anfangskapital">
         <div class="switch-row">
           <span class="label field-label-text">
-            <span data-i18n="labelEinmal">Einmalanlage</span>
+            <span data-i18n="labelEinmal">حابب تستثمر مبلغ دفعة وحدة؟</span>
             <span class="info-tip" tabindex="0" data-i18n-tip="sparTipEinmal" data-tip="فعّل هاد الخيار إذا عندك مبلغ جاهز بدك تستثمره كدفعة وحدة بالبداية."><span class="info-tip-glyph"></span></span>
           </span>
           <div class="switch on" id="sw-einmal"></div>
@@ -230,7 +244,7 @@
         <div class="fields open" id="fields-einmal">
           <div class="field">
             <div class="field-label">
-              <span data-i18n="labelBetrag">Anlagebetrag</span>
+              <span data-i18n="labelBetrag">مبلغ الاستثمار لمرة واحدة</span>
             </div>
             <input type="number" id="spar-anfangskapital" value="5000" min="0" step="100">
           </div>
@@ -241,7 +255,7 @@
         <div class="field">
           <div class="field-label">
             <span class="field-label-text">
-              <span data-i18n="sparLabelRate">Monatlicher Investitionsbetrag</span>
+              <span data-i18n="sparLabelRate">مبلغ الاستثمار الشهري</span>
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRate" data-tip="المبلغ يلي بتضيفه لاستثمارك كل شهر."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
@@ -273,7 +287,7 @@
 
           <div class="switch-row">
             <span class="label field-label-text">
-              <span data-i18n="labelTeilfreistellung">إعفاء ضريبي جزئي على سلات الأسهم؟</span><span class="info-tip" tabindex="0" data-i18n-tip="sparTipTeilfreistellung" data-tip="جزء من أرباح صناديق الأسهم بضل معفى من الضريبة، لأنه الصندوق نفسه دافع ضريبة عليه من جهته."><span class="info-tip-glyph"></span></span>
+              <span data-i18n="labelTeilfreistellung">إعفاء ضريبي جزئي؟</span><span class="info-tip" tabindex="0" data-i18n-tip="sparTipTeilfreistellung" data-tip="جزء من أرباح صناديق الأسهم بضل معفى من الضريبة، لأنه الصندوق نفسه دافع ضريبة عليه من جهته."><span class="info-tip-glyph"></span></span>
             </span>
             <div class="switch on" id="sw-teilfreistellung"></div>
           </div>
@@ -302,7 +316,7 @@
       </div>
 
       <div class="block">
-        <div class="calc-warning" id="calc-warning" data-i18n="sparInvalid">Mit diesen Werten nicht lösbar. Bitte Anfangskapital, Rate oder Sparziel anpassen.</div>
+        <div class="calc-warning" id="calc-warning" data-i18n="sparInvalid">غير قابل للحل بهذه القيم. الرجاء تعديل رأس المال الابتدائي أو القسط أو الهدف.</div>
       </div>
     </div>
 
@@ -312,17 +326,17 @@
         <div class="result-summary-top">
           <div class="result-summary-stats">
             <div class="rs-stat">
-              <span class="rs-label" data-i18n="sparStatContributed">Eingezahltes Kapital</span>
+              <span class="rs-label" data-i18n="sparStatContributed">المبلغ المُستثمر</span>
               <span class="rs-value" id="stat-contributed">-</span>
             </div>
             <div class="rs-stat">
-              <span class="rs-label" data-i18n="sparStatGain">Ertrag</span>
+              <span class="rs-label" data-i18n="sparStatGain">عوائد تراكمية على الاستثمار</span>
               <span class="rs-value" id="stat-gain">-</span>
             </div>
           </div>
           <div class="result-summary-divider"></div>
           <div class="result-summary-final">
-            <span class="rs-label" id="tag-result" data-i18n="sparTargetEndkapital">Endkapital</span>
+            <span class="rs-label" id="tag-result" data-i18n="sparTargetEndkapital">الثروة النهائية</span>
             <span class="rs-value-big" id="stat-result">-</span>
           </div>
         </div>
@@ -331,15 +345,15 @@
 
       <div class="panel chart-panel">
         <div class="chart-head">
-          <h2 data-i18n="roiChartTitle">Vermögensentwicklung über die Zeit</h2>
+          <h2 data-i18n="roiChartTitle">نمو استثمارك بمرور الوقت</h2>
           <div class="view-switch" id="spar-view-switch">
-            <button class="view-btn active" data-view="chart" data-i18n="roiViewChart">Diagramm</button>
-            <button class="view-btn" data-view="table" data-i18n="roiViewTable">Tabelle</button>
+            <button class="view-btn active" data-view="chart" data-i18n="roiViewChart">رسم بياني</button>
+            <button class="view-btn" data-view="table" data-i18n="roiViewTable">جدول</button>
           </div>
         </div>
         <div class="legend" id="spar-legend">
-          <span><i class="dot" style="background:var(--mint)"></i><span data-i18n="roiLegendReturn">kumulierte Rendite</span></span>
-          <span><i class="dot" style="background:var(--green)"></i><span data-i18n="roiLegendInvested">eingezahltes Kapital</span></span>
+          <span><i class="dot" style="background:var(--mint)"></i><span data-i18n="roiLegendReturn">العائد التراكمي</span></span>
+          <span><i class="dot" style="background:var(--green)"></i><span data-i18n="roiLegendInvested">المبلغ المُستثمر</span></span>
         </div>
         <div class="chart-inner" id="spar-chart-svg"></div>
 
@@ -348,10 +362,10 @@
             <table class="roi-table">
               <thead>
                 <tr>
-                  <th data-i18n="roiColYear">Jahr</th>
-                  <th data-i18n="roiColPrincipal">Jährlicher Zinsertrag</th>
+                  <th data-i18n="roiColYear">السنة</th>
+                  <th data-i18n="roiColPrincipal">العائد السنوي</th>
                   <th id="spar-th-return">Jährliche kumulierte Rendite</th>
-                  <th data-i18n="roiColTotal">Gesamtkapital</th>
+                  <th data-i18n="roiColTotal">إجمالي الثروة</th>
                 </tr>
               </thead>
               <tbody id="spar-table-body"></tbody>
@@ -364,7 +378,7 @@
   </div>
 
   <footer>
-    <p data-i18n="roiFooter">Dieser Rechner arbeitet mit vereinfachten Annahmen (konstante monatliche Rendite über die gesamte Laufzeit, keine Gebühren oder Steuern) und dient nur zur Veranschaulichung, keine Anlageberatung. Reale Renditen schwanken.</p>
+    <p data-i18n="roiFooter">تعتمد هذه الحاسبة على افتراضات مبسطة (عائد شهري ثابت طوال المدة، بدون رسوم؛ حساب الضريبة الاختياري كمان مبسّط، مثلاً من دون الدفعة المسبقة السنوية "Vorabpauschale") وهي لأغراض التوضيح فقط، وليست نصيحة استثمارية أو ضريبية. العوائد الحقيقية تتقلب صعودًا ونزولًا.</p>
     <div class="footer-social-banner">
       <span class="footer-social-title" data-i18n="footerFindMe">تابعني هون</span>
       <div class="footer-social-icons">
@@ -377,7 +391,7 @@
       </div>
     </div>
     <div class="footer-brand">
-      <p class="copyright">© <span id="copy-year"></span> Money with Rami</p>
+      <p class="copyright">© <span id="copy-year"></span> moneywithrami</p>
       <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
     </div>
 
@@ -390,12 +404,12 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260920r"></script>
-<script src="/js/common.js?v=20260920h"></script>
-<script src="/js/consent.js?v=20260920a"></script>
-<script src="/js/coach-box.js?v=20260920b"></script>
-<script src="/js/chart-helpers.js?v=20260817c"></script>
-<script src="/js/saved-results.js?v=20260920a"></script>
-<script src="/js/investment-calculator.js?v=20260908a"></script>
+<script src="/js/i18n.js?v=25791ebb"></script>
+<script src="/js/common.js?v=f5ece724"></script>
+<script src="/js/consent.js?v=2f4761b5"></script>
+<script src="/js/coach-box.js?v=befd341e"></script>
+<script src="/js/chart-helpers.js?v=b1a3c50b"></script>
+<script src="/js/saved-results.js?v=e7578164"></script>
+<script src="/js/investment-calculator.js?v=ddd55a40"></script>
 </body>
 </html>

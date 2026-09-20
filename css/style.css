@@ -357,10 +357,31 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   width:0;
   border-radius:22px;
   background:var(--periwinkle);
-  transition:transform .3s cubic-bezier(.4,0,.2,1), width .3s cubic-bezier(.4,0,.2,1), background-color .25s ease;
-  z-index:0;
+  /* Sanftes Ausgleiten (Apple-artig), Farbe wandert im gleichen Takt mit */
+  transition:transform .42s cubic-bezier(.32,.72,0,1), width .42s cubic-bezier(.32,.72,0,1), background-color .22s ease-out;
+  will-change:transform,width;
+  /* Über den Buttons: verdeckt deren Text vollständig, die Beschriftung in
+     der Pille kommt aus .category-switch-mask (siehe unten). */
+  z-index:2;
+  overflow:hidden;
   pointer-events:none;
 }
+/* Kopie der Beschriftungen INNERHALB der Pille. Sie wird von der Pille
+   ausgeschnitten und gegenläufig verschoben (gleiche Dauer/Kurve), steht also
+   im Container still, während die Pille darüber gleitet: Was auf der Pille
+   liegt, hat immer deren Schriftfarbe, alles andere bleibt grau. Dadurch gibt
+   es keine zeitversetzten Farbwechsel mehr. */
+.category-switch-mask{
+  position:absolute; top:0; left:0;
+  display:flex; align-items:center; gap:2px;
+  white-space:nowrap;
+  color:var(--ink);
+  transition:transform .42s cubic-bezier(.32,.72,0,1), color .06s linear .08s;
+  will-change:transform;
+  pointer-events:none;
+}
+.category-switch-thumb:not([data-category="start"]) .category-switch-mask{color:#fff;}
+.category-switch-mask .category-switch-btn{color:inherit; cursor:default; transition:none;}
 .category-switch-btn{
   position:relative;
   z-index:1;
@@ -376,10 +397,14 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
   border-radius:22px;
   cursor:pointer;
   white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none; user-select:none;
+  /* Die Schriftfarbe wechselt erst, wenn die Pille (fast) angekommen ist bzw.
+     den alten Button verlassen hat. Sonst steht z.B. weißer Text kurz auf
+     hellem Grund oder grauer Text noch auf der bunten Pille (= dunkles Aufblitzen). */
   transition:color .2s ease;
 }
 .category-switch-btn:hover{color:var(--ink);}
-.category-switch-btn.active{color:var(--ink);}
 /* Der native Fokus-Ring (outline) wird von manchen Browsern NICHT sauber
    auf die abgerundete Form vom .category-switch-Container zurechtgeschnitten
    und "leckt" dann rechts/außen über die Pille hinaus - sichtbar als
@@ -388,6 +413,7 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
    runden) Button-Form, kann also nirgendwo rausragen. */
 .category-switch-btn:focus{outline:none;}
 .category-switch-btn:focus-visible{box-shadow:inset 0 0 0 2px var(--purple);}
+.category-switch:has(.category-switch-btn.active:focus-visible) .category-switch-thumb{box-shadow:inset 0 0 0 2px var(--purple);}
 body.lang-ar .category-switch-btn{
   font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
   font-weight:700;
@@ -3171,8 +3197,36 @@ body.lang-ar .coach-box{font-family:'MWR Digits','Tajawal','IBM Plex Sans Arabic
 }
 
 /* Aktiver Tab: weißer Text auf Indigo (Rechner) und Orange (Tools) */
-.category-switch-btn.active[data-category="calculators"]{color:#fff;}
-.category-switch-btn.active[data-category="tools"]{color:#fff;}
+
+/* ===== Impressum & Datenschutz =====
+   Beide Seiten bestanden fast nur aus wiederholten Inline-Styles (Zeilenhoehe,
+   Textfarbe, Abstaende an jedem einzelnen Absatz). Die Regeln stehen jetzt
+   einmal hier, dadurch ist der Rhythmus auf beiden Seiten wirklich gleich. */
+.legal-page .panel{margin-bottom:20px;}
+.legal-page header .header-text p,
+.legal-page .panel p,
+.legal-page .panel ul{line-height:1.8; color:var(--text-muted); margin:0;}
+.legal-page header .header-text p{margin-top:10px;}
+.legal-page .panel ul{padding-inline-start:20px;}
+.legal-page .panel p + p,
+.legal-page .panel p + ul,
+.legal-page .panel ul + p{margin-top:12px;}
+.legal-page .panel li + li{margin-top:6px;}
+/* Anschriften: engere Zeilen, volle Textfarbe statt gedaempft.
+   unicode-bidi:plaintext, weil deutsche Anschriften lateinisch sind: auf der
+   arabischen Seite (dir=rtl) rutschte die Postleitzahl sonst hinter den Ort
+   ("Koeln 50931" statt "50931 Koeln"). Mit plaintext bekommt jede Zeile ihre
+   eigene Leserichtung; text-align haelt den Block trotzdem an der Textkante. */
+.legal-page .panel p.legal-address{
+  line-height:1.9;
+  color:var(--ink);
+  unicode-bidi:plaintext;
+  text-align:left;
+}
+.legal-page.lang-ar .panel p.legal-address{text-align:right;}
+.legal-page .panel p.legal-updated{font-size:13px;}
+.legal-page .panel a{color:var(--purple-strong); font-weight:600; text-decoration:none;}
+.legal-page .panel a:hover{text-decoration:underline;}
 
 /* ===== Apple-inspirierte Auswahl: Einstiegstext, Karten der Tabs "Tools" und "Rechner", einheitliche Rundung ===== */
 /* Gleiche Rundung für alle Boxen, Karten und Panels (Newsletter-Box, Coaching-Box, Rechner-Panels ...). */
@@ -3240,7 +3294,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #68
 .service-card{animation:none; opacity:1;}
 .cat-section.cat-anim .service-card{animation:serviceCardFade .3s ease both;}
 .landing-services{animation:none;}
-.category-switch.no-anim .category-switch-thumb{transition:none !important;}
+.category-switch.no-anim .category-switch-thumb, .category-switch.no-anim .category-switch-mask{transition:none !important;}
 @media (prefers-reduced-motion:reduce){ .cat-section.cat-anim .service-card{animation:none;} }
 
 /* Arabische Beschriftungen optisch mittig in Knöpfen (die Schriften sitzen nicht auf der Mittellinie) */

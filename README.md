@@ -21,6 +21,9 @@ project/
 ├─ impressum/  datenschutz/               Rechtstexte
 ├─ fonts/                                 Selbst gehostete Schriften (woff2)
 ├─ img/flags/                             Länderflaggen (SVG) für die Bewertungen
+├─ img/broker-logos/                      Logos im Broker-Finder (auf Anzeigegröße zugeschnitten)
+├─ img/social/og-cover.png                Vorschaubild beim Teilen (1200x630)
+├─ tools/                                 Wartungsskripte, siehe "Wartung"
 ├─ css/
 │  ├─ style.css                           Alle Styles der Website + @font-face-Deklarationen
 │  └─ coaching.css                        Nur für die Coaching-Seiten
@@ -60,8 +63,8 @@ Die Rechner-Seiten (`/calculator/…`) tragen `data-coach-box` im `<body>`, dann
   "Ja" bei Einverstanden aus der Google-Tabelle). Neue Bewertung: Datei anpassen und
   ggf. die Flagge in `img/flags/` ergänzen.
 - **Cookie-Einwilligung:** `js/consent.js` zeigt beim ersten Besuch das Banner (Nur notwendige / Anpassen / Alle akzeptieren) und speichert die Wahl in `localStorage` (`mwr_consent`). Externe Dienste laden erst nach Zustimmung: Cal.com (`js/booking.js`), Google reCAPTCHA und Brevo (Skripte als `type="text/plain" data-consent="services"` im HTML), TARIFCHECK24-Widgets (`js/cookie-consent.js`). Eine Analyse-Kategorie erscheint nur, wenn in `consent.js` `ANALYTICS_SRC` gesetzt ist. Der Footer-Link „Cookie-Einstellungen“ wird automatisch überall eingefügt.
-- Beim Ändern von `i18n.js`, `coaching.css` oder `common.js` die Versionsnummer
-  (`?v=…`) in den HTML-Dateien erhöhen, sonst sehen Besucher die alte Datei aus dem Cache.
+- Nach Änderungen an `css/` oder `js/` einmal `node tools/stamp-assets.js` laufen
+  lassen, das setzt die `?v=…`-Versionen neu (siehe "Wartung").
 
 Alle URL-Pfade sind bewusst auf Englisch gehalten, unabhängig von der Sprache, die
 gerade auf der Seite ausgewählt ist.
@@ -86,33 +89,73 @@ damit sie WCAG-AA-Kontrast (4.5:1) erreichen. Die ursprünglichen helleren
 Farben (`--purple`, `--orange`) bleiben für Hintergründe, Icons und Rahmen
 erhalten, wo Kontrastregeln nicht gelten.
 
-## Impressum
-**Wichtig:** `impressum/index.html` ist nur eine Vorlage mit Platzhaltern
-(Name, Adresse, E-Mail). Vor der Veröffentlichung unbedingt die echten Angaben
-eintragen, ein Impressum mit Platzhaltertext erfüllt die gesetzliche Pflicht
-nach § 5 TMG nicht.
+## Rechtstexte
+
+`impressum/index.html` und `datenschutz/index.html` enthalten die echten Angaben
+(Rami Alhasan, Köln, USt-IdNr.) und sind keine Vorlagen mehr.
+
+Der sichtbare Text beider Seiten kommt wie überall aus `js/i18n.js`. Wird dort
+etwas geändert (neuer Dienst, neue Rechtsgrundlage), danach unbedingt
+`node tools/sync-html.js` laufen lassen: sonst steht im ausgelieferten HTML
+weiter der alte Text, den Suchmaschinen und Besucher ohne JavaScript sehen.
+
+Beide Seiten tragen `class="legal-page"` am `<body>`; Zeilenhöhe, Textfarbe und
+Abstände der Absätze stehen gesammelt unter "Impressum & Datenschutz" in
+`css/style.css` statt an jedem einzelnen Absatz.
+
+Wird ein neuer externer Dienst eingebunden, gehört er in **drei** Stellen:
+Datenschutzerklärung (`privacy…`-Keys), die Aufzählung in `privacyCookiesText`
+und als `type="text/plain" data-consent="services"` ins HTML, damit er erst
+nach der Einwilligung lädt.
 
 ## Eine neue Sektion/Seite hinzufügen
 
 1. Neue Datei `meine-seite.html` anlegen, kopiere Kopf/Nav/Footer aus einer
    bestehenden Seite (`index.html` etc.), damit Branding und Sprache gleich bleiben.
-2. Im `<nav class="tab-nav">` einen weiteren Link ergänzen, in **allen** HTML-Dateien:
+2. Übersetzungen in `js/i18n.js` für **alle drei** Sprachen ergänzen; die Seite
+   in die Karten auf der Startseite und in die Schnellnavigation der jeweiligen
+   Kategorie eintragen.
+3. Eigene `js/meine-seite.js` schreiben, die auf `mwr:langchange` hört, um bei
+   Sprachwechsel neu zu rendern (`js/investment-calculator.js` als Vorlage).
+4. Skripte am Ende des `<body>` einbinden, Reihenfolge wie auf den anderen Seiten:
    ```html
-   <a class="tab-btn" href="meine-seite.html" data-page="meine-seite.html" data-i18n="tabNeu">Neu</a>
+   <script src="/js/i18n.js"></script>
+   <script src="/js/common.js"></script>
+   <script src="/js/consent.js"></script>
+   <script src="/js/meine-seite.js"></script>
    ```
-3. Neue Übersetzungs-Keys in `js/i18n.js` für alle drei Sprachen ergänzen
-   (z.B. `tabNeu: 'Neu'`, `titleNeu: '...'`).
-4. Eigene `js/meine-seite.js` schreiben, die auf `mwr:langchange` hört, um bei
-   Sprachwechsel neu zu rendern (siehe `rendite.js` als Vorlage).
-5. In `meine-seite.html` einbinden:
-   ```html
-   <script src="js/i18n.js"></script>
-   <script src="js/common.js"></script>
-   <script src="js/meine-seite.js"></script>
-   ```
+5. Danach `node tools/sync-html.js && node tools/stamp-assets.js && node tools/build-sitemap.js`
+   laufen lassen, das ergänzt Platzhaltertexte, Teilen-Vorschau, Versionen und Sitemap.
 
 Da `common.js` die gewählte Sprache in `localStorage` speichert, merkt sich
 die Seite die Sprache auch beim Wechsel zwischen den HTML-Dateien.
+
+## Wartung
+
+Drei kleine Node-Skripte halten Dinge im Einklang, die vorher von Hand gepflegt
+wurden und dadurch auseinandergelaufen sind. Alle sind idempotent (mehrfach
+ausführen ändert nichts) und können mit `--check` nur prüfen, ohne zu schreiben.
+
+```bash
+node tools/sync-html.js       # Platzhaltertexte im HTML + Teilen-Vorschau
+node tools/stamp-assets.js    # ?v=<Hash> hinter jede CSS-/JS-Einbindung
+node tools/build-sitemap.js   # sitemap.xml aus den vorhandenen Seiten
+```
+
+- **sync-html.js** schreibt jeden `data-i18n`-Platzhalter aus den **arabischen**
+  Texten in `js/i18n.js`. Jede Seite ist `<html lang="ar">`, und Erstbesucher
+  bekommen Arabisch, also muss der ausgelieferte Text arabisch sein. Außerdem
+  erzeugt es die Open-Graph-/Twitter-Tags aus `<title>`, `<meta name="description">`
+  und dem Canonical derselben Seite. Nach jeder Textänderung laufen lassen.
+- **stamp-assets.js** hängt einen Hash des Dateiinhalts an jede CSS-/JS-URL.
+  Solange die Datei gleich bleibt, bleibt die URL gleich; ändert sie sich, laden
+  Browser garantiert neu. Nach jeder Änderung in `css/` oder `js/` laufen lassen.
+- **build-sitemap.js** nimmt jede `index.html` auf, außer sie trägt
+  `<meta name="robots" content="noindex…">`. Die Coaching-Seiten bleiben dadurch
+  automatisch draußen. `lastmod` kommt aus dem letzten Commit der Datei.
+
+`tools/og-cover.html` ist die Vorlage für das Vorschaubild beim Teilen; oben in
+der Datei steht der Befehl zum Neu-Erzeugen.
 
 ## Lokal testen
 

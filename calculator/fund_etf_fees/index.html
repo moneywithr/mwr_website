@@ -9,10 +9,24 @@
 <title>مقارنة تكاليف ETF والصناديق | Money with Rami</title>
 <meta name="description" content="قارن بين تكاليف صناديق الاستثمار وETF وشوف قديش عم تخسر مصاري بسبب الرسوم على المدى الطويل. حاسبة مجانية بالعربي.">
 <link rel="canonical" href="https://moneywithrami.com/calculator/fund_etf_fees/">
+<!-- Vorschau beim Teilen (erzeugt von tools/sync-html.js) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="moneywithrami">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://moneywithrami.com/calculator/fund_etf_fees/">
+<meta property="og:title" content="مقارنة تكاليف ETF والصناديق | Money with Rami">
+<meta property="og:description" content="قارن بين تكاليف صناديق الاستثمار وETF وشوف قديش عم تخسر مصاري بسبب الرسوم على المدى الطويل. حاسبة مجانية بالعربي.">
+<meta property="og:image" content="https://moneywithrami.com/img/social/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="مقارنة تكاليف ETF والصناديق | Money with Rami">
+<meta name="twitter:description" content="قارن بين تكاليف صناديق الاستثمار وETF وشوف قديش عم تخسر مصاري بسبب الرسوم على المدى الطويل. حاسبة مجانية بالعربي.">
+<meta name="twitter:image" content="https://moneywithrami.com/img/social/og-cover.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=20260920p">
+<link rel="stylesheet" href="/css/style.css?v=d397340a">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -79,11 +93,11 @@
     </div>
   </div>
   <div class="category-switch-row">
-    <nav class="category-switch" aria-label="Kategorien">
+    <nav class="category-switch" data-i18n-aria="navCategories" aria-label="الأقسام">
       <span class="category-switch-thumb" aria-hidden="true"></span>
       <button type="button" class="category-switch-btn" data-category="start" data-i18n="landingCatStart">ابدأ الاستثمار</button>
-      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">Tools, die ich nutze</button>
-      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">Rechner</button>
+      <button type="button" class="category-switch-btn" data-category="tools" data-i18n="landingCatTools">أدوات بستخدمها</button>
+      <button type="button" class="category-switch-btn" data-category="calculators" data-i18n="landingCatCalculators">الحاسبات</button>
     </nav>
   </div>
 </div>
@@ -91,14 +105,14 @@
 <div class="wrap">
 
   <nav class="breadcrumb">
-    <a href="/" data-i18n="breadcrumbHome">Start</a>
+    <a href="/" data-i18n="breadcrumbHome">الرئيسية</a>
     <span class="breadcrumb-sep">/</span>
-    <span data-i18n="landingCatCalculators">Rechner</span>
+    <span data-i18n="landingCatCalculators">الحاسبات</span>
     <span class="breadcrumb-sep">/</span>
-    <span class="breadcrumb-current" data-i18n="tabCalculator">Kostenvergleich</span>
+    <span class="breadcrumb-current" data-i18n="tabCalculator">مقارنة التكاليف</span>
   </nav>
 
-  <nav class="tools-quick-nav" aria-label="Rechner">
+  <nav class="tools-quick-nav" data-i18n-aria="landingCatCalculators" aria-label="الحاسبات">
     <a class="tools-quick-nav-item" href="/calculator/investment/">
       <svg class="tools-quick-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="11" x2="8" y2="11"></line><line x1="12" y1="11" x2="12" y2="11"></line><line x1="16" y1="11" x2="16" y2="11"></line><line x1="8" y1="15" x2="8" y2="15"></line><line x1="12" y1="15" x2="12" y2="15"></line><line x1="16" y1="15" x2="16" y2="18"></line></svg>
       <span data-i18n="landingCalcTitle">حاسبة الاستثمار</span>
@@ -125,7 +139,7 @@
     <div class="header-text">
       <div class="eyebrow" data-i18n="eyebrow">حاسبة التكاليف</div>
       <h1 data-i18n="title">سلات الاسهم العادية أو صناديق الاستثمار تبع البنك؟</h1>
-      <p data-i18n="intro">نفس مبلغ الاستثمار، نفس المدة، نفس العائد المتوقع...</p>
+      <p data-i18n="intro">لما تستثمر بصناديق استثمارية مُدارة بنشاط بدل ما تستثمر بـ ETF لحالك بكل سهولة، بتخسر مصاري من غير ما تحس. نفس مبلغ الاستثمار، نفس المدة، نفس العائد المتوقع، والفرق الوحيد هو بنية التكاليف. عادةً ما تفرض صناديق المؤشرات رسوم تنفيذ ورسوم إدارة سنوية منخفضة، بينما تفرض الصناديق المُدارة بنشاط عادةً رسوم اشتراك ورسوم إدارة أعلى.</p>
     </div>
   </header>
 
@@ -134,7 +148,7 @@
     <div class="panel panel-input">
       <div class="block">
         <div class="section-title">
-        <span data-i18n="sectionDuration">Anlagedauer &amp; Rendite</span>
+        <span data-i18n="sectionDuration">مدة الاستثمار والعائد</span>
         <div class="currency-switch currency-switch-compact">
           <button type="button" class="currency-switch-btn" aria-haspopup="listbox" aria-expanded="false">
             <svg class="currency-flag-icon"><use href="#flag-eur"></use></svg>
@@ -162,17 +176,17 @@
         </div>
         <div class="field">
           <div class="field-label">
-            <span data-i18n="labelYears">Anlagedauer</span>
+            <span data-i18n="labelYears">مدة الاستثمار</span>
             <span class="inline-num-group">
               <input type="number" id="years-input" class="inline-num-input" value="20" min="1" max="60" step="1">
-              <span class="inline-num-unit" data-i18n="yearsUnit">Jahre</span>
+              <span class="inline-num-unit" data-i18n="yearsUnit">سنة</span>
             </span>
           </div>
           <input type="range" id="years" min="1" max="60" value="20" step="1">
         </div>
         <div class="field">
           <div class="field-label">
-            <span data-i18n="labelReturn">Erwartete Rendite p.a. (vor Kosten)</span>
+            <span data-i18n="labelReturn">العائد السنوي المتوقع (قبل التكاليف)</span>
             <span class="inline-num-group">
               <input type="number" id="rendite-input" class="inline-num-input" value="7" min="0" max="50" step="0.1">
               <span class="inline-num-unit">%</span>
@@ -185,14 +199,14 @@
       <div class="block">
         <div class="switch-row">
           <span class="label field-label-text">
-            <span data-i18n="labelEinmal">Einmalanlage</span>
+            <span data-i18n="labelEinmal">حابب تستثمر مبلغ دفعة وحدة؟</span>
             <span class="info-tip" tabindex="0" data-i18n-tip="sparTipEinmal" data-tip="فعّل هاد الخيار إذا عندك مبلغ جاهز بدك تستثمره كدفعة وحدة بالبداية."><span class="info-tip-glyph"></span></span>
           </span>
           <div class="switch on" id="sw-einmal"></div>
         </div>
         <div class="fields open" id="fields-einmal">
           <div class="field">
-            <div class="field-label"><span data-i18n="labelBetrag">Anlagebetrag</span></div>
+            <div class="field-label"><span data-i18n="labelBetrag">مبلغ الاستثمار لمرة واحدة</span></div>
             <input type="number" id="einmal-betrag" value="10000" min="0" step="100">
           </div>
         </div>
@@ -200,14 +214,14 @@
 
       <div class="block">
         <div class="switch-row">
-          <span class="label" data-i18n="labelSparplan">Sparplan</span>
+          <span class="label" data-i18n="labelSparplan">خطة ادخار شهرية</span>
           <div class="switch on" id="sw-sparplan"></div>
         </div>
         <div class="fields open" id="fields-sparplan">
           <div class="field">
             <div class="field-label">
               <span class="field-label-text">
-                <span data-i18n="labelRate">Monatliche Rate</span>
+                <span data-i18n="labelRate">القسط الشهري</span>
                 <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRate" data-tip="المبلغ يلي بتضيفه لاستثمارك كل شهر."><span class="info-tip-glyph"></span></span>
               </span>
             </div>
@@ -220,29 +234,29 @@
     <div class="results">
 
       <div class="panel" style="margin-bottom:20px;">
-        <div class="section-title" data-i18n="sectionCosts">Kostenstruktur je Produkt</div>
+        <div class="section-title" data-i18n="sectionCosts">بنية التكاليف لكل منتج</div>
         <div class="product-cards">
           <div class="product-card etf">
-            <div class="p-title" data-i18n="etf">ETF</div>
-            <div class="p-sub" data-i18n="etfSub">börsengehandelt, meist passiv</div>
+            <div class="p-title" data-i18n="etf">سلة الأسهم (ETF)</div>
+            <div class="p-sub" data-i18n="etfSub">يُتداول في البورصة، غالبًا سلبي</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">Ordergebühren</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst, meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-order-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelOrder">رسوم التنفيذ</span><span class="info-tip" tabindex="0" data-i18n-tip="tipOrder" data-tip="Die Gebühr, die du beim Kauf oder Verkauf des ETFs an der Börse zahlst, meist ein kleiner Fixbetrag oder Prozentsatz pro Order."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-order-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="etf-order" min="0" max="2" value="0.2" step="0.01">
             </div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerEtf">Verwaltungsgebühren p.a. (TER)</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerEtf" data-tip="Die jährliche Gebühr, die der ETF-Anbieter automatisch vom Fondsvermögen abzieht, um ihn zu verwalten. Wird nicht extra abgebucht, sondern mindert laufend still deine Rendite."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-ter-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerEtf">رسوم الإدارة السنوية (TER)</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerEtf" data-tip="Die jährliche Gebühr, die der ETF-Anbieter automatisch vom Fondsvermögen abzieht, um ihn zu verwalten. Wird nicht extra abgebucht, sondern mindert laufend still deine Rendite."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="etf-ter-input" class="inline-num-input" value="0.2" min="0" max="2" step="0.01"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="etf-ter" min="0" max="2" value="0.2" step="0.01">
             </div>
           </div>
           <div class="product-card fonds">
-            <div class="p-title" data-i18n="fonds">Fonds</div>
-            <div class="p-sub" data-i18n="fondsSub">meist aktiv gemanagt</div>
+            <div class="p-title" data-i18n="fonds">صندوق استثماري (Fond)</div>
+            <div class="p-sub" data-i18n="fondsSub">غالبًا مُدار بنشاط</div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">Ausgabeaufschlag</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2-5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-aa-input" class="inline-num-input" value="3" min="0" max="6" step="0.1"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelAA">رسوم الاشتراك</span><span class="info-tip" tabindex="0" data-i18n-tip="tipAA" data-tip="Eine einmalige Gebühr beim Kauf eines aktiv gemanagten Fonds, oft 2-5 % der Anlagesumme. Wird direkt von deinem Geld abgezogen, bevor es überhaupt investiert wird."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-aa-input" class="inline-num-input" value="3" min="0" max="6" step="0.1"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-aa" min="0" max="6" value="3" step="0.1">
             </div>
             <div class="field">
-              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">Verwaltungsgebühren p.a.</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet, meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-ter-input" class="inline-num-input" value="1.5" min="0" max="3" step="0.05"><span class="inline-num-unit">%</span></span></div>
+              <div class="field-label"><span class="field-label-text"><span data-i18n="labelTerFonds">رسوم الإدارة السنوية</span><span class="info-tip" tabindex="0" data-i18n-tip="tipTerFonds" data-tip="Die jährliche Gebühr, die der Fondsmanager für die aktive Verwaltung berechnet, meist deutlich höher als beim ETF, weil hier Menschen aktiv die Anlagen auswählen."><span class="info-tip-glyph"></span></span></span><span class="inline-num-group"><input type="number" id="fonds-ter-input" class="inline-num-input" value="1.5" min="0" max="3" step="0.05"><span class="inline-num-unit">%</span></span></div>
               <input type="range" id="fonds-ter" min="0" max="3" value="1.5" step="0.05">
             </div>
           </div>
@@ -251,17 +265,17 @@
 
       <div class="stat-row">
         <div class="stat-card green">
-          <div class="stat-tag etf" data-i18n="etf">ETF</div>
-          <div class="k" data-i18n="statFinalLabel">Endkapital</div>
+          <div class="stat-tag etf" data-i18n="etf">سلة الأسهم (ETF)</div>
+          <div class="k" data-i18n="statFinalLabel">رأس المال النهائي</div>
           <div class="v" id="r-etf">-</div>
         </div>
         <div class="stat-card purple">
-          <div class="stat-tag fonds" data-i18n="fonds">Fonds</div>
-          <div class="k" data-i18n="statFinalLabel">Endkapital</div>
+          <div class="stat-tag fonds" data-i18n="fonds">صندوق استثماري (Fond)</div>
+          <div class="k" data-i18n="statFinalLabel">رأس المال النهائي</div>
           <div class="v" id="r-fonds">-</div>
         </div>
         <div class="stat-card orange">
-          <div class="stat-tag orange" data-i18n="diffQuestion">Wer ist günstiger?</div>
+          <div class="stat-tag orange" data-i18n="diffQuestion">مين الأوفر؟</div>
           <div class="k" id="k-diff">ETF-Vorteil</div>
           <div class="v" id="r-diff">-</div>
           <div class="sub" id="r-diff-pct"></div>
@@ -270,31 +284,31 @@
 
       <div class="panel chart-panel">
         <div class="chart-head">
-          <h2 data-i18n="chartTitle">Wertentwicklung im Vergleich</h2>
+          <h2 data-i18n="chartTitle">مقارنة تطور القيمة</h2>
           <div class="legend">
-            <span><i class="dot" style="background:#1FA971"></i><span data-i18n="etf">ETF</span></span>
-            <span><i class="dot" style="background:var(--purple)"></i><span data-i18n="fonds">Fonds</span></span>
+            <span><i class="dot" style="background:#1FA971"></i><span data-i18n="etf">سلة الأسهم (ETF)</span></span>
+            <span><i class="dot" style="background:var(--purple)"></i><span data-i18n="fonds">صندوق استثماري (Fond)</span></span>
           </div>
         </div>
         <div class="chart-inner" id="chart-svg"></div>
       </div>
 
       <div class="panel">
-        <div class="section-title" data-i18n="sectionBreakdown">Kostenaufschlüsselung</div>
+        <div class="section-title" data-i18n="sectionBreakdown">تفصيل التكاليف</div>
         <div class="breakdown">
           <div class="b-group etf">
-            <div class="b-col-head etf" data-i18n="etf">ETF</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-etf">-</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-etf">-</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-etf">-</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-etf" style="color:var(--green)">-</span></div>
+            <div class="b-col-head etf" data-i18n="etf">سلة الأسهم (ETF)</div>
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">رأس المال المُستثمر</span><span class="b-val" id="b-eingezahlt-etf">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bDirect">تكاليف مباشرة (تنفيذ/اشتراك)</span><span class="b-val" id="b-direkt-etf">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bTer">تكاليف رسوم الإدارة (أثر الفائدة المركبة)</span><span class="b-val" id="b-ter-etf">-</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="bTotal">إجمالي التكاليف</span><span class="b-val" id="b-gesamt-etf" style="color:var(--green)">-</span></div>
           </div>
           <div class="b-group fonds">
-            <div class="b-col-head fonds" data-i18n="fonds">Fonds</div>
-            <div class="b-row"><span class="b-label" data-i18n="bContributed">Eingezahltes Kapital</span><span class="b-val" id="b-eingezahlt-fonds">-</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bDirect">Direkte Kosten (Order/Ausgabeaufschlag)</span><span class="b-val" id="b-direkt-fonds">-</span></div>
-            <div class="b-row"><span class="b-label" data-i18n="bTer">Kosten durch Verwaltungsgebühr (Zinseszins)</span><span class="b-val" id="b-ter-fonds">-</span></div>
-            <div class="b-row total"><span class="b-label" data-i18n="bTotal">Kosten gesamt</span><span class="b-val" id="b-gesamt-fonds" style="color:var(--purple)">-</span></div>
+            <div class="b-col-head fonds" data-i18n="fonds">صندوق استثماري (Fond)</div>
+            <div class="b-row"><span class="b-label" data-i18n="bContributed">رأس المال المُستثمر</span><span class="b-val" id="b-eingezahlt-fonds">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bDirect">تكاليف مباشرة (تنفيذ/اشتراك)</span><span class="b-val" id="b-direkt-fonds">-</span></div>
+            <div class="b-row"><span class="b-label" data-i18n="bTer">تكاليف رسوم الإدارة (أثر الفائدة المركبة)</span><span class="b-val" id="b-ter-fonds">-</span></div>
+            <div class="b-row total"><span class="b-label" data-i18n="bTotal">إجمالي التكاليف</span><span class="b-val" id="b-gesamt-fonds" style="color:var(--purple)">-</span></div>
           </div>
         </div>
       </div>
@@ -303,7 +317,7 @@
   </div>
 
   <footer>
-    <p data-i18n="footer">Dieser Rechner arbeitet mit vereinfachten Annahmen...</p>
+    <p data-i18n="footer">تعتمد هذه الحاسبة على افتراضات مبسطة (عائد شهري ثابت، خصم رسوم الإدارة شهريًا من قيمة الصندوق، رسوم تنفيذ أو اشتراك كنسبة مئوية من كل إيداع) وهي لأغراض التوضيح فقط، وليست نصيحة استثمارية. قد تختلف هيكلة الرسوم في المنتجات الحقيقية.</p>
     <div class="footer-social-banner">
       <span class="footer-social-title" data-i18n="footerFindMe">تابعني هون</span>
       <div class="footer-social-icons">
@@ -316,7 +330,7 @@
       </div>
     </div>
     <div class="footer-brand">
-      <p class="copyright">© <span id="copy-year"></span> Money with Rami</p>
+      <p class="copyright">© <span id="copy-year"></span> moneywithrami</p>
       <p class="copyright rights-reserved" data-i18n="allRightsReserved">جميع الحقوق محفوظة.</p>
     </div>
 
@@ -329,12 +343,12 @@
 
 </div>
 
-<script src="/js/i18n.js?v=20260920r"></script>
-<script src="/js/common.js?v=20260920h"></script>
-<script src="/js/consent.js?v=20260920a"></script>
-<script src="/js/coach-box.js?v=20260920b"></script>
-<script src="/js/chart-helpers.js?v=20260817c"></script>
-<script src="/js/saved-results.js?v=20260920a"></script>
-<script src="/js/fund-comparison-calculator.js?v=20260817c"></script>
+<script src="/js/i18n.js?v=25791ebb"></script>
+<script src="/js/common.js?v=f5ece724"></script>
+<script src="/js/consent.js?v=2f4761b5"></script>
+<script src="/js/coach-box.js?v=befd341e"></script>
+<script src="/js/chart-helpers.js?v=b1a3c50b"></script>
+<script src="/js/saved-results.js?v=e7578164"></script>
+<script src="/js/fund-comparison-calculator.js?v=6b6f6831"></script>
 </body>
 </html>
