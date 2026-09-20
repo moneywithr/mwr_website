@@ -116,19 +116,19 @@ body.lang-ar .coaching-title{line-height:1.35; letter-spacing:0;}
 .waitlist-hp{position:absolute; top:0; left:0; width:1px; height:1px; opacity:0; overflow:hidden; clip-path:inset(50%); pointer-events:none;}
 
 .thanks-hero{padding-top:56px;}
-.stepper{list-style:none; display:flex; margin:0 auto 40px; padding:0; max-width:480px;}
+.stepper{list-style:none; display:flex; margin:0 auto 44px; padding:0; max-width:560px;}
 .stepper li{flex:1; position:relative; text-align:center; color:var(--c-muted);}
-.stepper li + li::before{content:''; position:absolute; top:17px; inset-inline-start:-50%; width:100%; height:2px; background:var(--c-line);}
+.stepper li + li::before{content:''; position:absolute; top:23px; inset-inline-start:-50%; width:100%; height:3px; background:var(--c-line);}
 .stepper li.done + li::before, .stepper li.current::before{background:#DAFF00;}
 .step-dot{
-  position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px;
-  border-radius:50%; border:2px solid var(--c-line); background:#201E1F; font-weight:700; font-size:15px;
+  position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px;
+  border-radius:50%; border:2px solid var(--c-line); background:#201E1F; font-weight:700; font-size:20px;
 }
-.step-dot svg{width:18px; height:18px;}
+.step-dot svg{width:24px; height:24px;}
 .stepper li.done .step-dot{background:#DAFF00; border-color:#DAFF00; color:#201E1F;}
 .stepper li.current .step-dot{border-color:#DAFF00; color:#DAFF00;}
 .stepper li.current .step-label, .stepper li.done .step-label{color:var(--c-text);}
-.step-label{display:block; margin-top:10px; font-size:14px;}
+.step-label{display:block; margin-top:12px; font-size:16px; font-weight:600;}
 .thanks-hero .coaching-sub{margin-bottom:0;}
 .ig-btn{
   display:inline-flex; align-items:center; gap:10px; padding:14px 24px; border-radius:22px; text-decoration:none;
@@ -293,8 +293,8 @@ body.lang-ar.has-light-reviews .review-dialog, body.lang-ar.has-light-reviews .r
 
 /* Hervorhebung im Titel: fett auf Limetten-Textmarker (unregelmäßige Kanten wie von Hand gezogen), dunkle Schrift für Kontrast */
 .coaching-title em,.one-page .coaching-title em{
-  font-style:normal; font-weight:800; color:#201E1F; padding:.02em .22em; margin:0 -.04em;
-  background:linear-gradient(100deg,#DAFF00 0%,#E6FF4D 100%); background-size:100% 78%; background-position:0 62%; background-repeat:no-repeat;
+  font-style:normal; font-weight:800; color:#201E1F; padding:.06em .2em .02em; margin:0 -.04em;
+  background:linear-gradient(100deg,#DAFF00 0%,#E6FF4D 100%); background-size:100% 100%; background-position:0 0; background-repeat:no-repeat;
   border-radius:.35em .6em .3em .55em / .5em .3em .55em .35em;
   -webkit-box-decoration-break:clone; box-decoration-break:clone;
 }
@@ -360,3 +360,8 @@ body.lang-ar .coaching-btn-alt > span{position:relative; top:3.3px;}
 @keyframes finReveal2{from{clip-path:inset(-150px 100% -150px -3000px);} to{clip-path:inset(-150px -3000px -150px -3000px);}}
 .one-page .fin-wave svg{clip-path:inset(-150px -3000px -150px -3000px);}
 @media (max-width:560px){ .one-page .fin-box{--fp:16px;} }
+
+.fin-story strong{font-weight:800;}
+
+/* Markierte Wörter: mehr Zeilenabstand im Titel, damit sich die Marker benachbarter Zeilen nicht berühren oder Text überdecken */
+.coaching-title{line-height:1.42;}

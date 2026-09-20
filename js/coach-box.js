@@ -4,7 +4,7 @@
   if(!document.body.hasAttribute('data-coach-box')) return;
   var footer = document.querySelector('footer');
   if(!footer) return;
-  var check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12.5 10 17.5 19 7"></polyline></svg>';
+  var check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5.5 12.2 9.8 16.5 18.5 7.7"></polyline></svg>';
   var box = document.createElement('section');
   box.className = 'coach-box';
   box.innerHTML =
