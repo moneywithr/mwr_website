@@ -118,10 +118,17 @@ window.Site = (function(){
   const CATEGORY_COLORS = { start: '#DAFF00', tools: '#E4633C', calculators: '#685CC8' };
   const CATEGORY_KEYS = Object.keys(CATEGORY_COLORS);
 
+  // Start-Tab ("Investieren starten", Coaching-Hero) ausgeblendet. Zum Einblenden auf false setzen.
+  const HIDE_START_TAB = true;
+
   function initCategorySwitch(){
     const sw = document.querySelector('.category-switch');
     if(!sw) return;
     const thumb = sw.querySelector('.category-switch-thumb');
+    if(HIDE_START_TAB){
+      const startBtn = sw.querySelector('.category-switch-btn[data-category="start"]');
+      if(startBtn) startBtn.remove();
+    }
     const buttons = Array.from(sw.querySelectorAll('.category-switch-btn'));
     if(!thumb || !buttons.length) return;
 
@@ -211,7 +218,8 @@ window.Site = (function(){
     const hashCat = (location.hash || '').replace('#cat-', '').replace('comparisons', 'calculators');
     let initialCat;
     if(isHome){
-      initialCat = CATEGORY_KEYS.includes(hashCat) ? hashCat : 'start';
+      const homeCat = HIDE_START_TAB ? 'tools' : 'start';
+      initialCat = buttons.some(b=> b.getAttribute('data-category') === hashCat) ? hashCat : homeCat;
     } else {
       // Auf Unterseiten steht die eigentliche Kategorie in der Breadcrumb
       // (z.B. "Tools, die ich nutze"), nicht in der URL. Von dort ableiten,

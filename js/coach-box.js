@@ -1,6 +1,8 @@
 // Coaching-Box am Ende der Rechner-/Vergleichsseiten (vor dem Footer).
 // Wird nur eingefügt, wenn <body data-coach-box> gesetzt ist.
 (function(){
+  // 1:1-Coaching-Seite ist ausgeblendet. Zum Einblenden diese Zeile entfernen.
+  return;
   if(!document.body.hasAttribute('data-coach-box')) return;
   var footer = document.querySelector('footer');
   if(!footer) return;
