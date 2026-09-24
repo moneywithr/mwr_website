@@ -154,6 +154,8 @@ window.Site = (function(){
 
     function moveThumb(btn){
       if(!btn) return;
+      sw.classList.remove('is-scrollable');
+      if(sw.scrollWidth > sw.clientWidth) sw.classList.add('is-scrollable');
       const cat = btn.getAttribute('data-category');
       thumb.style.width = btn.offsetWidth + 'px';
       thumb.style.transform = 'translateX(' + btn.offsetLeft + 'px)';

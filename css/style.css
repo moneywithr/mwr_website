@@ -350,7 +350,9 @@ body.lang-ar header p{font-size:17.5px; line-height:1.75;}
    gequetscht aus, während der erste Button ganz normal Luft hatte. Ein
    echtes (unsichtbares) Flex-Element am Ende erzwingt den Abstand zuverlässig,
    weil es echter Inhalt ist statt Container-Padding. */
-.category-switch::after{content:''; flex:0 0 3px; width:3px; height:1px;}
+.category-switch::after{content:''; flex:0 0 0; width:0; height:1px; margin-left:-2px;}
+/* Nur wenn die Pille wirklich scrollt (per JS gesetzt); sonst wäre rechts 5px mehr Rand als links. */
+.category-switch.is-scrollable::after{flex:0 0 3px; width:3px; margin-left:0;}
 .category-switch-thumb{
   position:absolute;
   top:4px; bottom:4px; left:0;
