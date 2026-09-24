@@ -2537,7 +2537,7 @@ body.lang-ar .service-card .service-name-de{font-size:11.5px;}
   color:var(--ink);
 }
 .service-card .service-cta-arrow svg{width:12px;height:12px;}
-.service-card.card-ink .service-cta-arrow{background:rgba(255,255,255,.18); color:#FFFFFF;}
+/* card-ink ist inzwischen weiß (siehe unten), Pfeil deshalb wie bei allen anderen Karten */
 body.lang-ar .service-card .service-cta-arrow svg{transform:scaleX(-1);}
 
 @media (max-width:640px){
