@@ -13,6 +13,7 @@ project/
 │  ├─ brokerage_finder/                   Broker-Finder
 │  ├─ find_bank/                          Bank-Finder
 │  ├─ credit_cards/                       Kreditkarten-Finder
+│  ├─ energy/                             Strom & Gas wechseln (remind.me-Banner)
 │  └─ insurance/                          Versicherungen (Übersicht + car, home, legal, liability)
 ├─ one-on-one-coaching/                   Coaching 1:1 (öffentlich, in der Sitemap): Termin per Cal.com buchen
 ├─ coaching/                              Trainingssessions in Kleingruppen (versteckt, noindex, nicht in der Sitemap)

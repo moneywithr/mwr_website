@@ -3355,3 +3355,18 @@ body.lang-ar .cc-btn > span{position:relative; top:1.6px;}
 /* Dropdown-Listen: Hover und gewählter Eintrag im selben Lila (Kontinent-Zeile und Scrollbar bleiben eine Stufe dunkler) */
 .custom-select-menu li:hover,.custom-select-menu li.active{background:#F0EEFA;}
 .custom-select-menu li.custom-select-group:hover{background:#B9AFEA;}
+
+/* Strom & Gas: Schritte, Hinweise und Partnerbanner (120x600) */
+.energy-steps{list-style:none; margin:0; padding:0; counter-reset:energy-step; display:grid; gap:14px;}
+.energy-steps li{counter-increment:energy-step; position:relative; padding-inline-start:44px; line-height:1.8; color:var(--text-muted);}
+.energy-steps li::before{content:counter(energy-step); position:absolute; inset-inline-start:0; top:2px; width:30px; height:30px; border-radius:50%; background:var(--purple); color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;}
+.energy-steps li strong{display:block; color:var(--text); margin-bottom:2px;}
+.energy-tips{margin:0; padding-inline-start:20px; display:grid; gap:10px; line-height:1.8; color:var(--text-muted);}
+.energy-banner-slot{display:flex; flex-direction:column; align-items:center; gap:14px; padding:6px 0;}
+.energy-banner-slot a{display:block; max-width:100%;}
+.energy-banner-slot a img{max-width:100%; height:auto; display:block; border-radius:10px;}
+.energy-banner-slot img[width="0"]{position:absolute;}
+.energy-banner-slot .energy-cta-caption{margin:6px 0 0; font-weight:700; color:var(--text);}
+.energy-banner-slot a:not(:has(img)){display:inline-flex; align-items:center; justify-content:center; text-align:center; padding:14px 28px; border-radius:26px; background:#2E5B2D; color:#fff; font-weight:700; font-size:16px; text-decoration:none;}
+.energy-banner-slot a:not(:has(img)):hover{background:#244a23;}
+.energy-banner-slot .tcpp-consent-placeholder{width:100%; margin:0;}
