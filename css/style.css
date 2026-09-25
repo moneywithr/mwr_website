@@ -3370,3 +3370,11 @@ body.lang-ar .cc-btn > span{position:relative; top:1.6px;}
 .energy-banner-slot a:not(:has(img)){display:inline-flex; align-items:center; justify-content:center; text-align:center; padding:14px 28px; border-radius:26px; background:#2E5B2D; color:#fff; font-weight:700; font-size:16px; text-decoration:none;}
 .energy-banner-slot a:not(:has(img)):hover{background:#244a23;}
 .energy-banner-slot .tcpp-consent-placeholder{width:100%; margin:0;}
+
+/* Strom & Gas: Sprungknopf zum Wechsel-Bereich */
+html{scroll-behavior:smooth;}
+#energy-tool{scroll-margin-top:110px;}
+.energy-jump{display:inline-flex; align-items:center; gap:10px; margin-top:18px; padding:13px 26px; border-radius:26px; background:#2E5B2D; color:#fff; font-weight:700; font-size:15px; text-decoration:none;}
+.energy-jump:hover{background:#244a23;}
+.energy-jump svg{width:18px; height:18px;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
