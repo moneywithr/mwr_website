@@ -436,6 +436,67 @@ window.Site = (function(){
     }
   }
 
+  // Zahlenfelder: statt type="number" (Komma/Punkt-Verhalten hängt am Browser
+  // und Gerät, oft lässt sich kein Komma tippen) echte Textfelder mit
+  // Ziffern-Tastatur. Erlaubt sind Ziffern und EIN Dezimaltrenner; Komma und
+  // Punkt werden beide akzeptiert und sofort in den Trenner der gewählten
+  // Sprache umgewandelt (de ",", en/ar ".", auch arabisch-indische Ziffern).
+  // .value liefert nach außen weiter "1234.5", so laufen die Rechner unverändert.
+  function decSep(){
+    try{
+      return new Intl.NumberFormat(locale()).formatToParts(1.1).find(p=>p.type === 'decimal').value;
+    }catch(e){ return '.'; }
+  }
+  function initNumberInputs(){
+    const nativeValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
+    const inputs = Array.from(document.querySelectorAll('input[type=number]'));
+    inputs.forEach(el=>{
+      const integer = el.getAttribute('inputmode') === 'numeric';
+      const initial = el.value;
+      const raw = ()=> nativeValue.get.call(el);
+      const read = ()=>{
+        const parts = raw().split(/[.,٫،]/);
+        const r = parts.length > 1 ? parts[0] + '.' + parts.slice(1).join('') : parts[0];
+        return r === '.' ? '' : r;
+      };
+      const fmt = v => String(v).replace('.', decSep());
+      const clean = str=>{
+        let out = '', seen = false;
+        const sep = decSep();
+        for(const ch of String(str).replace(/[٠-٩]/g, d=> AR_DIGITS.indexOf(d))){
+          if(ch >= '0' && ch <= '9') out += ch;
+          else if(!integer && !seen && /[.,٫،]/.test(ch)){ out += sep; seen = true; }
+        }
+        return out;
+      };
+      el.type = 'text';
+      el.setAttribute('data-num', '');
+      el.setAttribute('autocomplete', 'off');
+      Object.defineProperty(el, 'value', {
+        configurable: true,
+        get: read,
+        set(v){
+          const n = String(v == null ? '' : v);
+          // Beim Tippen ("7," oder "7,0") nicht zurückschreiben, sonst
+          // verschwindet der gerade getippte Trenner.
+          if(n !== '' && read() !== '' && Number(read()) === Number(n)) return;
+          nativeValue.set.call(el, fmt(n));
+        }
+      });
+      nativeValue.set.call(el, fmt(initial));
+      el.addEventListener('input', ()=>{
+        const c = clean(raw());
+        if(c !== raw()) nativeValue.set.call(el, c);
+      }, true);
+      el._numRedisplay = ()=>{ nativeValue.set.call(el, fmt(read())); };
+    });
+    document.addEventListener('mwr:langchange', ()=>{
+      inputs.forEach(el=> el._numRedisplay && el._numRedisplay());
+    });
+  }
+  initNumberInputs();
+
   document.addEventListener('DOMContentLoaded', init);
 
   return { state, t, locale, fmtEUR, fmtCompact, fmtPct, textWidth, setLanguage, setCurrency, applyStatic };
