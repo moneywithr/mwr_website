@@ -1633,10 +1633,17 @@ body.lang-ar .field-note{font-size:14.5px;}
 .stat-card.fire-yellow{background:#F7FFCC;}
 .stat-card.fire-yellow .v{color:var(--ink);}
 .stat-card.fire-yellow .k{color:var(--ink); opacity:.72;}
-.stat-card.fire-purple-light{background:#EEECFA;}
-.stat-card.fire-purple-light .v{color:var(--purple);}
-.stat-card.fire-purple{background:var(--purple-dim);}
-.stat-card.fire-purple .v{color:var(--purple-strong);}
+/* Ergebnisblock des FIRE-Rechners bewusst zurückhaltend: nur die zwei
+   Kernzahlen (Jahre, monatlicher Betrag) tragen Farbe, der Rest ist neutral. */
+.stat-row.fire-results .stat-card .v{color:var(--ink);}
+.result-summary.plain{background:var(--panel); color:var(--ink);}
+.result-summary.plain .rs-stat .rs-label{color:var(--text-muted);}
+.result-summary.plain .rs-stat .rs-value,
+.result-summary.plain .result-summary-final .rs-value-big{color:var(--ink);}
+.result-summary.plain .result-summary-final .rs-label{color:var(--text-muted);}
+.result-summary.plain .result-summary-divider{background:var(--line);}
+.result-summary.plain .result-summary-explain{color:var(--text-muted); border-top-color:var(--line);}
+.result-summary.plain .result-summary-explain strong{color:var(--ink);}
 /* Wert zuerst, Beschriftung darunter (statt umgekehrt wie sonst im
    Standard-Layout), Ränder entsprechend getauscht. */
 .stat-row.centered .stat-card .v{margin-bottom:6px;}

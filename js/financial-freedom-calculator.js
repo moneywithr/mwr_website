@@ -10,6 +10,11 @@
   const { t, locale, fmtEUR, fmtCompact } = window.Site;
 
   const state = {
+    // 'payment': Ziel-Alter ist gegeben, gesucht ist die monatliche Sparrate.
+    // 'years': monatliche Sparrate ist gegeben, gesucht sind die Jahre bis
+    // zur finanziellen Freiheit.
+    target: 'payment',
+    monthly: 300,
     netOutcome: 1200,
     interest: 7,
     inflationActive: false,
@@ -57,10 +62,21 @@
     };
   }
 
-  function solve(){
-    const nAcc = Math.round((state.goalAge - state.actualAge) * 12);
-    if(nAcc <= 0) return { invalid: true };
+  // Benötigtes Kapital bei Erreichen der finanziellen Freiheit. mWithdraw ist
+  // die Zahl der Entnahmemonate (nur bei Kapitalverzehr relevant).
+  function neededCapitalFor(rmNet, mWithdraw){
+    if(state.depletionActive){
+      if(mWithdraw <= 0) return null;
+      if(Math.abs(rmNet) < 1e-9) return state.netOutcome * mWithdraw;
+      return state.netOutcome * (1 - Math.pow(1+rmNet, -mWithdraw)) / rmNet;
+    }
+    // Ohne Kapitalverzehr lebst du allein von den Erträgen, das Kapital
+    // bleibt unangetastet, ewige Rente: Kapital = Netto-Rate / Netto-Zins.
+    if(rmNet <= 0) return null;
+    return state.netOutcome / rmNet;
+  }
 
+  function solve(){
     const realAnnual = state.interest - (state.inflationActive ? state.inflationRate : 0);
     // Schutz vor extremen Eingaben (sehr hohe Inflation bei 0% Rendite): bei
     // realAnnual <= -100% würde (1+i)^(1/12) auf 0 gehen und die Formeln
@@ -75,21 +91,17 @@
     const taxRate = effectiveTaxPct() / 100;
     const rmNet = rm * (1 - taxRate);
 
-    let neededCapital, mWithdraw = null;
+    if(state.target === 'years') return solveYears(rm, rmNet, taxRate);
+
+    const nAcc = Math.round((state.goalAge - state.actualAge) * 12);
+    if(nAcc <= 0) return { invalid: true };
+
+    let mWithdraw = null;
     if(state.depletionActive){
       mWithdraw = Math.round((state.lifetimeAge - state.goalAge) * 12);
-      if(mWithdraw <= 0) return { invalid: true };
-      if(Math.abs(rmNet) < 1e-9){
-        neededCapital = state.netOutcome * mWithdraw;
-      } else {
-        neededCapital = state.netOutcome * (1 - Math.pow(1+rmNet, -mWithdraw)) / rmNet;
-      }
-    } else {
-      // Ohne Kapitalverzehr lebst du allein von den Erträgen, das Kapital
-      // bleibt unangetastet, ewige Rente: Kapital = Netto-Rate / Netto-Zins.
-      if(rmNet <= 0) return { invalid: true };
-      neededCapital = state.netOutcome / rmNet;
     }
+    const neededCapital = neededCapitalFor(rmNet, mWithdraw);
+    if(neededCapital === null) return { invalid: true };
 
     // Ansparphase: Startkapital und Sparrate wachsen brutto und werden am Ende
     // einmalig auf ihren Gewinnanteil besteuert (siehe netFactors).
@@ -101,22 +113,68 @@
     return { invalid: false, neededCapital, capitalGrown: fvCapital, remaining, payments, nAcc, mWithdraw };
   }
 
+  // Umgekehrte Rechnung: Sparrate ist vorgegeben, gesucht ist der erste Monat,
+  // in dem Startkapital + Sparrate (nach Steuer, siehe netFactors) das
+  // benötigte Kapital erreichen. Bei aktivem Kapitalverzehr hängt das
+  // benötigte Kapital selbst vom Zeitpunkt ab (je später, desto kürzer die
+  // Entnahmezeit, desto weniger Kapital), deshalb wird für jeden Monat beides
+  // neu bestimmt. Der erste Treffer ist die Lösung.
+  function solveYears(rm, rmNet, taxRate){
+    let maxN = 100 * 12;
+    let withdrawTotal = 0;
+    if(state.depletionActive){
+      withdrawTotal = Math.round((state.lifetimeAge - state.actualAge) * 12);
+      if(withdrawTotal <= 1) return { invalid: true };
+      maxN = withdrawTotal - 1;
+    } else if(neededCapitalFor(rmNet, 0) === null){
+      return { invalid: true };
+    }
+
+    for(let n = 0; n <= maxN; n++){
+      const mWithdraw = state.depletionActive ? withdrawTotal - n : null;
+      const neededCapital = neededCapitalFor(rmNet, mWithdraw);
+      if(neededCapital === null) return { invalid: true };
+      const nf = netFactors(n, rm, taxRate);
+      const fvCapital = state.capital * nf.capital;
+      const total = fvCapital + state.monthly * nf.payment;
+      if(total >= neededCapital){
+        return {
+          invalid: false, neededCapital, capitalGrown: fvCapital,
+          remaining: Math.max(0, neededCapital - fvCapital),
+          payments: state.monthly, nAcc: n, mWithdraw,
+        };
+      }
+    }
+    return { invalid: true, unreachable: true };
+  }
+
   function fmtBig(v){
     const full = fmtEUR(v);
     const digits = full.replace(/[^0-9]/g, '').length;
     return digits > 9 ? fmtCompact(v) : full;
   }
 
+  // Dauer in Monaten als "12 J. 4 M." (bzw. nur Jahre/nur Monate).
+  function fmtDuration(months){
+    const y = Math.floor(months / 12), m = months % 12;
+    if(y > 0 && m > 0) return t('fireDurationYM').replace('{y}', y).replace('{m}', m);
+    if(y > 0) return t('fireDurationY').replace('{y}', y);
+    return t('fireDurationM').replace('{m}', m);
+  }
+
   function buildExplanation(res){
-    const template = t('fireResultExplain');
     const b = txt => '<strong>' + txt + '</strong>';
+    const yearsMode = state.target === 'years';
+    const template = t(yearsMode ? 'fireResultExplainYears' : 'fireResultExplain');
     const interestStr = state.interest.toLocaleString(locale(), {maximumFractionDigits:1}) + '%';
     let html = template
       .replace('{payments}', b(fmtBig(res.payments)))
       .replace('{years}', b(String(Math.round(res.nAcc/12))))
       .replace('{interest}', b(interestStr))
       .replace('{needed}', b(fmtBig(res.neededCapital)))
-      .replace('{netOutcome}', b(fmtBig(state.netOutcome)));
+      .replace('{netOutcome}', b(fmtBig(state.netOutcome)))
+      .replace('{duration}', b(fmtDuration(res.nAcc)))
+      .replace('{age}', b(String(Math.round((state.actualAge + res.nAcc/12) * 10) / 10)));
 
     const taxPct = effectiveTaxPct();
     if(taxPct > 0){
@@ -137,15 +195,37 @@
     $('fire-years-after-freedom').textContent = t('fireYearsAfterFreedom').replace('{years}', yearsAfter);
   }
 
+  function syncTargetUI(){
+    const yearsMode = state.target === 'years';
+    $('fire-target-value').textContent = t(yearsMode ? 'fireTargetYears' : 'fireTargetPayment');
+    $('fire-target-select').querySelectorAll('[data-value]').forEach(li=>{
+      const isActive = li.getAttribute('data-value') === state.target;
+      li.classList.toggle('active', isActive);
+      li.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    $('field-goalage').style.display = yearsMode ? 'none' : '';
+    $('field-monthly').style.display = yearsMode ? '' : 'none';
+  }
+
+  $('fire-target-select').addEventListener('customselect:change', e=>{
+    state.target = e.detail.value === 'years' ? 'years' : 'payment';
+    render();
+  });
+
   function render(){
+    syncTargetUI();
     updateAgeNotes();
     const res = solve();
     const warningEl = $('fire-warning');
 
+    // Karte mit der Sparrate: im Modus "Jahre" ist es deine Eingabe, im
+    // Modus "Sparrate" das Ergebnis, entsprechend anders beschriftet.
+    $('fire-stat-payments-label').textContent = t(state.target === 'years' ? 'fireLabelMonthly' : 'fireStatPaymentsLabel');
+
     if(res.invalid){
+      warningEl.textContent = t(res.unreachable ? 'fireUnreachable' : 'fireInvalid');
       warningEl.classList.add('show');
       $('fire-stat-needed').textContent = '-';
-      $('fire-stat-needed-card').textContent = '-';
       $('fire-stat-capital').textContent = '-';
       $('fire-stat-remaining').textContent = '-';
       $('fire-stat-payments').textContent = '-';
@@ -157,11 +237,10 @@
     warningEl.classList.remove('show');
 
     $('fire-stat-needed').textContent = fmtBig(res.neededCapital);
-    $('fire-stat-needed-card').textContent = fmtBig(res.neededCapital);
     $('fire-stat-capital').textContent = fmtBig(res.capitalGrown);
     $('fire-stat-remaining').textContent = fmtBig(res.remaining);
     $('fire-stat-payments').textContent = fmtBig(res.payments);
-    $('fire-stat-years-to').textContent = Math.round(res.nAcc/12);
+    $('fire-stat-years-to').textContent = state.target === 'years' ? fmtDuration(res.nAcc) : Math.round(res.nAcc/12);
     $('fire-result-explain').innerHTML = buildExplanation(res);
 
     const yearsAfterRow = $('fire-stat-years-after-row');
@@ -215,6 +294,7 @@
   bindNumber('fire-goalage', 'goalAge', { min: 1, max: 100 });
   bindNumber('fire-lifetimeage', 'lifetimeAge', { min: 1, max: 120 });
   bindNumber('fire-capital', 'capital', { min: 0 });
+  bindNumber('fire-monthly', 'monthly', { min: 0 });
   bindNumber('fire-tax-rate', 'taxRate', { min: 0, max: 99 });
 
   const swInflation = $('sw-inflation'), fieldsInflation = $('fields-inflation');
@@ -255,6 +335,8 @@
     // Anker im DOM aber immer vorhanden.
     insertAfter: document.getElementById('fire-stat-years-after-row'),
     fields: [
+      { type:'customselect', id:'fire-target-select' },
+      { type:'value', id:'fire-monthly' },
       { type:'value', id:'fire-actualage' },
       { type:'value', id:'fire-goalage' },
       { type:'value', id:'fire-netoutcome' },

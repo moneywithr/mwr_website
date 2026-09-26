@@ -26,7 +26,7 @@
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=3037b230">
+<link rel="stylesheet" href="/css/style.css?v=c8037ef8">
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon/icon-192.png">
@@ -180,13 +180,34 @@
         <div class="field">
           <div class="field-label">
             <span class="field-label-text">
+              <span data-i18n="fireLabelTarget">Was möchtest du berechnen?</span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="fireTipTarget" data-tip=""><span class="info-tip-glyph"></span></span>
+            </span>
+          </div>
+          <div class="custom-select" id="fire-target-select">
+            <button type="button" class="custom-select-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="custom-select-value" id="fire-target-value"></span>
+              <svg class="custom-select-chevron" viewBox="0 0 20 20" fill="none"><path d="M5.5 7.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="custom-select-menu" role="listbox">
+              <li role="option" data-value="payment" class="active" aria-selected="true" data-i18n="fireTargetPayment">Monatliche Sparrate</li>
+              <li role="option" data-value="years" aria-selected="false" data-i18n="fireTargetYears">Jahre bis zur finanziellen Freiheit</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
               <span data-i18n="fireLabelActualAge">عمرك الحالي</span>
               <span class="info-tip" tabindex="0" data-i18n-tip="fireTipActualAge" data-tip="عمرك الحالي."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
           <input type="number" inputmode="numeric" id="fire-actualage" value="30" min="1" max="100" step="1">
         </div>
-        <div class="field">
+        <div class="field" id="field-goalage">
           <div class="field-label">
             <span class="field-label-text">
               <span data-i18n="fireLabelGoalAge">العمر إلي بدك توصل فيه للحرية المالية</span>
@@ -308,14 +329,37 @@
         </div>
       </div>
 
+      <div class="block" id="field-monthly" style="display:none;">
+        <div class="field">
+          <div class="field-label">
+            <span class="field-label-text">
+              <span data-i18n="fireLabelMonthly">Was du monatlich investierst</span>
+              <span class="info-tip" tabindex="0" data-i18n-tip="fireTipMonthly" data-tip=""><span class="info-tip-glyph"></span></span>
+            </span>
+          </div>
+          <input type="number" inputmode="decimal" id="fire-monthly" value="300" min="0" step="50">
+        </div>
+      </div>
+
       <div class="block">
-        <div class="calc-warning" id="fire-warning" data-i18n="fireInvalid">غير قابل للحل بهذه القيم. الرجاء تعديل العمر أو العائد أو العمر المتوقع.</div>
+        <div class="calc-warning" id="fire-warning"></div>
       </div>
     </div>
 
     <div class="results">
 
-      <div class="panel result-summary">
+      <div class="stat-row centered fire-results">
+        <div class="stat-card fire-yellow">
+          <div class="v" id="fire-stat-payments">-</div>
+          <div class="k" id="fire-stat-payments-label">قديش لازم تستثمر شهريًا</div>
+        </div>
+        <div class="stat-card fire-yellow">
+          <div class="v" id="fire-stat-years-to">-</div>
+          <div class="k" data-i18n="fireStatYearsToLabel">سنة حتى الحرية المالية</div>
+        </div>
+      </div>
+
+      <div class="panel result-summary plain">
         <div class="result-summary-top">
           <div class="result-summary-stats">
             <div class="rs-stat">
@@ -336,23 +380,8 @@
         <div class="result-summary-explain" id="fire-result-explain"></div>
       </div>
 
-      <div class="stat-row centered">
-        <div class="stat-card fire-yellow">
-          <div class="v" id="fire-stat-payments">-</div>
-          <div class="k" data-i18n="fireStatPaymentsLabel">قديش لازم تستثمر شهريًا</div>
-        </div>
-        <div class="stat-card fire-purple-light">
-          <div class="v" id="fire-stat-years-to">-</div>
-          <div class="k" data-i18n="fireStatYearsToLabel">سنة حتى الحرية المالية</div>
-        </div>
-        <div class="stat-card fire-purple">
-          <div class="v" id="fire-stat-needed-card">-</div>
-          <div class="k" data-i18n="fireStatWealthLabel">الثروة المطلوبة</div>
-        </div>
-      </div>
-
-      <div class="stat-row centered" id="fire-stat-years-after-row" style="display:none;">
-        <div class="stat-card purple" style="grid-column:1 / -1;">
+      <div class="stat-row centered fire-results" id="fire-stat-years-after-row" style="display:none;">
+        <div class="stat-card" style="grid-column:1 / -1;">
           <div class="v" id="fire-stat-years-after">-</div>
           <div class="k" data-i18n="fireStatYearsAfterLabel">سنة بضل فيها رأس مالك يكفيك</div>
         </div>
@@ -389,11 +418,11 @@
 
 </div>
 
-<script src="/js/i18n.js?v=8d51db7d"></script>
+<script src="/js/i18n.js?v=5fea3dd6"></script>
 <script src="/js/common.js?v=ebb8a081"></script>
 <script src="/js/consent.js?v=2f4761b5"></script>
 <script src="/js/coach-box.js?v=a2b6c366"></script>
 <script src="/js/saved-results.js?v=e7578164"></script>
-<script src="/js/financial-freedom-calculator.js?v=552a4426"></script>
+<script src="/js/financial-freedom-calculator.js?v=594a7f4c"></script>
 </body>
 </html>
