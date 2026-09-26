@@ -218,9 +218,10 @@
     const res = solve();
     const warningEl = $('fire-warning');
 
-    // Karte mit der Sparrate: im Modus "Jahre" ist es deine Eingabe, im
-    // Modus "Sparrate" das Ergebnis, entsprechend anders beschriftet.
-    $('fire-stat-payments-label').textContent = t(state.target === 'years' ? 'fireLabelMonthly' : 'fireStatPaymentsLabel');
+    // Nur die jeweils gesuchte Kernzahl wird groß und allein gezeigt.
+    $('fire-stat-payments-label').textContent = t('fireStatPaymentsLabel');
+    $('fire-main-payment').style.display = state.target === 'years' ? 'none' : '';
+    $('fire-main-years').style.display = state.target === 'years' ? '' : 'none';
 
     if(res.invalid){
       warningEl.textContent = t(res.unreachable ? 'fireUnreachable' : 'fireInvalid');

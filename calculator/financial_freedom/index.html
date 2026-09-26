@@ -26,7 +26,7 @@
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=c8037ef8">
+<link rel="stylesheet" href="/css/style.css?v=f13a71da">
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon/icon-192.png">
@@ -348,18 +348,21 @@
 
     <div class="results">
 
-      <div class="stat-row centered fire-results">
+      <div class="stat-row centered fire-results fire-main" id="fire-main-payment">
         <div class="stat-card fire-yellow">
           <div class="v" id="fire-stat-payments">-</div>
           <div class="k" id="fire-stat-payments-label">قديش لازم تستثمر شهريًا</div>
         </div>
+      </div>
+
+      <div class="stat-row centered fire-results fire-main" id="fire-main-years" style="display:none;">
         <div class="stat-card fire-yellow">
           <div class="v" id="fire-stat-years-to">-</div>
           <div class="k" data-i18n="fireStatYearsToLabel">سنة حتى الحرية المالية</div>
         </div>
       </div>
 
-      <div class="panel result-summary plain">
+      <div class="panel result-summary purple">
         <div class="result-summary-top">
           <div class="result-summary-stats">
             <div class="rs-stat">
@@ -381,7 +384,7 @@
       </div>
 
       <div class="stat-row centered fire-results" id="fire-stat-years-after-row" style="display:none;">
-        <div class="stat-card" style="grid-column:1 / -1;">
+        <div class="stat-card fire-purple-info">
           <div class="v" id="fire-stat-years-after">-</div>
           <div class="k" data-i18n="fireStatYearsAfterLabel">سنة بضل فيها رأس مالك يكفيك</div>
         </div>
@@ -423,6 +426,6 @@
 <script src="/js/consent.js?v=2f4761b5"></script>
 <script src="/js/coach-box.js?v=a2b6c366"></script>
 <script src="/js/saved-results.js?v=e7578164"></script>
-<script src="/js/financial-freedom-calculator.js?v=594a7f4c"></script>
+<script src="/js/financial-freedom-calculator.js?v=aaeb8448"></script>
 </body>
 </html>
