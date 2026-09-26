@@ -184,7 +184,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="fireTipActualAge" data-tip="عمرك الحالي."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="fire-actualage" value="30" min="1" max="100" step="1">
+          <input type="number" inputmode="numeric" id="fire-actualage" value="30" min="1" max="100" step="1">
         </div>
         <div class="field">
           <div class="field-label">
@@ -193,7 +193,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="fireTipGoalAge" data-tip="العمر إلي بدك توصل فيه للحرية المالية وتوقف عن الشغل."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="fire-goalage" value="60" min="1" max="100" step="1">
+          <input type="number" inputmode="numeric" id="fire-goalage" value="60" min="1" max="100" step="1">
           <div class="field-note" id="fire-years-to-freedom"></div>
         </div>
       </div>
@@ -206,7 +206,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="fireTipNetOutcome" data-tip="الدخل الشهري الصافي إلي بدك ياه بعد ما توصل للحرية المالية، لتغطي فيه مصاريفك من دون ما تشتغل."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="fire-netoutcome" value="1200" min="0" step="50">
+          <input type="number" inputmode="decimal" id="fire-netoutcome" value="1200" min="0" step="50">
         </div>
       </div>
 
@@ -218,7 +218,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRendite" data-tip="متوسط العائد السنوي يلي بتتوقعه على استثمارك، مثلاً حوالي 7% لصناديق المؤشرات على المدى الطويل."><span class="info-tip-glyph"></span></span>
             </span>
             <span class="inline-num-group">
-              <input type="number" id="fire-interest-input" class="inline-num-input" value="7" min="0" max="20" step="0.1">
+              <input type="number" inputmode="decimal" id="fire-interest-input" class="inline-num-input" value="7" min="0" max="20" step="0.1">
               <span class="inline-num-unit">%</span>
             </span>
           </div>
@@ -242,7 +242,7 @@
                 <span class="info-tip" tabindex="0" data-i18n-tip="fireTipInflationRate" data-tip="معدل التضخم السنوي المتوقع ببلدك، مثلاً بألمانيا معدل التضخم حوالي 2% سنويًا."><span class="info-tip-glyph"></span></span>
               </span>
               <span class="inline-num-group wide">
-                <input type="number" id="fire-inflation" class="inline-num-input wide" value="2" min="0" max="20" step="0.01">
+                <input type="number" inputmode="decimal" id="fire-inflation" class="inline-num-input wide" value="2" min="0" max="20" step="0.01">
                 <span class="inline-num-unit">%</span>
               </span>
             </div>
@@ -266,7 +266,7 @@
                 <span class="info-tip" tabindex="0" data-i18n-tip="fireTipTaxRate" data-tip="بألمانيا: 25% ضريبة أرباح رأسمالية (Abgeltungsteuer) + 5.5% ضريبة تضامن (Solidaritätszuschlag) عليها = 26.375%، وهاد هو الرقم المعبّى افتراضيًا. إذا عليك ضريبة كنيسة بيصير 27.82% (بافاريا وبادن-فورتمبيرغ) أو 27.99% (باقي الولايات). غيّره حسب ضريبة بلدك، أو خليه صفر إذا ما عندك ضرائب على أرباح الاستثمار."><span class="info-tip-glyph"></span></span>
               </span>
               <span class="inline-num-group wide">
-                <input type="number" id="fire-tax-rate" class="inline-num-input wide" value="26.375" min="0" max="99" step="0.005">
+                <input type="number" inputmode="decimal" id="fire-tax-rate" class="inline-num-input wide" value="26.375" min="0" max="99" step="0.005">
                 <span class="inline-num-unit">%</span>
               </span>
             </div>
@@ -290,7 +290,7 @@
                 <span class="info-tip" tabindex="0" data-i18n-tip="fireTipLifetimeAge" data-tip="العمر إلي بدك يكفي فيه رأس مالك لتغطية مصاريفك."><span class="info-tip-glyph"></span></span>
               </span>
             </div>
-            <input type="number" id="fire-lifetimeage" value="90" min="1" max="120" step="1">
+            <input type="number" inputmode="numeric" id="fire-lifetimeage" value="90" min="1" max="120" step="1">
             <div class="field-note" id="fire-years-after-freedom"></div>
           </div>
         </div>
@@ -304,7 +304,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="fireTipCapital" data-tip="قيمة استثماراتك الحالية إلي عندك جاهزة، وبتنحسب ضمن رأس مالك المستقبلي."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="fire-capital" value="5000" min="0" step="500">
+          <input type="number" inputmode="decimal" id="fire-capital" value="5000" min="0" step="500">
         </div>
       </div>
 

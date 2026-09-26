@@ -197,7 +197,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipGoal" data-tip="هاد المبلغ يلي بدك توصله بنهاية مدة الاستثمار، هدفك النهائي."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="spar-endkapital" value="100000" min="0" step="500">
+          <input type="number" inputmode="decimal" id="spar-endkapital" value="100000" min="0" step="500">
         </div>
       </div>
 
@@ -209,7 +209,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipLaufzeit" data-tip="عدد السنين يلي بدك تستثمر خلالها لحتى توصل لهدفك."><span class="info-tip-glyph"></span></span>
             </span>
             <span class="inline-num-group">
-              <input type="number" id="spar-years-input" class="inline-num-input" value="15" min="1" max="60" step="1">
+              <input type="number" inputmode="numeric" id="spar-years-input" class="inline-num-input" value="15" min="1" max="60" step="1">
               <span class="inline-num-unit" data-i18n="yearsUnit">سنة</span>
             </span>
           </div>
@@ -225,7 +225,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRendite" data-tip="متوسط العائد السنوي يلي بتتوقعه على استثمارك، مثلاً حوالي 7% لصناديق المؤشرات على المدى الطويل."><span class="info-tip-glyph"></span></span>
             </span>
             <span class="inline-num-group">
-              <input type="number" id="spar-rendite-input" class="inline-num-input" value="7" min="0" max="50" step="0.1">
+              <input type="number" inputmode="decimal" id="spar-rendite-input" class="inline-num-input" value="7" min="0" max="50" step="0.1">
               <span class="inline-num-unit">%</span>
             </span>
           </div>
@@ -246,7 +246,7 @@
             <div class="field-label">
               <span data-i18n="labelBetrag">مبلغ الاستثمار لمرة واحدة</span>
             </div>
-            <input type="number" id="spar-anfangskapital" value="5000" min="0" step="100">
+            <input type="number" inputmode="decimal" id="spar-anfangskapital" value="5000" min="0" step="100">
           </div>
         </div>
       </div>
@@ -259,7 +259,7 @@
               <span class="info-tip" tabindex="0" data-i18n-tip="sparTipRate" data-tip="المبلغ يلي بتضيفه لاستثمارك كل شهر."><span class="info-tip-glyph"></span></span>
             </span>
           </div>
-          <input type="number" id="spar-rate" value="300" min="0" step="10">
+          <input type="number" inputmode="decimal" id="spar-rate" value="300" min="0" step="10">
         </div>
       </div>
 
@@ -279,7 +279,7 @@
                 <span class="info-tip" tabindex="0" data-i18n-tip="sparTipKapSt" data-tip="النسبة يلي بتنحسم كضريبة من أرباح استثمارك. القيمة الافتراضية (26.375%) هي النسبة المعمول فيها بألمانيا، بدون ضريبة الكنيسة."><span class="info-tip-glyph"></span></span>
               </span>
               <span class="inline-num-group wide">
-                <input type="number" id="spar-kapst" class="inline-num-input wide" value="26.375" min="0" max="100" step="0.001">
+                <input type="number" inputmode="decimal" id="spar-kapst" class="inline-num-input wide" value="26.375" min="0" max="100" step="0.001">
                 <span class="inline-num-unit">%</span>
               </span>
             </div>
