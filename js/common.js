@@ -439,8 +439,9 @@ window.Site = (function(){
   // Zahlenfelder: statt type="number" (Komma/Punkt-Verhalten hängt am Browser
   // und Gerät, oft lässt sich kein Komma tippen) echte Textfelder mit
   // Ziffern-Tastatur. Erlaubt sind Ziffern und EIN Dezimaltrenner; Komma und
-  // Punkt werden beide akzeptiert und sofort in den Trenner der gewählten
-  // Sprache umgewandelt (de ",", en/ar ".", auch arabisch-indische Ziffern).
+  // Punkt werden beide akzeptiert und so stehen gelassen, wie sie getippt
+  // werden (die Tastatur folgt der Gerätesprache, nicht der Seitensprache).
+  // Vorgegebene Werte erscheinen im Trenner der Seitensprache (de ",", en/ar ".").
   // .value liefert nach außen weiter "1234.5", so laufen die Rechner unverändert.
   function decSep(){
     try{
@@ -463,15 +464,15 @@ window.Site = (function(){
       const fmt = v => String(v).replace('.', decSep());
       const clean = str=>{
         let out = '', seen = false;
-        const sep = decSep();
         for(const ch of String(str).replace(/[٠-٩]/g, d=> AR_DIGITS.indexOf(d))){
           if(ch >= '0' && ch <= '9') out += ch;
-          else if(!integer && !seen && /[.,٫،]/.test(ch)){ out += sep; seen = true; }
+          else if(!integer && !seen && /[.,٫،]/.test(ch)){ out += (ch === '.' ? '.' : ','); seen = true; }
         }
         return out;
       };
       el.type = 'text';
       el.setAttribute('data-num', '');
+      el.setAttribute('dir', 'ltr'); // sonst verschwindet ein Trenner am Ende in RTL-Seiten (Arabisch)
       el.setAttribute('autocomplete', 'off');
       Object.defineProperty(el, 'value', {
         configurable: true,
