@@ -1721,7 +1721,7 @@ body.lang-ar .broker-count{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sa
   display:inline-flex;
   align-items:center;
   text-align:center;
-  background:#12A883;
+  background:var(--exuberant-orange);
   color:#FFFFFF;
   font-size:12px;
   font-weight:700;
