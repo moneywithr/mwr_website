@@ -22,8 +22,8 @@ window.BROKER_DATA = [
       ar: "هذه ليست نصيحة مالية! تم البحث بأفضل ما لدينا من معرفة، والباقي عليك."
     },
     platforms: [
-      { name: "TradersPlace", url: "https://api.skynet.mcanism.com/c/09ahVd", domain: "tradersplace.de", logoUrl: "/img/broker-logos/tradersplace.png", highlight: true, tag: { de: "aktuell mein favorit", en: "current top pick", ar: "المفضل عندي حالياً" }, bonus: { de: "🎁 60€ Bonus", en: "🎁 €60 gift", ar: "🎁 هدية 60 يورو" } },
-      { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus-v2.png" },
+      { name: "Smartbroker+", url: "https://t.adcell.com/p/click?promoId=371155&slotId=148744", domain: "smartbrokerplus.de", logoUrl: "/img/broker-logos/smartbroker-plus-v2.png", highlight: true, tag: { de: "kostenlos & Testsieger", en: "free & test winner", ar: "مجاني وحائز على عدة جوائز" } },
+      { name: "TradersPlace", url: "https://api.skynet.mcanism.com/c/09ahVd", domain: "tradersplace.de", logoUrl: "/img/broker-logos/tradersplace.png" },
       { name: "Trading 212", url: "", domain: "trading212.com", logoUrl: "/img/broker-logos/trading212-v2.png" },
       { name: "Trade Republic", domain: "traderepublic.com", logoUrl: "/img/broker-logos/trade-republic-v2.svg" },
       { name: "Scalable Capital", domain: "scalable.capital", logoUrl: "/img/broker-logos/scalable-capital-v2.png" }
