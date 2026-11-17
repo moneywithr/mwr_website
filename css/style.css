@@ -138,6 +138,13 @@
   font-display:swap;
   src:url('/fonts/space-mono-latin-400-normal.woff2') format('woff2');
 }
+@font-face{
+  font-family:'Norwester';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('/fonts/norwester.woff2') format('woff2');
+}
 
 :root{
   /* Money with Rami, Design System (Aug 2026 refresh)
@@ -447,7 +454,15 @@ body.lang-ar .category-switch-btn{
   display:flex;
 }
 .brand-name .brand-line{white-space:nowrap;}
-.brand-dot{color:var(--mint);}
+.brand-dot{
+  font-family:'Norwester',sans-serif;
+  color:var(--mint);
+  font-size:2.4em;
+  display:inline-block;
+  line-height:1;
+  vertical-align:-0.2em;
+  margin-inline-start:2px;
+}
 /* Wortmarke bleibt bewusst IMMER in Space Mono, auch auf Arabisch,
    ein Markenzeichen soll sprachunabhängig gleich aussehen. */
 body.lang-ar .brand-name{
