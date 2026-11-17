@@ -7,4 +7,4 @@ TOTAL_SEATS = "5"
 
 [[kv_namespaces]]
 binding = "SEATS_KV"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "5c778f37fccf42aea273f88d41f1b1da"

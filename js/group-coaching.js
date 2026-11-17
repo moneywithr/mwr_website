@@ -4,7 +4,7 @@
 (function () {
   // TODO: nach dem Deploy des Workers hier die echte URL eintragen,
   // siehe cloudflare/group-coaching-seats/README.md
-  const SEATS_API = "";
+  const SEATS_API = "https://mwr-group-coaching-seats.moneywithrami.workers.dev";
 
   if (!SEATS_API) return;
 
