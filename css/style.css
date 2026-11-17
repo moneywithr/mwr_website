@@ -449,8 +449,8 @@ body.lang-ar .category-switch-btn{
 .brand-name .brand-line{white-space:nowrap;}
 .brand-dot{
   display:inline-block;
-  width:8px;
-  height:8px;
+  width:6px;
+  height:6px;
   background:var(--mint);
   border-radius:2px;
   overflow:hidden;
