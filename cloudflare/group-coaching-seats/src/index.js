@@ -2,8 +2,11 @@
 // GET  /seats           -> { total, taken, remaining, soldOut }  (öffentlich, keine Geheimnisse)
 // POST /stripe-webhook   -> von Stripe aufgerufen, zählt bei erfolgreicher Zahlung hoch
 //
+// Schickt außerdem die Bestätigungsmail mit dem Google-Meet-Link via Brevo.
+//
 // Benötigte Secrets (per `wrangler secret put ...` gesetzt, siehe README):
 //   STRIPE_WEBHOOK_SECRET  -> Signing secret des Stripe-Webhooks (whsec_...)
+//   BREVO_API_KEY          -> API-Key aus Brevo (SMTP & API -> API keys & MCP)
 //
 // KV-Keys:
 //   "taken"          -> Anzahl bereits bezahlter Plätze (String, Zahl)
@@ -75,6 +78,52 @@ async function verifyStripeSignature(rawBody, signatureHeader, secret) {
   return diff === 0;
 }
 
+function confirmationEmailHtml(env) {
+  return `
+    <div dir="rtl" style="font-family:sans-serif; font-size:15px; line-height:1.7; color:#222;">
+      <p>أهلاً 🌱</p>
+      <p>تم تأكيد حجزك بنجاح بالكوتشينغ الجماعي! هيك منفاصل تفاصيل الجلسات:</p>
+      <p>
+        <strong>رابط الجلسات (Google Meet):</strong><br>
+        <a href="${env.MEET_LINK}">${env.MEET_LINK}</a>
+      </p>
+      <p>
+        <strong>المواعيد:</strong><br>
+        الأحد ٦، ١٣ و٢٠ ديسمبر، الساعة ١١:٠٠ حتى ١٢:٣٠ (بتوقيت ألمانيا)
+      </p>
+      <p>كل جلسة بتتسجل، فإذا ما قدرت تحضر مباشرة فيك تتفرج عليها لاحقاً.</p>
+      <p style="color:#666; font-size:13px;">المحتوى المقدم لا يشكل أي نصيحة مالية أو استثمارية أو قانونية. جميع المعلومات مخصصة للأغراض التعليمية والإيضاحية العامة فقط، وتعبر فقط عن رأيي الشخصي.</p>
+      <p>بانتظارك 👋<br>Rami</p>
+    </div>
+  `;
+}
+
+async function sendConfirmationEmail(env, toEmail, toName) {
+  if (!toEmail || !env.BREVO_API_KEY) return;
+  try {
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "api-key": env.BREVO_API_KEY.trim(),
+      },
+      body: JSON.stringify({
+        sender: { email: env.SENDER_EMAIL, name: env.SENDER_NAME },
+        to: [{ email: toEmail, name: toName || undefined }],
+        subject: "تأكيد الحجز: كوتشينغ جماعي مع Money with Rami",
+        htmlContent: confirmationEmailHtml(env),
+      }),
+    });
+    if (!res.ok) {
+      console.error("Brevo send failed", res.status, await res.text());
+    }
+  } catch (e) {
+    // E-Mail-Fehler sollen die Webhook-Verarbeitung nicht blockieren, aber geloggt werden.
+    console.error("Brevo send threw", e);
+  }
+}
+
 async function handleWebhook(request, env) {
   const rawBody = await request.text();
   const signature = request.headers.get("Stripe-Signature");
@@ -100,6 +149,10 @@ async function handleWebhook(request, env) {
       const total = parseInt(env.TOTAL_SEATS || "5", 10);
       const next = Math.min(total, taken + 1);
       await env.SEATS_KV.put("taken", String(next));
+
+      const email = session.customer_details?.email || session.customer_email;
+      const name = session.customer_details?.name;
+      await sendConfirmationEmail(env, email, name);
     }
   }
 
