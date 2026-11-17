@@ -449,14 +449,14 @@ body.lang-ar .category-switch-btn{
 .brand-name .brand-line{white-space:nowrap;}
 .brand-dot{
   display:inline-block;
-  width:14px;
-  height:14px;
+  width:8px;
+  height:8px;
   background:var(--mint);
-  border-radius:3px;
+  border-radius:2px;
   overflow:hidden;
   color:transparent;
   vertical-align:middle;
-  margin-inline-start:4px;
+  margin-inline-start:3px;
 }
 /* Wortmarke bleibt bewusst IMMER in Space Mono, auch auf Arabisch,
    ein Markenzeichen soll sprachunabhängig gleich aussehen. */
